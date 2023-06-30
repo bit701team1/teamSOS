@@ -19,6 +19,7 @@ import javax.sql.DataSource;
 
 @Configuration
 public class SecurityConfiguration {
+    // test test
 
     //Configuring HttpSecurity
     @Bean
@@ -43,7 +44,7 @@ public class SecurityConfiguration {
         contextSourceFactoryBean.setPort(0);
         return contextSourceFactoryBean;
     }
-//    @Bean
+  //  @Bean
 //    AuthenticationManager ldapAuthenticationManager(
 //            BaseLdapPathContextSource contextSource) {
 //        LdapBindAuthenticationManagerFactory factory =
