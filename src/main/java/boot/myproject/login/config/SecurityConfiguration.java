@@ -20,6 +20,7 @@ import javax.sql.DataSource;
 @Configuration
 public class SecurityConfiguration {
     // test test
+    //main 에도 넣자
 
     //Configuring HttpSecurity
     @Bean
