@@ -7,6 +7,7 @@ import java.security.MessageDigest;
 
 @Component
 public class SHA512PasswordEncoder implements PasswordEncoder {
+    //i need test
     @Override
     public String encode(CharSequence rawPassword) {
         if (rawPassword == null) {
