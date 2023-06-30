@@ -1,0 +1,25 @@
+#port??
+server:
+  port: 8000
+#mysql setting
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/myschema?serverTimezone=Asia/Seoul
+    username: kim
+    password: 1111
+  servlet:
+    multipart:
+      max-file-size:
+        20MB
+  mvc:
+    view:
+      prefix: /WEB-INF/
+      suffix: .jsp
+
+  #mybatis
+
+mybatis:
+  type-aliases-package: boot.myproject
+  mapper-location:
+    - /mapper/**/*.xml
