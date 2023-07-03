@@ -1,21 +1,21 @@
 server:
   port: 9003
 
-##mysql setting
-#spring:
-#  datasource:
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-#    #url: jdbc:mysql://localhost:3306/bit701?serverTimezone=Asia/Seoul
-#    url: jdbc:mysql://db-g66qe-kr.vpc-pub-cdb.ntruss.com/bit701?serverTimezone=Asia/Seoul
-#    username: study
-#    password: bit123!@#
-#  servlet:
-#    multipart:
-#      max-file-size:
-#        20MB
+#mysql setting
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #url: jdbc:mysql://localhost:3306/bit701?serverTimezone=Asia/Seoul
+    url: jdbc:mysql://db-h7bki-kr.vpc-pub-cdb.ntruss.com/teamsos?serverTimezone=Asia/Seoul
+    username: teamsos
+    password: bit!@#123
+  servlet:
+    multipart:
+      max-file-size:
+        20MB
 
 #mybatis
-#mybatis:
-#  type-aliases-package: data.dto
-#  mapper-locations:
-#    - /mapper/**/*.xml
+mybatis:
+  type-aliases-package: data.dto
+  mapper-locations:
+    - /mapper/**/*.xml
