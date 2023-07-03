@@ -9,7 +9,7 @@ function RouteMain(props) {
         <div>
             <Routes>
                 <Route path='/' element={<GitTestHome/>}/>
-                <Route path='*' element={
+                <Route path='/*' element={
                     <div>
                         <h1>잘못된 URL 주소입니다</h1>
                         <br/><br/>
