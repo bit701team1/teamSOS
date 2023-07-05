@@ -22,9 +22,8 @@ repositories {
 }
 
 dependencies {
-    //implementation 'org.springframework.boot:spring-boot-starter-security'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
 
+    implementation 'org.springframework.boot:spring-boot-starter-web'
 
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
@@ -32,14 +31,23 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
+    //mybatis
     testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:2.3.1'
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.3.1'
 
-    //testImplementation 'org.springframework.security:spring-security-test'
+    //security
+    testImplementation 'org.springframework.security:spring-security-test'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
 
     //aws s3
     implementation group: 'io.awspring.cloud', name: 'spring-cloud-starter-aws', version: '2.4.4'
     implementation group: 'com.amazonaws', name: 'aws-java-sdk-s3', version: '1.12.488'
+
+    //jwt
+    implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.2'
+    runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.2'
+    runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.2'
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
 }
 
 tasks.named('test') {
