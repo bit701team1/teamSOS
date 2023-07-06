@@ -22,14 +22,8 @@ function AuctionLive(props) {
                 connect();
             });
     },[roomId]);
-
-    useEffect(() => {
-        if (anonymousCount > 0) {
-            setUserName(`익명${anonymousCount}`);
-        }
-    }, [anonymousCount]);
     const connect = () => {//소켓 연결용 함수
-        let sock =new SockJS('http://localhost:9003/ws'); //endpoint 주소 소켓을 저기로 연결하겠다
+        let sock =new SockJS('http://175.45.193.12/ws'); //endpoint 주소 소켓을 저기로 연결하겠다
         client.current = StompJS.Stomp.over(sock);
         let ws = client.current;
         ws.connect({},()=>{
