@@ -22,10 +22,9 @@ function RouteMain(props) {
         <div>
             <Routes>
                 <Route path='/chat' element={<Chat/>}/>
-                <Route path='/' element={<GitTestHome/>}/>
                 <Route path='/room/:roomId' element={<AuctionLive/>}/>
                 <Route path='/userinfo' element={<UserInfo/>}/>
-                <Route path='/main' element={<Mainauction/>}/>
+                <Route path='/' element={<Mainauction/>}/>
                 <Route path='/*' element={
                     <div>
                         <h1>잘못된 URL 주소입니다</h1>
