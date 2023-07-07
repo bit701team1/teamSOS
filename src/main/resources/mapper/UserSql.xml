@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="data.mapper.UserMapper">
-
+    <select id="insertUser" parameterType="UserDto">
+        insert into user(id,password,user_name,email,hp) values (#{id},#{password},#{user_name},#{email},#{hp})
+    </select>
+    <select id="getUserByUserName" parameterType="String" resultType="UserDto">
+        select  * from user where user_name = #{user_name}
+    </select>
+    <select id="getUserByEmail" parameterType="String" resultType="UserDto">
+        select  * from user where email = #{email}
+    </select>
 </mapper>

@@ -8,6 +8,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -17,13 +18,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-
+        System.out.println("doFilterInternal");
         log.info(request.getRequestURI());
 
         if (!request.getRequestURI().contains("login") && !request.getRequestURI().contains("favicon")) {
             log.info("토큰 체크");
             try {
                 String jwt = getJwtFromRequest(request); //request에서 jwt 토큰을 꺼낸다.
+                System.out.println("jwt = " + jwt);
                 if (StringUtils.isNotEmpty(jwt) && JwtTokenProvider.validateToken(jwt)) {
                     String userId = JwtTokenProvider.getUserIdFromJWT(jwt); //jwt에서 사용자 id를 꺼낸다.
 
@@ -53,21 +55,22 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
-    //    private String getJwtFromRequest(HttpServletRequest request) {
+    private String getJwtFromRequest(HttpServletRequest request) {
+        // HTTP Only 쿠키 값을 가져옵니다.
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("access_token")) {
+                    return cookie.getValue();
+                }
+            }
+        }
 //        String bearerToken = request.getHeader("Authorization");
-//        log.info("bearerToken : " + bearerToken);
 //        if (StringUtils.isNotEmpty(bearerToken) && bearerToken.startsWith("Bearer ")) {
-//            log.info("Bearer exist");
 //            return bearerToken.substring("Bearer ".length());
 //        }
-//        return null;
-//    }
-    private String getJwtFromRequest(HttpServletRequest request) {
-        String bearerToken = request.getHeader("Authorization");
-        if (StringUtils.isNotEmpty(bearerToken) && bearerToken.startsWith("Bearer ")) {
-            return bearerToken.substring("Bearer ".length());
-        }
         return null;
     }
+
 
 }

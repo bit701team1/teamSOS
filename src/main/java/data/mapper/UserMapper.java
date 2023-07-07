@@ -6,9 +6,11 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface UserMapper {
     //스프링 시큐리티용 로그인
-    public UserDto getUserInfo(String email);
+    public UserDto getUserByEmail(String email);
 
-    public UserDto getUserByNum(int u_num);
+    public UserDto getUserByNum(int user_id);
+
+    public UserDto getUserByUserName(String user_name);
 
     //스프링 시큐리티용 회원가입
     public void insertUser(UserDto dto);
@@ -38,7 +40,7 @@ public interface UserMapper {
     public void addrChange(UserDto dto);
 
     //회원 탈퇴
-    public void deleteUser(int u_num);
+    public void deleteUser(int user_id);
 
     // 휴대폰 번호로 이메일 찾기
     public String findEmailByHp(String hp);
@@ -50,5 +52,5 @@ public interface UserMapper {
     public void findPassUpdate(UserDto dto);
 
     // refresh_token 삭제
-    public void deleteRefreshToken(int u_num);
+    public void deleteRefreshToken(int user_id);
 }

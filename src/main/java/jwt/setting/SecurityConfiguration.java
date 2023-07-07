@@ -19,8 +19,10 @@ import java.util.Arrays;
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-
+    //401로 인증이 요구됨을 알려줌
     private final JwtAuthenticationEntryPoint unauthorizedHandler;
+    //403으로 권한이 없음을 알려줌
+    private final JwtAccessDeniedHandler accessDeniedHandler;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -35,6 +37,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 // 인증, 허가 에러 시 공통적으로 처리해주는 부분
                 .exceptionHandling() //(3)
                 .authenticationEntryPoint(unauthorizedHandler)
+                .accessDeniedHandler(accessDeniedHandler)
                 .and()
                 .sessionManagement() //(4)
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -45,10 +48,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
                 // login, 회원가입 API는 토큰이 없는 상태에서 요청이 들어오기 때문에 permitAll
                 // 허용 영역 설정
-                .antMatchers("/","/login","/join").permitAll()
-//                .antMatchers("/user/withdrawal").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN") // 회원 탈퇴
-//                .antMatchers("/mypage/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
-//                .antMatchers("/trade/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
+                .antMatchers("/","/user/login","/user/join").permitAll()
+                .antMatchers("/user/join","/user/logintest").permitAll()
+                .antMatchers("/api/*").permitAll()
+
+
+                .antMatchers("/user/rejection").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
+                //.antMatchers("/trade/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
+                //.antMatchers("/user/withdrawal").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN") // 회원 탈퇴
 
 
                 // 나머지는 전부 인증 필요

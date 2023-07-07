@@ -27,27 +27,14 @@ public class JwtTokenProvider {
     private static final long REFRESH_TOKEN_EXPIRE_TIME = 1000 * 60 * 60 * 24 * 7;  // 7일
     private static Key secretKey;
 
+//    @PostConstruct
+//    protected void init() {
+//        secretKey = Keys.hmacShaKeyFor(JWT_SECRET.getBytes(StandardCharsets.UTF_8));
+//    }
     @PostConstruct
     protected void init() {
-        secretKey = Keys.hmacShaKeyFor(JWT_SECRET.getBytes(StandardCharsets.UTF_8));
+        secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS512);
     }
-    // jwt 토큰 생성
-//    public static TokenDto generateToken(Authentication authentication, String userId) {
-//        Date now = new Date();
-//        Date expiryDate = new Date(now.getTime() + ACCESS_TOKEN_EXPIRE_TIME);
-//
-//        String refreshToken = generateRefreshToken(userId);
-//
-//        return Jwts.builder()
-//                .setSubject((String) authentication.getPrincipal()) // 사용자
-//                .setIssuedAt(new Date()) // 현재 시간 기반으로 생성
-//                .setExpiration(expiryDate) // 만료 시간 세팅
-//                .claim("userId", userId)
-//                .claim("userName", "비트캠프")
-//                // 사용할 암호화 알고리즘, signature에 들어갈 secret 값 세팅
-//                .signWith(secretKey, SignatureAlgorithm.HS256)
-//                .compact();
-//    }
 
     public static TokenDto generateTokenDto(Authentication authentication) {
         // 권한들 가져오기
@@ -57,55 +44,29 @@ public class JwtTokenProvider {
         long now = (new Date()).getTime();
         // Access Token 생성
         Date accessTokenExpiresIn = new Date(now + ACCESS_TOKEN_EXPIRE_TIME);
+        Date refreshTokenExpiresIn = new Date(now + REFRESH_TOKEN_EXPIRE_TIME);
         String accessToken = Jwts.builder()
                 .setSubject(authentication.getName())       // payload "sub": "name"
                 .claim(AUTHORITIES_KEY, authorities)        // payload "auth": "ROLE_USER"
                 .setExpiration(accessTokenExpiresIn)        // payload "exp": 1516239022 (예시)
-                .signWith(secretKey, SignatureAlgorithm.HS512)    // header "alg": "HS512"
+                .signWith(secretKey, SignatureAlgorithm.HS512)    // header "alg":
                 .compact();
 
         // Refresh Token 생성
         String refreshToken = Jwts.builder()
+                .claim(AUTHORITIES_KEY, authorities)        // payload "auth": "ROLE_USER"
                 .setExpiration(new Date(now + REFRESH_TOKEN_EXPIRE_TIME))
                 .signWith(secretKey, SignatureAlgorithm.HS512)
                 .compact();
 
+        //필요한 값 넣어서 token 빌드
         return TokenDto.builder()
-                .grantType(BEARER_TYPE)
-                .accessToken(accessToken)
-                .accessTokenExpiresIn(accessTokenExpiresIn.getTime())
-                .refreshToken(refreshToken)
+                .granttype(BEARER_TYPE)
+                .accesstoken(accessToken)
+                .accesstokenexpire(accessTokenExpiresIn.getTime())
+                .refreshtoken(refreshToken)
+                .refreshtokenexpire(refreshTokenExpiresIn.getTime())
                 .build();
-    }
-
-
-    // Access 토큰 생성
-    public static String generateAccessToken(Authentication authentication, String userId) {
-        Date now = new Date();
-        Date expiryDate = new Date(now.getTime() + ACCESS_TOKEN_EXPIRE_TIME);
-
-        return Jwts.builder()
-                .setSubject((String) authentication.getPrincipal())
-                .setIssuedAt(new Date())
-                .setExpiration(expiryDate)
-                .claim("userId", userId)
-                .claim("userName", "비트캠프")
-                .signWith(secretKey, SignatureAlgorithm.HS256)
-                .compact();
-    }
-
-    // Refresh 토큰 생성
-    public static String generateRefreshToken(String userId) {
-        Date now = new Date();
-        Date expiryDate = new Date(now.getTime() + REFRESH_TOKEN_EXPIRE_TIME);
-
-        return Jwts.builder()
-                .setSubject(userId)
-                .setIssuedAt(new Date())
-                .setExpiration(expiryDate)
-                .claim("refreshToken", true)
-                .signWith(secretKey, SignatureAlgorithm.HS256)
-                .compact();
     }
 
 
@@ -116,16 +77,17 @@ public class JwtTokenProvider {
                 .parseClaimsJws(token)
                 .getBody();
 
-        log.info("id:"+claims.getId());
-        log.info("issuer:"+claims.getIssuer());
-        log.info("issue:"+claims.getIssuedAt().toString());
-        log.info("subject:"+claims.getSubject());
-        log.info("Audience:"+claims.getAudience());
-        log.info("expire:"+claims.getExpiration().toString());
-        log.info("userName:"+claims.get("userName"));
+        log.info("id: " + (claims.getId() != null ? claims.getId() : ""));
+        log.info("issuer: " + (claims.getIssuer() != null ? claims.getIssuer() : ""));
+        log.info("issue: " + (claims.getIssuedAt() != null ? claims.getIssuedAt().toString() : ""));
+        log.info("subject: " + (claims.getSubject() != null ? claims.getSubject() : ""));
+        log.info("Audience: " + (claims.getAudience() != null ? claims.getAudience() : ""));
+        log.info("expire: " + (claims.getExpiration() != null ? claims.getExpiration().toString() : ""));
+        log.info("userName: " + (claims.get("userName") != null ? claims.get("userName") : ""));
 
         return claims.getSubject();
     }
+
 
     // Jwt 토큰 유효성 검사
     public static boolean validateToken(String token) {

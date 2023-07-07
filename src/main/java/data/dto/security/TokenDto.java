@@ -9,8 +9,9 @@ import org.apache.ibatis.type.Alias;
 @Alias("TokenDto")
 public class TokenDto {
     private int user_id;
-    private String grantType;
-    private String accessToken;
-    private String refreshToken;
-    private Long accessTokenExpiresIn;
+    private String granttype;
+    private String accesstoken;
+    private String refreshtoken;
+    private Long accesstokenexpire;
+    private Long refreshtokenexpire;
 }

@@ -12,7 +12,6 @@ import java.io.IOException;
 @Slf4j
 @Component
 public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
-
     /**
      * 유효한 자격증명을 하지 않고 접근하려 할때 401.
      *
@@ -23,6 +22,7 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
      */
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException e) throws IOException {
+        System.out.println("JwtAuthenticationEntryPoint에서 예외처리");
         response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
     }
 }

@@ -14,7 +14,10 @@ public class UserDto {
     private String user_name;
     private String email;
     private String hp;
-    private int user_type;
+
+    //db에는 int임 조심
+    private String user_type;
+
     private boolean isalarm;
     private boolean iswinner;
     private int report_num;
