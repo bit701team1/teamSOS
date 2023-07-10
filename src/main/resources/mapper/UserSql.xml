@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="data.mapper.UserMapper">
-    <select id="insertUser" parameterType="UserDto">
-        insert into user(id,password,user_name,email,hp) values (#{id},#{password},#{user_name},#{email},#{hp})
+    <insert id="insertUser" parameterType="UserDto">
+        insert into user(password,user_name,email,hp) values (#{password},#{user_name},#{email},#{hp})
+        <!-- INSERT 후에(after) 자동으로 들어간 guest_idx값을 얻어서 dto에 주입 -->
+        <selectKey keyProperty="user_id" resultType="int" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+    <select id="countEmail" parameterType="String" resultType="int">
+        select count(*) from user where email = #{email}
     </select>
     <select id="getUserByUserName" parameterType="String" resultType="UserDto">
         select  * from user where user_name = #{user_name}
     </select>
     <select id="getUserByEmail" parameterType="String" resultType="UserDto">
         select  * from user where email = #{email}
+    </select>
+    <select id="getUserByUserId" parameterType="int" resultType="UserDto">
+        select * from user where user_id = #{user_id}
     </select>
 </mapper>

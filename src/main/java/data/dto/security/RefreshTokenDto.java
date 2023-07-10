@@ -7,6 +7,7 @@ import org.apache.ibatis.type.Alias;
 @Alias("RTDto")
 public class RefreshTokenDto {
     private String rt_key;
-    private String rt_value;
-    private Long rt_expire;
+    private String refreshtoken_value;
+    private Long refreshtoken_expire;
+    private String accesstoken_value;
 }

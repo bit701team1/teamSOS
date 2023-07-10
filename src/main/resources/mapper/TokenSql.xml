@@ -7,18 +7,20 @@
         where rt_key = #{rt_key}
     </select>
     <insert id="insertRefreshToken" parameterType="RTDto">
-        insert into refresh_token
-        values (#{rt_key}, #{rt_value}, #{rt_expire})
+        insert into refresh_token (rt_key, refreshtoken_value, refreshtoken_expire)
+        values (#{rt_key}, #{refreshtoken_value}, #{refreshtoken_expire})
     </insert>
     <update id="updateRefreshToken" parameterType="RTDto">
         update refresh_token
-        set rt_value=#{rt_value}, rt_expire = #{rt_expire}
+        set refreshtoken_value=#{refreshtoken_value}, refreshtoken_expire = #{refreshtoken_expire}
         where rt_key = #{rt_key}
     </update>
-<!--    &lt;!&ndash; u_num이 가진 refreshToken 반환&ndash;&gt;-->
-<!--    <select id="selectRefreshToken" parameterType="String" resultType="RTDto">-->
-<!--        select *-->
-<!--        from refresh_token-->
-<!--        where rt_key = #{rt_key}-->
-<!--    </select>-->
+    <insert id="updateAccessToken" parameterType="RTDto">
+        update refresh_token
+        set accesstoken_value=#{accesstoken_value}
+        where rt_key = #{rt_key}
+    </insert>
+    <select id="selectAccessToken" parameterType="String" resultType="int">
+        select user_id from refresh_token where accesstoken_value=#{accesstoken_value}
+    </select>
 </mapper>

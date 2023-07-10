@@ -9,7 +9,6 @@ import java.sql.Timestamp;
 @Alias("UserDto")
 public class UserDto {
     private int user_id;
-    private String id;
     private String password;
     private String user_name;
     private String email;

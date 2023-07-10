@@ -23,6 +23,7 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException e) throws IOException {
         System.out.println("JwtAuthenticationEntryPoint에서 예외처리");
+        System.out.println("예외 종류: " + e.getClass().getSimpleName());
         response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
     }
 }

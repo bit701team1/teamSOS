@@ -5,7 +5,6 @@ import Axios from "axios";
 function LoginForm(props) {
 
     const [data, setData] = useState({
-        id: '',
         email:'',
         password: ""
     })
@@ -24,8 +23,20 @@ function LoginForm(props) {
         let url = "/user/login";
         Axios.post(url, data).then(res => {
             console.log(res);
-        })
+        }).catch(error => {
+            // 로그인 실패 처리
+            alert("회원가입에 실패했습니다.");
+        });
+    }
 
+    const handleIsLoginClick = () => {
+        let url = "/user/islogin";
+        Axios.get(url).then(res => {
+            alert("로그인 중입니다")
+        }).catch(error => {
+            // 로그인 실패 처리
+            alert("회원정보가 없습니다");
+        });
     }
 
     return (
@@ -34,13 +45,6 @@ function LoginForm(props) {
             <h1>LoginForm</h1>
             <h3 onClick={handleDeleteClick}>클릭시 쿠키값을 지웁니다</h3>
             <br/><br/>
-            <div>
-                <input type="text" value={data.id} onChange={(e) => setData({
-                    ...data,
-                    id: e.target.value
-                })
-                }/>
-            </div>
             <div>
                 <input type="text" value={data.email} onChange={(e) => setData({
                     ...data,
@@ -56,6 +60,8 @@ function LoginForm(props) {
                 }/>
                 <button onClick={handleLoginClick}>로그인</button>
             </div>
+            <br/>
+            <button onClick={handleIsLoginClick}>islogin</button>
         </div>
     );
 }
