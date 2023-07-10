@@ -7,7 +7,7 @@ function Root(props) {
         <div>
             <BrowserRouter>
                 <RouteMain/>
-            </BrowserRouter>            
+            </BrowserRouter>
         </div>
     );
 }
