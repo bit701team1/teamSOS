@@ -1,21 +1,25 @@
 {
   "files": {
-    "main.css": "/static/css/main.fa7e6f41.css",
-    "main.js": "/static/js/main.61458985.js",
+    "main.css": "/static/css/main.0d83399d.css",
+    "main.js": "/static/js/main.14eb55e5.js",
     "static/js/787.d3befce1.chunk.js": "/static/js/787.d3befce1.chunk.js",
+    "static/media/kermit.gif": "/static/media/kermit.fe721bbd80f92534cc31.gif",
+    "static/media/짱구5.gif": "/static/media/짱구5.11a0424ac8e60362d83e.gif",
     "static/media/ERR404.png": "/static/media/ERR404.077cdd9ef8a1b332a0be.png",
+    "static/media/R1.gif": "/static/media/R1.dbaf1d9b4bd8719a112b.gif",
+    "static/media/alert.png": "/static/media/alert.a4fa5827778217c1101b.png",
+    "main.0d83399d.css.map": "/static/css/main.0d83399d.css.map",
+    "787.d3befce1.chunk.js.map": "/static/js/787.d3befce1.chunk.js.map",
     "static/media/k_alert.svg": "/static/media/k_alert.b1fb5fbb979354b85d25180e9f8a341d.svg",
     "static/media/k_people_icon.svg": "/static/media/k_people_icon.71e6b1e44326b34a65d5ca0bcf131728.svg",
     "index.html": "/index.html",
     "static/media/k_search_icon.svg": "/static/media/k_search_icon.c3892366960acaffec87ce261f22dd37.svg",
     "static/media/k_home.svg": "/static/media/k_home.0bb7d84ff598f8300335365d279ccede.svg",
     "static/media/k_back_icon.svg": "/static/media/k_back_icon.d2e8df84f6c2bd4953cf4e6aa6790253.svg",
-    "main.fa7e6f41.css.map": "/static/css/main.fa7e6f41.css.map",
-    "main.61458985.js.map": "/static/js/main.61458985.js.map",
     "787.d3befce1.chunk.js.map": "/static/js/787.d3befce1.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.fa7e6f41.css",
-    "static/js/main.61458985.js"
+    "static/css/main.0d83399d.css",
+    "static/js/main.14eb55e5.js"
   ]
 }
