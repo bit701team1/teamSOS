@@ -8,11 +8,12 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
-@ComponentScan({"data.*","naver.cloud",})
 @MapperScan({"data.mapper"})
-@EnableScheduling
-public class ArenaApplication {
+@ComponentScan({"data.*","naver.cloud","jwt.setting"})
 
+@EnableScheduling
+@MapperScan("data.mapper")
+public class ArenaApplication {
     public static void main(String[] args) {
         SpringApplication.run(ArenaApplication.class, args);
     }
