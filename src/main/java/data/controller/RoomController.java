@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import data.dto.roomDto;
-import data.service.roomService;
+import data.service.RoomService;
 @RestController
 @RequestMapping("/room")
-public class roomController {
+public class RoomController {
     @Autowired
-    roomService roomService;
+    RoomService roomService;
 
     @GetMapping("/info/{id}")
     public roomDto getInfo(@PathVariable String id) {

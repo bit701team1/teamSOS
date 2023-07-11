@@ -1,7 +1,5 @@
 package data.controller;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -11,14 +9,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import data.dto.msgDto;
 import data.dto.roomDto;
-import data.service.roomService;
+import data.service.RoomService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-public class msgController {
+
+public class MsgController {
     @Autowired
-    roomService roomService;
+    RoomService roomService;
     private final SimpMessageSendingOperations sendingOperations;
     @MessageMapping("/msg")
     public void msg(msgDto msg) {

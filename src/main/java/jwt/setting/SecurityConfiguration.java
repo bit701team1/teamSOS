@@ -50,8 +50,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 // 허용 영역 설정
                 .antMatchers("/","/user/login","/user/join").permitAll()
                 .antMatchers("/login","/join").permitAll()
-                .antMatchers("/user/join","/user/logintest","user/islogin").permitAll()
-                .antMatchers("/api/*").permitAll()
+                .antMatchers("/user/join","/user/logintest","/user/islogin").permitAll()
+
+                .antMatchers("/sub/room","/ws/**","/sub/**","/pub/**","/info/**").permitAll()
+                .antMatchers("/lobby/**").permitAll()
+                .antMatchers("/room/**").permitAll()
+
+                .antMatchers("/api/**").permitAll()
 
 
                 .antMatchers("/user/rejection").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
@@ -74,7 +79,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public CorsConfigurationSource corsConfigurationSource() {
         System.out.println("corsConfigurationSource 진입");
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.addAllowedOrigin("*");
+        configuration.addAllowedOrigin("http://localhost:3000");
         configuration.setAllowedMethods(Arrays.asList("HEAD", "GET", "POST", "PUT", "DELETE"));
         configuration.addAllowedHeader("*");
         configuration.setAllowCredentials(true);

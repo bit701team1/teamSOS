@@ -14,7 +14,7 @@ import data.dto.msgDto;
 import data.dto.roomDto;
 
 @Service
-public class roomService {
+public class RoomService {
     private Map<String, roomDto> rooms;//방목록 저장
     private Map<String, msgDto> msgs;//메세지 저장
     @PostConstruct //Autowired 되는 순간 딱 한번만 실행되는 것(PostConstruct)

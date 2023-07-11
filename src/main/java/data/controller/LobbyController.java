@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import data.dto.roomDto;
-import data.service.roomService;
+import data.service.RoomService;
 
 @RestController
 @RequestMapping("/lobby")
-public class lobbyController {
+public class LobbyController {
 
     @Autowired
-    roomService roomService;
+    RoomService roomService;
 
     @GetMapping("/list")
     public List<roomDto> getList(){

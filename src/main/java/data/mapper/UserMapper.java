@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.User;
 @Mapper
 public interface UserMapper {
     public List<UserDto> getAllUsers();
-}
+
     //스프링 시큐리티용 로그인
 
     public UserDto getUserByEmail(String email);
