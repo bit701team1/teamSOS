@@ -3,27 +3,44 @@ import './App.css';
 import UserInfo from "./UserPage/UserInfo";
 import Mainauction from "./AuctionPage/Mainauction";
 import AuctionLive from "./AuctionPage/AuctionLive";
+
+import React from 'react';
+import './manage_page/ManagePageMain.css';
+
 import errorimg from './image/ERR404.png';
 import JoinForm from "./user/JoinForm";
 import LoginForm from "./user/LoginForm";
 import Menu from "./user/Menu";
 import {ManagePageMain} from "./manage_page";
 
+import LiveStream from "./AuctionPage/LiveStream";
+
+import ResultPage from "./AuctionPage/ResultPage";
+
+
 
 function RouteMain(props) {
     return (
         <div>
             <Routes>
+
                 <Route path='/userinfo' element={<UserInfo/>}/>
                 <Route path='/room/:roomId' element={<AuctionLive/>}/>
                 <Route path='/' element={<Mainauction/>}/>
 
                 <Route path='/menu' element={<Menu/>}/>
+
+                <Route path='/manage/*' element={<ManagePageMain/>}/>
+
+                <Route path='/result' element={<ResultPage/>}/>
+
                 <Route path='/join' element={<JoinForm/>}/>
                 <Route path='/login' element={<LoginForm/>}/>
 
                 <Route path='/manage/*' element={<ManagePageMain/>}/>
-
+                <Route path={'/livestream'}>
+                    <Route path={'livestream'} element={<LiveStream/>}/>
+                </Route>
 
                 <Route path='/*' element={
                     <div>
@@ -32,7 +49,6 @@ function RouteMain(props) {
                         <img alt='' src={errorimg}/>
                     </div>
                 }/>
-
             </Routes>
         </div>
     );

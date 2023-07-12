@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="data.mapper.UserMapper">
-<!--  관리자페이지에서 회원 조회  -->
-    <select id="getAllUsers" resultType="UserDto">
-        select * from user order by user_id
-    </select>
     <insert id="insertUser" parameterType="UserDto">
         insert into user(password,user_name,email,hp) values (#{password},#{user_name},#{email},#{hp})
         <!-- INSERT 후에(after) 자동으로 들어간 guest_idx값을 얻어서 dto에 주입 -->
@@ -24,7 +20,74 @@
     <select id="getUserByUserId" parameterType="int" resultType="UserDto">
         select * from user where user_id = #{user_id}
     </select>
+
     <select id="selectAccessToken" parameterType="String" resultType="int">
         select rt_key from refresh_token where refresh_token = #{refresh_token}
     </select>
+
+
+    <!-- /////////////////////////////////////  경철 (ManagePage)  //////////////////////////////////////////////////-->
+
+    <!--  회원 삭제, 회원탈퇴-->
+    <delete id="deleteUser">
+        delete from user where user_id=#{user_id}
+    </delete>
+
+    <!--    관리자페이지에서 유저목록 조회 페이징리스트-->
+    <!--    <select id="getManagePagingList" parameterType="map" resultType="UserDto">-->
+    <!--        select * from user order by user_id desc limit #{startNum}, #{perPage}-->
+    <!--    </select>-->
+    <!--    <select id="getManageTotalCount" resultType="int">-->
+    <!--        select count(*) from user-->
+    <!--    </select>-->
+
+    <!--    관리자페이지에서 유저목록 조회 페이징리스트 검색추가-->
+    <select id="getManagePagingList" parameterType="map" resultType="UserDto">
+        select * from user
+        <if test="search!=''">
+            where user_name like CONCAT('%',#{search},'%')
+            or
+            email like CONCAT('%',#{search},'%')
+        </if>
+        order by user_id desc limit #{startNum}, #{perPage}
+    </select>
+    <select id="getManageTotalCount" resultType="int">
+        select count(*) from user
+    </select>
+
+    <!--    관리자페이지에서 신고된 유저목록 조회 페이징리스트 및 검색추가-->
+    <select id="getManageBlockList" parameterType="map" resultType="UserDto">
+        SELECT *
+        FROM user
+        where
+            report_num != 0
+            <if test="search != ''">
+                AND (user_name LIKE CONCAT('%', #{search}, '%') OR email LIKE CONCAT('%', #{search}, '%'))
+            </if>
+        ORDER BY user_id DESC limit #{startNum}, #{perPage}
+    </select>
+
+    <!--    &lt;!&ndash;   관리자페이지에서 유저목록 검색해서 조회 &ndash;&gt;-->
+    <!--    <select id="getSearchUser" parameterType="map" resultType="UserDto">-->
+    <!--        select * from user-->
+    <!--        <if test="search!=''">-->
+    <!--            where user_name like CONCAT('%',#{search},'%')-->
+    <!--            or-->
+    <!--            email like CONCAT('%',#{search},'%')-->
+    <!--        </if>-->
+    <!--        order by user_id limit #{startNum},#{perPage}-->
+    <!--    </select>-->
+
+    <!--    <select id="getSearchUserCount" parameterType="map" resultType="int">-->
+    <!--        select concat(*) from user-->
+    <!--        where user_name like concat('%',#{search},'%')-->
+    <!--           or-->
+    <!--            email like CONCAT('%',#{search},'%')-->
+    <!--    </select>-->
+
+
+
+
+
+
 </mapper>

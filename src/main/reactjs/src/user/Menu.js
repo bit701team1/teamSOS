@@ -7,6 +7,7 @@ function Menu(props) {
             <ul className=''>
                 <li><NavLink to={"/login"}><h2>Login</h2></NavLink></li>
                 <li><NavLink to={"/join"}><h2>Join</h2></NavLink></li>
+                <li><NavLink to={"/manage"}><h2>manage</h2></NavLink></li>
             </ul>
         </div>
     );

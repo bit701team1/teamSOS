@@ -56,8 +56,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/lobby/**").permitAll()
                 .antMatchers("/room/**").permitAll()
 
+                .antMatchers("/manage/**").permitAll()
+
                 .antMatchers("/api/**").permitAll()
 
+                .antMatchers("/livestream/**").permitAll()
 
                 .antMatchers("/user/rejection").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
                 //.antMatchers("/trade/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")

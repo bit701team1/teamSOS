@@ -38,20 +38,39 @@
 .y_chatscreen,
 .y_livescreen{
     position: absolute;
-    top: 22.81rem;
+    top: 20.81rem;
     left: calc(50% - 545px);
     border : 1px solid gainsboro;
     width: 68.06rem;
     height: 51.06rem;
 }
 .y_chatscreen{
-    top: 81.38rem;
-    height: 45.06rem;
+    top: 80.7rem;
+    height: 48.06rem;
     overflow-y:auto;
+}
+.y_banner{
+    position: absolute;
+    top: 71.7rem;
+    left: calc(50% - 545px);
+    border: 1px solid black;
+    height: 9.0rem;
+    width: 68.06rem;
+}
+.message-right {
+    text-align: right;
+    color: black;
+    margin-right: 10px;
+}
+.message-left {
+    text-align: left;
+    color: black;
+    margin-left: 10px;
 }
 .y_chatscreen b{
     font-family: Gowun Dodum;
 }
+
 .y_donation{
     position: absolute;
     top: 8.5rem;
@@ -145,6 +164,8 @@
     left: calc(50% - 517px);
     width: 25.19rem;
     height: 11.38rem;
+}
+.y_chatinput2{
     font-family: Gowun Dodum;
 }
 .y_header{

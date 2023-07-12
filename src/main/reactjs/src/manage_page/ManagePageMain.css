@@ -1,11 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Song+Myung:wght@400&display=swap");
-html {
-    font-size: 10px;
-}
-body {
-    margin: 0;
-    line-height: normal;
-}
 
 .k-ct-body-icon {
     position: absolute;
@@ -208,7 +201,8 @@ body {
     font-size: 6rem;
 }
 .k-list-show {
-    height: calc(100% - 1438px);
+    /*height: calc(100% - 1438px);*/
+    height: calc(100% - 838px);
     width: calc(100% - 100px);
     top: 120.9rem;
     right: 6rem;
@@ -249,4 +243,6 @@ body {
     font-size: 8rem;
     color: #000;
     font-family: "Song Myung";
+    margin: 0;
+    line-height: normal;
 }
