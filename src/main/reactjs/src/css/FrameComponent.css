@@ -1,0 +1,67 @@
+.y_end1{
+    top: 5.75rem;
+    left: calc(50% - 371.85px);
+    width: 40.15rem;
+    height: 4.81rem;
+}
+.y_end1,
+.y_end2,
+.y_end3{
+    position: absolute;
+    display: inline-block;
+}
+.y_end2{
+    top: 13.88rem;
+    left: calc(50% - 371.85px);
+    font-size: 3rem;
+    color: #636366;
+    width: 32.01rem;
+    height: 3.63rem;
+}
+.y_end3{
+    top: 26.6rem;
+    left: calc(50% + 72px);
+    font-size: 2.5rem;
+    width: 16.61rem;
+    height: 3.75rem;
+    font-family: Inter;
+}
+.y_gogo {
+    position: absolute;
+    height: 10.28%;
+    top: 77.98%;
+    bottom: 11.74%;
+    left: calc(50% + 326px);
+    max-height: 100%;
+    width: 3.56rem;
+    animation: moveRight 1s infinite;
+    cursor: pointer;
+}
+@keyframes moveRight {
+    0% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(10px); /* Adjust this value to how far you want it to move */
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+.y_end-div {
+    position: relative;
+    border-radius: 20px;
+    background-color: #fff;
+    width: 54.75rem;
+    height: 34.63rem;
+    overflow: hidden;
+    max-width: 100%;
+    max-height: 100%;
+    text-align: left;
+    font-size: 4rem;
+    color: #000;
+    font-family: Inter;
+    top: 50%;
+    left: 40%;
+    transform: translate(-40%, -50%);
+}

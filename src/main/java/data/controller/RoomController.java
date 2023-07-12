@@ -27,8 +27,9 @@ public class RoomController {
                 public void run() {
                     roomService.deleteRoom(id);
                     timer.cancel(); // 타이머 종료
+                    System.out.println("끝");
                 }
-            }, 600 * 1000); // 10초 (밀리초)
+            }, 600 * 1000);
         }
         return room;
     }

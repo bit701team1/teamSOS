@@ -1,0 +1,39 @@
+.please-make-a,
+.price {
+    position: absolute;
+    top: 5rem;
+    left: calc(50% - 404.5px);
+}
+.price {
+    top: 16.88rem;
+    font-size: 3.44rem;
+}
+.child,
+.item {
+    position: absolute;
+    top: 22.94rem;
+    left: calc(50% - 406.5px);
+    width: 49.88rem;
+    height: 6.19rem;
+}
+.item {
+    top: 33.81rem;
+    left: calc(50% + 245.5px);
+    background-color: #d9d9d9;
+    width: 9.13rem;
+    height: 6.25rem;
+}
+.div4 {
+    position: relative;
+    border-radius: 20px;
+    background-color: #fff;
+    width: 56.69rem;
+    height: 45.81rem;
+    overflow: hidden;
+    max-width: 100%;
+    max-height: 100%;
+    text-align: left;
+    font-size: 5rem;
+    color: #000;
+    font-family: "Song Myung";
+}
