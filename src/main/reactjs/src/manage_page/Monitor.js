@@ -1,6 +1,5 @@
 import React from 'react';
 import './ManagePageMain.css';
-import k_home from "../k_manage_image/k_home.svg";
 
 function Monitor(props) {
     return (

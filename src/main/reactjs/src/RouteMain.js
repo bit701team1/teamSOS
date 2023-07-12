@@ -1,9 +1,7 @@
-import React, {useEffect, useState} from 'react';
-import { Route, Routes } from 'react-router-dom';
-import './App.css';
-import UserInfo from "./UserPage/UserInfo";
-import Mainauction from "./AuctionPage/Mainauction";
-import AuctionLive from "./AuctionPage/AuctionLive";
+import React from 'react';
+import {Route, Routes} from 'react-router-dom';
+
+import './manage_page/ManagePageMain.css';
 import errorimg from './image/ERR404.png';
 import JoinForm from "./user/JoinForm";
 import LoginForm from "./user/LoginForm";
@@ -21,10 +19,8 @@ function RouteMain(props) {
     return (
         <div>
             <Routes>
-                {/*<Route path='/room/:roomId' element={<AuctionLive/>}/>*/}
-                <Route path='/userinfo' element={<UserInfo/>}/>
-                <Route path='/room/:roomId' element={<AuctionLive/>}/>
-                <Route path='/' element={<Mainauction/>}/>
+                <Route path='/manage/*' element={<ManagePageMain/>}/>
+
 
                 <Route path='/result' element={<ResultPage/>}/>
                 <Route path='/' element={<Menu/>}/>
@@ -45,7 +41,6 @@ function RouteMain(props) {
                         <img alt='' src={errorimg}/>
                     </div>
                 }/>
-
             </Routes>
         </div>
     );
