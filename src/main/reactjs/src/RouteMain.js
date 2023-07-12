@@ -9,6 +9,11 @@ import Menu from "./user/Menu";
 import Unauthorized from "./user/Unauthorized";
 import {ManagePageMain} from "./manage_page";
 
+import LiveStream from "./AuctionPage/LiveStream";
+
+import ResultPage from "./AuctionPage/ResultPage";
+
+
 
 function RouteMain(props) {
     return (
@@ -17,13 +22,17 @@ function RouteMain(props) {
                 <Route path='/manage/*' element={<ManagePageMain/>}/>
 
 
+                <Route path='/result' element={<ResultPage/>}/>
                 <Route path='/' element={<Menu/>}/>
+
                 <Route path='/join' element={<JoinForm/>}/>
                 <Route path='/login' element={<LoginForm/>}/>
                 <Route path='/unauth' element={<Unauthorized/>}/>
 
                 <Route path='/manage/*' element={<ManagePageMain/>}/>
-
+                <Route path={'/livestream'}>
+                    <Route path={'livestream'} element={<LiveStream/>}/>
+                </Route>
 
                 <Route path='/*' element={
                     <div>

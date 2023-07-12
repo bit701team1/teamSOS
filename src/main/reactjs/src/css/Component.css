@@ -1,0 +1,52 @@
+.detailed-information {
+    position: absolute;
+    top: 6.31rem;
+    left: 7rem;
+    font-size: 4.38rem;
+}
+.date-20230704,
+.title {
+    position: absolute;
+    top: 13.75rem;
+    left: 7rem;
+}
+.title {
+    top: 19.44rem;
+}
+.detail {
+    margin: 0;
+}
+.artist,
+.detail-container {
+    position: absolute;
+    top: 30.81rem;
+    left: 7rem;
+}
+.artist {
+    top: 25.13rem;
+}
+.div3,
+.icon {
+    border-radius: 20px;
+}
+.icon {
+    position: absolute;
+    top: 52.31rem;
+    left: 9.19rem;
+    width: 46.88rem;
+    height: 48.19rem;
+    object-fit: cover;
+}
+.div3 {
+    position: relative;
+    background-color: #fff;
+    width: 65.31rem;
+    height: 104.63rem;
+    max-width: 100%;
+    max-height: 100%;
+    overflow: auto;
+    text-align: left;
+    font-size: 3rem;
+    color: #000;
+    font-family: "Song Myung";
+}

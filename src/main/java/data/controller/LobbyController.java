@@ -39,7 +39,7 @@ public class LobbyController {
                 timer.cancel(); // 타이머 종료
             }
         }, 600 * 1000); // 10초 (밀리초)
-
+        
         return createdRoom;
     }
 
