@@ -10,6 +10,7 @@ import monitor from './Monitor';
 import {BlockList, Monitor, UserList} from "./index";
 
 function ManagePageMain(props) {
+
     return (
         <div className="k-containermain">
             <div className="k-ct-header" />
@@ -48,15 +49,21 @@ function ManagePageMain(props) {
                 </NavLink>
             </div>
 
-            <div className="k-searchbox">
-                <img className="k-people-icon" alt="" src={k_people_icon} />
-                <input type={'text'} className="k-search-bar" >
-                </input>
-                <img className="k-search-icon" alt="" src={k_search_icon} />
-            </div>
+            {/*<div className="k-searchbox">*/}
+            {/*    <img className="k-people-icon" alt="" src={k_people_icon} />*/}
+            {/*    <input type={'text'} className="k-search-bar" >*/}
+            {/*    </input>*/}
+            {/*    <img className="k-search-icon" alt="" src={k_search_icon} />*/}
+            {/*</div>*/}
 
             <Routes>
                 <Route path={'userlist'} element={
+                    <div className="k-list-show">
+                    <UserList/>
+                    </div>
+                }/>
+
+                <Route path={'userlist/:currentPage'} element={
                     <div className="k-list-show">
                     <UserList/>
                     </div>
