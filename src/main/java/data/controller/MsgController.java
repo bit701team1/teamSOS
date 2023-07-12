@@ -7,8 +7,8 @@ import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-import data.dto.msgDto;
-import data.dto.roomDto;
+import data.dto.MsgDto;
+import data.dto.RoomDto;
 import data.service.RoomService;
 import lombok.RequiredArgsConstructor;
 
@@ -20,14 +20,14 @@ public class MsgController {
     RoomService roomService;
     private final SimpMessageSendingOperations sendingOperations;
     @MessageMapping("/msg")
-    public void msg(msgDto msg) {
+    public void msg(MsgDto msg) {
         switch (msg.getType()) {
             case "ENTER":
                 break;/// 최초 방에 입장했을때
 
             case "CHAT":
                 // 방이 존재하는지 확인
-                roomDto room = roomService.getRoom(msg.getRoomId());
+                RoomDto room = roomService.getRoom(msg.getRoomId());
 
                     // 방이 존재하는 경우에만 채팅 전송
                     sendingOperations.convertAndSend("/sub/room/" + msg.getRoomId(), msg);

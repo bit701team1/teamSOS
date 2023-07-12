@@ -1,5 +1,5 @@
-import "../css/Component.css";
-const Component = ({ onClose }) => {
+import "../css/detailmodal.css";
+const DetailModal = ({ onClose }) => {
     return (
         <div className="div3">
             <div className="detailed-information">DETAILED INFORMATION</div>
@@ -15,4 +15,4 @@ const Component = ({ onClose }) => {
     );
 };
 
-export default Component;
+export default DetailModal;

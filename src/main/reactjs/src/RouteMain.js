@@ -1,8 +1,8 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import UserInfo from "./UserPage/UserInfo";
-import Mainauction from "./AuctionPage/Mainauction";
-import AuctionLive from "./AuctionPage/AuctionLive";
+import Mainauction from "./auctionpage/Mainauction";
+import AuctionLive from "./auctionpage/AuctionLive";
 
 import React from 'react';
 import './manage_page/ManagePageMain.css';
@@ -13,9 +13,9 @@ import LoginForm from "./user/LoginForm";
 import Menu from "./user/Menu";
 import {ManagePageMain} from "./manage_page";
 
-import LiveStream from "./AuctionPage/LiveStream";
+import LiveStream from "./auctionpage/LiveStream";
 
-import ResultPage from "./AuctionPage/ResultPage";
+import ResultPage from "./auctionpage/ResultPage";
 
 
 

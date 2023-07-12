@@ -13,11 +13,11 @@ import alertImage from "../image/alert.png";
 import LiveStream from './LiveStream';//추가-DH
 
 
-import Component2 from "../Y_MODAL/Component2";
-import PortalPopup from "../Y_MODAL/PortalPopup";
-import Component1 from "../Y_MODAL/Component1";
-import Component from "../Y_MODAL/Component";
-import FrameComponent from "../Y_MODAL/FrameComponent";
+import DonateModal from "../y_modal/DonateModal";
+import PortalPopup from "../y_modal/PortalPopup";
+import BidModal from "../y_modal/BidModal";
+import DetailModal from "../y_modal/DetailModal";
+import ResultModal from "../y_modal/ResultModal";
 
 function AuctionLive(props) {
     const [isFrameOpen, setFrameOpen] = useState(false);
@@ -257,7 +257,7 @@ function AuctionLive(props) {
                     placement="Centered"
                     onOutsideClick={closeFrame}
                 >
-                    <Component2 onClose={closeFrame} />
+                    <DonateModal onClose={closeFrame} />
                 </PortalPopup>
             )}
             {isFrame1Open && (
@@ -266,7 +266,7 @@ function AuctionLive(props) {
                     placement="Centered"
                     onOutsideClick={closeFrame1}
                 >
-                    <Component1 onClose={closeFrame1} />
+                    <BidModal onClose={closeFrame1} />
                 </PortalPopup>
             )}
             {isFrame2Open && (
@@ -275,7 +275,7 @@ function AuctionLive(props) {
                     placement="Centered"
                     onOutsideClick={closeFrame2}
                 >
-                    <Component onClose={closeFrame2} />
+                    <DetailModal onClose={closeFrame2} />
                 </PortalPopup>
             )}
             {isFrame3Open && (
@@ -284,7 +284,7 @@ function AuctionLive(props) {
                     placement="Centered"
                     onOutsideClick={closeFrame3}
                 >
-                    <FrameComponent onClose={closeFrame3} />
+                    <ResultModal onClose={closeFrame3} />
                 </PortalPopup>
             )}
         </>

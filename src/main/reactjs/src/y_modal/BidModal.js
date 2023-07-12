@@ -1,5 +1,5 @@
-import "../css/Component1.css";
-const Component1 = ({ onClose }) => {
+import "../css/bidmodal.css";
+const BidModal = ({ onClose }) => {
     return (
         <div className="div4">
             <div className="please-make-a">{`Please make a bid `}</div>
@@ -10,4 +10,4 @@ const Component1 = ({ onClose }) => {
     );
 };
 
-export default Component1;
+export default BidModal;

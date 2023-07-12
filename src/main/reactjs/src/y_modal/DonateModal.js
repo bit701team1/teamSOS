@@ -1,5 +1,5 @@
-import "../css/Component2.css";
-const Component2 = ({ onClose }) => {
+import "../css/donatemodal.css";
+const DonateModal = ({ onClose }) => {
     return (
         <div className="div5">
             <div className="please-donate">Please donate</div>
@@ -10,4 +10,4 @@ const Component2 = ({ onClose }) => {
     );
 };
 
-export default Component2;
+export default DonateModal;

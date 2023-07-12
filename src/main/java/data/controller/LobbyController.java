@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import data.dto.roomDto;
+import data.dto.RoomDto;
 import data.service.RoomService;
 
 @RestController
@@ -23,13 +23,13 @@ public class LobbyController {
     RoomService roomService;
 
     @GetMapping("/list")
-    public List<roomDto> getList(){
+    public List<RoomDto> getList(){
         return roomService.getAll();
     }
     @PostMapping("/create")
-    public roomDto postCreate(@RequestBody Map<String,Object> data) {
+    public RoomDto postCreate(@RequestBody Map<String,Object> data) {
         String roomName = data.get("name").toString();
-        roomDto createdRoom = roomService.createRoom(roomName);
+        RoomDto createdRoom = roomService.createRoom(roomName);
         // 10초 후에 방을 삭제
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {

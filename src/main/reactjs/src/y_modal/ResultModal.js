@@ -1,9 +1,9 @@
 
 import React from 'react';
-import "../css/FrameComponent.css";
+import "../css/resultmodal.css";
 import go from "../image/y_go.png";
 import {useNavigate} from "react-router-dom";
-const FrameComponent = ({ onClose }) => {
+const ResultModal = ({ onClose }) => {
     const navigate = useNavigate()
     ;
     return (
@@ -21,4 +21,4 @@ const FrameComponent = ({ onClose }) => {
     );
 };
 
-export default FrameComponent;
+export default ResultModal;

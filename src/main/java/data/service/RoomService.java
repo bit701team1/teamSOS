@@ -10,28 +10,28 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.stereotype.Service;
 
-import data.dto.msgDto;
-import data.dto.roomDto;
+import data.dto.MsgDto;
+import data.dto.RoomDto;
 
 @Service
 public class RoomService {
-    private Map<String, roomDto> rooms;//방목록 저장
-    private Map<String, msgDto> msgs;//메세지 저장
+    private Map<String, RoomDto> rooms;//방목록 저장
+    private Map<String, MsgDto> msgs;//메세지 저장
     @PostConstruct //Autowired 되는 순간 딱 한번만 실행되는 것(PostConstruct)
     private void init() {
         rooms = new LinkedHashMap<>();
     }
-    public List<roomDto> getAll(){//방 정보 가져오기
-        List<roomDto> res = new ArrayList<>(rooms.values());
+    public List<RoomDto> getAll(){//방 정보 가져오기
+        List<RoomDto> res = new ArrayList<>(rooms.values());
         Collections.reverse(res); //방목록 순서 반전
         return res;
     }
-    public roomDto createRoom(String name) {//방생성
-        roomDto r = roomDto.create(name);
+    public RoomDto createRoom(String name) {//방생성
+        RoomDto r = RoomDto.create(name);
         rooms.put(r.getRoomId(),r);
         return r;
     }
-    public roomDto getRoom(String roomId) {//특정방
+    public RoomDto getRoom(String roomId) {//특정방
         return rooms.get(roomId);
 
     }

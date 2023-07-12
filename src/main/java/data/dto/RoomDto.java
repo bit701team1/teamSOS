@@ -7,12 +7,12 @@ import lombok.ToString;
 
 @Data
 @ToString
-public class roomDto {
+public class RoomDto {
     String roomId;
     String roomName;
 
-    public static roomDto create(String name) {
-        roomDto r = new roomDto(); //생성자 생성
+    public static RoomDto create(String name) {
+        RoomDto r = new RoomDto(); //생성자 생성
         r.roomId=UUID.randomUUID().toString();//roomId UUID(랜덤 고유 번호로 생성)
         r.roomName = name;
         return r;
