@@ -60,8 +60,7 @@ public interface UserMapper {
     // refresh_token 삭제
     public void deleteRefreshToken(int user_id);
 
-    public void updateAccessToken(RefreshTokenDto RTokenDto);
-    public int selectAccessToken(String accesstoken_value);
+
     public UserDto getUserByUserId(int user_id);
 
     public int countEmail(String email);

@@ -20,7 +20,13 @@
         set accesstoken_value=#{accesstoken_value}
         where rt_key = #{rt_key}
     </insert>
-    <select id="selectAccessToken" parameterType="String" resultType="int">
-        select user_id from refresh_token where accesstoken_value=#{accesstoken_value}
+    <select id="selectByRtKey" parameterType="RTDto" resultType="String">
+        select * from refresh_token where rt_key = #{rt_key}
+    </select>
+    <select id="selectByAccessToken" parameterType="String" resultType="RTDto">
+        select * from refresh_token where accesstoken_value= #{accesstoken_value}
+    </select>
+    <select id="countByAccessToken" parameterType="String" resultType="int">
+        select count(*) from refresh_token where accesstoken_value= #{accesstoken_value}
     </select>
 </mapper>

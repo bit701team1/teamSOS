@@ -21,6 +21,11 @@
         select * from user where user_id = #{user_id}
     </select>
 
+    <select id="selectAccessToken" parameterType="String" resultType="int">
+        select rt_key from refresh_token where refresh_token = #{refresh_token}
+    </select>
+
+
     <!-- /////////////////////////////////////  경철 (ManagePage)  //////////////////////////////////////////////////-->
 
     <!--  회원 삭제, 회원탈퇴-->
@@ -79,6 +84,7 @@
     <!--           or-->
     <!--            email like CONCAT('%',#{search},'%')-->
     <!--    </select>-->
+
 
 
 

@@ -17,7 +17,10 @@ function JoinForm(props) {
             .then(res=>{
                 if(res.data===1){
                     alert("이미 존재하는 이메일입니다");
-                } else {
+                } else if (res.data ===2) {
+                    alert("유효한 이메일 형식을 입력해주세요");
+                }
+                else {
                     alert("성공적으로 가입되었습니다");
                 }
             }) .catch(error => {
