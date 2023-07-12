@@ -36,30 +36,62 @@ public class JwtTokenProvider {
         secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS512);
     }
 
-    public static TokenDto generateTokenDto(Authentication authentication) {
-        // 권한들 가져오기
-        String authorities = authentication.getAuthorities().stream()
-                .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.joining(","));
+//    public static TokenDto generateTokenDto(Authentication authentication) {
+//        // 권한들 가져오기
+//        String authorities = authentication.getAuthorities().stream()
+//                .map(GrantedAuthority::getAuthority)
+//                .collect(Collectors.joining(","));
+//        long now = (new Date()).getTime();
+//        // Access Token 생성
+//        Date accessTokenExpiresIn = new Date(now + ACCESS_TOKEN_EXPIRE_TIME);
+//        Date refreshTokenExpiresIn = new Date(now + REFRESH_TOKEN_EXPIRE_TIME);
+//        String accessToken = Jwts.builder()
+//                .setSubject(authentication.getName())       // payload "sub": "name"
+//                .claim(AUTHORITIES_KEY, authorities)        // payload "auth": "ROLE_USER"
+//                .setExpiration(accessTokenExpiresIn)        // payload "exp": 1516239022 (예시)
+//                .signWith(secretKey, SignatureAlgorithm.HS512)    // header "alg":
+//                .compact();
+//
+//        // Refresh Token 생성
+//        String refreshToken = Jwts.builder()
+//                .claim(AUTHORITIES_KEY, authorities)        // payload "auth": "ROLE_USER"
+//                .setExpiration(new Date(now + REFRESH_TOKEN_EXPIRE_TIME))
+//                .signWith(secretKey, SignatureAlgorithm.HS512)
+//                .compact();
+//
+//        //필요한 값 넣어서 token 빌드
+//        return TokenDto.builder()
+//                .granttype(BEARER_TYPE)
+//                .accesstoken(accessToken)
+//                .accesstokenexpire(accessTokenExpiresIn.getTime())
+//                .refreshtoken(refreshToken)
+//                .refreshtokenexpire(refreshTokenExpiresIn.getTime())
+//                .build();
+//    }
+
+    public static TokenDto generateTokenDto(String email) {
+        // 권한 정보를 생성하지 않음
+        String authorities = "";
+
         long now = (new Date()).getTime();
         // Access Token 생성
         Date accessTokenExpiresIn = new Date(now + ACCESS_TOKEN_EXPIRE_TIME);
         Date refreshTokenExpiresIn = new Date(now + REFRESH_TOKEN_EXPIRE_TIME);
         String accessToken = Jwts.builder()
-                .setSubject(authentication.getName())       // payload "sub": "name"
-                .claim(AUTHORITIES_KEY, authorities)        // payload "auth": "ROLE_USER"
+                .setSubject(email)                          // payload "sub": "email"
+                .claim(AUTHORITIES_KEY, authorities)        // payload "auth": ""
                 .setExpiration(accessTokenExpiresIn)        // payload "exp": 1516239022 (예시)
-                .signWith(secretKey, SignatureAlgorithm.HS512)    // header "alg":
+                .signWith(secretKey, SignatureAlgorithm.HS512)
                 .compact();
 
         // Refresh Token 생성
         String refreshToken = Jwts.builder()
-                .claim(AUTHORITIES_KEY, authorities)        // payload "auth": "ROLE_USER"
+                .claim(AUTHORITIES_KEY, authorities)        // payload "auth": ""
                 .setExpiration(new Date(now + REFRESH_TOKEN_EXPIRE_TIME))
                 .signWith(secretKey, SignatureAlgorithm.HS512)
                 .compact();
 
-        //필요한 값 넣어서 token 빌드
+        // 필요한 값 넣어서 token 빌드
         return TokenDto.builder()
                 .granttype(BEARER_TYPE)
                 .accesstoken(accessToken)
@@ -70,22 +102,31 @@ public class JwtTokenProvider {
     }
 
 
+
     // Jwt 토큰에서 아이디 추출
     public static String getUserIdFromJWT(String token) {
-        Claims claims = Jwts.parser()
-                .setSigningKey(secretKey)
-                .parseClaimsJws(token)
-                .getBody();
+        try {
+            Claims claims = Jwts.parser()
+                    .setSigningKey(secretKey)
+                    .parseClaimsJws(token)
+                    .getBody();
 
-        log.info("id: " + (claims.getId() != null ? claims.getId() : ""));
-        log.info("issuer: " + (claims.getIssuer() != null ? claims.getIssuer() : ""));
-        log.info("issue: " + (claims.getIssuedAt() != null ? claims.getIssuedAt().toString() : ""));
-        log.info("subject: " + (claims.getSubject() != null ? claims.getSubject() : ""));
-        log.info("Audience: " + (claims.getAudience() != null ? claims.getAudience() : ""));
-        log.info("expire: " + (claims.getExpiration() != null ? claims.getExpiration().toString() : ""));
-        log.info("userName: " + (claims.get("userName") != null ? claims.get("userName") : ""));
+            log.info("id: " + (claims.getId() != null ? claims.getId() : ""));
+            log.info("issuer: " + (claims.getIssuer() != null ? claims.getIssuer() : ""));
+            log.info("issue: " + (claims.getIssuedAt() != null ? claims.getIssuedAt().toString() : ""));
+            log.info("subject: " + (claims.getSubject() != null ? claims.getSubject() : ""));
+            log.info("Audience: " + (claims.getAudience() != null ? claims.getAudience() : ""));
+            log.info("expire: " + (claims.getExpiration() != null ? claims.getExpiration().toString() : ""));
+            log.info("userName: " + (claims.get("userName") != null ? claims.get("userName") : ""));
 
-        return claims.getSubject();
+            return claims.getSubject();
+        } catch (ExpiredJwtException e) {
+            // JWT 만료 예외 처리
+            log.error("JWT expired: " + e.getMessage());
+            // 예외 처리 후 원하는 동작 수행
+            // 예: 로깅, 특정 응답 반환 등
+            return null;
+        }
     }
 
 

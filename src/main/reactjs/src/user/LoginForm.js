@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {NavLink} from "react-router-dom";
+import React, {useEffect, useState} from 'react';
+import {NavLink, useLocation} from "react-router-dom";
 import Axios from "axios";
 
 function LoginForm(props) {
@@ -39,21 +39,75 @@ function LoginForm(props) {
         });
     }
 
+    /////////////////
+
+    // const handleNaverClick = ()=>{
+    //     const NAVER_CLIENT_ID = process.env.REACT_APP_NAVER_CLIENT_ID;
+    //     const REDIRECT_URL = "http://localhost:3000/user/naverlogin"
+    //
+    // }
+
+    const { naver } = window
+    const location = useLocation();
+    // const naverLogin = new naver.LoginWithNaverId({
+    //     clientId: "process.env.REACT_APP_NAVER_CLIENT_ID",
+    //     callbackUrl: "http://localhost:3000/user/naverlogin",
+    //     isPopup: true,
+    //     loginButton: {
+    //         color: "green",
+    //         type: 3,
+    //         height: 40,
+    //     },
+    // });
+
+    // const initializeNaverLogin = () => {
+    //
+    //     naverLogin.init();
+    // };
+
+    useEffect(() => {
+        const naverLogin = new naver.LoginWithNaverId({
+            clientId: "process.env.REACT_APP_NAVER_CLIENT_ID",
+            callbackUrl: "http://localhost:3000/login",
+            isPopup: true,
+            loginButton: { color: 'white', type: 3, height: '40' },
+        });
+        naverLogin.init();
+
+        //naverLogin.logout();
+        getNaverToken();
+        try {
+            naverLogin.getLoginStatus((status) => {
+                if (status) {
+                    console.log(naverLogin.user);
+                }
+            });
+        } catch (err) {
+            console.log(err);
+        }
+    }, []);
+
+    const getNaverToken = () => {
+        if (!location.hash) return;
+        const token = location.hash.split('=')[1].split('&')[0];
+        console.log(token);
+    };
+
     return (
         <div>
             <NavLink to={"/"}><h2>Menu</h2></NavLink>
             <h1>LoginForm</h1>
-            <h3 onClick={handleDeleteClick}>클릭시 쿠키값을 지웁니다</h3>
+            <h3 style={{cursor:"pointer"}} onClick={handleDeleteClick}>클릭시 쿠키값을 지웁니다(로그아웃)</h3>
             <br/><br/>
             <div>
-                <input type="text" value={data.email} onChange={(e) => setData({
+                <input type="text" value={data.email} placeholder='email' onChange={(e) => setData({
                     ...data,
                     email: e.target.value
                 })
                 }/>
             </div>
             <div>
-                <input type="password" value={data.password} onChange={(e) => setData({
+                <input type="password" value={data.password} placeholder='password' onChange={(e) => setData({
                     ...data,
                     password: e.target.value
                 })
@@ -62,6 +116,8 @@ function LoginForm(props) {
             </div>
             <br/>
             <button onClick={handleIsLoginClick}>islogin</button>
+            <br/><br/>
+            <div className="grid-naver" id='naverIdLogin'></div>
         </div>
     );
 }

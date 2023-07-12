@@ -40,8 +40,10 @@ public class CustomUserDetailsService implements UserDetailsService {
 
             GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(userDto.getUser_type());
             System.out.println("grantedAuthority = " + grantedAuthority);
+            System.out.println("userDto.getEmail() = " + userDto.getEmail());
+            //System.out.println("userDto.getPassword() = "+ userDto.getPassword());
 
-            return new User(userDto.getEmail(), userDto.getPassword(), Collections.singleton(grantedAuthority));
+            return new User(userDto.getEmail(), "", Collections.singleton(grantedAuthority));
         }
     }
 

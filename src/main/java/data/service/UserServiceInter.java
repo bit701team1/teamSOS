@@ -11,8 +11,7 @@ public interface UserServiceInter {
 
     public void insertUser(UserDto dto);
     public UserDto getUserByEmail(String email);
-    public void updateAccessToken(RefreshTokenDto RTokenDto);
-    public int selectAccessToken(String accesstoken_value);
+
     public UserDto getUserByUserId(int user_id);
     public int countEmail(String email);
 }

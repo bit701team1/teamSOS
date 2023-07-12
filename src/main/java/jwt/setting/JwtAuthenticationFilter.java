@@ -47,62 +47,73 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         log.info(request.getRequestURI());
 
         if (!request.getRequestURI().contains("join") && !request.getRequestURI().contains("delete-") &&
-        !request.getRequestURI().contains("room") && !request.getRequestURI().contains("lobby") &&
-        !request.getRequestURI().contains("ws") ){
+                !request.getRequestURI().contains("room") && !request.getRequestURI().contains("lobby") &&
+                !request.getRequestURI().contains("ws")) {
             log.info("토큰 체크");
             UserDto dto = new UserDto();
             try {
                 String jwt = getJwtFromRequest(request); //request에서 jwt 토큰을 꺼낸다.
-                //System.out.println("jwt = " + jwt);
-                if (StringUtils.isNotEmpty(jwt) && JwtTokenProvider.validateToken(jwt)) {
-                    System.out.println("조건문 진입 확인1");
+                System.out.println("jwt = " + jwt);
+                System.out.println("JwtTokenProvider.validateToken(jwt) : " + JwtTokenProvider.validateToken(jwt));
 
-                    System.out.println(userService.selectAccessToken(jwt));
+                //System.out.println("Rt_key 유효성 검사 : " + tokenMapper.countByAccessToken(jwt));
 
-                    //재발급 요구됨
-                    if(userService.selectAccessToken(jwt)>-1){
-                        //accesstoken값 일치여부로 user id 구하고 그것으로 다른 유저정보 dto에 저장
-                        dto = userService.getUserByUserId(userService.selectAccessToken(jwt));
+                //jwt(accesstoken)이 있으면서 그게 db에도 저장이 되어있는 경우
+                //System.out.println("1. " + StringUtils.isNotEmpty(jwt));
 
-                        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(dto.getEmail(), dto.getPassword());
-                        Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
-                        TokenDto tokenDto = JwtTokenProvider.generateTokenDto(authentication);
+                if (StringUtils.isNotEmpty(jwt)) {
+                    if (tokenMapper != null && tokenMapper.countByAccessToken(jwt) != 0) {
+                        //System.out.println("조건문 진입 확인1");
 
-                        // 4. RefreshToken 저장
-                        RefreshTokenDto RTDto = new RefreshTokenDto();
-                        RTDto.setRt_key(Integer.toString(userMapper.getUserByEmail(dto.getEmail()).getUser_id()));
-                        RTDto.setRefreshtoken_expire(tokenDto.getRefreshtokenexpire());
-                        RTDto.setRefreshtoken_value(tokenDto.getRefreshtoken());
+                        //System.out.println(tokenMapper.selectByAccessToken(jwt));
+                        //System.out.println("access로 뽑은 rt_key"+tokenMapper.selectByAccessToken(jwt).getRt_key());
 
-                        if (tokenMapper.countRefreshToken(RTDto) > 0) {
-                            tokenMapper.updateRefreshToken(RTDto);
-                        } else {
-                            tokenMapper.insertRefreshToken(RTDto);
+                        //재발급 요구됨
+                        if (tokenMapper.selectByAccessToken(jwt).getRt_key() != 0) {
+                            System.out.println("재발급 요구되는 상황");
+                            //accesstoken값 일치여부로 user id 구하고 그것으로 다른 유저정보 dto에 저장
+                            dto = userService.getUserByUserId(tokenMapper.selectByAccessToken(jwt).getRt_key());
+                            System.out.println("재발급 dto = " + dto);
+
+//                        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(dto.getEmail(), null);
+//                        Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
+                            TokenDto tokenDto = JwtTokenProvider.generateTokenDto(dto.getEmail());
+
+                            // 4. RefreshToken 저장
+                            RefreshTokenDto RTDto = new RefreshTokenDto();
+                            RTDto.setRt_key((userMapper.getUserByEmail(dto.getEmail()).getUser_id()));
+                            RTDto.setRefreshtoken_expire(tokenDto.getRefreshtokenexpire());
+                            RTDto.setRefreshtoken_value(tokenDto.getRefreshtoken());
+
+                            if (tokenMapper.countRefreshToken(RTDto) > 0) {
+                                tokenMapper.updateRefreshToken(RTDto);
+                            } else {
+                                tokenMapper.insertRefreshToken(RTDto);
+                            }
+
+                            tokenDto.setUser_id(userMapper.getUserByEmail(dto.getEmail()).getUser_id());
+                            tokenDto.setRefreshtoken(RTDto.getRefreshtoken_value());
+
+                            // 5. Access Token을 HttpOnly쿠키와 와 DB에 저장
+                            Cookie accessTokenCookie = new Cookie("access_token", tokenDto.getAccesstoken());
+                            accessTokenCookie.setPath("/");
+                            accessTokenCookie.setHttpOnly(true);
+                            response.addCookie(accessTokenCookie);
+
+                            RTDto.setAccesstoken_value(tokenDto.getAccesstoken());
+                            tokenMapper.updateAccessToken(RTDto);
                         }
 
-                        tokenDto.setUser_id(userMapper.getUserByEmail(dto.getEmail()).getUser_id());
-                        tokenDto.setRefreshtoken(RTDto.getRefreshtoken_value());
+                        String userId = JwtTokenProvider.getUserIdFromJWT(jwt); //jwt에서 사용자 id를 꺼낸다.
 
-                        // 5. Access Token을 HttpOnly쿠키와 와 DB에 저장
-                        Cookie accessTokenCookie = new Cookie("access_token", tokenDto.getAccesstoken());
-                        accessTokenCookie.setPath("/");
-                        accessTokenCookie.setHttpOnly(true);
-                        response.addCookie(accessTokenCookie);
+                        log.info("userId : " + userId);
 
-                        RTDto.setAccesstoken_value(tokenDto.getAccesstoken());
-                        tokenMapper.updateAccessToken(RTDto);
+                        UserAuthentication authentication = new UserAuthentication(userId, null, null); //id를 인증한다.
+                        authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request)); //기본적으로 제공한 details 세팅
+
+                        SecurityContextHolder.getContext()
+                                .setAuthentication(authentication); //세션에서 계속 사용하기 위해 securityContext에 Authentication 등록
                     }
-
-
-                    String userId = JwtTokenProvider.getUserIdFromJWT(jwt); //jwt에서 사용자 id를 꺼낸다.
-
-                    log.info("userId : " + userId);
-
-                    UserAuthentication authentication = new UserAuthentication(userId, null, null); //id를 인증한다.
-                    authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request)); //기본적으로 제공한 details 세팅
-
-                    SecurityContextHolder.getContext()
-                            .setAuthentication(authentication); //세션에서 계속 사용하기 위해 securityContext에 Authentication 등록
                 } else {
                     if (StringUtils.isEmpty(jwt)) {
                         System.out.println("조건문 진입 확인2");
@@ -134,10 +145,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 }
             }
         }
-//        String bearerToken = request.getHeader("Authorization");
-//        if (StringUtils.isNotEmpty(bearerToken) && bearerToken.startsWith("Bearer ")) {
-//            return bearerToken.substring("Bearer ".length());
-//        }
+
         return null;
     }
 
