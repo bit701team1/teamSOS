@@ -9,11 +9,16 @@ import * as SockJS from "sockjs-client";
 import * as StompJS from "@stomp/stompjs";
 import test from '../image/짱구5.gif';
 import alertImage from "../image/alert.png";
+
+import LiveStream from './LiveStream';//추가-DH
+
+
 import Component2 from "../Y_MODAL/Component2";
 import PortalPopup from "../Y_MODAL/PortalPopup";
 import Component1 from "../Y_MODAL/Component1";
 import Component from "../Y_MODAL/Component";
 import FrameComponent from "../Y_MODAL/FrameComponent";
+
 function AuctionLive(props) {
     const [isFrameOpen, setFrameOpen] = useState(false);
     const [isFrame1Open, setFrame1Open] = useState(false);
@@ -73,6 +78,7 @@ function AuctionLive(props) {
     useEffect(() => {
         scrollToBottom();// 채팅 스크롤을 아래로 고정
     }, [msg]);
+
     useEffect(() => {
         fetch('/room/info/' + roomId)
             .then(res => res.json()) // 메서드로부터 받은 응답 데이터를 json 형식으로 변환하는 과정임
@@ -89,6 +95,7 @@ function AuctionLive(props) {
             client.current.disconnect();
         };
     }, [roomId]); // 자꾸 채팅이 두개씩 들어가서 추가한 코드
+
     const connect = () => {//소켓 연결용 함수
         let sock =new SockJS('http://localhost:9003/ws'); //endpoint 주소 소켓을 저기로 연결하겠다
         client.current = StompJS.Stomp.over(sock); //StompJS를 사용하여 소켓 연결을 관리하는 클라이언트 객체를 생성
@@ -174,7 +181,10 @@ function AuctionLive(props) {
                 <p className="y_arte-arena"> ARTE : ARENA</p>
             </div>
             <div className="y_livescreen">
-                <img alt='' src={test}></img>
+                <LiveStream/>
+            </div>
+            <div className='y_banner'>
+                배너임
             </div>
             <div className='y_banner'>
                 배너임
