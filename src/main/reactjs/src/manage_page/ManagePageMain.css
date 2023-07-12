@@ -1,12 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Song+Myung:wght@400&display=swap");
-html {
-    font-size: 10px;
-}
-body {
-    margin: 0;
-    line-height: normal;
-}
-
 .k-ct-body-icon {
     position: absolute;
     bottom: 0;
