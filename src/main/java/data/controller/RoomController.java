@@ -2,7 +2,12 @@ package data.controller;
 
 import java.util.Timer;
 import java.util.TimerTask;
+
+import data.mapper.TokenMapper;
+import data.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,12 +15,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import data.dto.RoomDto;
 import data.service.RoomService;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+
 @RestController
 @RequestMapping("/room")
 public class RoomController {
     @Autowired
     RoomService roomService;
-
+    @Autowired
+    UserMapper userMapper;
+    @Autowired
+    TokenMapper tokenMapper;
     @GetMapping("/info/{id}")
     public RoomDto getInfo(@PathVariable String id) {
         RoomDto room = roomService.getRoom(id);
@@ -27,10 +39,25 @@ public class RoomController {
                 public void run() {
                     roomService.deleteRoom(id);
                     timer.cancel(); // 타이머 종료
-                    System.out.println("끝");
                 }
             }, 600 * 1000);
         }
         return room;
+    }
+    @GetMapping("/usermsg")
+    public ResponseEntity<String> UserMsg(HttpServletRequest request) {
+        Cookie[] cookies = request.getCookies();
+        String accesstoken = null;
+
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("access_token")) {
+                    accesstoken = cookie.getValue();
+                }
+            }
+        }
+        String email = userMapper.getUserByUserId(tokenMapper.selectByAccessToken(accesstoken).getRt_key()).getEmail();
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

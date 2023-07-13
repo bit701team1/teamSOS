@@ -18,6 +18,7 @@ import PortalPopup from "../y_modal/PortalPopup";
 import BidModal from "../y_modal/BidModal";
 import DetailModal from "../y_modal/DetailModal";
 import ResultModal from "../y_modal/ResultModal";
+import axios from "axios";
 
 function AuctionLive(props) {
     const [isFrameOpen, setFrameOpen] = useState(false);
@@ -28,7 +29,7 @@ function AuctionLive(props) {
     const { roomId } = useParams();
     const [roomName, setRoomName] =useState('');
     const client = useRef();
-    const [userName, setUserName] = useState('');
+    const [email, setemail] = useState('');
     const msgRef = useRef();
     const [msg,setMsg] = useState([]);
     const chatScreenRef = useRef(null);
@@ -80,15 +81,26 @@ function AuctionLive(props) {
     }, [msg]);
 
     useEffect(() => {
+        axios.get('/room/usermsg')
+            .then(response => {
+                setemail(response.data);
+            })
+            .catch(error => {
+                console.error('There was an error!', error);
+            });
+    }, []);
+
+
+    useEffect(() => {
         fetch('/room/info/' + roomId)
             .then(res => res.json()) // 메서드로부터 받은 응답 데이터를 json 형식으로 변환하는 과정임
             .then(res => {
                 setRoomName(res.roomName); // json데이터를 처리하는 부분
             });
         // 아래 코드 추가: 로그인되지 않은 사용자를 위한 임의의 이름 설정
-        if (!userName) {
-            setUserName('Guest' + Math.floor(Math.random() * 10000));  // "Guest"라는 이름에 4자리 임의의 숫자를 추가
-        }
+        // if (!userName) {
+        //     setUserName('Guest' + Math.floor(Math.random() * 10000));  // "Guest"라는 이름에 4자리 임의의 숫자를 추가
+        // }
         connect();
         // 컴포넌트가 언마운트되면 소켓 연결 해제
         return () => {
@@ -109,10 +121,6 @@ function AuctionLive(props) {
             // 일정 시간이 지난 후에 채팅이 끝났다는 알림을 표시
         });
     }
-    setTimeout(() => {
-        alert("방송이 끝났습니다.");
-        window.location='/result'; // 방송이 끝나면 홈으로 이동
-    }, 600*1000); // 시간
     const AddChat = (data) => {
         setMsg((prevMsg) => [
             ...prevMsg, // setMsg 함수를 사용하여 prevMsg 상태를 업데이트하는데,
@@ -152,7 +160,7 @@ function AuctionLive(props) {
                 return;
             } // 값 입력 안하고 엔터누르면 alert창 뜸
             else {
-                publish('CHAT', userName, msgRef.current.value); // 값 입력하면 publish로 값 넘어감
+                publish('CHAT', email, msgRef.current.value); // 값 입력하면 publish로 값 넘어감
             }
         }
     };
@@ -186,14 +194,11 @@ function AuctionLive(props) {
             <div className='y_banner'>
                 배너임
             </div>
-            <div className='y_banner'>
-                배너임
-            </div>
             <div className="y_chatscreen" ref={chatScreenRef}>
                 {msg.map((item) => {
                     const { id, message, showDeletedMessage } = item;
                     const Message = JSON.parse(message);
-                    const isCurrentUser = Message.userName === userName;  // userName은 현재 사용자의 이름을 가지고 있는 변수라고 가정
+                    const isCurrentUser = Message.userName === email;  // userName은 현재 사용자의 이름을 가지고 있는 변수라고 가정
                     return (
                         <div key={id} className={isCurrentUser ? 'message-right' : 'message-left'} > {/*왼쪽은 보낸사람 오른쪽은 현재 보내는 사람 */}
                             {showDeletedMessage ? (
