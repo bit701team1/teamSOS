@@ -62,6 +62,9 @@ function Mainauction(props) {
                  ])
              })
     }
+    const [emailss, setEmail] = useState('');
+
+
     return (
         <div>
             <button onClick={RoomCreate} style={{backgroundColor:'yellow'}}
