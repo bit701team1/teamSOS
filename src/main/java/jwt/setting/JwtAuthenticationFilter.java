@@ -28,17 +28,22 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Slf4j
-@Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    @Autowired
     private UserService userService;
-    @Autowired
     private AuthenticationManagerBuilder authenticationManagerBuilder;
-    @Autowired
     private UserMapper userMapper;
-    @Autowired
     private TokenMapper tokenMapper;
+
+    public JwtAuthenticationFilter(UserService userService,
+                                   AuthenticationManagerBuilder authenticationManagerBuilder,
+                                   UserMapper userMapper,
+                                   TokenMapper tokenMapper) {
+        this.userService = userService;
+        this.authenticationManagerBuilder = authenticationManagerBuilder;
+        this.userMapper = userMapper;
+        this.tokenMapper = tokenMapper;
+    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -48,7 +53,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         if (!request.getRequestURI().contains("join") && !request.getRequestURI().contains("delete-") &&
                 !request.getRequestURI().contains("room") && !request.getRequestURI().contains("lobby") &&
-                !request.getRequestURI().contains("ws")) {
+                !request.getRequestURI().contains("ws") && !request.getRequestURI().contains("oauth")) {
             log.info("토큰 체크");
             UserDto dto = new UserDto();
             try {

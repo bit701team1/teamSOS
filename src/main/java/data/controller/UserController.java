@@ -53,14 +53,9 @@ public class UserController {
     BCryptPasswordEncoder bCryptPasswordEncoder;
     @Autowired
     CustomUserDetailsService customUserDetailsService;
-    
-    public void tokenCheck(HttpServletResponse response){
-
-    }
 
     @GetMapping("/naverlogin")
     public UserDto naverlogin(){
-
         UserDto dto = new UserDto();
         return dto;
     }

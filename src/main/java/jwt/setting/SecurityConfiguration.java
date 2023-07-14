@@ -1,8 +1,12 @@
 package jwt.setting;
 
+import data.mapper.TokenMapper;
+import data.mapper.UserMapper;
+import data.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -24,6 +28,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     //403으로 권한이 없음을 알려줌
     private final JwtAccessDeniedHandler accessDeniedHandler;
 
+    private final UserService userService;
+    private final AuthenticationManagerBuilder authenticationManagerBuilder;
+    private final UserMapper userMapper;
+    private final TokenMapper tokenMapper;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         System.out.println("HttpSecurity 진입");
@@ -43,13 +52,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 // UsernamePasswordAuthenticationFilter보다 JwtAuthenticationFilter를 먼저 수행
-                .addFilterBefore(new JwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new JwtAuthenticationFilter(userService, authenticationManagerBuilder, userMapper, tokenMapper),
+                        UsernamePasswordAuthenticationFilter.class)
+
                 .authorizeRequests() // (5)
 
                 // login, 회원가입 API는 토큰이 없는 상태에서 요청이 들어오기 때문에 permitAll
                 // 허용 영역 설정
                 .antMatchers("/","/user/login","/user/join").permitAll()
-                .antMatchers("/login","/join").permitAll()
+                .antMatchers("/login","/join","/oauth/**").permitAll()
                 .antMatchers("/user/join","/user/logintest","/user/islogin").permitAll()
 
                 .antMatchers("/sub/room","/ws/**","/sub/**","/pub/**","/info/**").permitAll()
@@ -83,11 +94,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public CorsConfigurationSource corsConfigurationSource() {
         System.out.println("corsConfigurationSource 진입");
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.addAllowedOrigin("http://localhost:3000");
+
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "https://nid.naver.com"));
         configuration.setAllowedMethods(Arrays.asList("HEAD", "GET", "POST", "PUT", "DELETE"));
-        configuration.addAllowedHeader("*");
+        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Authorization-refresh", "Cache-Control", "Content-Type"));
+        /* 응답 헤더 설정 추가*/
+        configuration.setExposedHeaders(Arrays.asList("Authorization", "Authorization-refresh","Cache-Control", "Content-Type"));
+
         configuration.setAllowCredentials(true);
-        configuration.setMaxAge(3600L);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;

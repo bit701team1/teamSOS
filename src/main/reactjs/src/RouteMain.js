@@ -16,6 +16,7 @@ import {ManagePageMain} from "./manage_page";
 import LiveStream from "./auctionpage/LiveStream";
 
 import ResultPage from "./auctionpage/ResultPage";
+import RedirectURI from "./user/naverlogin/RedirectURI";
 
 
 
@@ -36,6 +37,7 @@ function RouteMain(props) {
 
                 <Route path='/join' element={<JoinForm/>}/>
                 <Route path='/login' element={<LoginForm/>}/>
+                <Route path='/oauth' element={<RedirectURI/>}/>
 
                 <Route path='/manage/*' element={<ManagePageMain/>}/>
                 <Route path={'/livestream'}>
