@@ -63,4 +63,30 @@ public class RoomController {
 
         return new ResponseEntity<>(email, HttpStatus.OK);
     }
+
+    @GetMapping("/userdata")
+    public ResponseEntity<UserDto> userData( HttpServletRequest request) {
+        Cookie[] cookies = request.getCookies();
+        String accessToken = null;
+
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("access_token")) {
+                    accessToken = cookie.getValue();
+                }
+            }
+        }
+        if (accessToken == null) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+
+        int userId = tokenMapper.selectByAccessToken(accessToken).getRt_key();
+        UserDto user = userMapper.getUserByUserId(userId);
+
+        if (user == null) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+
+        return ResponseEntity.ok(user);
+    }
 }
