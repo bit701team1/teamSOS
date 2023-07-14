@@ -12,12 +12,12 @@ import alertImage from "../image/alert.png";
 
 import LiveStream from './LiveStream';//추가-DH
 
-
 import DonateModal from "../y_modal/DonateModal";
 import PortalPopup from "../y_modal/PortalPopup";
 import BidModal from "../y_modal/BidModal";
 import DetailModal from "../y_modal/DetailModal";
 import ResultModal from "../y_modal/ResultModal";
+import axios from "axios";
 
 function AuctionLive(props) {
     const [isFrameOpen, setFrameOpen] = useState(false);
@@ -32,6 +32,7 @@ function AuctionLive(props) {
     const msgRef = useRef();
     const [msg,setMsg] = useState([]);
     const chatScreenRef = useRef(null);
+    /////////////////////////////////모달////////////////////////////////
     const openFrame = useCallback(() => {
         setFrameOpen(true);
     }, []);
@@ -72,23 +73,29 @@ function AuctionLive(props) {
             clearTimeout(timer);
         };
     }, [openFrame3]);
+    /////////////////////////////////모달////////////////////////////////
     const scrollToBottom = () => {
         chatScreenRef.current.scrollTop = chatScreenRef.current.scrollHeight;
     };
     useEffect(() => {
         scrollToBottom();// 채팅 스크롤을 아래로 고정
     }, [msg]);
-
+    // 이메일 상태 변수를 추가합니다.
     useEffect(() => {
         fetch('/room/info/' + roomId)
             .then(res => res.json()) // 메서드로부터 받은 응답 데이터를 json 형식으로 변환하는 과정임
             .then(res => {
                 setRoomName(res.roomName); // json데이터를 처리하는 부분
             });
-        // 아래 코드 추가: 로그인되지 않은 사용자를 위한 임의의 이름 설정
-        if (!userName) {
-            setUserName('Guest' + Math.floor(Math.random() * 10000));  // "Guest"라는 이름에 4자리 임의의 숫자를 추가
-        }
+        const getUser = async () => {
+            try {
+                const response = await axios.get('/room/emailuser'); // 'axios.post' was changed to 'axios.get'
+                setUserName(response.data);
+            } catch (error) {
+                console.error("Failed to fetch user:", error);
+            }
+        };
+        getUser();
         connect();
         // 컴포넌트가 언마운트되면 소켓 연결 해제
         return () => {
@@ -96,7 +103,8 @@ function AuctionLive(props) {
         };
     }, [roomId]); // 자꾸 채팅이 두개씩 들어가서 추가한 코드
 
-    const connect = () => {//소켓 연결용 함수
+
+        const connect = () => {//소켓 연결용 함수
         let sock =new SockJS('http://localhost:9003/ws'); //endpoint 주소 소켓을 저기로 연결하겠다
         client.current = StompJS.Stomp.over(sock); //StompJS를 사용하여 소켓 연결을 관리하는 클라이언트 객체를 생성
         let ws = client.current;
@@ -109,10 +117,6 @@ function AuctionLive(props) {
             // 일정 시간이 지난 후에 채팅이 끝났다는 알림을 표시
         });
     }
-    setTimeout(() => {
-        alert("방송이 끝났습니다.");
-        window.location='/result'; // 방송이 끝나면 홈으로 이동
-    }, 600*1000); // 시간
     const AddChat = (data) => {
         setMsg((prevMsg) => [
             ...prevMsg, // setMsg 함수를 사용하여 prevMsg 상태를 업데이트하는데,
@@ -124,7 +128,7 @@ function AuctionLive(props) {
     const publish = (type, userName, msg) => {
         client.current.send( //send : StompJS라이브러리에서 제공하는 메서드:메시지 전송 역할
             '/pub/msg', // 목적지 주소
-            {}, // 메시지 전송에 필요한 헤더를 지정 
+            {}, // 메시지 전송에 필요한 헤더를 지정
             JSON.stringify({ // 실제로 전송할 메시지 내용
                 type, // ENTER(입장할 때), CHAT(메세지 쓸 때)
                 roomId, //방 주소
@@ -132,7 +136,7 @@ function AuctionLive(props) {
                 msg, // 메세지
             })
             //데이터 보낼때 json 형식을 맞추어 보낸다.
-        );
+        )
         // 메시지 전송 후 입력창 초기화
         msgRef.current.value = '';
     };
@@ -145,20 +149,20 @@ function AuctionLive(props) {
         });
         setMsg(updatedMessages);
     };
+    const maxLength = 10; // 최대 글자 수
     const enterKey =(e)=> {
-        if(e.key==='Enter') {
-            if(msgRef.current.value === '') {
+        if (e.key === 'Enter') {
+            if (msgRef.current.value === '') {
                 alert('값을 입력하세요');
                 return;
             } // 값 입력 안하고 엔터누르면 alert창 뜸
             else {
-                publish('CHAT', userName, msgRef.current.value); // 값 입력하면 publish로 값 넘어감
-            }
+                    publish('CHAT', userName, msgRef.current.value);
+                }
         }
-    };
+    }
 
     const [isInputVisible, setInputVisible] = useState(false);
-
     const toggleInput = () => {
         setInputVisible(!isInputVisible);
     };
@@ -170,87 +174,86 @@ function AuctionLive(props) {
 
     return (
         <>
-        <div className="y_auctionlive">
-            <div className="y_auctionlive-child" />
-            <div className="y_aa-arte-container">
-                <p className="y_aa">
-                    <span>{`    `}</span>
-                    <span className="y_span">{` `}</span>
-                    <span className="y_aa1">{`A&A`}</span>
-                </p>
-                <p className="y_arte-arena"> ARTE : ARENA</p>
-            </div>
-            <div className="y_livescreen">
-                <LiveStream/>
-            </div>
-            <div className='y_banner'>
-                배너임
-            </div>
-            <div className='y_banner'>
-                배너임
-            </div>
-            <div className="y_chatscreen" ref={chatScreenRef}>
-                {msg.map((item) => {
-                    const { id, message, showDeletedMessage } = item;
-                    const Message = JSON.parse(message);
-                    const isCurrentUser = Message.userName === userName;  // userName은 현재 사용자의 이름을 가지고 있는 변수라고 가정
-                    return (
-                        <div key={id} className={isCurrentUser ? 'message-right' : 'message-left'} > {/*왼쪽은 보낸사람 오른쪽은 현재 보내는 사람 */}
-                            {showDeletedMessage ? (
-                                <b style={{ color: '#FF6666'}}>메시지가 삭제되었습니다.</b>
-                            ) : (
-                                <>
-                                    <b>{Message.msg}</b>
-                                    {!isCurrentUser && (
-                                        <>
-                                            <i
-                                                className="bi bi-trash"
-                                                style={{ cursor: 'pointer', float: 'right' ,marginRight:10}}
-                                                onClick={() => deleteMessage(id)}
-                                            ></i>
-                                            <img
-                                                alt=""
-                                                src={alertImage}
-                                                style={{ width: '45px', cursor: "pointer", float: 'right' }}
-                                            ></img>
-                                        </>
-                                    )}
-                                    <br/>
-                                </>
-                            )}
-                        </div>
-                    );
-                })}
-            </div>
-            <div className="y_donation-parent">
-                <div className="y_donation">DONATION</div>
-                <img className="y_icon-donate" alt="" src={donation} onClick={openFrame} />
-            </div>
-            <div className="y_bidding-parent">
-                <div className="y_bidding">BIDDING</div>
-                <img className="y_biddingicon" alt="" src={bidding} onClick={openFrame1}/>
-            </div>
-            <div className="y_detail-parent">
-                <div className="y_detail" >DETAIL</div>
-                <div className="y_send" >SEND</div>
-                <img className="y_infoicon" alt="" src={info}  onClick={openFrame2} />
-            </div>
-            <img className="y_sendicon" alt="" src={send}
-                 onClick={toggleInput} />
-            {isInputVisible && (
-                <input placeholder="  보낼메세지" ref={msgRef} onKeyUp={enterKey}
-                       className="y_chatinput2"
-                       onBlur={handleBlur}
-                       autoFocus
-                       onFocus={(e) => {
-                           e.target.placeholder = ''; // 입력이 시작되면 플레이스홀더 텍스트를 빈 문자열로 변경합니다
-                       }}
-                />
-            )}
-            <div className="y_header" />
-            <div className="iphone-14-child3" onClick={openFrame3} />
+            <div className="y_auctionlive">
+                <div className="y_auctionlive-child" />
+                <div className="y_aa-arte-container">
+                    <p className="y_aa">
+                        <span>{`    `}</span>
+                        <span className="y_span">{` `}</span>
+                        <span className="y_aa1">{`A&A`}</span>
+                    </p>
+                    <p className="y_arte-arena"> ARTE : ARENA</p>
+                </div>
+                <div className="y_livescreen">
+                    <LiveStream/>
+                </div>
+                <div className='y_banner'>
+                    배너임
+                </div>
 
-        </div>
+                <div className="y_chatscreen" ref={chatScreenRef}>
+                    {msg.map((item) => {
+                        const { id, message, showDeletedMessage } = item;
+                        const Message = JSON.parse(message);
+                        const isCurrentUser = Message.userName === userName;  // userName은 현재 사용자의 이름을 가지고 있는 변수라고 가정
+                        return (
+                            <div key={id} className={isCurrentUser ? 'message-right' : 'message-left'} > {/*왼쪽은 보낸사람 오른쪽은 현재 보내는 사람 */}
+                                {showDeletedMessage ? (
+                                    <b style={{ color: '#FF6666'}}>메시지가 삭제되었습니다.</b>
+                                ) : (
+                                    <>
+                                        <b>{Message.userName} : {Message.msg}</b>
+                                        {!isCurrentUser && (
+                                            <>
+                                                <i
+                                                    className="bi bi-trash"
+                                                    style={{ cursor: 'pointer', float: 'right' ,marginRight:10}}
+                                                    onClick={() => deleteMessage(id)}
+                                                ></i>
+                                                <img
+                                                    alt=""
+                                                    src={alertImage}
+                                                    style={{ width: '45px', cursor: "pointer", float: 'right' }}
+                                                ></img>
+                                            </>
+                                        )}
+                                        <br/>
+                                    </>
+                                )}
+                            </div>
+                        );
+                    })}
+                </div>
+                <div className="y_donation-parent">
+                    <div className="y_donation">DONATION</div>
+                    <img className="y_icon-donate" alt="" src={donation} onClick={openFrame} />
+                </div>
+                <div className="y_bidding-parent">
+                    <div className="y_bidding">BIDDING</div>
+                    <img className="y_biddingicon" alt="" src={bidding} onClick={openFrame1}/>
+                </div>
+                <div className="y_detail-parent">
+                    <div className="y_detail" >DETAIL</div>
+                    <div className="y_send" >SEND</div>
+                    <img className="y_infoicon" alt="" src={info}  onClick={openFrame2} />
+                </div>
+                <img className="y_sendicon" alt="" src={send}
+                     onClick={toggleInput} />
+                {isInputVisible && (
+                    <input placeholder=" 50자까지 입력 가능합니다" ref={msgRef} onKeyUp={enterKey}
+                           className="y_chatinput2"
+                           onBlur={handleBlur}
+                           maxLength={20}
+                           onFocus={(e) => {
+                               e.target.placeholder = ''; // 입력이 시작되면 플레이스홀더 텍스트를 빈 문자열로 변경합니다
+                           }}
+                    />
+                )}
+                <div className="y_header" />
+                <div className="iphone-14-child3" onClick={openFrame3} />
+
+            </div>
+            {/* 모달 */}
             {isFrameOpen && (
                 <PortalPopup
                     overlayColor="rgba(113, 113, 113, 0.3)"
@@ -287,6 +290,7 @@ function AuctionLive(props) {
                     <ResultModal onClose={closeFrame3} />
                 </PortalPopup>
             )}
+            {/* 모달 */}
         </>
     );
 };

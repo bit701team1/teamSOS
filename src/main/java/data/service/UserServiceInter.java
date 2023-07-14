@@ -17,7 +17,6 @@ public interface UserServiceInter {
     public int countEmail(String email);
 
 
-
     //회원목록 페이징리스트
     public List<UserDto> getManagePagingList(String search,int startNum,int perPage);
     //회원목록 토탈카운트

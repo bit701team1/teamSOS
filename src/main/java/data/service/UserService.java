@@ -37,8 +37,6 @@ public class UserService implements UserServiceInter{
     }
 
 
-
-
     //회원목록 페이징 리스트
     public List<UserDto> getManagePagingList(String search,int startNum,int perPage){
         Map<String,Object> map=new HashMap<>();
@@ -83,6 +81,5 @@ public class UserService implements UserServiceInter{
 //        return userMapper.getSearchUserCount(map);
 //    }
 //
-    
 
 }
