@@ -1,4 +1,4 @@
-import React,{ PureComponent } from 'react';
+import React, {PureComponent, useState} from 'react';
 import '../css/resultpage.css';
 import cel from'../image/cel.gif';
 
@@ -7,7 +7,9 @@ import { BarChart, Bar,
     YAxis, CartesianGrid,
     Tooltip, Legend,
     ResponsiveContainer } from 'recharts';
+import Payment from "./Payment";
 function ResultPage(props) {
+
     window.onload = function() {
         var imageContainer = document.getElementById("y_celimg");
         setTimeout(function() {
@@ -51,7 +53,7 @@ function ResultPage(props) {
                     <YAxis />
                 </BarChart>
             </div>
-            <div className="y_result-success">테이블</div>
+            <div className="y_result-success"><Payment/></div>
             <div className="y_header" />
         </div>
     );

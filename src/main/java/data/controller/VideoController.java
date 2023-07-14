@@ -19,7 +19,9 @@ public class VideoController {
     @GetMapping("/api/video")
     public String getVideoUrl() {
         VideoDto liveVideoDto = videoService.getLiveVideo();
+
         return liveVideoDto.getUrl();
     }
+
 }
 

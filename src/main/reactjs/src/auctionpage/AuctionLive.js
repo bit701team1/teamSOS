@@ -12,7 +12,6 @@ import alertImage from "../image/alert.png";
 
 import LiveStream from './LiveStream';//추가-DH
 
-
 import DonateModal from "../y_modal/DonateModal";
 import PortalPopup from "../y_modal/PortalPopup";
 import BidModal from "../y_modal/BidModal";
