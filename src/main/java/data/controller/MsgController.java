@@ -29,8 +29,9 @@ public class MsgController {
                 // 방이 존재하는지 확인
                 RoomDto room = roomService.getRoom(msg.getRoomId());
 
-                    // 방이 존재하는 경우에만 채팅 전송
-                    sendingOperations.convertAndSend("/sub/room/" + msg.getRoomId(), msg);
+                System.out.println(msg);
+                // 방이 존재하는 경우에만 채팅 전송
+                sendingOperations.convertAndSend("/sub/room/" + msg.getRoomId(), msg);
 
                 break; // 채팅을 입력했을때
             default:
