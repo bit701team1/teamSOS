@@ -75,7 +75,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
                         //재발급 요구됨
                         if (tokenMapper.selectByAccessToken(jwt).getRt_key() != 0) {
-                            System.out.println("재발급 요구되는 상황");
+
                             //accesstoken값 일치여부로 user id 구하고 그것으로 다른 유저정보 dto에 저장
                             dto = userService.getUserByUserId(tokenMapper.selectByAccessToken(jwt).getRt_key());
                             System.out.println("재발급 dto = " + dto);
@@ -121,13 +121,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     }
                 } else {
                     if (StringUtils.isEmpty(jwt)) {
-                        System.out.println("조건문 진입 확인2");
+                        //System.out.println("조건문 진입 확인2");
                         //request.setAttribute("unauthorization", "401 인증키 없음.");
                         System.out.println("401 인증키 없음.");
                     }
 
                     if (JwtTokenProvider.validateToken(jwt)) {
-                        System.out.println("조건문 진입 확인3");
+                        //System.out.println("조건문 진입 확인3");
                         //request.setAttribute("unauthorization", "401-001 인증키 만료.");
                         System.out.println("401-001 인증키 만료.");
                     }

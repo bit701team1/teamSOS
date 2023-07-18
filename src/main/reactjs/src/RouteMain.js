@@ -38,7 +38,7 @@ function RouteMain(props) {
 
                 <Route path='/join' element={<JoinForm/>}/>
                 <Route path='/login' element={<LoginForm/>}/>
-                {/*/<Route path='/oauth' element={<RedirectURI/>}/>*/}
+                <Route path='/oauth' element={<RedirectURI/>}/>
 
                 <Route path='/manage/*' element={<ManagePageMain/>}/>
                 <Route path={'/livestream'}>

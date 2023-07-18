@@ -39,63 +39,26 @@ function LoginForm(props) {
         });
     }
 
-    /////////////////
-
-    // const handleNaverClick = ()=>{
-    //     const NAVER_CLIENT_ID = process.env.REACT_APP_NAVER_CLIENT_ID;
-    //     const REDIRECT_URL = "http://localhost:3000/user/naverlogin"
-    //
-    // }
 
     const { naver } = window
     const location = useLocation();
-    // const naverLogin = new naver.LoginWithNaverId({
-    //     clientId: "process.env.REACT_APP_NAVER_CLIENT_ID",
-    //     callbackUrl: "http://localhost:3000/user/naverlogin",
-    //     isPopup: true,
-    //     loginButton: {
-    //         color: "green",
-    //         type: 3,
-    //         height: 40,
-    //     },
-    // });
 
-    // const initializeNaverLogin = () => {
-    //
-    //     naverLogin.init();
-    // };
 
     useEffect(() => {
         const naverLogin = new naver.LoginWithNaverId({
-            clientId: "process.env.REACT_APP_NAVER_CLIENT_ID",
-            callbackUrl: "http://localhost:3000/login",
-            isPopup: true,
-            loginButton: { color: 'white', type: 3, height: '40' },
+            clientId: process.env.REACT_APP_NAVER_CLIENT_ID,
+            callbackUrl: "http://localhost:3000/oauth",
+            isPopup: false,
+            loginButton: { color: 'green', type: 3, height: '40' },
         });
         naverLogin.init();
-
-        //naverLogin.logout();
-        getNaverToken();
-        try {
-            naverLogin.getLoginStatus((status) => {
-                if (status) {
-                    console.log(naverLogin.user);
-                }
-            });
-        } catch (err) {
-            console.log(err);
-        }
     }, []);
 
-    const getNaverToken = () => {
-        if (!location.hash) return;
-        const token = location.hash.split('=')[1].split('&')[0];
-        console.log(token);
-    };
+
 
     return (
         <div>
-            <NavLink to={"/"}><h2>Menu</h2></NavLink>
+            <NavLink to={"/menu"}><h2>Menu</h2></NavLink>
             <h1>LoginForm</h1>
             <h3 style={{cursor:"pointer"}} onClick={handleDeleteClick}>클릭시 쿠키값을 지웁니다(로그아웃)</h3>
             <br/><br/>
@@ -118,6 +81,7 @@ function LoginForm(props) {
             <button onClick={handleIsLoginClick}>islogin</button>
             <br/><br/>
             <div className="grid-naver" id='naverIdLogin'></div>
+            <br/><br/>
         </div>
     );
 }
