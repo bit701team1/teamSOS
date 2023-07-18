@@ -4,7 +4,6 @@ import axios from "axios";
 
 function Payment() {
 
-    const [id, setId] = useState("");
     const [pg] = useState("html5_inicis");
     const [pay_method] = useState("card");
     const [amount, setAmount] = useState(0);
@@ -36,10 +35,6 @@ function Payment() {
     IMP.init('imp57160077'); // 'imp00000000' 대신 발급받은 가맹점 식별코드를 사용합니다.
 
     const handleClick = () => {
-        if(!id) {
-            alert("ID를 입력해주세요.");
-            return;
-        }
         /* 결제 요청 */
         const data = {
             pg: "html5_inicis",
@@ -144,7 +139,7 @@ function Payment() {
                 +'\n'+'uid:'+imp_uid
             );
 
-            // // // paymentinfo로 넘어갈 데이터 imp_uid, amount
+            //paymentinfo로 넘어갈 데이터 imp_uid, amount
             const validationResult = await axios.post("/payment/paymentinfo", {
                 pg:pg,
                 pay_method:pay_method,
@@ -154,7 +149,7 @@ function Payment() {
                 name,
                 buyer_name,
                 buyer_tel,
-                buyer_email,
+                buyer_email:userdata.email,
             });
             // if (validationResult.data) {
             // //     // 서버에서 결제 정보 일치하다고 판단한 경우 데이터베이스에 추가
@@ -234,7 +229,7 @@ function Payment() {
         <div>
             <br/>
             <p>{userdata.email}</p>
-            <input type="email" value={userdata.email} onChange={(e) => setBuyerEmail(e.target.value)} placeholder="Email" />
+            <input type="email" value={userdata.email} onChange={(e) => setBuyerEmail(userdata.email)} placeholder="Email" />
             <input type="number" value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="가격" />
             <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="상품명" />
             <input type="text" value={buyer_name} onChange={(e) => setBuyerName(e.target.value)} placeholder="이름" />

@@ -17,6 +17,7 @@ import LiveStream from "./auctionpage/LiveStream";
 
 import ResultPage from "./auctionpage/ResultPage";
 import RedirectURI from "./user/naverlogin/RedirectURI";
+import RegisterProduct from "./product/RegisterProduct";
 
 
 
@@ -43,6 +44,7 @@ function RouteMain(props) {
                 <Route path={'/livestream'}>
                     <Route path={'livestream'} element={<LiveStream/>}/>
                 </Route>
+                <Route path='/product/*' element={<RegisterProduct/>}/>
 
                 <Route path='/*' element={
                     <div>

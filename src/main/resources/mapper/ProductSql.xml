@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="data.mapper.ProductMapper">
+    <insert id="insertProduct" parameterType="ProductDto">
+        INSERT INTO product (product_id, product_name, transaction_date, description, winner, final_price)
+        VALUES (null, #{product_name}, #{transaction_date}, #{description}, #{winner}, #{final_price})
+    </insert>
+    <select id="getWinnerAndFinalPriceByProductName" parameterType="String" resultType="ProductDto">
+        SELECT product_name, winner, final_price FROM product WHERE product_name = #{product_name}
+    </select>
+    <update id="updateWinnerAndFinalPrice" parameterType="ProductDto">
+        UPDATE product SET winner = #{winner}, final_price = #{final_price} WHERE product_name = #{product_name}
+    </update>
+</mapper>

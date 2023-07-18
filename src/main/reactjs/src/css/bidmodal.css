@@ -18,11 +18,15 @@
 }
 .item {
     top: 33.81rem;
-    left: calc(50% + 245.5px);
-    background-color: #d9d9d9;
+    left: calc(50% + 80px);
     width: 9.13rem;
     height: 6.25rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
+
 .div4 {
     position: relative;
     border-radius: 20px;
