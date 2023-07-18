@@ -77,6 +77,7 @@ function JoinForm(props) {
                                     hp: e.target.value
                                 })
                                 }/>
+                                <button type='button'>휴대폰 인증</button>
                             </td>
                         </tr>
                         <tr>
