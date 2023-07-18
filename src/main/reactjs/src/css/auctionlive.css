@@ -61,11 +61,13 @@
     text-align: right;
     color: black;
     margin-right: 10px;
+    margin-left: 200px;
 }
 .message-left {
     text-align: left;
     color: black;
     margin-left: 10px;
+    margin-right: 200px;
 }
 .y_chatscreen b{
     font-family: Gowun Dodum;
@@ -167,6 +169,7 @@
 }
 .y_chatinput2{
     font-family: Gowun Dodum;
+    
 }
 .y_header{
     position: absolute;

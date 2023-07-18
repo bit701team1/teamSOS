@@ -21,7 +21,7 @@
         select * from user where user_id = #{user_id}
     </select>
     <select id="selectAccessToken" parameterType="String" resultType="int">
-        select rt_key from refresh_token where refresh_token = #{refresh_token}
+        select rt_key from refresh_token where accesstoken_value= #{accesstoken_value}
     </select>
 
 
