@@ -25,8 +25,7 @@ function Mainauction(props) {
     },[]);
     const RoomCreate=(e)=>{ //방 만드는 함수
         let name=prompt('방제 입력').trim();
-        if(name.length===0)
-            return; //방제가 공백이면 리턴
+        if(!name) return alert('방 이름은 반드시 입력해야합니다');
         //방 생성 소스 들어갈 부분이다
         //서버와 fetch 통신함
 

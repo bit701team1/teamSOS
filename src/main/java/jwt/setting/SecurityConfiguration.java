@@ -62,7 +62,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/","/user/**").permitAll()
                 .antMatchers("/oauth/**").permitAll()
 
+
                 .antMatchers("/ws/**","/sub/**","/pub/**","/info/**").permitAll()
+
                 .antMatchers("/lobby/**").permitAll()
                 .antMatchers("/room/**").permitAll()
 
@@ -72,6 +74,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
                 .antMatchers("/livestream/**").permitAll()
                 .antMatchers("/payment/**").permitAll()
+                .antMatchers("/product/**").permitAll()
 
                 //.antMatchers("/user/rejection").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
                 //.antMatchers("/trade/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")

@@ -98,7 +98,7 @@ public class LobbyController {
 
 
     @GetMapping("/logincheck")
-    public ResponseEntity<String> methodName(HttpServletRequest request) {
+    public ResponseEntity<String> loginCheck(HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
         String accesstoken = null;
 
