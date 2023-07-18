@@ -3,19 +3,11 @@ package data.controller;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import data.dto.PaymentDto;
-import data.dto.UserDto;
-import data.mapper.TokenMapper;
-import data.mapper.UserMapper;
+
 import data.service.PaymentService;
 import lombok.AllArgsConstructor;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import java.util.Map;
 
 
 @RestController
@@ -24,8 +16,6 @@ import java.util.Map;
 public class PaymentController {
     PaymentService paymentService;
 
-    UserMapper userMapper;
-    TokenMapper tokenMapper;
 
     @PostMapping("/insert")
     public void insert(@RequestBody PaymentDto dto, String imp_uid)
@@ -51,6 +41,7 @@ public class PaymentController {
         if (receivedAmount == fetchedAmount) {
             // 결제 정보가 일치하면 true 리턴하고, 데이터베이스에 추가
             paymentService.insertPayment(dto,dto.getImp_uid());
+            System.out.println("");
             System.out.println("결제확인 완료");
             return true;
         } else {
