@@ -63,7 +63,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login","/join","/oauth/**").permitAll()
                 .antMatchers("/user/join","/user/logintest","/user/islogin").permitAll()
 
-                .antMatchers("/sub/room","/ws/**","/sub/**","/pub/**","/info/**").permitAll()
+                .antMatchers("/sub/room","/ws/**","/sub/**","/pub/**","/info/**","/pub/msg").permitAll()
                 .antMatchers("/lobby/**").permitAll()
                 .antMatchers("/room/**").permitAll()
 

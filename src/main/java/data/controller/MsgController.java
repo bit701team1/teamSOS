@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import data.dto.MsgDto;
 import data.dto.RoomDto;
@@ -34,12 +33,32 @@ public class MsgController {
                 sendingOperations.convertAndSend("/sub/room/" + msg.getRoomId(), msg);
 
                 break; // 채팅을 입력했을때
+                 case "DELETE":
+              // 방이 존재하는지 확인
+              room = roomService.getRoom(msg.getRoomId());
+              MsgDto deleteNotification = new MsgDto();
+              deleteNotification.setType("DELETE");
+              deleteNotification.setRoomId(msg.getRoomId());
+              deleteNotification.setMsgId(msg.getMsgId());
+              deleteNotification.setMsg(msg.getMsg());
+              deleteNotification.setUserName(msg.getUserName()); 
+
+              // 모든 클라이언트에게 삭제 알림 메시지를 전달
+              sendingOperations.convertAndSend("/sub/room/" + msg.getRoomId(), deleteNotification);
+              System.out.println(deleteNotification);
+              break;
+              case "KICK":
+               room = roomService.getRoom(msg.getRoomId());
+               MsgDto kickuser = new MsgDto();
+                // 특정 사용자를 강퇴하는 로직 추가
+                kickuser.setType("KICK");
+                kickuser.setUserName(msg.getUserName());
+                System.out.println("강퇴되었습니다.");
+                 sendingOperations.convertAndSend("/sub/room/" + msg.getRoomId(), kickuser);
+              break;
+             
             default:
-                break;
+            break;
         }
-    }
-    @DeleteMapping("/delmsg")
-    public void delmsg(@PathVariable("msg") String msg) {
-        roomService.deleteChat(msg);
     }
 }
