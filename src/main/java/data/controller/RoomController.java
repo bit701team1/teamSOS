@@ -84,9 +84,10 @@ public class RoomController {
         UserDto user = userMapper.getUserByUserId(userId);
 
         if (user == null) {
+
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
-
+        System.out.println("user>>>>"+user);
         return ResponseEntity.ok(user);
     }
 }

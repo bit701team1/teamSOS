@@ -67,7 +67,8 @@ function AuctionLive(props) {
     useEffect(() => {
         const timer = setTimeout(() => {
             openFrame3();
-        }, 10 * 1000);
+            //방송 시간
+        }, 10 * 1000 * 60);
 
         return () => {
             clearTimeout(timer);
