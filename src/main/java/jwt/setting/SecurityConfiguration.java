@@ -59,11 +59,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
                 // login, 회원가입 API는 토큰이 없는 상태에서 요청이 들어오기 때문에 permitAll
                 // 허용 영역 설정
-                .antMatchers("/","/user/login","/user/join").permitAll()
-                .antMatchers("/login","/join","/oauth/**").permitAll()
-                .antMatchers("/user/join","/user/logintest","/user/islogin").permitAll()
+                .antMatchers("/","/user/**").permitAll()
+                .antMatchers("/oauth/**").permitAll()
 
-                .antMatchers("/sub/room","/ws/**","/sub/**","/pub/**","/info/**").permitAll()
+                .antMatchers("/ws/**","/sub/**","/pub/**","/info/**").permitAll()
                 .antMatchers("/lobby/**").permitAll()
                 .antMatchers("/room/**").permitAll()
 
@@ -74,7 +73,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/livestream/**").permitAll()
                 .antMatchers("/payment/**").permitAll()
 
-                .antMatchers("/user/rejection").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
+                //.antMatchers("/user/rejection").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
                 //.antMatchers("/trade/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
                 //.antMatchers("/user/withdrawal").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN") // 회원 탈퇴
 

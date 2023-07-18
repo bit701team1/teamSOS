@@ -1,6 +1,5 @@
 package data.controller;
 
-
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,11 +18,10 @@ import jwt.setting.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.UserDetails;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -34,7 +32,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/user")
 public class UserController {
     @Autowired
@@ -54,17 +52,13 @@ public class UserController {
     @Autowired
     CustomUserDetailsService customUserDetailsService;
 
-    @GetMapping("/naverlogin")
-    public UserDto naverlogin(){
-        UserDto dto = new UserDto();
-        return dto;
-    }
 
     //login
     @PostMapping("/login")
     public ResponseEntity<TokenDto> signIn(@RequestBody UserDto dto, HttpServletResponse response) {
         System.out.println("/login 진입");
-        System.out.println(dto);
+        System.out.println("logindto : " + dto);
+        System.out.println("response : " + response);
         // 사용자 정보 조회
         UserDto user = userMapper.getUserByEmail(dto.getEmail());
 
@@ -107,7 +101,7 @@ public class UserController {
             } else {
                 tokenMapper.insertRefreshToken(RTDto);
             }
-            
+
             tokenDto.setUser_id(userMapper.getUserByEmail(dto.getEmail()).getUser_id());
             tokenDto.setRefreshtoken(RTDto.getRefreshtoken_value());
 
@@ -120,6 +114,8 @@ public class UserController {
             RTDto.setAccesstoken_value(tokenDto.getAccesstoken());
             tokenMapper.updateAccessToken(RTDto);
 
+            System.out.println("ResponseEntity.ok(tokenDto) : " + ResponseEntity.ok(tokenDto));
+
             return ResponseEntity.ok(tokenDto);
         } catch (AuthenticationException e) {
             // 인증 실패 처리
@@ -130,22 +126,21 @@ public class UserController {
     }
 
     @PostMapping("/join")
-    public int join(@RequestBody UserDto dto, HttpServletRequest request) {
+    public int join(@RequestBody UserDto dto) {
         int result = 0;
         String cookieValue = null;
-        
+
         //email 유효성 검사
-        if(!dto.getEmail().contains("@")){
+        if (!dto.getEmail().contains("@")) {
             return 2;
         }
 
-        //email 중복확인 ~ count(*)은 따로 mapping해서 확인이 되었을때 join으로 넘어와야함
-        if(userMapper.countEmail(dto.getEmail())>0){
+        //naver login이 아닌 일반적인 이메일 중복 케이스
+        if (userMapper.countEmail(dto.getEmail()) > 0 ) {
             System.out.println("이메일 중복 진입");
             return 1;
         }
         //email 인증 확인
-
 
 
         // 1. Login ID/PW 를 기반으로 AuthenticationToken 생성
@@ -163,7 +158,7 @@ public class UserController {
 //        System.out.println("2번 시작");
 //        Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
 //        System.out.println("2번 끝");
-        
+
         // 3. 이메일 정보를 기반으로 JWT 토큰 생성
         TokenDto tokenDto = JwtTokenProvider.generateTokenDto(dto.getEmail());
 
@@ -175,6 +170,12 @@ public class UserController {
 
         tokenMapper.insertRefreshToken(RTDto);
 
+        if(dto.isNaver()){
+            System.out.println("Naver: join --> signIn");
+            signIn(dto, dto.getResponse());
+        }
+
+        System.out.println("Join 완료");
         return result;
     }
 
@@ -189,19 +190,19 @@ public class UserController {
         if (cookies != null) {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("access_token")) {
-                   accessToken = cookie.getValue();
-                } else  {
+                    accessToken = cookie.getValue();
+                } else {
                     return ResponseEntity.ok("User is not logged in");
                 }
             }
         }
 
         //accesstoken의 값을 db에서 찾고 존재하면 해당값 기반으로 refreshtoken값 가져옴
-        refreshToken = tokenMapper.selectByRtKey( tokenMapper.selectByAccessToken(accessToken).getRt_key() ).getRefreshtoken_value();
+        refreshToken = tokenMapper.selectByRtKey(tokenMapper.selectByAccessToken(accessToken).getRt_key()).getRefreshtoken_value();
         //accesstoken값으로 email 값 가져옴
         String email = userMapper.getUserByUserId(tokenMapper.selectByAccessToken(accessToken).getRt_key()).getEmail();
 
-        System.out.println("accessToken = "+accessToken);
+        System.out.println("accessToken = " + accessToken);
         System.out.println("refreshToken = " + refreshToken);
         System.out.println(JwtTokenProvider.validateToken(accessToken));
 
@@ -232,7 +233,6 @@ public class UserController {
             return ResponseEntity.ok("User is not logged in");
         }
     }
-
 
 
 }

@@ -31,7 +31,7 @@ function JoinForm(props) {
 
     return (
         <div>
-            <NavLink to={"/"}><h2>Menu</h2></NavLink>
+            <NavLink to={"/menu"}><h2>Menu</h2></NavLink>
             <h1>JoinForm</h1>
 
             <div className='login'>
