@@ -1,5 +1,6 @@
 package data.service;
 
+import com.amazonaws.services.s3.transfer.internal.CompleteMultipartCopy;
 import data.dto.UserDto;
 
 import java.util.List;
@@ -17,6 +18,10 @@ public interface UserServiceInter {
     public int countEmail(String email);
 
 
+    /////////////////////경철//////////////
+    // 알림수신 업데이트
+    public void updateUserIsAlarm(String email, boolean isalarm);
+
 
     //회원목록 페이징리스트
     public List<UserDto> getManagePagingList(String search,int startNum,int perPage);
@@ -24,10 +29,11 @@ public interface UserServiceInter {
     public int getManageTotalCount();
     //회원 삭제
     void deleteUser(int user_id);
-    //회원 검색
-//    public List<UserDto> getSearchUser(String search, Integer startNum, Integer perPage);
-//    //회원 검색 카운트
-//    public int getSearchUserCount(String search,Integer startNum, Integer perPage);
+
+    //블랙리스트 회원
+    public List<UserDto> getManageBlockList(String search,int startNum,int perPage);
+    //블랙리스트 멤버 수
+    public int getManageBlockCount();
 
 
 

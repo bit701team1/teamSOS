@@ -37,6 +37,11 @@ public class UserService implements UserServiceInter{
     }
 
 
+///////////////////////////////////////////////////// 경 철 /////////////////////////////////
+    @Override
+    public void updateUserIsAlarm(String email, boolean isalarm){
+        userMapper.updateUserIsAlarm(email,isalarm);
+    }
 
 
     //회원목록 페이징 리스트
@@ -56,33 +61,22 @@ public class UserService implements UserServiceInter{
     public void deleteUser(int user_id){
         userMapper.deleteUser(user_id);
     }
-    //회원 검색
-//    @Override
-//    public List<UserDto> getSearchUser(String search,Integer startNum, Integer perPage){
-//        if(startNum==null) startNum = 0;
-//        if(perPage==null) perPage= 0;
-//
-//        Map<String ,Object> map =new HashMap<>();
-//        map.put("start",Integer.valueOf(startNum));
-//        map.put("perpage",Integer.valueOf(perPage));
-//        map.put("search",search);
-//
-//        return userMapper.getSearchUser(map);
-//    }
-//    //회원 검색 카운트
-//    @Override
-//    public int getSearchUserCount(String search,Integer startNum, Integer perPage){
-//        if(startNum==null) startNum = 0;
-//        if(perPage==null) perPage= 0;
-//
-//        Map<String ,Object> map =new HashMap<>();
-//        map.put("start",Integer.valueOf(startNum));
-//        map.put("perpage",Integer.valueOf(perPage));
-//        map.put("search",search);
-//
-//        return userMapper.getSearchUserCount(map);
-//    }
-//
     
+    //블랙리스트 회원 출력
+    @Override
+    public List<UserDto> getManageBlockList(String search,int startNum,int perPage){
+        Map<String,Object> map=new HashMap<>();
+        map.put("search",search);
+        map.put("startNum",startNum);
+        map.put("perPage",perPage);
+        return userMapper.getManageBlockList(map);
+    }
+
+    //블랙리스트 목록 토탈카운트
+    public int getManageBlockCount(){
+        return userMapper.getManageBlockCount();
+    }
+    
+
 
 }

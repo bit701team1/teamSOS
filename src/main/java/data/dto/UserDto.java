@@ -23,8 +23,4 @@ public class UserDto {
     private boolean iswinner;
     private int report_num;
     private long total_payment;
-
 }
-
-
-

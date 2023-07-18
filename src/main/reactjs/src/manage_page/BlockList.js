@@ -8,55 +8,53 @@ import BlockRowList from "./BlockRowList";
 
 function BlockList(props) {
 
-    const [data,setData]=useState([]);
+    const [blockdata,setBlockdata]=useState([]);
     const {currentPage}=useParams();
-    const [searchValue, setSearchValue] = useState('');
+    const [searchValueBlock, setSearchValueBlock] = useState('');
     const navi=useNavigate();
 
     //출력 이벤트
-    const getUserList=useCallback(()=>{
-        const url="/manage/userlist?currentPage="+(currentPage==null?1:currentPage)+"&search="+(searchValue || '');
+    const getBlocklist=useCallback(()=>{
+        const url="/manage/blocklist?currentPage="+(currentPage==null?1:currentPage)+"&search="+(searchValueBlock || '');
         Axios.get(url)
             .then(res=>{
-                console.log(res.data);
-                setData(res.data);
+                console.log("res.data="+res.data);
+                setBlockdata(res.data);
             })
 
-    },[currentPage,searchValue]);
+    },[currentPage,searchValueBlock]);
 
     const handleSearchChange=(e)=>{
-        setSearchValue(e.target.value);
+        setSearchValueBlock(e.target.value);
     };
 
     const handleSearch=()=>{
-        getUserList();
+        getBlocklist();
     };
 
-    const deleteUser=(user_id)=>{
+    const deleteBlockUser=(user_id)=>{
         const url="/manage/delete?user_id="+user_id;
         Axios.delete(url)
             .then(res=>{
                 alert("삭제 되었습니다");
-                getUserList();
+                getBlocklist();
             })
     }
 
     useEffect(()=>{
-        getUserList();
-    },[getUserList])
-
+        getBlocklist();
+    },[getBlocklist])
 
 
     return (
         <div style={{fontSize:'2.5rem'}}>
-            <if></if>
             <div className="k-searchbox">
                 <img className="k-people-icon" alt="" src={k_people_icon} />
-                <input type={'text'} className="k-search-bar" onChange={handleSearchChange} value={searchValue}>
+                <input type={'text'} className="k-search-bar" onChange={handleSearchChange} value={searchValueBlock}>
                 </input>
                 <img className="k-search-icon" alt="검색" src={k_search_icon} onClick={handleSearch} style={{cursor:'pointer'}} />
             </div>
-            <b style={{marginLeft:'200px'}}>총 {data.length}개</b>
+            <b style={{marginLeft:'200px'}}>총 {blockdata.totalCount} 개</b>
 
             <table className={"table table-bordered k_table-userlist"}>
                 <tr style={{backgroundColor:'white',textAlign:'center'}}>
@@ -67,9 +65,8 @@ function BlockList(props) {
                     <th style={{width:'80px'}}>삭제</th>
                 </tr>
                 {
-                    // userlist.map((row,idx)=><UserRowList key={idx} row={row} idx={idx} onDelete={deleteUser}/>)
-                    data.getUserList &&
-                    data.getUserList.map((row,idx)=><BlockRowList key={idx} row={row} no={data.no} idx={idx} onDelete={deleteUser} currentPage={currentPage}/>)
+                    blockdata.getBlocklist &&
+                    blockdata.getBlocklist.map((row,idx)=><BlockRowList key={idx} row={row} no={blockdata.no} idx={idx} onDelete={deleteBlockUser} currentPage={currentPage}/>)
                 }
             </table>
 
@@ -77,23 +74,23 @@ function BlockList(props) {
                 {/* 페이징처리 */}
                 {
                     //이전
-                    data.startPage>1?
-                        <Link to={`/manage/userlist/${data.startPage-1}`}
+                    blockdata.startPage>1?
+                        <Link to={`/manage/blocklist/${blockdata.startPage-1}`}
                               style={{textDecoration:'none',cursor:'pointer',marginRight:'10px'}}>
                             이전</Link>:''
                 }
                 {
-                    data.parr &&
-                    data.parr.map((pno,i)=>
-                        <NavLink to={`/manage/userlist/${pno}`} style={{textDecoration:'none'}} key={i}>
+                    blockdata.barr &&
+                    blockdata.barr.map((pno,i)=>
+                        <NavLink to={`/manage/blocklist/${pno}`} style={{textDecoration:'none'}} key={i}>
                             <b style={{marginRight:'10px',
                                 color:pno===Number(currentPage)?'red':'black'}}>{pno}</b>
                         </NavLink>)
                 }
                 {
                     // 다음
-                    data.endPage<data.totalPage?
-                        <Link to={`/manage/userlist/${data.endPage+1}`}
+                    blockdata.endPage<blockdata.totalPage?
+                        <Link to={`/manage/blocklist/${blockdata.endPage+1}`}
                               style={{textDecoration:'none',cursor:'pointer'}}>
                             다음</Link>:''
                 }

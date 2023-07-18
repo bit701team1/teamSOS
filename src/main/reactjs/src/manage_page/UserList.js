@@ -9,13 +9,10 @@ import './ManagePageMain.css';
 
 
 function UserList(props) {
-    // const [userlist,setUserlist]=useState([]);
+
     const [data,setData]=useState([]);
-
     const {currentPage}=useParams();
-
     const [searchValue, setSearchValue] = useState('');
-
     const navi=useNavigate();
 
     //출력 이벤트
@@ -26,6 +23,9 @@ function UserList(props) {
                 console.log(res.data);
                 setData(res.data);
             })
+            .catch(error=>{
+                console.log(error);
+            });
 
     },[currentPage,searchValue]);
 
@@ -59,7 +59,7 @@ function UserList(props) {
                 </input>
                 <img className="k-search-icon" alt="검색" src={k_search_icon} onClick={handleSearch} style={{cursor:'pointer'}} />
             </div>
-            <b style={{marginLeft:'200px'}}>총 {data.length}개</b>
+            <b style={{marginLeft:'200px'}}>총 {data.totalCount}개</b>
 
             <table className={"table table-bordered k_table-userlist"}>
                 <tr style={{backgroundColor:'white',textAlign:'center'}}>

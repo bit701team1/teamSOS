@@ -53,14 +53,9 @@ public class UserController {
     BCryptPasswordEncoder bCryptPasswordEncoder;
     @Autowired
     CustomUserDetailsService customUserDetailsService;
-    
-    public void tokenCheck(HttpServletResponse response){
-
-    }
 
     @GetMapping("/naverlogin")
     public UserDto naverlogin(){
-
         UserDto dto = new UserDto();
         return dto;
     }
@@ -112,7 +107,7 @@ public class UserController {
             } else {
                 tokenMapper.insertRefreshToken(RTDto);
             }
-            
+
             tokenDto.setUser_id(userMapper.getUserByEmail(dto.getEmail()).getUser_id());
             tokenDto.setRefreshtoken(RTDto.getRefreshtoken_value());
 
@@ -138,7 +133,7 @@ public class UserController {
     public int join(@RequestBody UserDto dto, HttpServletRequest request) {
         int result = 0;
         String cookieValue = null;
-        
+
         //email 유효성 검사
         if(!dto.getEmail().contains("@")){
             return 2;
@@ -168,7 +163,7 @@ public class UserController {
 //        System.out.println("2번 시작");
 //        Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
 //        System.out.println("2번 끝");
-        
+
         // 3. 이메일 정보를 기반으로 JWT 토큰 생성
         TokenDto tokenDto = JwtTokenProvider.generateTokenDto(dto.getEmail());
 
@@ -194,7 +189,7 @@ public class UserController {
         if (cookies != null) {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("access_token")) {
-                   accessToken = cookie.getValue();
+                    accessToken = cookie.getValue();
                 } else  {
                     return ResponseEntity.ok("User is not logged in");
                 }
@@ -202,10 +197,11 @@ public class UserController {
         }
 
         //accesstoken의 값을 db에서 찾고 존재하면 해당값 기반으로 refreshtoken값 가져옴
-        refreshToken = tokenMapper.selectByRtKey( tokenMapper.selectByAccessToken(accessToken).getRt_key() ).getRefreshtoken_value();
+        refreshToken = tokenMapper.selectByRtKey(tokenMapper.selectByAccessToken(accessToken).getRt_key()).getRefreshtoken_value();
         //accesstoken값으로 email 값 가져옴
         String email = userMapper.getUserByUserId(tokenMapper.selectByAccessToken(accessToken).getRt_key()).getEmail();
 
+        System.out.println("email"+email);
         System.out.println("accessToken = "+accessToken);
         System.out.println("refreshToken = " + refreshToken);
         System.out.println(JwtTokenProvider.validateToken(accessToken));

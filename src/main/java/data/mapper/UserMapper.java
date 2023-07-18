@@ -65,18 +65,21 @@ public interface UserMapper {
 
     public int countEmail(String email);
 
+    ///////////////////////////////////경철 ///////////////////////////////////////
+    public void updateUserIsAlarm(String email, boolean isalarm);
 
 
-    //관리자페이지에서 회원 목로 페이징
+    //관리자페이지에서 일반회원 목로 페이징
     public List<UserDto> getManagePagingList(Map<String,Object>map);
     //관리자페이지에서 회원 목록 토탈 카운트
     public int getManageTotalCount();
 
+    //관리자페이지에서 블랙리스트 회원 출력
+    public List<UserDto> getManageBlockList(Map<String,Object> map);
 
-    //관리자페이지에서 회원 검색 기능
-//    public List<UserDto> getSearchUser(Map<String,Object> map);
-//    //관리자페이지에서 회원검색 카운트
-//    public int getSearchUserCount(Map<String,Object>map);
+    //블랙리스트 멤버 수 (count)
+    public int getManageBlockCount();
+
 
 
 

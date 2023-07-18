@@ -16,6 +16,7 @@ import {ManagePageMain} from "./manage_page";
 import LiveStream from "./auctionpage/LiveStream";
 
 import ResultPage from "./auctionpage/ResultPage";
+import {MyAlertTest} from "./mytest_page";
 
 
 
@@ -31,13 +32,13 @@ function RouteMain(props) {
                 <Route path='/menu' element={<Menu/>}/>
 
                 <Route path='/manage/*' element={<ManagePageMain/>}/>
+                <Route path='/myalert' element={<MyAlertTest/>}/>
 
                 <Route path='/result' element={<ResultPage/>}/>
 
                 <Route path='/join' element={<JoinForm/>}/>
                 <Route path='/login' element={<LoginForm/>}/>
 
-                <Route path='/manage/*' element={<ManagePageMain/>}/>
                 <Route path={'/livestream'}>
                     <Route path={'livestream'} element={<LiveStream/>}/>
                 </Route>

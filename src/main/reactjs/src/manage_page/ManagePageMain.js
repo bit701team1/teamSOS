@@ -74,6 +74,14 @@ function ManagePageMain(props) {
                     <BlockList/>
                     </div>
                 }/>
+
+                <Route path={'blocklist/:currentPage'} element={
+                    <div className="k-list-show">
+                        <BlockList/>
+                    </div>
+                }/>
+
+
                 <Route path={'monitor'} element={<Monitor/>}/>
             </Routes>
 
