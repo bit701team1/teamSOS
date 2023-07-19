@@ -1,4 +1,5 @@
 package data.mapper;
+import data.dto.ReportDto;
 import data.dto.UserDto;
 import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
@@ -67,15 +68,19 @@ public interface UserMapper {
     public UserDto getUserByUserId(int user_id);
 
     public int countEmail(String email);
-    
-    //관리자페이지에서 회원 목록 페이징
+
+
+    //관리자페이지에서 회원 목로 페이징
     public List<UserDto> getManagePagingList(Map<String,Object>map);
     //관리자페이지에서 회원 목록 토탈 카운트
     public int getManageTotalCount();
 
     
 
-
+    //수연 알람
+    public void updatealarm(UserDto dto);
+    //수연 경고증가
+    public void insertReport(ReportDto dto);
 
 
 }
