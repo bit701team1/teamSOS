@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -71,10 +72,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/manage/**").permitAll()
 
                 .antMatchers("/api/**").permitAll()
+                .antMatchers("/sms/**").permitAll()
 
                 .antMatchers("/livestream/**").permitAll()
                 .antMatchers("/payment/**").permitAll()
                 .antMatchers("/product/**").permitAll()
+
+                .antMatchers("/static/**","/main/**","/manifest/**","/resources/**","/css/**","/favicon*/**").permitAll()
 
                 //.antMatchers("/user/rejection").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
                 //.antMatchers("/trade/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
@@ -115,12 +119,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //		System.out.println("web security");
 //		web.ignoring()
 //		.antMatchers("/h2-console/**", "/favicon.ico")
+//        .antMatchers("/static/**","/main/**","/manifest/**","/resources/**","/css/**","/favicon*/**")
 //		.antMatchers("/v2/api-docs", "/swagger-resources/**", "/swagger-ui.html", "/webjars/**", "/swagger/**");
-//		//              .antMatchers("/resources/**")
-//		//              .antMatchers("/css/**")
 //		//              .antMatchers("/vendor/**")
 //		//              .antMatchers("/js/**")
-//		//              .antMatchers("/favicon*/**")
 //		//              .antMatchers("/img/**")
 //	}
 

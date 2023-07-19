@@ -53,7 +53,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         if (!request.getRequestURI().contains("join") && !request.getRequestURI().contains("delete-") &&
                 !request.getRequestURI().contains("room") && !request.getRequestURI().contains("lobby") &&
-                !request.getRequestURI().contains("ws") && !request.getRequestURI().contains("oauth")) {
+                !request.getRequestURI().contains("ws") && !request.getRequestURI().contains("oauth") &&
+                !request.getRequestURI().contains("sms")) {
             log.info("토큰 체크");
             UserDto dto = new UserDto();
             try {
