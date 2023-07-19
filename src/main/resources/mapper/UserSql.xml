@@ -82,6 +82,15 @@
     <!--            email like CONCAT('%',#{search},'%')-->
     <!--    </select>-->
 
+    <!-- 수연 -->
+    <!-- 알람 스위치 update-->
+    <update id="updatealarm" parameterType="UserDto">
+    UPDATE user set isalarm = #{isalarm} where email = #{email}
+    </update>
+    <insert id="insertReport" parameterType="ReportDto">
+       INSERT into report(email,msg) values(#{email},#{msg})
+    </insert>
+
 
 
 

@@ -1,35 +1,35 @@
-.detailed-information {
+.y_detailed-information {
     position: absolute;
     top: 6.31rem;
     left: 7rem;
     font-size: 4.38rem;
 }
-.date-20230704,
-.title {
+.y_date-20230704,
+.y_detail-title {
     position: absolute;
     top: 13.75rem;
     left: 7rem;
 }
-.title {
+.y_detail-title {
     top: 19.44rem;
 }
-.detail {
+.y_detail-p{
     margin: 0;
 }
-.artist,
-.detail-container {
+.y_artist,
+.y_detail-container {
     position: absolute;
     top: 30.81rem;
     left: 7rem;
 }
-.artist {
+.y_artist {
     top: 25.13rem;
 }
-.div3,
-.icon {
+.y_detail-div,
+.y_detail-icon {
     border-radius: 20px;
 }
-.icon {
+.y_detail-icon  {
     position: absolute;
     top: 52.31rem;
     left: 9.19rem;
@@ -37,7 +37,7 @@
     height: 48.19rem;
     object-fit: cover;
 }
-.div3 {
+.y_detail-div{
     position: relative;
     background-color: #fff;
     width: 65.31rem;

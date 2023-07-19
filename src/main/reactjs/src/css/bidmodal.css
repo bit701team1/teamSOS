@@ -1,22 +1,22 @@
-.please-make-a,
-.price {
+.y_please-make-a,
+.y_price {
     position: absolute;
     top: 5rem;
     left: calc(50% - 404.5px);
 }
-.price {
+.y_price {
     top: 16.88rem;
     font-size: 3.44rem;
 }
-.child,
-.item {
+.y_bid-child,
+.y_item {
     position: absolute;
     top: 22.94rem;
     left: calc(50% - 406.5px);
     width: 49.88rem;
     height: 6.19rem;
 }
-.item {
+.y_item {
     top: 33.81rem;
     left: calc(50% + 80px);
     width: 9.13rem;
@@ -27,7 +27,7 @@
     justify-content: center;
 }
 
-.div4 {
+.y_bid-div {
     position: relative;
     border-radius: 20px;
     background-color: #fff;
