@@ -17,7 +17,6 @@ public class UserDto {
     private String email;
     private String hp;
 
-    //db에는 int임 조심
     private String user_type;
 
     private boolean isalarm;
@@ -25,8 +24,11 @@ public class UserDto {
     private int report_num;
     private long total_payment;
 
+    //naver login
     private boolean isNaver;
     private HttpServletResponse response;
+    //sms
+    private boolean isAuth;
 
 }
 

@@ -72,10 +72,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/manage/**").permitAll()
 
                 .antMatchers("/api/**").permitAll()
+                .antMatchers("/sms/**").permitAll()
 
                 .antMatchers("/livestream/**").permitAll()
                 .antMatchers("/payment/**").permitAll()
                 .antMatchers("/product/**").permitAll()
+
+                .antMatchers("/static/**","/main/**","/manifest/**","/resources/**","/css/**","/favicon*/**").permitAll()
 
                 //.antMatchers("/user/rejection").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
                 //.antMatchers("/trade/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
@@ -111,17 +114,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     // Spring security룰을 무시하게 하는 url규칙
-	@Override
-	public void configure(WebSecurity web) {
-		System.out.println("web security");
-		web.ignoring()
-		.antMatchers("/h2-console/**", "/favicon.ico")
-        .antMatchers("/static/**","/main/**","/manifest/**","/resources/**","/css/**","/favicon*/**")
-		.antMatchers("/v2/api-docs", "/swagger-resources/**", "/swagger-ui.html", "/webjars/**", "/swagger/**");
-		//              .antMatchers("/vendor/**")
-		//              .antMatchers("/js/**")
-		//              .antMatchers("/img/**")
-	}
+//	@Override
+//	public void configure(WebSecurity web) {
+//		System.out.println("web security");
+//		web.ignoring()
+//		.antMatchers("/h2-console/**", "/favicon.ico")
+//        .antMatchers("/static/**","/main/**","/manifest/**","/resources/**","/css/**","/favicon*/**")
+//		.antMatchers("/v2/api-docs", "/swagger-resources/**", "/swagger-ui.html", "/webjars/**", "/swagger/**");
+//		//              .antMatchers("/vendor/**")
+//		//              .antMatchers("/js/**")
+//		//              .antMatchers("/img/**")
+//	}
 
     //비밀번호 암호화를 위한 Encoder 설정
     @Bean
