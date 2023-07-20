@@ -19,3 +19,4 @@ mybatis:
   type-aliases-package: data.dto
   mapper-locations:
     - /mapper/**/*.xml
+  #type-handlers-package: org.apache.ibatis.type

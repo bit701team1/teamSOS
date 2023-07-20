@@ -13,4 +13,6 @@ public interface ProductMapper {
     public List<ProductDto> getWinnerAndFinalPriceByProductName(String product_name);
 
     public void updateWinnerAndFinalPrice(ProductDto dto);
+
+    public ProductDto selectByCurDate();
 }

@@ -54,12 +54,13 @@ public class UserController {
     public ResponseEntity<TokenDto> signIn(@RequestBody UserDto dto, HttpServletResponse response) {
         System.out.println("/login 진입");
         System.out.println("logindto : " + dto);
-        System.out.println("response : " + response);
+        //System.out.println("response : " + response);
         // 사용자 정보 조회
         UserDto user = userMapper.getUserByEmail(dto.getEmail());
 
         if (user == null) {
             // 사용자가 존재하지 않는 경우
+            System.out.println("사용자가 존재하지 않음");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
@@ -68,24 +69,17 @@ public class UserController {
         // 비밀번호 검증
         boolean passwordMatched = bCryptPasswordEncoder.matches(rawPassword, user.getPassword());
 
-        if (!passwordMatched) {
-            // 비밀번호 검증 실패
+        if (!passwordMatched && !dto.isNaver()) {
+            System.out.println("비밀번호 검증 실패 case");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
         try {
-            // 1. Login ID 를 기반으로 AuthenticationToken 생성
-            //UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(dto.getEmail(), null);
-            //System.out.println("authenticationToken 지나감");
-            // 2. 실제로 검증 (사용자 비밀번호 체크)이 이루어지는 부분
-            //Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
-            //System.out.println("authentication = " + authentication);
-
-            // 3. 이메일을 기반으로 JWT 토큰 생성
+            //이메일을 기반으로 JWT 토큰 생성
             TokenDto tokenDto = JwtTokenProvider.generateTokenDto(dto.getEmail());
             //System.out.println("tokenDto.toString(): " + tokenDto.toString());
 
-            // 4. RefreshToken 값 DB에 저장
+            //RefreshToken 값 DB에 저장
             RefreshTokenDto RTDto = new RefreshTokenDto();
             RTDto.setRt_key((userMapper.getUserByEmail(dto.getEmail()).getUser_id()));
             RTDto.setRefreshtoken_expire(tokenDto.getRefreshtokenexpire());
@@ -101,7 +95,7 @@ public class UserController {
             tokenDto.setUser_id(userMapper.getUserByEmail(dto.getEmail()).getUser_id());
             tokenDto.setRefreshtoken(RTDto.getRefreshtoken_value());
 
-            // 5. Access Token을 HttpOnly쿠키와 와 DB에 저장
+            //Access Token을 HttpOnly쿠키와 와 DB에 저장
             Cookie accessTokenCookie = new Cookie("access_token", tokenDto.getAccesstoken());
             accessTokenCookie.setPath("/");
             accessTokenCookie.setHttpOnly(true);
@@ -147,6 +141,8 @@ public class UserController {
         String encryptedPassword = encoder.encode(dto.getPassword());
 
         dto.setPassword(encryptedPassword);
+        //네이버에서 받아오는 번호는 -를 포함하므로 저장전에 제거해줌
+        dto.setHp(dto.getHp().replace("-",""));
 
         userMapper.insertUser(dto);
 

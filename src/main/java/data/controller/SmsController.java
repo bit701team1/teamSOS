@@ -1,6 +1,10 @@
 package data.controller;
 
+import data.dto.ProductDto;
 import data.dto.UserDto;
+import data.mapper.AuthMapper;
+import data.mapper.ProductMapper;
+import data.service.AuthService;
 import net.nurigo.sdk.NurigoApp;
 import net.nurigo.sdk.message.exception.NurigoMessageNotReceivedException;
 import net.nurigo.sdk.message.model.Message;
@@ -12,6 +16,7 @@ import net.nurigo.sdk.message.response.MultipleDetailMessageSentResponse;
 import net.nurigo.sdk.message.response.SingleMessageSentResponse;
 
 import net.nurigo.sdk.message.service.DefaultMessageService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.SessionScope;
@@ -25,6 +30,7 @@ import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 @RestController
@@ -33,14 +39,16 @@ import java.util.Random;
 public class SmsController {
     private DefaultMessageService messageService;
 
+    @Autowired
+    private AuthMapper authMapper;
+    @Autowired
+    private ProductMapper productMapper;
+
     public SmsController() {
-        // 반드시 계정 내 등록된 유효한 API 키, API Secret Key를 입력해주셔야 합니다!
         this.messageService = NurigoApp.INSTANCE.initialize("NCSKRC7UBRSXFSNX", "CXXI9LMNA4XFNIBGLXWJX7SIU7AYGABM", "https://api.coolsms.co.kr");
     }
 
-    /**
-     * 단일 메시지 발송 예제
-     */
+   //단일 메세지 발송, 문자 인증 용도
     @PostMapping("/send-one")
     public String sendOne(@RequestBody UserDto dto) {
         System.out.println("/send-one 진입");
@@ -54,13 +62,13 @@ public class SmsController {
         message.setTo(dto.getHp());
         message.setText("[AAA] 인증번호 ["+authnum+"]를 입력해주세요");
 
-
         SingleMessageSentResponse response = this.messageService.sendOne(new SingleMessageSendingRequest(message));
         System.out.println(response);
 
         return authnum;
     }
 
+    //6자리의 랜덤한 인증번호 생성
     public static String generateRandomNumber(int digits) {
         Random random = new Random();
         StringBuilder sb = new StringBuilder(digits);
@@ -73,53 +81,38 @@ public class SmsController {
         return sb.toString();
     }
 
-    /**
-     * MMS 발송 예제
-     * 단일 발송, 여러 건 발송 상관없이 이용 가능
-     */
-    @PostMapping("/send-mms")
-    public SingleMessageSentResponse sendMmsByResourcePath() throws IOException {
-        ClassPathResource resource = new ClassPathResource("static/sample.jpg");
-        File file = resource.getFile();
-        String imageId = this.messageService.uploadFile(file, StorageType.MMS, null);
 
-        Message message = new Message();
-        // 발신번호 및 수신번호는 반드시 01012345678 형태로 입력되어야 합니다.
-        message.setFrom("발신번호 입력");
-        message.setTo("수신번호 입력");
-        message.setText("한글 45자, 영자 90자 이하 입력되면 자동으로 SMS타입의 메시지가 추가됩니다.");
-        message.setImageId(imageId);
-
-        // 여러 건 메시지 발송일 경우 send many 예제와 동일하게 구성하여 발송할 수 있습니다.
-        SingleMessageSentResponse response = this.messageService.sendOne(new SingleMessageSendingRequest(message));
-        System.out.println(response);
-
-        return response;
-    }
-
-    /**
-     * 여러 메시지 발송 예제
-     * 한 번 실행으로 최대 10,000건 까지의 메시지가 발송 가능합니다.
-     */
+   //여러 메세지 동시 발송, 알림 서비스 용도
     @PostMapping("/send-many")
     public MultipleDetailMessageSentResponse sendMany() {
         ArrayList<Message> messageList = new ArrayList<>();
 
-        for (int i = 0; i < 3; i++) {
+        //isalarm인 user의 hp list 호출
+        List<String> HpList = authMapper.selectHpList();
+        //System.out.println("HpList : " + HpList);
+
+        //product내용을 불러올 방법 필요함
+        ProductDto dto = new ProductDto();
+        dto = productMapper.selectByCurDate();
+        //System.out.println("dto : " + dto);
+
+        for (String hp : HpList) {
             Message message = new Message();
             // 발신번호 및 수신번호는 반드시 01012345678 형태로 입력되어야 합니다.
-            message.setFrom("발신번호 입력");
-            message.setTo("수신번호 입력");
-            message.setText("한글 45자, 영자 90자 이하 입력되면 자동으로 SMS타입의 메시지가 추가됩니다." + i);
+            message.setFrom("01092594908");
+            message.setTo(hp);
+            message.setText("잠시후 ["+dto.getProduct_name()+"]의 경매가 시작될 예정입니다. 꼭 참가하셔서 이 기회를 놓치지 마세요!");
 
             // 메시지 건건 마다 사용자가 원하는 커스텀 값(특정 주문/결제 건의 ID를 넣는등)을 map 형태로 기입하여 전송 후 확인해볼 수 있습니다!
             /*HashMap<String, String> map = new HashMap<>();
 
             map.put("키 입력", "값 입력");
-            message.setCustomFields(map);
+            message.setCustomFields(map);*/
 
-            messageList.add(message);*/
+            messageList.add(message);
         }
+
+        //System.out.println("messageList : " + messageList);
 
         try {
             // send 메소드로 단일 Message 객체를 넣어도 동작합니다!
@@ -138,6 +131,7 @@ public class SmsController {
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
         }
+
         return null;
     }
 
@@ -178,6 +172,30 @@ public class SmsController {
             System.out.println(exception.getMessage());
         }
         return null;
+    }
+
+    /**
+     * MMS 발송 예제
+     * 단일 발송, 여러 건 발송 상관없이 이용 가능
+     */
+    @PostMapping("/send-mms")
+    public SingleMessageSentResponse sendMmsByResourcePath() throws IOException {
+        ClassPathResource resource = new ClassPathResource("static/sample.jpg");
+        File file = resource.getFile();
+        String imageId = this.messageService.uploadFile(file, StorageType.MMS, null);
+
+        Message message = new Message();
+        // 발신번호 및 수신번호는 반드시 01012345678 형태로 입력되어야 합니다.
+        message.setFrom("발신번호 입력");
+        message.setTo("수신번호 입력");
+        message.setText("한글 45자, 영자 90자 이하 입력되면 자동으로 SMS타입의 메시지가 추가됩니다.");
+        message.setImageId(imageId);
+
+        // 여러 건 메시지 발송일 경우 send many 예제와 동일하게 구성하여 발송할 수 있습니다.
+        SingleMessageSentResponse response = this.messageService.sendOne(new SingleMessageSendingRequest(message));
+        System.out.println(response);
+
+        return response;
     }
 
 }
