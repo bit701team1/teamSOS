@@ -64,7 +64,7 @@ function LoginForm(props) {
 
     return (
         <div>
-            <NavLink to={"/menu"}><h2>Menu</h2></NavLink>
+            <NavLink to={"/"}><h2>Menu</h2></NavLink>
             <h1>LoginForm</h1>
             <h3 style={{cursor:"pointer"}} onClick={handleDeleteClick}>클릭시 쿠키값을 지웁니다(로그아웃)</h3>
             <br/><br/>

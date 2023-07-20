@@ -214,7 +214,7 @@ function AuctionLive(props) {
                 type: 'DELETE', 
                 roomId, 
                 userName, 
-                msg, // 메세지를 지우겠다
+                msg:'', // 메세지를 지우겠다
                 msgId
             })
         )

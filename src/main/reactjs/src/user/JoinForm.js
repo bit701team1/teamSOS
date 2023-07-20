@@ -1,15 +1,14 @@
-import React, {useState} from 'react';
-import {NavLink} from "react-router-dom";
-import Axios from "axios";
-
+import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import Axios from 'axios';
 import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';;
+import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import {createTheme, ThemeProvider} from "@mui/material";
+import { createTheme, ThemeProvider } from '@mui/material';
 
 function JoinForm(props) {
 
@@ -91,7 +90,7 @@ function JoinForm(props) {
 
     return (
         <div>
-            <NavLink to={"/menu"}><h2>Menu</h2></NavLink>
+            <NavLink to={"/"}><h2>Menu</h2></NavLink>
             <h1>JoinForm</h1>
 
             <div className='login'>

@@ -11,7 +11,7 @@ function ManagePageMain(props) {
     const navi=useNavigate();
 
     const handleBeforePage=()=>{
-        navi("/menu");
+        navi("/");
     };
 
 
