@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import UserInfo from "./UserPage/UserInfo";
+import UserInfo from "./userpage/UserInfo";
 import Mainauction from "./auctionpage/Mainauction";
 import AuctionLive from "./auctionpage/AuctionLive";
 

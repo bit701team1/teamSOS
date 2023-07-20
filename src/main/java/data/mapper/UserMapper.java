@@ -81,6 +81,7 @@ public interface UserMapper {
     public void updatealarm(UserDto dto);
     //수연 경고증가
     public void insertReport(ReportDto dto);
-
+    //수연 유저 정보 수정
+    public void updateUserInfo(UserDto dto);
 
 }

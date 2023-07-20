@@ -157,4 +157,25 @@ public class RoomController {
         
         return ResponseEntity.ok(reportdto);
     }
+     //정보 수정 
+     @PostMapping("/userupdate")
+     public ResponseEntity<UserDto> userupdate( HttpServletRequest request, @RequestBody UserDto dto) {
+         Cookie[] cookies = request.getCookies();
+         String accessToken = null;
+ 
+         if (cookies != null) {
+             for (Cookie cookie : cookies) {
+                 if (cookie.getName().equals("access_token")) {
+                     accessToken = cookie.getValue();
+                 }
+             }
+         }
+         int userId = tokenMapper.selectByAccessToken(accessToken).getRt_key();
+         UserDto user = userMapper.getUserByUserId(userId);
+         user.setUser_name(dto.getUser_name());
+         user.setEmail(dto.getEmail());
+         user.setHp(dto.getHp());
+         userMapper.updateUserInfo(user);
+         return ResponseEntity.ok(user);
+     }
 }

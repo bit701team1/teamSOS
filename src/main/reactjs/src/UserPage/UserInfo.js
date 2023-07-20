@@ -1,106 +1,182 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import '../css/userinfo.css';
-import {Switch,Radio} from "@mui/material";
+import {styled} from '@mui/system';
+import Switch from '@mui/material/Switch';
 import kermit from '../image/kermit.gif';
-import {pink} from "@mui/material/colors";
-
+import edit from '../image/y_edit.svg';
+import back from '../image/y_back.svg';
+import eyeopen from '../image/y_eye-open.svg';
+import alarm from '../image/y_alarm.svg';
+import report from '../image/y_reporticon.svg';
+import center from  '../image/y_center.svg';
+import centergo from '../image/y_centergo.svg';
+import axios from 'axios';
 function UserInfo(props) {
-    const [selectedValue, setSelectedValue] = React.useState('e');
-    const handleChange = (event) => {
-        setSelectedValue(event.target.value);
-    };
-    const controlProps = (item) => ({
-        checked: selectedValue === item,
-        onChange: handleChange,
-        value: item,
-        name: 'color-radio-button-demo',
-        inputProps: { 'aria-label': item },
-    });
-    return (
-        <div className="y_userinfo">
-            <div className="y_userinfo-child" />
-            <div className="y_aa-arte-container">
-                <p className="y_aa">
-                    <span>{`    `}</span>
-                    <span className="y_span">{` `}</span>
-                    <span className="y_aa1">{`A&A`}</span>
-                </p>
-                <p className="y_arte-arena"> ARTE : ARENA</p>
-            </div>
-            <div className="y_username">Kermit님</div>
-            <div className="y_my-page">MY PAGE</div>
-            <img alt='' src={kermit} className="y_img"/>
-            <div className="y_switch">
-                        <Switch defaultChecked color="default" className='y_alarm' />
-            </div>
-            <div className="y_user1">알림 설정</div>
-            <div className="y_user2">{`낙찰 수  0 `}</div>
-            <div className="y_box1">
-                <div className="y_box2" />
-                <div className="y_box3">{`인증서 발급`}</div>
-            </div>
-            <div className="y_user4">개인정보 변경</div>
-            <div className="y_user5">회원님의 정보를 변경하실 수 있습니다</div>
-            <div className="y_user6">이메일</div>
-            <div className="y_user7">비밀번호</div>
-            <div className="y_user8">성별</div>
-            <div className="y_user9">이름</div>
-            <div className="y_user10">생일</div>
-            <div className="y_user11">주소</div>
-            <div className="y_user12">휴대폰</div>
-            <div className="y_user13">상세주소</div>
-            <input className="y_email"/>
-            <input className="y_passwd"/>
-            <input className="y_nameinput"/>
-            <input className="y_birth"/>
-            <input className="y_addr1"/>
-            <input className="y_pnum1"/>
-            <input className="y_pnum2"/>
-            <input className="y_pnum3"/>
-            <input className="y_addr4"/>
-            <input className="y_addr2"/>
-            <input className="y_addr3"/>
-            <div className="y_woman">
-                <Radio
-                    {...controlProps('a')}
-                    sx={{
-                        color: pink[800],
-                        '&.Mui-checked': {
-                            color: pink[600],
-                        },
-                    }}
-                />
-            </div>
-            <div className="y_man">
-                <Radio
-                    {...controlProps('b')}
+  const StyledSwitch = styled(Switch)(({ theme }) => ({
+    '& .MuiSwitch-switchBase.Mui-checked': {
+        color: '#f5dd4b',
+    },
+    '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+        backgroundColor: '#81b0ff',
+    },
+    '& .MuiSwitch-switchBase': {
+        color: '#f4f3f4',
+    },
+    '& .MuiSwitch-switchBase + .MuiSwitch-track': {
+        backgroundColor: '#767577',
+    },
+}));
 
-                />
-            </div>
-            <div className="y_user14">남자</div>
-            <div className="y_user15">여자</div>
-            <div className="y_buttons">
-                <button type="button" className="btn btn-outline-dark" id="y_pwdupdate">
-                    <h3>비밀번호 변경</h3></button>
-            </div>
-            <div className="y_buttons-parent">
-                <button type="button" className="btn btn-outline-dark" id="y_addrsearch">
-                    <h1>검색</h1></button>
-            </div>
-            <div className="y_header" />
-            <div className="y_line" />
-            <div className="y_line2" />
-            <div className="y_line3" />
-            <div className="y_line4" />
-            <div className="y_line5" />
-            <div className="y_line6" />
-            <div className="y_line7" />
-            <div className="y_line8" />
-            <div className="y_infoupdate_div">
-                <button type="button" className="btn btn-outline-dark" id="y_infoupdate"><h1>수정</h1></button>
-            </div>
-        </div>
-
-    );
+  const [userdata, setUserdata] = useState({
+    email:'',
+    hp:'',
+    user_name:''
+  });
+  useEffect(() => {
+    axios.get('/room/userdata')
+        .then(response => {
+            setUserdata(response.data); 
+        })
+        .catch(error => {
+            console.error('에러가 발생했습니다!', error); 
+        });
+}, []);
+const handleEmailChange = (event) => {
+  const newEmail = event.target.value;
+  setUserdata(prevUserData => ({
+    ...prevUserData,
+    email: newEmail
+  }));
 };
+
+const handleHpChange = (event) => {
+  const newHp = event.target.value;
+  setUserdata(prevUserData => ({
+    ...prevUserData,
+    hp: newHp
+  }));
+};
+
+const handleUserNameChange = (event) => {
+  const newUserName = event.target.value;
+  setUserdata(prevUserData => ({
+    ...prevUserData,
+    user_name: newUserName
+  }));
+};
+const updateInfo = () => {
+  console.log(userdata);
+  const { user_name, email, hp, user_id } = userdata;
+  const updateData = {
+      user_name,
+      email,
+      hp,
+      user_id
+  };
+
+
+  const url = '/room/userupdate';
+  axios.post(url, updateData)
+      .then(response => {
+          alert("수정이 완료되었습니다");
+          console.log(updateData);
+      })
+      .catch(error => {
+          alert("수정 실패");
+          console.log(updateData);
+      });
+};
+
+  const handleToggle = () => {
+    const updatedUserdata = { email:userdata.email, isalarm: !userdata.isalarm };
+  
+    const url = '/room/alarm'; // URL이 '/room/alarm'에서 '/alarm'으로 변경되었습니다.
+    axios.post(url, updatedUserdata) // entire updatedUserdata 객체를 전달합니다.
+      .then(response => {
+        console.log('알람 값이 업데이트되었습니다.');
+        console.log(updatedUserdata.isalarm + updatedUserdata.email);
+        setUserdata(updatedUserdata); // userdata 업데이트
+      })
+      .catch(error => {
+        console.log('알람 값을 업데이트하는데 실패하였습니다.', error);
+      });
+      
+}
+
+
+
+    return (
+        <div className="y_info-div">
+          <img className="y_myimage" alt="" src={kermit}/>
+          <div className="y_input-field">
+            <input className="y_info-input" value={userdata.email}
+            onChange={handleEmailChange}/>
+          </div>
+          <div className="y_input-field1">
+          <input className="y_info-input" value={userdata.hp}
+          onChange={handleHpChange}>
+            </input>
+          </div>
+          <div className="y_input-field2">
+            <div className="y_input-field3">
+              <input className="y_info-input"
+               style={{width:'80%'}}>
+            </input>
+            </div>
+          </div>
+          <div className="y_infoemail-p">Email</div>
+          <div className="y_input-field4">
+          <input className="y_info-input" value={userdata.user_name}
+          onChange={handleUserNameChange}>
+            </input>
+          </div>
+          <div className="y_infoname-p">Name</div>
+          <div className="y_pwd-p">Password</div>
+          <div className="y_hp-p">Phone</div>
+          <div className="rectangle-parent">
+            <div className="y_edit-div"/>
+            <img className="y_icon-edit" alt="" src={edit}/>
+          </div>
+          <img className="eye-show-icon" alt="" src={eyeopen}  style={{cursor:'pointer'}} />
+          <div className="y_info-p1">내 정보 관리</div>
+          <button onClick={updateInfo} className="y_infoupdate-btn">
+          수정완료
+          </button>
+          <div className="inner" />
+          <img className="y_icon-bell" alt="" src={alarm} />
+          <div className="y_info-p2">개인정보 변경</div>
+          <div className="y_info-p3">회원님의 회원 정보를 변경하실 수 있습니다.</div>
+          <div className="on-wrapper">
+              <StyledSwitch  checked={userdata.isalarm || false} onChange={handleToggle}/>
+          </div>
+          <div className="div5">알람 허용</div>
+          <div className="div6">{`받은 신고 수 `}</div>
+          <div className="div7">고객센터</div>
+          <img
+            className="icon-arrow-right-circled"
+            alt=""
+            src={centergo}
+          />
+          <div
+            className="icon-arrow-right-circled1">
+              <p>1</p>
+          </div>
+          <img className="icon-emoji-sad" alt="" src={report} />
+          <img
+            className="y_back" style={{cursor:'pointer'}}
+            alt="" 
+            src={back}
+          />
+          <img
+            className="icon-question-mark-circle"
+            alt=""
+            src={center}
+          />
+          <div className="rectangle-div" />
+          <div className="child1" />
+          <div className="child2" />
+          <div className="child3" />
+        </div>
+      );
+    };
 export default UserInfo;

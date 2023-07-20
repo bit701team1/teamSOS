@@ -85,12 +85,18 @@
     <!-- 수연 -->
     <!-- 알람 스위치 update-->
     <update id="updatealarm" parameterType="UserDto">
-    UPDATE user set isalarm = #{isalarm} where email = #{email}
+       UPDATE user set isalarm = #{isalarm} where email = #{email}
     </update>
+    <!-- 경고 리스트 추가-->
     <insert id="insertReport" parameterType="ReportDto">
        INSERT into report(email,msg) values(#{email},#{msg})
     </insert>
-
+    <!-- 일반유저 정보 수정-->
+    <update id="updateUserInfo" parameterType="UserDto">
+        UPDATE user set
+        user_name=#{user_name}, email=#{email},hp=#{hp}
+        where user_id=#{user_id}
+    </update>
 
 
 
