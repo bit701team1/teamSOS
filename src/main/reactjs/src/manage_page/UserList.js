@@ -5,6 +5,7 @@ import {Link, NavLink, useNavigate, useParams} from "react-router-dom";
 import k_people_icon from "../k_manage_image/k_people_icon.svg";
 import k_search_icon from "../k_manage_image/k_search_icon.svg";
 import './ManagePageMain.css';
+import './UserList.css';
 
 
 
@@ -52,54 +53,57 @@ function UserList(props) {
     },[getUserList])
 
     return (
-        <div style={{fontSize:'2.5rem'}}>
+        <div>
+
             <div className="k-searchbox">
                 <img className="k-people-icon" alt="" src={k_people_icon} />
-                <input type={'text'} className="k-search-bar" onChange={handleSearchChange} value={searchValue}>
+                <input type={'text'} className="k-search-bar" onChange={handleSearchChange} value={searchValue} style={{fontSize:'1rem'}}>
                 </input>
                 <img className="k-search-icon" alt="검색" src={k_search_icon} onClick={handleSearch} style={{cursor:'pointer'}} />
             </div>
-            <b style={{marginLeft:'200px'}}>총 {data.length}개</b>
 
-            <table className={"table table-bordered k_table-userlist"}>
-                <tr style={{backgroundColor:'white',textAlign:'center'}}>
-                    <th style={{width:'80px'}}>번호</th>
-                    <th style={{width:'80px'}}>회원명</th>
-                    <th style={{width:'80px'}}>이메일</th>
-                    <th style={{width:'80px'}}>조회</th>
-                    <th style={{width:'80px'}}>삭제</th>
-                </tr>
-                {
-                    // userlist.map((row,idx)=><UserRowList key={idx} row={row} idx={idx} onDelete={deleteUser}/>)
-                    data.getUserList &&
-                    data.getUserList.map((row,idx)=><UserRowList key={idx} row={row} no={data.no} idx={idx} onDelete={deleteUser} currentPage={currentPage}/>)
-                }
-            </table>
+            <div className={'k-list-show'}  style={{fontSize:'1rem'}}>
+                <b style={{marginLeft:'15%'}}>총 {data.totalCount}명</b>
 
-            <div style={{width:'100%',textAlign:'center'}}>
-                {/* 페이징처리 */}
-                {
-                    //이전
-                    data.startPage>1?
-                        <Link to={`/manage/userlist/${data.startPage-1}`}
-                              style={{textDecoration:'none',cursor:'pointer',marginRight:'10px'}}>
-                            이전</Link>:''
-                }
-                {
-                    data.parr &&
-                    data.parr.map((pno,i)=>
-                        <NavLink to={`/manage/userlist/${pno}`} style={{textDecoration:'none'}} key={i}>
-                            <b style={{marginRight:'10px',
-                                color:pno===Number(currentPage)?'red':'black'}}>{pno}</b>
-                        </NavLink>)
-                }
-                {
-                    // 다음
-                    data.endPage<data.totalPage?
-                        <Link to={`/manage/userlist/${data.endPage+1}`}
-                              style={{textDecoration:'none',cursor:'pointer'}}>
-                            다음</Link>:''
-                }
+                <table className={"table k_table-userlist"}>
+                    <tr style={{backgroundColor:'pink',textAlign:'center'}}>
+                        <th style={{width:'2.5rem'}}>번호</th>
+                        <th style={{width:'5rem'}}>회원명</th>
+                        <th style={{width:'6rem'}}>이메일</th>
+                        <th style={{width:'2.5rem'}}>삭제</th>
+                    </tr>
+                    {
+                        // userlist.map((row,idx)=><UserRowList key={idx} row={row} idx={idx} onDelete={deleteUser}/>)
+                        data.getUserList &&
+                        data.getUserList.map((row,idx)=><UserRowList key={idx} row={row} no={data.no} idx={idx} onDelete={deleteUser} currentPage={currentPage}/>)
+                    }
+                </table>
+
+                <div style={{width:'100%',textAlign:'center',fontSize:'0.8rem'}}>
+                    {/* 페이징처리 */}
+                    {
+                        //이전
+                        data.startPage>1?
+                            <Link to={`/manage/userlist/${data.startPage-1}`}
+                                  style={{textDecoration:'none',cursor:'pointer',marginRight:'10px'}}>
+                                이전</Link>:''
+                    }
+                    {
+                        data.parr &&
+                        data.parr.map((pno,i)=>
+                            <NavLink to={`/manage/userlist/${pno}`} style={{textDecoration:'none'}} key={i}>
+                                <b style={{marginRight:'10px',
+                                    color:pno===Number(currentPage)?'red':'black'}}>{pno}</b>
+                            </NavLink>)
+                    }
+                    {
+                        // 다음
+                        data.endPage<data.totalPage?
+                            <Link to={`/manage/userlist/${data.endPage+1}`}
+                                  style={{textDecoration:'none',cursor:'pointer'}}>
+                                다음</Link>:''
+                    }
+                </div>
             </div>
         </div>
     );

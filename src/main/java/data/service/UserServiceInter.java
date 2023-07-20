@@ -1,5 +1,6 @@
 package data.service;
 
+import data.dto.ReportDto;
 import data.dto.UserDto;
 
 import java.util.List;
@@ -17,16 +18,21 @@ public interface UserServiceInter {
     public int countEmail(String email);
 
 
+    ///////////////////////////////////경철 ///////////////////////////////////////
+
     //회원목록 페이징리스트
     public List<UserDto> getManagePagingList(String search,int startNum,int perPage);
     //회원목록 토탈카운트
     public int getManageTotalCount();
     //회원 삭제
     void deleteUser(int user_id);
-    //회원 검색
-//    public List<UserDto> getSearchUser(String search, Integer startNum, Integer perPage);
-//    //회원 검색 카운트
-//    public int getSearchUserCount(String search,Integer startNum, Integer perPage);
+
+
+    //블랙리스트 멤버수 (new)
+    public int getBlockListCount();
+
+    //블랙리스트 회원 조회 (new)
+    public List<ReportDto> getBlockList(String search,int startNum,int perPage);
 
 
 

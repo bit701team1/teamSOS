@@ -1,6 +1,9 @@
 package data.mapper;
+import data.dto.ReportDto;
 import data.dto.UserDto;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -66,6 +69,7 @@ public interface UserMapper {
     public int countEmail(String email);
 
 
+    ///////////////////////////////////경철 ///////////////////////////////////////
 
     //관리자페이지에서 회원 목로 페이징
     public List<UserDto> getManagePagingList(Map<String,Object>map);
@@ -73,12 +77,9 @@ public interface UserMapper {
     public int getManageTotalCount();
 
 
-    //관리자페이지에서 회원 검색 기능
-//    public List<UserDto> getSearchUser(Map<String,Object> map);
-//    //관리자페이지에서 회원검색 카운트
-//    public int getSearchUserCount(Map<String,Object>map);
+    //블랙리스트 멤버 숫자(new)
+    public int getBlockListCount();
 
-
-
-
+    //관리자페이지에서 블랙리스트 회원출력(new)
+    public List<ReportDto> getBlockList(Map<String,Object> map);
 }

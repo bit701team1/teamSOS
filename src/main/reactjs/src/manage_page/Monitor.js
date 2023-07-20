@@ -3,8 +3,10 @@ import './ManagePageMain.css';
 
 function Monitor(props) {
     return (
-        <div style={{fontSize:'100px'}}>
+        <div>
+            <div className={'k-moniter-list-show'}  style={{fontSize:'1rem'}}>
             알라랄알라랄알라랄알라랄알라랄알라
+            </div>
         </div>
     );
 }
