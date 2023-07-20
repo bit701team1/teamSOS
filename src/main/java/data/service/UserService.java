@@ -81,12 +81,17 @@ public class UserService implements UserServiceInter{
 //        return userMapper.getSearchUserCount(map);
 //    }
 //
-    //수연 알람
+    //수연
+    //알람
     public void updatealarm(UserDto dto){
         userMapper.updatealarm(dto);
     }
-    //수연 경고증가
+    //경고리스트
     public void insertReport(ReportDto dto){
         userMapper.insertReport(dto);
+    }
+    //유저 정보 수정
+    public void updateUserInfo(UserDto dto){
+        userMapper.updateUserInfo(dto);
     }
 }

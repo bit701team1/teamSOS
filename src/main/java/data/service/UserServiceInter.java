@@ -32,6 +32,7 @@ public interface UserServiceInter {
     public void insertReport(ReportDto dto);
     //alarm 스위치 on, off
     public void updatealarm(UserDto dto);
-
+    //유저 정보 수정
+    public void updateUserInfo(UserDto dto);
 
 }
