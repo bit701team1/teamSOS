@@ -1,5 +1,6 @@
 package data.service;
 
+import data.dto.ReportDto;
 import data.dto.UserDto;
 
 import java.util.HashMap;
@@ -35,7 +36,6 @@ public class UserService implements UserServiceInter{
     public int countEmail(String email) {
         return userMapper.countEmail(email);
     }
-
 
     //회원목록 페이징 리스트
     public List<UserDto> getManagePagingList(String search,int startNum,int perPage){
@@ -81,5 +81,12 @@ public class UserService implements UserServiceInter{
 //        return userMapper.getSearchUserCount(map);
 //    }
 //
-
+    //수연 알람
+    public void updatealarm(UserDto dto){
+        userMapper.updatealarm(dto);
+    }
+    //수연 경고증가
+    public void insertReport(ReportDto dto){
+        userMapper.insertReport(dto);
+    }
 }

@@ -70,10 +70,10 @@ const BidModal = ({ onClose }) => {
     };
 
     return (
-        <div className={`div4 ${modalOpen ? "open" : "closed"}`}>
-            <div className="please-make-a">Please make a bid</div>
-            <div className="price">price</div>
-            <div className="child">
+        <div className={`y_bid-div  ${modalOpen ? "open" : "closed"}`}>
+            <div className="y_please-make-a">Please make a bid</div>
+            <div className="y_price">price</div>
+            <div className="y_bid-child">
                 <input
                     width="60%"
                     type="number"
@@ -83,7 +83,7 @@ const BidModal = ({ onClose }) => {
                     onChange={handleInputChange}
                 />
             </div>
-            <div className="item">
+            <div className="y_item">
                 <button className="bidding" onClick={bidHandler}>
                     Bidding
                 </button>

@@ -2,14 +2,26 @@ import React, {useState} from 'react';
 import {NavLink} from "react-router-dom";
 import Axios from "axios";
 
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+
 function JoinForm(props) {
 
     const [data, setData] = useState({
         email:'',
         password: "",
         user_name:"",
-        hp:""
+        hp:"",
+        isAuth : false
     })
+
+    const [authnum,setAuthnum] = useState("");
+    const [inputauthnum,setInputAuthnum] = useState("");
 
     const handleJoinClick = (e)=>{
         e.preventDefault();
@@ -28,6 +40,40 @@ function JoinForm(props) {
             alert("회원가입에 실패했습니다.");
         });
     }
+
+    //modal
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        if(data.hp==""){
+            alert("전화번호를 입력해주세요");
+        } else {
+            Axios.post("/sms/send-one",data).then(res=>{
+                    //console.log(res.data);
+                    setAuthnum(res.data);
+                }
+            )
+            setOpen(true);
+        }
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    const handleAuthClick = ()=>{
+        if(authnum == inputauthnum){
+            setData({
+                ...data,
+                isAuth: true
+            })
+            handleClose();
+        } else {
+            alert("authnum : " + authnum, " inputauthnum : " + inputauthnum)
+            alert("인증번호가 틀렸습니다");
+        }
+    }
+
 
     return (
         <div>
@@ -77,6 +123,13 @@ function JoinForm(props) {
                                     hp: e.target.value
                                 })
                                 }/>
+                                <button type='button' onClick={handleClickOpen}>휴대폰 인증</button>
+                                {
+                                    data.isAuth && <div>인증 OOO</div>
+                                }
+                                {
+                                    !data.isAuth && <div>인증 XXX</div>
+                                }
                             </td>
                         </tr>
                         <tr>
@@ -89,6 +142,32 @@ function JoinForm(props) {
                     </table>
                 </form>
             </div>
+
+            <Dialog open={open} onClose={handleClose}>
+                <DialogTitle>SMS 인증</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>
+                        입력하신 휴대전화 번호로 전송받은 인증번호를 입력해주세요
+                    </DialogContentText>
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="name"
+                        label="인증번호"
+                        type="email"
+                        fullWidth
+                        variant="standard"
+                        onChange={(event) => {
+                            setInputAuthnum(event.target.value);
+                        }}
+                    />
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleAuthClick}>확인</Button>
+                    <Button onClick={handleClose}>취소</Button>
+                </DialogActions>
+            </Dialog>
+
         </div>
     );
 }
