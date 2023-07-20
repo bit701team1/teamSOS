@@ -13,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 
+import data.dto.MsgDto;
+import data.dto.ReportDto;
 import data.dto.RoomDto;
 import data.service.RoomService;
 
@@ -95,7 +97,7 @@ public class RoomController {
         return ResponseEntity.ok(user);
     }
      @GetMapping("/adminpower")
-     public ResponseEntity<String> loginCheck(HttpServletRequest request) {
+     public ResponseEntity<String> adminpower(HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
         String accesstoken = null;
 
@@ -115,24 +117,65 @@ public class RoomController {
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }
-    @PostMapping("/kickuser")
-    public ResponseEntity<String> kickUser(@RequestBody Map<String, String> payload,HttpServletRequest request) {
-        String userName = payload.get("userName");
+     //수연 알람
+    @PostMapping("/alarm")
+    public ResponseEntity<UserDto> updatealarm( HttpServletRequest request, @RequestBody UserDto dto) {
         Cookie[] cookies = request.getCookies();
-        String accesstoken = "";
+        String accessToken = null;
 
         if (cookies != null) {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("access_token")) {
-                    accesstoken = cookie.getValue();
-                    break;
+                    accessToken = cookie.getValue();
                 }
             }
         }
-
-        userName = userMapper.getUserByUserId(tokenMapper.selectByAccessToken(accesstoken).getRt_key()).getEmail();
-
-        template.convertAndSend("/sub/kick", userName);
-         return new ResponseEntity<>(userName, HttpStatus.OK);
+        int userId = tokenMapper.selectByAccessToken(accessToken).getRt_key();
+        UserDto user = userMapper.getUserByUserId(userId);
+        user.setIsalarm(dto.isIsalarm());
+        userMapper.updatealarm(user);
+        return ResponseEntity.ok(user);
     }
+
+    @PostMapping("/insertreport")
+     public ResponseEntity<ReportDto>insertreport( HttpServletRequest request, @RequestBody MsgDto msg, ReportDto reportdto, UserDto userdto) {
+      Cookie[] cookies = request.getCookies();
+        String accessToken = null;
+
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("access_token")) {
+                    accessToken = cookie.getValue();
+                }
+            }
+        }
+        int userId = tokenMapper.selectByAccessToken(accessToken).getRt_key();
+        UserDto user = userMapper.getUserByUserId(userId);
+        reportdto.setEmail(msg.getUserName());
+        reportdto.setMsg(msg.getMsg());
+        userMapper.insertReport(reportdto);
+        
+        return ResponseEntity.ok(reportdto);
+    }
+     //정보 수정 
+     @PostMapping("/userupdate")
+     public ResponseEntity<UserDto> userupdate( HttpServletRequest request, @RequestBody UserDto dto) {
+         Cookie[] cookies = request.getCookies();
+         String accessToken = null;
+ 
+         if (cookies != null) {
+             for (Cookie cookie : cookies) {
+                 if (cookie.getName().equals("access_token")) {
+                     accessToken = cookie.getValue();
+                 }
+             }
+         }
+         int userId = tokenMapper.selectByAccessToken(accessToken).getRt_key();
+         UserDto user = userMapper.getUserByUserId(userId);
+         user.setUser_name(dto.getUser_name());
+         user.setEmail(dto.getEmail());
+         user.setHp(dto.getHp());
+         userMapper.updateUserInfo(user);
+         return ResponseEntity.ok(user);
+     }
 }

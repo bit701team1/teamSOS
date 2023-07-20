@@ -24,6 +24,9 @@ public interface UserMapper {
     //스프링 시큐리티용 회원가입
     public void insertUser(UserDto dto);
 
+    //알림 발송용 isAlarm으로 hp list 반환
+
+    
     // 이메일 중복 체크
     public int emailCheck(String email);
 
@@ -76,9 +79,16 @@ public interface UserMapper {
     //관리자페이지에서 회원 목록 토탈 카운트
     public int getManageTotalCount();
 
+    
 
     //블랙리스트 멤버 숫자(new)
     public int getBlockListCount();
+    //수연 알람
+    public void updatealarm(UserDto dto);
+    //수연 경고증가
+    public void insertReport(ReportDto dto);
+    //수연 유저 정보 수정
+    public void updateUserInfo(UserDto dto);
 
     //관리자페이지에서 블랙리스트 회원출력(new)
     public List<ReportDto> getBlockList(Map<String,Object> map);

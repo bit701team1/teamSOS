@@ -1,11 +1,5 @@
 package data.controller;
 
-import data.service.UserService;
-import org.apache.catalina.User;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import data.dto.security.RefreshTokenDto;
 import data.dto.security.TokenDto;
 import data.dto.UserDto;
@@ -235,6 +229,5 @@ public class UserController {
             return ResponseEntity.ok("User is not logged in");
         }
     }
-
-
+   
 }

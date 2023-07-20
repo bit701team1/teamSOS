@@ -19,6 +19,7 @@ import ResultModal from "../y_modal/ResultModal";
 import axios from "axios";
 
 function AuctionLive(props) {
+    const [hasBid, setHasBid] = useState(false); // 현재 로그인된 사용자의 입찰 여부를 관리하는 상태 변수
     const [isFrameOpen, setFrameOpen] = useState(false); // 도네이션 모달
     const [isFrame1Open, setFrame1Open] = useState(false); // 입찰 모달
     const [isFrame2Open, setFrame2Open] = useState(false); // 상세정보 모달
@@ -40,8 +41,12 @@ function AuctionLive(props) {
     }, []);
 
     const openFrame1 = useCallback(() => {
-        setFrame1Open(true);
-    }, []);
+        if (hasBid) {
+            alert("이미 입찰한 이용자입니다.");
+        } else {
+            setFrame1Open(true);
+        }
+    }, [hasBid]);
 
     const closeFrame1 = useCallback(() => {
         setFrame1Open(false);
@@ -62,17 +67,44 @@ function AuctionLive(props) {
     const closeFrame3 = useCallback(() => {
         setFrame3Open(false);
     }, []);
+
     useEffect(() => {
         const timer = setTimeout(() => {
             openFrame3();
-            //방송 시간
-        }, 10 * 1000 * 60);
+        },60* 10 * 1000);
 
         return () => {
             clearTimeout(timer);
         };
     }, [openFrame3]);
     /////////////////////////////////모달////////////////////////////////
+
+    useEffect(() => {
+        console.log("roomname>>" + roomName);
+        console.log("userName>>" + userName);
+
+        const checkDuplicateBid = async () => {
+            try {
+                const response = await axios.get(`/product/check-duplicate?productName=${roomName}&userEmail=${userName}`);
+                if (response.status === 200) {
+                    const responseData = response.data; // 서버 응답 데이터
+                    if (responseData === "이미 입찰한 이용자입니다.") {
+                        setHasBid(true);
+                    } else {
+                        setHasBid(false);
+                    }
+                } else {
+                    console.log("Failed to check duplicate bid:", response);
+                }
+            } catch (error) {
+                console.error("Failed to check duplicate bid:", error);
+            }
+        };
+
+        checkDuplicateBid();
+    }, [roomName, userName]);
+
+
     /*채팅 스크롤*/
     const scrollToBottom = () => {
         chatScreenRef.current.scrollTop = chatScreenRef.current.scrollHeight;
@@ -80,21 +112,7 @@ function AuctionLive(props) {
     useEffect(() => {
         scrollToBottom();
     }, [msg]);  // 채팅을 아래로 고정
-     /* 사용자 강퇴시키기 */
-    const kickUser = (userName) => {
-        // 서버에 강퇴 요청을 보냅니다.
-        axios.post('/room/kickuser', { userName: userName })
-            .then(response => {
-                if (response.status === 200) {
-                    // 강퇴 요청이 성공하면, 모든 사용자에게 강퇴 이벤트를 전송합니다.
-                    client.current.send(
-                        '/pub/kick',
-                        {},
-                        JSON.stringify({ userName: userName }) // 강퇴당한 사용자의 이름을 보냅니다.
-                    );
-                }
-            });
-    }    
+    
     /* 방 id 가져오기 , 로그인한 사용자 이메일 가져오기*/
     useEffect(() => {
         fetch('/room/info/' + roomId)
@@ -114,9 +132,11 @@ function AuctionLive(props) {
         connect();
         // 컴포넌트가 언마운트되면 소켓 연결 해제
         return () => {
-            client.current.disconnect(); // 채팅이 두번 쳐지는걸 방지하기 위함
+            client.current.disconnect(); // 채팅이 두번 전송되는 것을 방지하기 위함
         };
     }, [roomId]);
+
+
     /* 소켓연결 */
     const connect = () => { //소켓 연결용 함수
         let sock = new SockJS('http://localhost:9003/ws'); //endpoint 주소 소켓을 저기로 연결하겠다
@@ -130,19 +150,18 @@ function AuctionLive(props) {
                     // 해당 메시지 ID를 가진 메시지를 삭제
                     //preMsg 배열에서 receivedMsh의 msgId와 다른 메시지만 남기도록 필터링 역할
                     setMsg(prevMsg => prevMsg.filter(message => message.msgId !== receivedMsg.msgId));
-                } else {
+                } else if(receivedMsg.type === 'KICK'){
+                    const kickUser = JSON.parse(data.body).userName;
+                    if(kickUser === userName){
+                        alert('나가');
+                        window.location.href = '/';
+                    }
+                } 
+                else {
                     AddChat(data.body,  receivedMsg.msgId);
                 }
             });
-            //강퇴
-            ws.subscribe('/sub/kick', data => {
-                const kickedUser = JSON.parse(data.body).userName;
-                if (kickedUser === userName) {
-                    alert('You have been kicked out.');
-                    window.location.href = '/';
-                }
-                
-            });
+           
             //입장
             publish('ENTER', '');
         });
@@ -195,11 +214,55 @@ function AuctionLive(props) {
                 type: 'DELETE', 
                 roomId, 
                 userName, 
-                msg: '', // 메세지를 지우겠다
+                msg, // 메세지를 지우겠다
                 msgId
             })
         )
     };
+    /* 강퇴 기능*/
+    const kick = (kickUser) =>{ // 강퇴할 대상의 userName을 인자로 받는다.
+       
+        client.current.send( // 웹소켓 서버로 강퇴 이벤트를 보낸다.
+            '/pub/msg',
+            {},
+            JSON.stringify({
+                type:'KICK',
+                roomId, 
+                userName: kickUser,  // 강퇴할 대상의 userName을 보낸다.
+                msg: '' // 메시지는 비워둔다.
+            })
+        )
+        console.log(kickUser + " was kicked out."); // 강퇴당한 사용자의 userName을 출력한다.
+    };
+    /* 신고 수 증가 */
+    // const report = (UserName, msg) =>{
+    //     client.current.send(
+    //         '/pub/msg',
+    //         {},
+    //         JSON.stringify({
+    //             userName,
+    //             msg
+    //         })
+    //     )
+    // }
+    const report = (userName, msg) => {
+        const requestBody = {
+          userName,
+          msg
+        };
+      
+        let url ='/room/insertreport';
+          axios.post(url,requestBody)
+         
+          .then(response => response.json())
+          .then(data => {
+            console.log(msg +"," + userName);
+          })
+          .catch(error => {
+            // 오류 처리
+          });
+      };
+      
     /*입력창에 채팅 보냈을 때 실행 */
     const enterKey =(e)=> {
         if (e.key === 'Enter') {// 사용자가 Enter 키를 눌렀을 때 실행
@@ -236,7 +299,7 @@ function AuctionLive(props) {
                         <span className="y_span">{` `}</span>
                         <span className="y_aa1">{`A&A`}</span>
                     </p>
-                    <p className="y_arte-arena"> ARTE : ARENA</p>
+                    <p className="y_arte-arena">AR</p>
                 </div>
                 <div className="y_livescreen">
                     <LiveStream/>
@@ -267,7 +330,11 @@ function AuctionLive(props) {
                 <i
                     className="bi bi-person-x"
                     style={{ cursor: 'pointer', float: 'right' ,marginRight:10}}
-                    onClick={() => kickUser(Message.userName)}
+                    onClick={() => {
+                        kick(Message.userName);
+                    }
+                    }
+                    
                 ></i>
              )}
                     {!isCurrentUser && !admin && ( //현재 로그인한 사용자가 아닌데 일반사용자면 신고아이콘 보임
@@ -275,6 +342,9 @@ function AuctionLive(props) {
                             alt=""
                             src={alertImage}
                             style={{ width: '45px', cursor: "pointer", float: 'right' }}
+                            onClick={() => {
+                                report(Message.userName, Message.msg);
+                            }}
                         ></img>
                     )}
                     <br/>
@@ -292,6 +362,7 @@ function AuctionLive(props) {
                     <div className="y_bidding">BIDDING</div>
                     <img className="y_biddingicon" alt="" src={bidding} onClick={openFrame1}/>
                 </div>
+
                 <div className="y_detail-parent">
                     <div className="y_detail" >DETAIL</div>
                     <div className="y_send" >SEND</div>

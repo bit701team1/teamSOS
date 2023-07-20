@@ -37,7 +37,6 @@ public class UserService implements UserServiceInter{
         return userMapper.countEmail(email);
     }
 
-
     /////////////////////경철//////////////////
 
     //회원목록 페이징 리스트
@@ -58,7 +57,6 @@ public class UserService implements UserServiceInter{
         userMapper.deleteUser(user_id);
     }
 
-
     //블랙리스트  회원 카운트
     public int getBlockListCount(){
         return userMapper.getBlockListCount();
@@ -75,5 +73,17 @@ public class UserService implements UserServiceInter{
     }
 
 
-
+    //수연
+    //알람
+    public void updatealarm(UserDto dto){
+        userMapper.updatealarm(dto);
+    }
+    //경고리스트
+    public void insertReport(ReportDto dto){
+        userMapper.insertReport(dto);
+    }
+    //유저 정보 수정
+    public void updateUserInfo(UserDto dto){
+        userMapper.updateUserInfo(dto);
+    }
 }

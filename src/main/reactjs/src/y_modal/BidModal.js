@@ -9,8 +9,7 @@ const BidModal = ({ onClose }) => {
     const [bidMessage, setBidMessage] = useState("");
 
     useEffect(() => {
-        axios
-            .get("/room/userdata")
+        axios.get("/room/userdata")
             .then((response) => {
                 console.log("user>>"+JSON.stringify(response));
                 setUserdata(response.data);
@@ -45,7 +44,17 @@ const BidModal = ({ onClose }) => {
                     }
                 );
 
-                console.log(response);
+                // BidDto 생성
+                const bidDto = {
+                    product_name: "상품2",
+                    user_email: userdata.email,
+                    price: parseInt(price),
+                };
+                // console.log("bidDto>>"+JSON.stringify(bidDto))
+
+                // BidService.insertBid 호출하여 DB에 입찰 값 저장
+                await axios.post("/bid/insert",
+                    bidDto);
 
                 alert("입찰이 완료되었습니다!")
 
@@ -61,10 +70,10 @@ const BidModal = ({ onClose }) => {
     };
 
     return (
-        <div className={`div4 ${modalOpen ? "open" : "closed"}`}>
-            <div className="please-make-a">Please make a bid</div>
-            <div className="price">price</div>
-            <div className="child">
+        <div className={`y_bid-div  ${modalOpen ? "open" : "closed"}`}>
+            <div className="y_please-make-a">Please make a bid</div>
+            <div className="y_price">price</div>
+            <div className="y_bid-child">
                 <input
                     width="60%"
                     type="number"
@@ -74,7 +83,7 @@ const BidModal = ({ onClose }) => {
                     onChange={handleInputChange}
                 />
             </div>
-            <div className="item">
+            <div className="y_item">
                 <button className="bidding" onClick={bidHandler}>
                     Bidding
                 </button>
