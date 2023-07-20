@@ -3,39 +3,39 @@ import {NavLink} from "react-router-dom";
 import Axios from "axios";
 
 import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
+import TextField from '@mui/material/TextField';;
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import {createTheme, ThemeProvider} from "@mui/material";
 
 function JoinForm(props) {
 
     const [data, setData] = useState({
-        email:'',
+        email: '',
         password: "",
-        user_name:"",
-        hp:"",
-        isAuth : false
+        user_name: "",
+        hp: "",
+        isAuth: false
     })
 
-    const [authnum,setAuthnum] = useState("");
-    const [inputauthnum,setInputAuthnum] = useState("");
+    const [authnum, setAuthnum] = useState("");
+    const [inputauthnum, setInputAuthnum] = useState("");
 
-    const handleJoinClick = (e)=>{
+    const handleJoinClick = (e) => {
         e.preventDefault();
-        Axios.post("/user/join",data)
-            .then(res=>{
-                if(res.data===1){
+        Axios.post("/user/join", data)
+            .then(res => {
+                if (res.data === 1) {
                     alert("이미 존재하는 이메일입니다");
-                } else if (res.data ===2) {
+                } else if (res.data === 2) {
                     alert("유효한 이메일 형식을 입력해주세요");
-                }
-                else {
+                } else {
                     alert("성공적으로 가입되었습니다");
                 }
-            }) .catch(error => {
+            }).catch(error => {
             // 회원가입 실패 처리
             alert("회원가입에 실패했습니다.");
         });
@@ -45,24 +45,26 @@ function JoinForm(props) {
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
-        if(data.hp==""){
+        if (data.hp == "") {
             alert("전화번호를 입력해주세요");
         } else {
-            Axios.post("/sms/send-one",data).then(res=>{
+            Axios.post("/sms/send-one", data).then(res => {
                     //console.log(res.data);
                     setAuthnum(res.data);
                 }
             )
             setOpen(true);
         }
-    };
+        setOpen(true);
+    }
+
 
     const handleClose = () => {
         setOpen(false);
     };
 
-    const handleAuthClick = ()=>{
-        if(authnum == inputauthnum){
+    const handleAuthClick = () => {
+        if (authnum == inputauthnum) {
             setData({
                 ...data,
                 isAuth: true
@@ -73,6 +75,18 @@ function JoinForm(props) {
             alert("인증번호가 틀렸습니다");
         }
     }
+
+    const theme = createTheme({
+        palette: {
+            primary: {
+                main: '#d6b4a2', // 변경하고 싶은 기본 색상을 설정
+            },
+            // 다른 색상들도 필요에 따라 설정 가능
+            // secondary: {
+            //   main: '#00ff00',
+            // },
+        },
+    });
 
 
     return (
@@ -142,32 +156,35 @@ function JoinForm(props) {
                     </table>
                 </form>
             </div>
-
-            <Dialog open={open} onClose={handleClose}>
-                <DialogTitle>SMS 인증</DialogTitle>
-                <DialogContent>
-                    <DialogContentText>
-                        입력하신 휴대전화 번호로 전송받은 인증번호를 입력해주세요
-                    </DialogContentText>
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        id="name"
-                        label="인증번호"
-                        type="email"
-                        fullWidth
-                        variant="standard"
-                        onChange={(event) => {
-                            setInputAuthnum(event.target.value);
-                        }}
-                    />
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleAuthClick}>확인</Button>
-                    <Button onClick={handleClose}>취소</Button>
-                </DialogActions>
-            </Dialog>
-
+            <ThemeProvider theme={theme}>
+                <Dialog open={open} onClose={handleClose}>
+                    <DialogTitle><b>SMS 인증</b></DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            입력하신 휴대전화 번호로 전송받은 인증번호를 입력해주세요
+                        </DialogContentText>
+                        <TextField
+                            autoFocus
+                            margin="dense"
+                            id="name"
+                            label="인증번호"
+                            InputLabelProps={{
+                                style: { fontWeight: 'bold' },
+                            }}
+                            type="email"
+                            fullWidth
+                            variant="standard"
+                            onChange={(event) => {
+                                setInputAuthnum(event.target.value);
+                            }}
+                        />
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleAuthClick}>확인</Button>
+                        <Button onClick={handleClose}>취소</Button>
+                    </DialogActions>
+                </Dialog>
+            </ThemeProvider>
         </div>
     );
 }

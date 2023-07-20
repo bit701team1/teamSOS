@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {NavLink, useLocation} from "react-router-dom";
 import Axios from "axios";
+import Spinner from "./naverlogin/Spinner";
 
 function LoginForm(props) {
 
@@ -50,7 +51,16 @@ function LoginForm(props) {
         naverLogin.init();
     }, []);
 
-
+    // 단체 알림 서비스
+    const handleClickAlarm = ()=>{
+        let url = "/sms/send-many";
+        Axios.post(url).then(res => {
+            alert("발송 되었습니다");
+        }).catch(error => {
+            // 로그인 실패 처리
+            alert("발송 실패");
+        });
+    }
 
     return (
         <div>
@@ -78,6 +88,9 @@ function LoginForm(props) {
             <br/><br/>
             <div className="grid-naver" id='naverIdLogin'></div>
             <br/><br/>
+            <button onClick={handleClickAlarm}>문자알림 발송</button>
+            <br/><br/>
+            <Spinner/>
         </div>
     );
 }

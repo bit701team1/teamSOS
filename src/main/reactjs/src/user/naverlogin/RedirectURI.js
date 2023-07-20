@@ -42,7 +42,9 @@ const RedirectUri = (props) => {
         getNaverToken();
     }, [tokenAlreadyFetched]);
 
-    return <div>대충 로그인 중이라는 화면</div>;
+    return <div>
+        대충 로그인 중이라는 화면
+    </div>;
 };
 
 export default RedirectUri;

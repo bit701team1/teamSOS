@@ -11,4 +11,9 @@
     <update id="updateWinnerAndFinalPrice" parameterType="ProductDto">
         UPDATE product SET winner = #{winner}, final_price = #{final_price} WHERE product_name = #{product_name}
     </update>
+
+    <!-- K1m / 문자 알림 기능 -->
+    <select id="selectByCurDate" resultType="ProductDto">
+        select * from product where transaction_date = current_date
+    </select>
 </mapper>
