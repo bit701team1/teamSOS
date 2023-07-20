@@ -15,6 +15,10 @@ public interface UserServiceInter {
     public UserDto getUserByEmail(String email);
 
     public UserDto getUserByUserId(int user_id);
+
+
+    ///////////////////////////////////경철 ///////////////////////////////////////
+
     public int countEmail(String email);    
     //회원목록 페이징리스트
     public List<UserDto> getManagePagingList(String search,int startNum,int perPage);
@@ -22,11 +26,16 @@ public interface UserServiceInter {
     public int getManageTotalCount();
     //회원 삭제
     void deleteUser(int user_id);
-    //회원 검색
-//    public List<UserDto> getSearchUser(String search, Integer startNum, Integer perPage);
-//    //회원 검색 카운트
-//    public int getSearchUserCount(String search,Integer startNum, Integer perPage);
-    
+
+
+    //블랙리스트 멤버수 (new)
+    public int getBlockListCount();
+
+    //블랙리스트 회원 조회 (new)
+    public List<ReportDto> getBlockList(String search,int startNum,int perPage);
+
+
+
     //수연 
     //신고 insert
     public void insertReport(ReportDto dto);

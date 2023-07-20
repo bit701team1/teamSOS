@@ -10,4 +10,5 @@ public class ReportDto {
     private int num;
     private String email;
     private String msg;
+
 }
