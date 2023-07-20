@@ -9,8 +9,7 @@ const BidModal = ({ onClose }) => {
     const [bidMessage, setBidMessage] = useState("");
 
     useEffect(() => {
-        axios
-            .get("/room/userdata")
+        axios.get("/room/userdata")
             .then((response) => {
                 console.log("user>>"+JSON.stringify(response));
                 setUserdata(response.data);
@@ -45,7 +44,17 @@ const BidModal = ({ onClose }) => {
                     }
                 );
 
-                console.log(response);
+                // BidDto 생성
+                const bidDto = {
+                    product_name: "상품2",
+                    user_email: userdata.email,
+                    price: parseInt(price),
+                };
+                // console.log("bidDto>>"+JSON.stringify(bidDto))
+
+                // BidService.insertBid 호출하여 DB에 입찰 값 저장
+                await axios.post("/bid/insert",
+                    bidDto);
 
                 alert("입찰이 완료되었습니다!")
 

@@ -10,8 +10,9 @@ import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 public class BidDto {
+    private int bid_num;
+    private String product_name;
     private String user_email;
     private int price;
 }

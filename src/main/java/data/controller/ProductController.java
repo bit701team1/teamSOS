@@ -2,23 +2,32 @@ package data.controller;
 
 import data.dto.BidDto;
 import data.dto.ProductDto;
+import data.service.BidService;
 import data.service.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @AllArgsConstructor
 @RequestMapping("/product")
 public class ProductController {
     private ProductService productService;
+    private BidService bidService;
 
     @PostMapping("/insert")
     public void insert(@RequestBody ProductDto dto) {
         productService.insertProduct(dto);
+    }
+
+    @PostMapping("/insertBid")
+    public void insertBid(@RequestBody BidDto bidDto){
+        bidService.insertBid(bidDto);
     }
 
     @PostMapping("/price-compare")
@@ -39,6 +48,8 @@ public class ProductController {
                     System.out.println("final_price>>" + product.getFinal_price());
 
                     productService.updateWinnerAndFinalPrice(product);
+
+                    bidService.insertBid(bidDto); // Insert bid into bid table
                     return ResponseEntity.ok("입찰이 성공적으로 완료되었습니다!");
                 } else if (bidDto.getPrice()==0) {
                     return ResponseEntity.badRequest().body("금액을 입력해주세요.");
@@ -48,6 +59,25 @@ public class ProductController {
                 }
             } else {
                 return ResponseEntity.notFound().build();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/check-duplicate")
+    public ResponseEntity<Object> checkDuplicateBid(@RequestParam("productName") String productName,
+                                                    @RequestParam("userEmail") String userEmail) {
+        try {
+            int duplicateBid = bidService.checkDuplicateBid(productName, userEmail);
+            System.out.println("duplicateBid>>"+duplicateBid);
+            System.out.println("name>>"+productName);
+            System.out.println("email>>"+userEmail);
+            if (duplicateBid == 1) {
+                return ResponseEntity.ok("이미 입찰한 이용자입니다.");
+            } else {
+                return ResponseEntity.ok("입찰 가능한 이용자입니다.");
             }
         } catch (Exception e) {
             e.printStackTrace();

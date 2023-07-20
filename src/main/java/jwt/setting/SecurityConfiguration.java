@@ -34,6 +34,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private final UserMapper userMapper;
     private final TokenMapper tokenMapper;
 
+//    @Override
+//    public void configure(WebSecurity web) {
+//        web.ignoring()
+//                .antMatchers(
+//                        "/h2-console/**"
+//                        ,"/favicon.ico"
+//                        ,"/error"
+//                );
+//    }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         System.out.println("HttpSecurity 진입");
@@ -77,6 +86,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/livestream/**").permitAll()
                 .antMatchers("/payment/**").permitAll()
                 .antMatchers("/product/**").permitAll()
+                .antMatchers("/bid/**").permitAll()
 
                 .antMatchers("/static/**","/main/**","/manifest/**","/resources/**","/css/**","/favicon*/**").permitAll()
 
@@ -125,6 +135,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //		//              .antMatchers("/js/**")
 //		//              .antMatchers("/img/**")
 //	}
+
 
     //비밀번호 암호화를 위한 Encoder 설정
     @Bean
