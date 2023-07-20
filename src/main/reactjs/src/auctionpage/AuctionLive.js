@@ -19,6 +19,7 @@ import ResultModal from "../y_modal/ResultModal";
 import axios from "axios";
 
 function AuctionLive(props) {
+    const [hasBid, setHasBid] = useState(false); // 현재 로그인된 사용자의 입찰 여부를 관리하는 상태 변수
     const [isFrameOpen, setFrameOpen] = useState(false); // 도네이션 모달
     const [isFrame1Open, setFrame1Open] = useState(false); // 입찰 모달
     const [isFrame2Open, setFrame2Open] = useState(false); // 상세정보 모달
@@ -40,8 +41,12 @@ function AuctionLive(props) {
     }, []);
 
     const openFrame1 = useCallback(() => {
-        setFrame1Open(true);
-    }, []);
+        if (hasBid) {
+            alert("이미 입찰한 이용자입니다.");
+        } else {
+            setFrame1Open(true);
+        }
+    }, [hasBid]);
 
     const closeFrame1 = useCallback(() => {
         setFrame1Open(false);
@@ -62,6 +67,7 @@ function AuctionLive(props) {
     const closeFrame3 = useCallback(() => {
         setFrame3Open(false);
     }, []);
+
     useEffect(() => {
         const timer = setTimeout(() => {
             openFrame3();
@@ -72,6 +78,33 @@ function AuctionLive(props) {
         };
     }, [openFrame3]);
     /////////////////////////////////모달////////////////////////////////
+
+    useEffect(() => {
+        console.log("roomname>>" + roomName);
+        console.log("userName>>" + userName);
+
+        const checkDuplicateBid = async () => {
+            try {
+                const response = await axios.get(`/product/check-duplicate?productName=${roomName}&userEmail=${userName}`);
+                if (response.status === 200) {
+                    const responseData = response.data; // 서버 응답 데이터
+                    if (responseData === "이미 입찰한 이용자입니다.") {
+                        setHasBid(true);
+                    } else {
+                        setHasBid(false);
+                    }
+                } else {
+                    console.log("Failed to check duplicate bid:", response);
+                }
+            } catch (error) {
+                console.error("Failed to check duplicate bid:", error);
+            }
+        };
+
+        checkDuplicateBid();
+    }, [roomName, userName]);
+
+
     /*채팅 스크롤*/
     const scrollToBottom = () => {
         chatScreenRef.current.scrollTop = chatScreenRef.current.scrollHeight;
@@ -102,6 +135,8 @@ function AuctionLive(props) {
             client.current.disconnect(); // 채팅이 두번 전송되는 것을 방지하기 위함
         };
     }, [roomId]);
+
+
     /* 소켓연결 */
     const connect = () => { //소켓 연결용 함수
         let sock = new SockJS('http://localhost:9003/ws'); //endpoint 주소 소켓을 저기로 연결하겠다
@@ -327,6 +362,7 @@ function AuctionLive(props) {
                     <div className="y_bidding">BIDDING</div>
                     <img className="y_biddingicon" alt="" src={bidding} onClick={openFrame1}/>
                 </div>
+
                 <div className="y_detail-parent">
                     <div className="y_detail" >DETAIL</div>
                     <div className="y_send" >SEND</div>

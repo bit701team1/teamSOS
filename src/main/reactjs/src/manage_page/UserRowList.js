@@ -4,7 +4,6 @@ import DialogActions from "@mui/material/DialogActions";
 import userimg from '../k_manage_image/k_mange_user.jpg';
 import hpimg from '../k_manage_image/k_hpimg.png';
 import mailimg from '../k_manage_image/k_mailimg.png';
-import hateimg from '../k_manage_image/k_hateimg.png';
 import cardimg from '../k_manage_image/k_cardimg.png';
 import blockimg from '../image/alert.png';
 
@@ -21,17 +20,12 @@ function UserRowList(props) {
     };
 
     return (
-        <tr style={{backgroundColor:'white',textAlign:'center'}}>
-            <td style={{width:'20px'}}>{no-idx}</td>
-            <td style={{width:'80px'}}>{row.user_name}</td>
-            <td style={{width:'80px'}}>{row.email}</td>
-            <td style={{width:'80px'}}>
-                <Button variant="outlined" onClick={handleClickOpen} style={{width:'100%',height:'200px',fontSize:'2.5rem'}}>
-                    상세<br/>조회
-                </Button>
-            </td>
-            <td style={{width:'80px'}}>
-                <Button variant='outlined' style={{width:'100%',height:'200px',fontSize:'2.5rem',color:'red'}}
+        <tr style={{backgroundColor:'#f6f6f6',textAlign:'center',borderStyle:'unset'}}>
+            <td style={{width:'2.5rem'}}>{no-idx}</td>
+            <td style={{width:'5rem'}}>{row.user_name}</td>
+            <td style={{width:'6rem'}} onClick={handleClickOpen}>{row.email}</td>
+            <td style={{width:'2.5rem'}}>
+                <Button variant='contained' style={{width:'100%',fontSize:'0.5rem',color:'red'}}
                         onClick={()=>{
                             const b=window.confirm("삭제하려면 확인을 누르십시요")
                             if(b){
@@ -47,10 +41,9 @@ function UserRowList(props) {
                 aria-labelledby="customized-dialog-title"
                 open={open}
             >
-                <DialogTitle id="customized-dialog-title" onClose={handleClose}   style={{width:'35rem'}}>
-                    <img alt={'슬픔이'} src={userimg} style={{width:'5rem',height:'5rem',borderRadius:'100px',marginRight:'10px'}}/>
+                <DialogTitle id="customized-dialog-title" onClose={handleClose}   style={{width:'22rem'}}>
+                    <img alt={'슬픔이'} src={userimg} style={{width:'4rem',height:'4rem',borderRadius:'100px',marginRight:'4px'}}/>
                     &nbsp;{row.user_name}
-                    <img alt={'싫어요 개수'} src={blockimg} style={{width:'2rem',marginLeft:'50%',marginTop:'-0.5rem'}}/> {row.report_num}
                 </DialogTitle>
                 <DialogContent dividers>
                     <Typography gutterBottom>
@@ -68,7 +61,7 @@ function UserRowList(props) {
                 </DialogContent>
                 <DialogActions>
                     <Button autoFocus onClick={handleClose}>
-                        Save changes
+                        상세조회 닫기
                     </Button>
                 </DialogActions>
             </Dialog>

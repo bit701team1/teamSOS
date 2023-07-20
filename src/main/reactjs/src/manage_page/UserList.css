@@ -1,3 +1,13 @@
 .k_table-userlist{
     width: 90%;
+    margin-left: 5%;
+    font-size: 1rem;
+    border-radius: 100px;
+}
+
+.k_table-blacklist{
+    width: 90%;
+    margin-left: 5%;
+    font-size: 1rem;
+    border-radius: 100px;
 }

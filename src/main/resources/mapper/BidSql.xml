@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="data.mapper.BidMapper">
+    <insert id="insertBid" parameterType="BidDto">
+        INSERT INTO bid (bid_num, product_name, user_email, price)
+        VALUES (null, #{product_name}, #{user_email}, #{price})
+    </insert>
+    <select id="checkDuplicateBid" parameterType="map" resultType="int">
+        SELECT CASE WHEN COUNT(*) > 0 THEN 1 ELSE 0 END
+        FROM bid
+        WHERE product_name = #{productName} AND user_email = #{userEmail}
+    </select>
+</mapper>
