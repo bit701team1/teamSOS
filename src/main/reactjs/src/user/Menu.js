@@ -11,6 +11,7 @@ function Menu(props) {
                 <li><NavLink to={"/userinfo"}><h2>마이페이지</h2></NavLink></li>
                 <li><NavLink to={"/result"}><h2>결과페이지</h2></NavLink></li>
                 <li><NavLink to={"/auction"}><h2>경매메인</h2></NavLink></li>
+                <li><NavLink to={"/result"}><h2>결제</h2></NavLink></li>
             </ul>
         </div>
     );
