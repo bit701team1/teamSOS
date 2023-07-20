@@ -61,7 +61,7 @@ const BidModal = ({ onClose }) => {
                 // 모달 닫기
                 setModalOpen(false);
                 onClose();
-
+                window.location.reload();
             }
         } catch (err) {
             alert("입찰 금액을 입력해주시기 바랍니다.");

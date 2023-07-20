@@ -25,12 +25,11 @@ function RouteMain(props) {
     return (
         <div>
             <Routes>
-
                 <Route path='/userinfo' element={<UserInfo/>}/>
                 <Route path='/room/:roomId' element={<AuctionLive/>}/>
-                <Route path='/' element={<Mainauction/>}/>
+                <Route path='/auction' element={<Mainauction/>}/>
 
-                <Route path='/menu' element={<Menu/>}/>
+                <Route path='/' element={<Menu/>}/>
 
                 <Route path='/manage/*' element={<ManagePageMain/>}/>
 
