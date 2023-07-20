@@ -6,9 +6,6 @@ import data.dto.UserDto;
 import data.mapper.TokenMapper;
 import data.mapper.UserMapper;
 import data.service.CustomUserDetailsService;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
-import io.jsonwebtoken.Jwts;
 import jwt.setting.JwtTokenProvider;
 
 import org.springframework.beans.factory.annotation.Autowired;
