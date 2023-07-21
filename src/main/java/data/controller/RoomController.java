@@ -154,6 +154,7 @@ public class RoomController {
         reportdto.setEmail(msg.getUserName());
         reportdto.setMsg(msg.getMsg());
         userMapper.insertReport(reportdto);
+        userMapper.updateReportNum(msg.getUserName());
         
         return ResponseEntity.ok(reportdto);
     }

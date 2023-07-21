@@ -40,8 +40,10 @@ public class ManageContoller {
         int totalPage;//총 페이지수
         int no;//출력할 시작번호
 
+        //검색된 유저의 수
+        int totalUserCount=userService.getManageTotalCount();
         //총갯수
-        totalCount=userService.getManageTotalCount();
+        totalCount=userService.getManageTotalCountWithSearch(search);
         //총 페이지수
         totalPage=totalCount/perPage+(totalCount%perPage==0?0:1);
         //시작페이지
@@ -67,6 +69,7 @@ public class ManageContoller {
         //리액트로 필요한 변수들을 Map 에 담아서 보낸다
         Map<String,Object> smap=new HashMap<>();
         smap.put("totalCount",totalCount);
+        smap.put("totalUserCount",totalUserCount);
         smap.put("getUserList",list);
         smap.put("parr",parr);
         smap.put("startPage",startPage);
