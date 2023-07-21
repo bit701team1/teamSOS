@@ -19,8 +19,10 @@ function LoginForm(props) {
     const handleLoginClick = () => {
         //dto로 /user/login 으로 넘겨야함
         let url = "/user/login";
+
         Axios.post(url, data).then(res => {             
             alert("로그인 성공")
+
         }).catch(error => {
             // 로그인 실패 처리
             alert("로그인 실패");

@@ -2,7 +2,7 @@ import "../css/bidmodal.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const BidModal = ({ onClose }) => {
+const BidModal = ({ roomName,onClose }) => {
     const [userdata, setUserdata] = useState("");
     const [price, setPrice] = useState("");
     const [modalOpen, setModalOpen] = useState(true); // 모달 열림/닫힘 상태 추가
@@ -34,19 +34,18 @@ const BidModal = ({ onClose }) => {
                     "/product/price-compare",
                     {
                         user_email: userdata.email,
-                        price: parseInt(price),
-                        productName: "상품2",
+                        price: parseInt(price)
                     },
                     {
                         params: {
-                            productName: "상품2",
-                        },
+                            productName: roomName,
+                        }
                     }
                 );
 
                 // BidDto 생성
                 const bidDto = {
-                    product_name: "상품2",
+                    product_name: roomName,
                     user_email: userdata.email,
                     price: parseInt(price),
                 };
