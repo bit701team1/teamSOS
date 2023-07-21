@@ -5,6 +5,8 @@ import k_alert from '../k_manage_image/k_alert.svg';
 import k_back_icon from '../k_manage_image/k_back_icon.svg';
 import {BlockList, Monitor, UserList} from "./index";
 import sesoimg from '../k_manage_image/sesoimg.jpg';
+import adminimg from '../k_manage_image/s72.jpg';
+import Axios from "axios";
 
 function ManagePageMain(props) {
 
@@ -13,6 +15,14 @@ function ManagePageMain(props) {
     const handleBeforePage=()=>{
         navi("/");
     };
+
+    const handleDeleteAdminCookie = () => {
+        Axios.delete("/api/delete-cookie")
+            .then(res => {
+                alert("쿠키값이 제거 => 로그아웃!")
+            })
+    }
+
 
 
     return (
@@ -26,9 +36,9 @@ function ManagePageMain(props) {
             </div>
 
             <div className="k-admin-info">
-                <div className="k-admin-photo" />
+                <img className="k-admin-photo" alt={'관리자 이미지'} src={adminimg} />
                 <div className="k-admin-name">{`관리자 `}</div>
-                <div className="k-logout">
+                <div className="k-logout" onClick={handleDeleteAdminCookie} style={{cursor:'pointer'}}>
                     <div className="k_logout_text">로그아웃</div>
                 </div>
             </div>

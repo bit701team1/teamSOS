@@ -79,7 +79,8 @@ public interface UserMapper {
     //관리자페이지에서 회원 목록 토탈 카운트
     public int getManageTotalCount();
 
-    
+    //검색된 유저의 총 토탈 카운트
+    public int getManageTotalCountWithSearch(Map<String, Object> map);
 
     //블랙리스트 멤버 숫자(new)
     public int getBlockListCount();
@@ -94,4 +95,7 @@ public interface UserMapper {
 
     //관리자페이지에서 블랙리스트 회원출력(new)
     public List<ReportDto> getBlockList(Map<String,Object> map);
+
+    // 버튼 클릭시 report num 증가
+    public void updateReportNum(String email);
 }

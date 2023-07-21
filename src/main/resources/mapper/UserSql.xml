@@ -43,6 +43,15 @@
         select count(*) from user
     </select>
 
+    <!--  검색한 유저의 수 토탈카운트   -->
+    <select id="getManageTotalCountWithSearch" parameterType="map" resultType="int">
+        select count(*) from user
+        <if test="search != null and search != ''">
+            where user_name like CONCAT('%',#{search},'%') or email like CONCAT('%',#{search},'%')
+        </if>
+    </select>
+
+
     <!--   관리자 페이지에서 신고된 유저 카운트 -->
     <select id="getBlockListCount" resultType="int">
         select count(*) from report where num
@@ -56,6 +65,12 @@
         </if>
         ORDER BY num DESC limit #{startNum}, #{perPage}
     </select>
+
+    <!--  클릭하면 report_num이 1증가 시키기  -->
+    <update id="updateReportNum">
+        update user set report_num=report_num+1 where email=#{email}
+    </update>
+
 
     <!-- 수연 -->
     <!-- 알람 스위치 update-->

@@ -62,16 +62,18 @@ function UserList(props) {
                 <img className="k-search-icon" alt="검색" src={k_search_icon} onClick={handleSearch} style={{cursor:'pointer'}} />
             </div>
 
-            <div className={'k-list-show'}  style={{fontSize:'1rem'}}>
-                <b style={{marginLeft:'15%'}}>총 {data.totalCount}명</b>
+            <div className={'k-list-show'} style={{fontSize:'1rem'}}>
+                <b style={{marginLeft:'15%'}}>등록된 멤버수  {data.totalCount}명</b>
 
-                <table className={"table k_table-userlist"}>
-                    <tr style={{backgroundColor:'pink',textAlign:'center'}}>
-                        <th style={{width:'2.5rem'}}>번호</th>
-                        <th style={{width:'5rem'}}>회원명</th>
-                        <th style={{width:'6rem'}}>이메일</th>
-                        <th style={{width:'2.5rem'}}>삭제</th>
+                <table className={"table k_table-userlist"} style={{textAlign:'center'}}>
+                    <tbody>
+                    <tr style={{backgroundColor:'pink'}}>
+                        <th style={{width:'20%'}}>번호</th>
+                        <th style={{width:'30%'}}>회원명</th>
+                        <th style={{width:'30%'}}>이메일</th>
+                        <th style={{width:'20%'}}>삭제</th>
                     </tr>
+                    </tbody>
                     {
                         // userlist.map((row,idx)=><UserRowList key={idx} row={row} idx={idx} onDelete={deleteUser}/>)
                         data.getUserList &&
@@ -79,7 +81,7 @@ function UserList(props) {
                     }
                 </table>
 
-                <div style={{width:'100%',textAlign:'center',fontSize:'0.8rem'}}>
+                <div style={{width:'100%',textAlign:'center',fontSize:'1rem'}}>
                     {/* 페이징처리 */}
                     {
                         //이전
