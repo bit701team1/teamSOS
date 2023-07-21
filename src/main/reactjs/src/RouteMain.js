@@ -29,7 +29,7 @@ function RouteMain(props) {
         <div>
             <Routes>
                 <Route path='/userinfo' element={<UserInfo/>}/>
-                <Route path='/room/:roomId' element={<AuctionLive/>}/>
+                {/*<Route path='/room/:roomId' element={<AuctionLive/>}/>*/}
                 <Route path='/auction' element={<Mainauction/>}/>
 
                 <Route path='/' element={<Menu/>}/>
@@ -41,7 +41,7 @@ function RouteMain(props) {
                 <Route path='/join' element={<JoinForm/>}/>
                 <Route path='/login' element={<LoginForm/>}/>
                 <Route path='/oauth' element={<RedirectURI/>}/>
-                <Route path='live' element={<AuctionLive2/>}/>
+                <Route path='/room/:roomId' element={<AuctionLive2/>}/>
                 <Route path='/manage/*' element={<ManagePageMain/>}/>
                 <Route path='/result2' element={<ResultPage2/>}/>
                 <Route path={'/livestream'}>
