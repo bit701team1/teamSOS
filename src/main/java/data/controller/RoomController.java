@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import data.dto.MsgDto;
@@ -177,6 +179,27 @@ public class RoomController {
          user.setEmail(dto.getEmail());
          user.setHp(dto.getHp());
          userMapper.updateUserInfo(user);
+         return ResponseEntity.ok(user);
+     }
+     //비밀번호 변경
+    @PostMapping("/pwdupdate")
+     public ResponseEntity<UserDto> pwdupdate( HttpServletRequest request, @RequestBody UserDto dto) {
+         Cookie[] cookies = request.getCookies();
+         String accessToken = null;
+ 
+         if (cookies != null) {
+             for (Cookie cookie : cookies) {
+                 if (cookie.getName().equals("access_token")) {
+                     accessToken = cookie.getValue();
+                 }
+             }
+         }
+         int userId = tokenMapper.selectByAccessToken(accessToken).getRt_key();
+         UserDto user = userMapper.getUserByUserId(userId);
+         PasswordEncoder encoder = new BCryptPasswordEncoder();
+         String encryptedPassword = encoder.encode(dto.getPassword());
+         user.setPassword(encryptedPassword);
+         userMapper.updatePassword(user);
          return ResponseEntity.ok(user);
      }
 }

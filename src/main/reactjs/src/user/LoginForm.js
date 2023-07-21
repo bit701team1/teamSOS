@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {NavLink, useLocation} from "react-router-dom";
 import Axios from "axios";
 
+
 function LoginForm(props) {
 
     const [data, setData] = useState({
@@ -90,6 +91,9 @@ function LoginForm(props) {
             <div className="grid-naver" id='naverIdLogin'></div>
             <br/><br/>
             <button onClick={handleClickAlarm}>문자알림 발송</button>
+
+            <br/><br/>
+
         </div>
     );
 }

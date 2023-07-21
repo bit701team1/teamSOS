@@ -46,5 +46,7 @@ public interface UserServiceInter {
     public void updatealarm(UserDto dto);
     //유저 정보 수정
     public void updateUserInfo(UserDto dto);
+    //유저 비밀번호 변경
+    public void updatePassword(UserDto dto);
 
 }

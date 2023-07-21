@@ -17,8 +17,10 @@ import {ManagePageMain} from "./manage_page";
 import LiveStream from "./auctionpage/LiveStream";
 
 import ResultPage from "./auctionpage/ResultPage";
+import ResultPage2 from "./auctionpage/ResultPage2";
 import RedirectURI from "./user/naverlogin/RedirectURI";
 import RegisterProduct from "./product/RegisterProduct";
+import AuctionLive2 from './auctionpage/AuctionLive2';
 
 
 
@@ -39,8 +41,9 @@ function RouteMain(props) {
                 <Route path='/join' element={<JoinForm/>}/>
                 <Route path='/login' element={<LoginForm/>}/>
                 <Route path='/oauth' element={<RedirectURI/>}/>
-
+                <Route path='live' element={<AuctionLive2/>}/>
                 <Route path='/manage/*' element={<ManagePageMain/>}/>
+                <Route path='/result2' element={<ResultPage2/>}/>
                 <Route path={'/livestream'}>
                     <Route path={'livestream'} element={<LiveStream/>}/>
                 </Route>
