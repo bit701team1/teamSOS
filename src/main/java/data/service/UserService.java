@@ -86,4 +86,8 @@ public class UserService implements UserServiceInter{
     public void updateUserInfo(UserDto dto){
         userMapper.updateUserInfo(dto);
     }
+    //비밀번호 변경
+    public void updatePassword(UserDto dto){
+        userMapper.updatePassword(dto);
+    }
 }

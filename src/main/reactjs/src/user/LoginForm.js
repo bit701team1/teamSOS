@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {NavLink, useLocation} from "react-router-dom";
 import Axios from "axios";
-import Spinner from "./naverlogin/Spinner";
+// import Spinner from "./naverlogin/Spinner";
 
 function LoginForm(props) {
 
@@ -90,7 +90,6 @@ function LoginForm(props) {
             <br/><br/>
             <button onClick={handleClickAlarm}>문자알림 발송</button>
             <br/><br/>
-            <Spinner/>
         </div>
     );
 }

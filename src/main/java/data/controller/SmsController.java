@@ -4,7 +4,6 @@ import data.dto.ProductDto;
 import data.dto.UserDto;
 import data.mapper.AuthMapper;
 import data.mapper.ProductMapper;
-import data.service.AuthService;
 import net.nurigo.sdk.NurigoApp;
 import net.nurigo.sdk.message.exception.NurigoMessageNotReceivedException;
 import net.nurigo.sdk.message.model.Message;

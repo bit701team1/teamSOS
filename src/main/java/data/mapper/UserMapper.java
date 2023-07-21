@@ -89,6 +89,8 @@ public interface UserMapper {
     public void insertReport(ReportDto dto);
     //수연 유저 정보 수정
     public void updateUserInfo(UserDto dto);
+    //수연 비밀번호 변경
+    public void updatePassword(UserDto dto);
 
     //관리자페이지에서 블랙리스트 회원출력(new)
     public List<ReportDto> getBlockList(Map<String,Object> map);

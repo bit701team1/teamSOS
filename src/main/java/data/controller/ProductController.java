@@ -1,5 +1,4 @@
 package data.controller;
-
 import data.dto.BidDto;
 import data.dto.ProductDto;
 import data.service.BidService;
@@ -8,7 +7,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
