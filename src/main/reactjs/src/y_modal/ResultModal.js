@@ -3,7 +3,7 @@ import React from 'react';
 import "../css/resultmodal.css";
 import go from "../image/y_go.png";
 import {useNavigate} from "react-router-dom";
-const ResultModal = ({ onClose }) => {
+const ResultModal = ({ roomName, onClose }) => {
     const navigate = useNavigate()
     ;
     return (
@@ -15,7 +15,7 @@ const ResultModal = ({ onClose }) => {
                 className="y_gogo"
                 alt=""
                 src={go}
-                onClick={() => navigate('/result')}
+                onClick={() => navigate(`/result?roomName=${roomName}`)}
             />
         </div>
     );

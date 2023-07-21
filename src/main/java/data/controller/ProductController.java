@@ -32,6 +32,8 @@ public class ProductController {
 
     @PostMapping("/price-compare")
     public ResponseEntity<Object> bid(@RequestParam("productName") String product_name, @RequestBody BidDto bidDto) {
+        System.out.println("product_name: " + product_name);
+        System.out.println("bidDto: " + bidDto.toString());
         try {
             List<ProductDto> products = productService.getWinnerAndFinalPriceByProductName(product_name);
             System.out.println("products>>" + products + "||productName>>" + product_name);
