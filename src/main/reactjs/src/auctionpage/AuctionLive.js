@@ -17,6 +17,7 @@ import BidModal from "../y_modal/BidModal";
 import DetailModal from "../y_modal/DetailModal";
 import ResultModal from "../y_modal/ResultModal";
 import axios from "axios";
+import ResultPage from "./ResultPage";
 
 function AuctionLive(props) {
     const [hasBid, setHasBid] = useState(false); // 현재 로그인된 사용자의 입찰 여부를 관리하는 상태 변수
@@ -71,38 +72,13 @@ function AuctionLive(props) {
     useEffect(() => {
         const timer = setTimeout(() => {
             openFrame3();
-        },60* 10 * 1000);
+        },60* 1000 );
 
         return () => {
             clearTimeout(timer);
         };
     }, [openFrame3]);
     /////////////////////////////////모달////////////////////////////////
-
-    useEffect(() => {
-        console.log("roomname>>" + roomName);
-        console.log("userName>>" + userName);
-
-        const checkDuplicateBid = async () => {
-            try {
-                const response = await axios.get(`/product/check-duplicate?productName=${roomName}&userEmail=${userName}`);
-                if (response.status === 200) {
-                    const responseData = response.data; // 서버 응답 데이터
-                    if (responseData === "이미 입찰한 이용자입니다.") {
-                        setHasBid(true);
-                    } else {
-                        setHasBid(false);
-                    }
-                } else {
-                    console.log("Failed to check duplicate bid:", response);
-                }
-            } catch (error) {
-                console.error("Failed to check duplicate bid:", error);
-            }
-        };
-
-        checkDuplicateBid();
-    }, [roomName, userName]);
 
 
     /*채팅 스크롤*/
@@ -287,6 +263,30 @@ function AuctionLive(props) {
     const handleBlur = () => {
         setInputVisible(false); // 평소에는 안보이게
     };
+    useEffect(() => {
+        console.log("roomname>>" + roomName);
+
+        const checkDuplicateBid = async () => {
+            try {
+                const response = await axios.get(`/product/check-duplicate?productName=${roomName}&userEmail=${userName}`);
+                console.log("response>>"+response)
+                if (response.status === 200) {
+                    const responseData = response.data; // 서버 응답 데이터
+                    if (responseData === "이미 입찰한 이용자입니다.") {
+                        setHasBid(true);
+                    } else {
+                        setHasBid(false);
+                    }
+                } else {
+                    console.log("Failed to check duplicate bid:", response);
+                }
+            } catch (error) {
+                console.error("Failed to check duplicate bid:", error);
+            }
+        };
+
+        checkDuplicateBid();
+    }, [roomName, userName]);
 
 
     return (
@@ -401,7 +401,7 @@ function AuctionLive(props) {
                     placement="Centered"
                     onOutsideClick={closeFrame1}
                 >
-                    <BidModal onClose={closeFrame1} />
+                    <BidModal onClose={closeFrame1} roomName={roomName}/>
                 </PortalPopup>
             )}
             {isFrame2Open && (
@@ -419,10 +419,11 @@ function AuctionLive(props) {
                     placement="Centered"
                     onOutsideClick={closeFrame3}
                 >
-                    <ResultModal onClose={closeFrame3} />
+                    <ResultModal onClose={closeFrame3} roomName={roomName}/>
                 </PortalPopup>
             )}
              {/*///////////////////////* 모달 /////////////////////////*/}
+
         </>
     );
 };

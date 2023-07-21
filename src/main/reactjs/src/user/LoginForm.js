@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {NavLink, useLocation} from "react-router-dom";
 import Axios from "axios";
-import Spinner from "./naverlogin/Spinner";
 
 function LoginForm(props) {
 
@@ -20,23 +19,25 @@ function LoginForm(props) {
     const handleLoginClick = () => {
         //dto로 /user/login 으로 넘겨야함
         let url = "/user/login";
-        Axios.post(url, data).then(res => {
-            console.log(res);
+
+        Axios.post(url, data).then(res => {             
+            alert("로그인 성공")
+
         }).catch(error => {
             // 로그인 실패 처리
-            alert("회원가입에 실패했습니다.");
+            alert("로그인 실패");
         });
     }
 
-    const handleIsLoginClick = () => {
-        let url = "/user/islogin";
-        Axios.get(url).then(res => {
-            alert("로그인 중입니다")
-        }).catch(error => {
-            // 로그인 실패 처리
-            alert("회원정보가 없습니다");
-        });
-    }
+    // const handleIsLoginClick = () => {
+    //     let url = "/user/islogin";
+    //     Axios.get(url).then(res => {
+    //         alert("로그인 중입니다")
+    //     }).catch(error => {
+    //         // 로그인 실패 처리
+    //         alert("회원정보가 없습니다");
+    //     });
+    // }
 
     //naver Login
     const { naver } = window
@@ -84,13 +85,11 @@ function LoginForm(props) {
                 <button onClick={handleLoginClick}>로그인</button>
             </div>
             <br/>
-            <button onClick={handleIsLoginClick}>islogin</button>
+            {/*<button onClick={handleIsLoginClick}>islogin</button>*/}
             <br/><br/>
             <div className="grid-naver" id='naverIdLogin'></div>
             <br/><br/>
             <button onClick={handleClickAlarm}>문자알림 발송</button>
-            <br/><br/>
-            <Spinner/>
         </div>
     );
 }

@@ -1,10 +1,11 @@
+import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import UserInfo from "./userpage/UserInfo";
+import UserInfo from './userpage/UserInfo'
 import Mainauction from "./auctionpage/Mainauction";
 import AuctionLive from "./auctionpage/AuctionLive";
 
-import React from 'react';
+
 import './manage_page/ManagePageMain.css';
 
 import errorimg from './image/ERR404.png';
