@@ -21,11 +21,11 @@ function UserRowList(props) {
 
     return (
         <tr style={{backgroundColor:'#f6f6f6',textAlign:'center',borderStyle:'unset'}}>
-            <td style={{width:'2.5rem'}}>{no-idx}</td>
-            <td style={{width:'5rem'}}>{row.user_name}</td>
-            <td style={{width:'6rem'}} onClick={handleClickOpen}>{row.email}</td>
-            <td style={{width:'2.5rem'}}>
-                <Button variant='contained' style={{width:'100%',fontSize:'0.5rem',color:'red'}}
+            <td style={{width:'20%'}}>{no-idx}</td>
+            <td style={{width:'30%'}}>{row.user_name}</td>
+            <td style={{width:'20%'}} onClick={handleClickOpen}>{row.email}</td>
+            <td style={{width:'30%'}}>
+                <Button variant='text' style={{width:'80%',fontSize:'0.5rem',color:'red'}}
                         onClick={()=>{
                             const b=window.confirm("삭제하려면 확인을 누르십시요")
                             if(b){
@@ -52,7 +52,7 @@ function UserRowList(props) {
                     </Typography>
                     <Typography gutterBottom>
                         <img alt={'hp이미지'} src={hpimg} style={{width:'2.5rem'}}/>
-                        &nbsp; 핸드폰 : {row.hp}
+                        &nbsp; 핸드폰 : {row.hp.slice(0, 3) + "-" + row.hp.slice(3, 7) + "-" + row.hp.slice(7)}
                     </Typography>
                     <Typography gutterBottom>
                         <img alt={'card이미지'} src={cardimg} style={{width:'2.5rem'}}/>

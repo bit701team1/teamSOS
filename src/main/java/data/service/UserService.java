@@ -7,8 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import data.dto.security.RefreshTokenDto;
-import data.mapper.TokenMapper;
 import data.mapper.UserMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -57,6 +55,16 @@ public class UserService implements UserServiceInter{
         userMapper.deleteUser(user_id);
     }
 
+    //검색된 유저의 토탈카운트
+    @Override
+    public int getManageTotalCountWithSearch(String search) {
+        Map<String,Object> map=new HashMap<>();
+        map.put("search",search);
+        return userMapper.getManageTotalCountWithSearch(map);
+    }
+
+
+
     //블랙리스트  회원 카운트
     public int getBlockListCount(){
         return userMapper.getBlockListCount();
@@ -72,6 +80,10 @@ public class UserService implements UserServiceInter{
         return userMapper.getBlockList(map);
     }
 
+    // report_num 증가
+    public void updateReportNum(String email){
+        userMapper.updateReportNum(email);
+    }
 
     //수연
     //알람
