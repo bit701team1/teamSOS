@@ -113,7 +113,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         System.out.println("corsConfigurationSource 진입");
         CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "https://nid.naver.com","http://175.45.193.12/"));
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "https://nid.naver.com","http://175.45.193.12"));
         configuration.setAllowedMethods(Arrays.asList("HEAD", "GET", "POST", "PUT", "DELETE"));
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Authorization-refresh", "Cache-Control", "Content-Type"));
         /* 응답 헤더 설정 추가*/

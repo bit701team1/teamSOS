@@ -9,6 +9,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import TextField from "@mui/material/TextField";
 import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
+import {useNavigate} from "react-router-dom";
 
 // import BackIcon2 from "../ImageTest/back-arrow2.svg";
 // import UserIcon from "../ImageTest/user.svg";
@@ -34,6 +35,8 @@ function SignUpPage(props) {
 
     const [authnum, setAuthnum] = useState("");
     const [inputauthnum, setInputAuthnum] = useState("");
+
+    const navi  = useNavigate();
 
     const handleJoinClick = (e) => {
 
@@ -61,6 +64,7 @@ function SignUpPage(props) {
                         alert("유효한 이메일 형식을 입력해주세요");
                     } else {
                         alert("성공적으로 가입되었습니다");
+                        navi("/login");
                     }
                 }).catch(error => {
                 // 회원가입 실패 처리
