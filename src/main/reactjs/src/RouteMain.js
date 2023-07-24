@@ -47,7 +47,6 @@ function RouteMain(props) {
                 <Route path={'/livestream'}>
                     <Route path={'livestream'} element={<LiveStream/>}/>
                 </Route>
-                <Route path='/product/*' element={<RegisterProduct/>}/>
 
                 <Route path='/*' element={
                     <div>

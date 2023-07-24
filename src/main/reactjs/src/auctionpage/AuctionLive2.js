@@ -10,7 +10,7 @@ import AuctionBid from '../auctionmodal/AuctionBid';
 import PortalPopup from '../auctionmodal/PortalPopup';
 import axios from "axios";
 import alertImage from "../image/alert.png";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import * as SockJS from "sockjs-client";
 import * as StompJS from "@stomp/stompjs";
 function AuctionLive2(props) {
@@ -23,7 +23,8 @@ function AuctionLive2(props) {
   const [userName, setUserName] = useState(''); //email
   const msgRef = useRef(); // 메세지 함수
   const [msg,setMsg] = useState([]); // 메세지 내용
-  const chatScreenRef = useRef(null); 
+  const chatScreenRef = useRef(null);
+  const productName = roomName;
   /////////////////////////모달////////////////////////////
   const openFrame = useCallback(() => {
     setFrameOpen(true);
@@ -67,8 +68,10 @@ function AuctionLive2(props) {
           console.error("Failed to check duplicate bid:", error);
       }
   };
-
-  checkDuplicateBid();
+    //중복실행 수정(빈값이 아닐때만 실행)
+     if (roomName !== "" && userName !== "") {
+         checkDuplicateBid();
+     }
 }, [roomName, userName]);
 
   /*채팅 스크롤*/
@@ -249,6 +252,13 @@ const report = (userName, msg) => {
     setInputVisible(false); // 평소에는 안보이게
   };
 
+  //추가
+    const navigate = useNavigate();
+    const goToResult = () => {
+        // 여기서 '/result2'는 이동할 경로입니다.
+        // 필요에 따라 다른 경로로 변경할 수 있습니다.
+        navigate(`/result2?roomName=${roomName}`);
+    };
     return (
       <>
         <div className="y_auction-div">
@@ -324,6 +334,7 @@ const report = (userName, msg) => {
                            }}
                     />
                   )}
+            <button type={"button"} onClick={goToResult}>결과창</button>
       </div>
       {/* 모달 */}
         {isFrameOpen && (
@@ -341,7 +352,7 @@ const report = (userName, msg) => {
             placement="Centered"
             onOutsideClick={closeFrame1}
           >
-            <AuctionBid onClose={closeFrame1} />
+            <AuctionBid onClose={closeFrame1} roomName={roomName} userName={userName} productName={productName}/>
           </PortalPopup>
         )}
       </>
