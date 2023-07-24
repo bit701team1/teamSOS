@@ -27,10 +27,11 @@ function BlockRowList(props) {
     const ShortMsg=limitMsg(row.msg, 10);
 
     return (
-        <tr style={{ backgroundColor: '#f6f6f6', textAlign: 'center', borderStyle:'unset',height:'2rem'}}>
-            <td style={{ width: '20px' }}>{idx+1}</td>
-            <td style={{ width: '80px' }}>{row.email}</td>
-            <td style={{ width: '80px',cursor:'pointer' }} onClick={handleClickOpen}>{ShortMsg}</td>
+        <tr style={{ backgroundColor: '#f6f6f6', textAlign: 'center',
+            borderStyle:'unset',height:'2.5rem',border:'none',fontSize:'1rem'}}>
+            <td>{idx+1}</td>
+            <td>{row.email}</td>
+            <td style={{ cursor:'pointer' }} onClick={handleClickOpen}>{ShortMsg}</td>
 
             <Dialog
                 onClose={handleClose}

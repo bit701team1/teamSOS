@@ -58,22 +58,23 @@ function BlockList(props) {
 
             <div className={'k-list-show'}  style={{fontSize:'1rem'}}>
 
-                <b style={{marginLeft:'15%'}}>총 {data.totalCount} 명</b>
+                {/*<b style={{marginLeft:'15%'}}>총 {data.totalCount} 명</b>*/}
 
-                <table className={"table k_table-blacklist"}>
-                    <tr style={{backgroundColor:'lightpink',textAlign:'center'}}>
-                        <th style={{width:'80px'}}>번호</th>
-                        <th style={{width:'80px'}}>이메일</th>
-                        <th style={{width:'80px'}}>신고내용</th>
-                        {/*<th style={{width:'80px'}}>삭제</th>*/}
+                <table className={"table k_table-blacklist"} style={{textAlign:'center',marginTop:'1rem',borderRadius:'10px',overflow:'hidden'}}>
+                    <tbody>
+                    <tr style={{backgroundColor:'lightpink'}}>
+                        <th style={{width:'20%'}}>번호</th>
+                        <th style={{width:'30%'}}>이메일</th>
+                        <th style={{width:'50%'}}>신고내용</th>
                     </tr>
+                    </tbody>
                     {
                         data.Blocklist &&
                         data.Blocklist.map((row,idx)=><BlockRowList key={idx} row={row} no={data.no} idx={idx} onDelete={deleteBlockUser} currentPage={currentPage}/>)
                     }
                 </table>
 
-                <div style={{width:'100%',textAlign:'center',fontSize:'0.8rem'}}>
+                <div style={{width:'100%',textAlign:'center',fontSize:'1rem'}}>
                     {/* 페이징처리 */}
                     {
                         //이전

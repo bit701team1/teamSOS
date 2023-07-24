@@ -84,14 +84,6 @@ function ManagePageMain(props) {
                 <Route path={'monitor'} element={<Monitor/>}/>
             </Routes>
 
-            <div className="k-manage-sendmsg">
-                <img alt={'새소년'} src={sesoimg} className={"k_sendimg"}/>
-                <button type={"button"} className={"btn btn-success k-send-button"}>
-                        문자 발송
-                </button>
-            </div>
-
-
         </div>
     );
 };

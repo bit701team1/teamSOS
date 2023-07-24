@@ -61,10 +61,18 @@
     <select id="getBlockList" parameterType="map" resultType="ReportDto">
         select * from report
         <if test="search != ''">
-            where report.email like CONCAT('%',#{search},'%')
+            where report.email like CONCAT('%',#{search},'%') or msg like CONCAT('%',#{search},'%')
         </if>
         ORDER BY num DESC limit #{startNum}, #{perPage}
     </select>
+    <!--  검색한 신고 유저의 수 토탈카운트   -->
+    <select id="getManageTotalCountWithBlockUserSearch" parameterType="map" resultType="int">
+        select count(*) from report
+        <if test="search != null and search != ''">
+            where email like CONCAT('%',#{search},'%')
+        </if>
+    </select>
+
 
     <!--  클릭하면 report_num이 1증가 시키기  -->
     <update id="updateReportNum">

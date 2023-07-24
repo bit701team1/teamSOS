@@ -32,6 +32,8 @@ public interface UserServiceInter {
 
     //블랙리스트 멤버수 (new)
     public int getBlockListCount();
+    //검색된 블랙리스트 유저의 총 토탈 카운트
+    public int getManageTotalCountWithBlockUserSearch(String search);
 
     //블랙리스트 회원 조회 (new)
     public List<ReportDto> getBlockList(String search,int startNum,int perPage);

@@ -12,7 +12,7 @@ import errorimg from './image/ERR404.png';
 import JoinForm from "./user/JoinForm";
 import LoginForm from "./user/LoginForm";
 import Menu from "./user/Menu";
-import {ManagePageMain} from "./manage_page";
+import {ManagePageMain, ProductList} from "./manage_page";
 
 import LiveStream from "./auctionpage/LiveStream";
 
@@ -35,6 +35,7 @@ function RouteMain(props) {
                 <Route path='/' element={<Menu/>}/>
 
                 <Route path='/manage/*' element={<ManagePageMain/>}/>
+                <Route path='/productlist/*' element={<ProductList/>}/>
 
                 <Route path='/result' element={<ResultPage/>}/>
 

@@ -63,15 +63,14 @@ function UserList(props) {
             </div>
 
             <div className={'k-list-show'} style={{fontSize:'1rem'}}>
-                <b style={{marginLeft:'15%'}}>등록된 멤버수  {data.totalCount}명</b>
+                {/*<b style={{marginLeft:'15%'}}>등록된 멤버수  {data.totalCount}명</b>*/}
 
-                <table className={"table k_table-userlist"} style={{textAlign:'center'}}>
+                <table className={"table k_table-userlist"} style={{textAlign:'center',marginTop:'1rem',borderRadius:'10px',overflow:'hidden'}}>
                     <tbody>
-                    <tr style={{backgroundColor:'pink'}}>
+                    <tr style={{backgroundColor:'lightpink'}}>
                         <th style={{width:'20%'}}>번호</th>
-                        <th style={{width:'30%'}}>회원명</th>
-                        <th style={{width:'30%'}}>이메일</th>
-                        <th style={{width:'20%'}}>삭제</th>
+                        <th style={{width:'40%'}}>회원명</th>
+                        <th style={{width:'40%'}}>이메일</th>
                     </tr>
                     </tbody>
                     {

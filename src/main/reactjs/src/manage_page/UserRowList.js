@@ -20,22 +20,12 @@ function UserRowList(props) {
     };
 
     return (
-        <tr style={{backgroundColor:'#f6f6f6',textAlign:'center',borderStyle:'unset'}}>
-            <td style={{width:'20%'}}>{no-idx}</td>
-            <td style={{width:'30%'}}>{row.user_name}</td>
-            <td style={{width:'20%'}} onClick={handleClickOpen}>{row.email}</td>
-            <td style={{width:'30%'}}>
-                <Button variant='text' style={{width:'80%',fontSize:'0.5rem',color:'red'}}
-                        onClick={()=>{
-                            const b=window.confirm("삭제하려면 확인을 누르십시요")
-                            if(b){
-                                console.log(row.user_id);
-                                onDelete(row.user_id);
-                            }
-                        }}>
-                    삭제
-                </Button>
-            </td>
+        <tr className={'userRowList'}
+            style={{backgroundColor:'#f6f6f6',textAlign:'center',height:'2.5rem',
+                borderStyle:'unset',border:'none',fontSize:'1rem'}}>
+            <td>{no-idx}</td>
+            <td >{row.user_name}</td>
+            <td onClick={handleClickOpen}>{row.email}</td>
             <Dialog
                 onClose={handleClose}
                 aria-labelledby="customized-dialog-title"
@@ -44,6 +34,16 @@ function UserRowList(props) {
                 <DialogTitle id="customized-dialog-title" onClose={handleClose}   style={{width:'22rem'}}>
                     <img alt={'슬픔이'} src={userimg} style={{width:'4rem',height:'4rem',borderRadius:'100px',marginRight:'4px'}}/>
                     &nbsp;{row.user_name}
+                    <button  style={{fontSize:'1.2rem',color:'red',padding:'0',border:'none',marginLeft:'100px',backgroundColor:'white'}}
+                             onClick={()=>{
+                                 const b=window.confirm("삭제하려면 확인을 누르십시요")
+                                 if(b){
+                                     console.log(row.user_id);
+                                     onDelete(row.user_id);
+                                 }
+                             }}>
+                        삭제
+                    </button>
                 </DialogTitle>
                 <DialogContent dividers>
                     <Typography gutterBottom>

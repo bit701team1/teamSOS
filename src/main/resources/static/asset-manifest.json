@@ -1,8 +1,9 @@
 {
   "files": {
-    "main.css": "/static/css/main.eef590da.css",
-    "main.js": "/static/js/main.f9e4404e.js",
+    "main.css": "/static/css/main.7145ed62.css",
+    "main.js": "/static/js/main.3588997e.js",
     "static/js/787.d3befce1.chunk.js": "/static/js/787.d3befce1.chunk.js",
+    "static/media/productimg.jpg": "/static/media/productimg.cd7fc8cb271a5d602154.jpg",
     "static/media/kermit.gif": "/static/media/kermit.fe721bbd80f92534cc31.gif",
     "static/media/cel.gif": "/static/media/cel.3fa5e85cd104d7537a06.gif",
     "static/media/스폰지밥1.gif": "/static/media/스폰지밥1.cdd17038c344033cb747.gif",
@@ -28,12 +29,12 @@
     "static/media/y_info.svg": "/static/media/y_info.28dc8ff4adc9ef9f77b10e520d941c47.svg",
     "static/media/k_back_icon.svg": "/static/media/k_back_icon.6a67430ab5919eb8b452ae91649c05c3.svg",
     "static/media/y_msgsend.svg": "/static/media/y_msgsend.4bffe2cbb08ff276c3d68554ac34d9d4.svg",
-    "main.eef590da.css.map": "/static/css/main.eef590da.css.map",
-    "main.f9e4404e.js.map": "/static/js/main.f9e4404e.js.map",
+    "main.7145ed62.css.map": "/static/css/main.7145ed62.css.map",
+    "main.3588997e.js.map": "/static/js/main.3588997e.js.map",
     "787.d3befce1.chunk.js.map": "/static/js/787.d3befce1.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.eef590da.css",
-    "static/js/main.f9e4404e.js"
+    "static/css/main.7145ed62.css",
+    "static/js/main.3588997e.js"
   ]
 }
