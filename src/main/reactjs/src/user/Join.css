@@ -1,0 +1,234 @@
+/* 구글 폰트 로드 */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&display=swap");
+
+/* 전체 페이지 설정 */
+.SignUpPage{
+    background-color: #ffffff;
+    width: 428px;
+    height: 926px;
+    overflow: hidden;
+    text-align: center;
+    color: #000000;
+    position: absolute;
+    top: calc(50% - 463px);
+    left: calc(50% - 214px);
+}
+
+/* 뒤로가기 아이콘 설정 */
+.SignUpIcon {
+    position: absolute;
+    width: 32.143px;
+    height: 25px;
+    flex-shrink: 0;
+    stroke-width: 6px;
+    top: 87px;
+    left: 32px;
+}
+
+/* 페이지 제목 설정 */
+.SignUpTitle {
+    position: absolute;
+    color: #000000;
+    text-align: center;
+    font-family: 'Roboto';
+    font-size: 25px;
+    font-weight: 500;
+    line-height: normal;
+    top: 85px;
+    left:180px;
+}
+
+/* 입력 필드 설정 */
+.SignUpPageInput {
+    position: relative;
+    top: 245px;
+    left: 44px;
+    margin-bottom: 30px;
+}
+
+.SignUpPageInput input {
+    font-size: 25px;
+    padding: 10px 10px 10px 5px;
+    border-radius: 15px;
+    background: rgba(217, 217, 217, 0.20);
+    display: block;
+    width: 340px;
+    height: 70px;
+    border: none;
+    color: #000000;
+    border-bottom: 1px solid #757575;
+    outline: none;
+}
+
+/* 입력 필드 내의 플레이스홀더 설정 */
+.SignUpPageInput input::placeholder {
+    text-align: center;
+    font-size: 18px;
+}
+
+/* 라벨 설정 */
+.SignUpPageInput label {
+    color:#999;
+    font-size:10px;
+    font-weight:normal;
+    position:absolute;
+    pointer-events:none;
+    left:5px;
+    top:10px;
+    transition:0.2s ease all;
+    opacity: 0;
+}
+
+/* 이미지 아이콘 설정 */
+.SignUpPageInput img{
+    position: absolute;
+    left: 16px;
+    opacity: 1;
+    transition:0.2s ease all;
+}
+
+/* 입력 필드에 포커스가 있거나 유효한 입력이 있을 때 이미지 숨김 */
+.SignUpPageInput input:focus ~ img,
+.SignUpPageInput input:valid ~ img{
+    opacity: 0;
+}
+
+/* 각 아이콘의 위치 설정 */
+.UserIcon, .PassIcon, .PhoneIcon{
+    top: 23px;
+}
+
+.EmailIcon{
+    top: 26px;
+}
+
+/* 입력 필드에 포커스가 있거나 유효한 입력이 있을 때 라벨의 위치 및 크기 변경 */
+.SignUpPageInput input:focus ~ label, input:valid ~ label {
+    top:-30px;
+    font-size:20px;
+    color: #B24C4B;
+    opacity: 1;
+}
+
+/* 입력 필드 아래의 바 설정 */
+.SignUpBar {
+    position: relative;
+    display: block;
+    width: 328px;
+}
+
+.SignUpBar:before,
+.SignUpBar:after {
+    content: '';
+    height: 2px;
+    width: 0;
+    bottom: 1px;
+    position: absolute;
+    background: #B24C4B;
+    transition: 0.2s ease all;
+}
+
+.SignUpBar:before {
+    left: 50%;
+}
+
+.SignUpBar:after {
+    right: 50%;
+}
+
+/* 입력 필드에 포커스가 있을 때 바의 길이를 확장 */
+input:focus ~ .SignUpBar:before,
+input:focus ~ .SignUpBar:after {
+    width: calc(50% - 3%);
+}
+
+/* 입력 필드에 포커스가 있을 때 하이라이트 표시 */
+.SignUpHighlight {
+    position: absolute;
+    height: 60%;
+    width: 100px;
+    top: 25%;
+    left: 0;
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+/* 하이라이트 애니메이션 설정 */
+input:focus ~ .SignUpHighlight {
+    animation: inputHighlighter 0.3s ease;
+}
+
+/* 애니메이션 효과 설정 */
+@keyframes inputHighlighter {
+    from {
+        background: #7d7d7d;
+    }
+    to {
+        width: 0;
+        background: transparent;
+    }
+}
+
+/* 링크 텍스트 설정 */
+.SignUpPageLink{
+    position: absolute;
+    top: 624px;
+    left: 106px;
+}
+
+.SignUpPageLinkText1 {
+    color: #000000;
+}
+
+.SignUpPageLinkText2 {
+    color: #ffffff;
+}
+
+.SignUpPageLinkText3 {
+    text-decoration: underline;
+    color: #B24C4B;
+}
+
+/* 회원가입 버튼 설정 */
+.SignUpButton {
+    position: absolute;
+    top: 730px;
+    left: 44px;
+    width: 340px;
+    height: 70px;
+    border-radius: 15px;
+    background: #D6B4A2;
+}
+
+/* 버튼 내부의 텍스트 설정 */
+.SignUpButton span {
+    position: absolute;
+    top: 21px;
+    left: 136px;
+    color: #2b2b2b;
+    text-align: center;
+    font-family: 'Roboto';
+    font-size: 25px;
+    font-weight: 600;
+    line-height: normal;
+}
+
+/* 페이지 하단 텍스트 설정 */
+.SingUpPageFooter{
+    position: absolute;
+    top: 830px;
+    left: 129px;
+}
+
+.SingUpFooterText1 {
+    color: #000000;
+}
+
+.SingUpFooterText2 {
+    color: #ffffff;
+}
+
+.SingUpFooterText3 {
+    text-decoration: underline;
+    color: #B24C4B;
+}

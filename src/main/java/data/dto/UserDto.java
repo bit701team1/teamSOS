@@ -29,6 +29,8 @@ public class UserDto {
     private HttpServletResponse response;
     //sms
     private boolean isAuth;
+    //password Update
+    private String rawpassword;
 
 }
 

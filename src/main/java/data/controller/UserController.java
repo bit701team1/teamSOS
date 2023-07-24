@@ -6,6 +6,7 @@ import data.dto.UserDto;
 import data.mapper.TokenMapper;
 import data.mapper.UserMapper;
 import data.service.CustomUserDetailsService;
+import data.service.UserService;
 import jwt.setting.JwtTokenProvider;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,8 @@ public class UserController {
     @Autowired
     UserMapper userMapper;
     @Autowired
+    UserService userService;
+    @Autowired
     AuthenticationManagerBuilder authenticationManagerBuilder;
     @Autowired
     JwtTokenProvider jwtTokenProvider;
@@ -44,6 +47,15 @@ public class UserController {
     BCryptPasswordEncoder bCryptPasswordEncoder;
     @Autowired
     CustomUserDetailsService customUserDetailsService;
+
+    //
+    @PostMapping("/passUpatebyHp")
+    public void passUpatebyHp(@RequestBody UserDto dto){
+        //password 암호화
+        String password = bCryptPasswordEncoder.encode(dto.getRawpassword());
+        //password update
+        userService.updateUserPassbyHp(dto.getHp(),password);
+    }
 
 
     //login

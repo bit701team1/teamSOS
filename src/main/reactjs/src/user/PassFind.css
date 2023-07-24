@@ -1,0 +1,165 @@
+/* 구글 폰트 로드 */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&display=swap");
+
+/* 전체 페이지 설정 */
+.FindPassPage{
+    background-color: #2B2B2B;
+    width: 428px;
+    height: 926px;
+    overflow: hidden;
+    text-align: center;
+    color: #ffffff;
+    position: absolute;
+    top: calc(50% - 463px);
+    left: calc(50% - 214px);
+}
+
+/* 뒤로가기 아이콘 설정 */
+.FindPassIcon {
+    position: absolute;
+    width: 32.143px;
+    height: 25px;
+    flex-shrink: 0;
+    stroke-width: 6px;
+    top: 87px;
+    left: 32px;
+}
+
+/* 페이지 제목 설정 */
+.FindPasspTitle {
+    position: absolute;
+    color: #ffffff;
+    text-align: center;
+    font-family: 'Roboto';
+    font-size: 25px;
+    font-weight: 500;
+    line-height: normal;
+    top: 85px;
+    left:142px;
+}
+
+/* 상단 텍스트 설정 */
+.FindPassHeaderText{
+    position: absolute;
+    width: 300px;
+    height: 30px;
+    color: #ffffff;
+    font-family: 'Roboto';
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+    top: 164px;
+    left: 44px;
+    text-align: left;
+}
+
+/* 인증 버튼 설정*/
+.FindPassPhoneButton {
+    position: absolute;
+    top: 244px;
+    left: 44px;
+    width: 340px;
+    height: 70px;
+    border-radius: 15px;
+    background: rgba(217, 217, 217, 0.20);
+}
+
+/* 인증 버튼 내부의 텍스트 설정 */
+.FindPhoneButtonText {
+    position: absolute;
+    top: 24px;
+    left: 103px;
+    color: #ffffff;
+    text-align: center;
+    font-family: 'Roboto';
+    font-size: 20px;
+    font-weight: 500;
+    line-height: normal;
+}
+
+/* 인증 버튼 내부의 아이콘 설정*/
+.FindPhone{
+    width: 16.25px;
+    height: 27.5px;
+    flex-shrink: 0;
+    position: absolute;
+    top: 21px;
+    left: 19px;
+}
+
+.FindPassEmailButton{
+    position: absolute;
+    top: 364px;
+    left: 44px;
+    width: 340px;
+    height: 70px;
+    border-radius: 15px;
+    background: rgba(217, 217, 217, 0.20);
+}
+
+.FindEmail{
+    width: 22px;
+    height: 17.864px;
+    flex-shrink: 0;
+    position: absolute;
+    top: 26px;
+    left: 16px;
+}
+
+.FindEmailButtonText {
+    position: absolute;
+    color: #ffffff;
+    text-align: center;
+    font-family: Roboto;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    top: 24px;
+    left: 112px;
+}
+
+/* 네이버 로그인 버튼 위치 설정 */
+.FindNaver {
+    position: absolute;
+    top: 512px;
+    left: 89.71px;
+}
+
+/* 구글 로그인 버튼 위치 설정 */
+.FindGoogle {
+    position: absolute;
+    top: 512px;
+    left: 194.4px;
+}
+
+/* 카카오 로그인 버튼 위치 설정 */
+.FindKakao {
+    position: absolute;
+    top: 512px;
+    left: 301px;
+}
+
+/* 페이지 푸터 위치 설정 */
+.FindPageFooter {
+    position: absolute;
+    top: 830px;
+    left: 140px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+/* 페이지 푸터 텍스트 설정 */
+.FindPageFooterText1 {
+    color: #ffffff;
+}
+
+.FindPageFooterText2 {
+    color: #2b2b2b;
+}
+
+.FindPageFooterText3 {
+    text-decoration: underline;
+    color: #D6B4A2;
+}
