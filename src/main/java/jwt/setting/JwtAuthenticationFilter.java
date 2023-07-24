@@ -48,16 +48,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-        System.out.println("doFilterInternal");
         log.info(request.getRequestURI());
 
         if (!request.getRequestURI().contains("join") && !request.getRequestURI().contains("delete-") &&
                 !request.getRequestURI().contains("room") && !request.getRequestURI().contains("lobby") &&
                 !request.getRequestURI().contains("ws") && !request.getRequestURI().contains("oauth") &&
                 !request.getRequestURI().contains("sms") && !request.getRequestURI().contains("manage") &&
-                !request.getRequestURI().contains("product") && !request.getRequestURI().contains("passUpatebyHp") &&
+                !request.getRequestURI().contains("product") &&
                 !request.getRequestURI().contains("static") && !request.getRequestURI().contains("pass") &&
-                !request.getRequestURI().contains("manifest")
+                !request.getRequestURI().contains("manifest") && !request.getRequestURI().contains("favicon")
             ){
             log.info("토큰 체크");
             UserDto dto = new UserDto();
