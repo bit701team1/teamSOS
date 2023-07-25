@@ -3,12 +3,6 @@ import '../css/userinfo.css';
 import {styled} from '@mui/system';
 import Switch from '@mui/material/Switch';
 import kermit from '../image/kermit.gif';
-import edit from '../image/y_edit.svg';
-import back from '../image/y_back.svg';
-import alarm from '../image/y_alarm.svg';
-import report from '../image/y_reporticon.svg';
-import center from  '../image/y_center.svg';
-import centergo from '../image/y_centergo.svg';
 import axios from 'axios';
 function UserInfo(props) {
   const StyledSwitch = styled(Switch)(({ theme }) => ({
@@ -25,7 +19,7 @@ function UserInfo(props) {
         backgroundColor: '#767577',
     },
 }));
-
+  const photo = process.env.REACT_APP_SUICONURL;
   const [userdata, setUserdata] = useState({});
   useEffect(() => {
     axios.get('/room/userdata')
@@ -161,7 +155,7 @@ const togglePasswordVisibility = () => {
           <div className="y_hp-p">Phone</div>
           <div className="y_editbox">
             <div className="y_edit-div"/>
-            <img className="y_icon-edit" alt="" src={edit}/>
+            <img className="y_icon-edit" alt="" src={`${photo}y_edit.svg`}/>
           </div>
          
           <div className="y_info-p1">내 정보 관리</div>
@@ -169,7 +163,7 @@ const togglePasswordVisibility = () => {
           수정완료
           </button>
           <div className="y_infobox" />
-          <img className="y_icon-bell" alt="" src={alarm} />
+          <img className="y_icon-bell" alt="" src={`${photo}y_alarm.svg`} />
           <div className="y_info-p2">개인정보 변경</div>
           <div className="y_info-p3">회원님의 회원 정보를 변경하실 수 있습니다.</div>
           <div className="y_alarmupdate">
@@ -181,22 +175,22 @@ const togglePasswordVisibility = () => {
           <img
             className="y_centergo-icon"
             alt=""
-            src={centergo}
+            src={`${photo}y_centergo.svg`}
           />
           <div
             className="y_reportnum-p">
               {userdata.report_num}
           </div>
-          <img className="y_icon-emoji-sad" alt="" src={report} />
+          <img className="y_icon-emoji-sad" alt="" src={`${photo}y_reporticon.svg`} />
           <img
             className="y_back" style={{cursor:'pointer'}}
             alt="" 
-            src={back}
+            src={`${photo}y_back.svg`}
           />
           <img
             className="y_center-icon"
             alt=""
-            src={center}
+            src={`${photo}y_center.svg`}
           />
           <div className="y_infoline" />
           <div className="y_infoboxline1" />

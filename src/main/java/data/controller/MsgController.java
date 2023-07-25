@@ -55,7 +55,17 @@ public class MsgController {
                 System.out.println("강퇴되었습니다.");
                  sendingOperations.convertAndSend("/sub/room/" + msg.getRoomId(), kickuser);
               break;
-             
+              case "BROADCAST_END":
+              room = roomService.getRoom(msg.getRoomId());
+              MsgDto broadcastEnd = new MsgDto();
+              broadcastEnd.setType("BROADCAST_END");
+              broadcastEnd.setRoomId(msg.getRoomId());
+              broadcastEnd.setMsg("The broadcast has ended.");
+      
+              // 모든 클라이언트에게 방송 종료 메시지를 전달
+              sendingOperations.convertAndSend("/sub/room/" + msg.getRoomId(), broadcastEnd);
+              System.out.println(broadcastEnd);
+              break;
             default:
             break;
         }

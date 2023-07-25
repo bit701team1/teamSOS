@@ -2,7 +2,6 @@ import React, { useCallback, useState } from 'react';
 import ResultModal from "../resultmodal/ResultModal";
 import PortalPopup from "../resultmodal/PortalPopup";
 import img from '../image/스폰지밥1.gif';
-import back from '../image/y_back.svg';
 import "../css/resultpage2.css";
 function ResultPage2(props) {
     const [isFrameOpen, setFrameOpen] = useState(false);
@@ -18,14 +17,14 @@ function ResultPage2(props) {
     const closeFrame = useCallback(() => {
       setFrameOpen(false);
     }, []);
-  
+    const photo = process.env.REACT_APP_SUICONURL;
     return (
       <>
         <div className="y_resultpage-div">
             
           <img className="y_result-img" alt="" src={img}/>
           <img
-            alt="" src={back}
+            alt="" src={`${photo}y_back.svg`}
             className="y_result-back"
             onClick={onIconArrowRightCircledClick}
           />

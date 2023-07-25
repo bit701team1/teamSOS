@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Song+Myung&display=swap');
+
 .y_myimage{
     position: absolute;
     top: 14.19rem;
@@ -313,6 +315,6 @@
     text-align: left;
     font-size: 1rem;
     color: #2b2b2b;
-    font-family: Inter;
+    font-family: 'Roboto';
   }
   

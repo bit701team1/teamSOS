@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Song+Myung&display=swap');
+
+.y_end-p1,
+.y_end-p2{
+  position: absolute;
+  top: 1.63rem;
+  left: 2rem;
+}
+.y_end-p2{
+  top: 4.94rem;
+  font-size: 1.3rem;
+  color: rgba(99, 99, 102, 0.8);
+}
+.y_end-div,
+.y_end-gogo{
+  overflow: hidden;
+  max-width: 100%;
+  max-height: 100%;
+}
+.y_end-gogo{
+  position: absolute;
+  height: 20.32%;
+  width: 11.5%;
+  top: 69.79%;
+  right: 6.13%;
+  bottom: 9.89%;
+  animation: moveRight 1s infinite;
+  left: 82.36%;
+}
+@keyframes moveRight {
+    0% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(10px); /* Adjust this value to how far you want it to move */
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+.y_end-div{
+  position: relative;
+  border-radius: 10px;
+  background-color: #fff;
+  width: 21.44rem;
+  height: 11.69rem;
+  text-align: left;
+  font-size: 1.8rem;
+  color: #000;
+  font-family: 'Roboto';
+}

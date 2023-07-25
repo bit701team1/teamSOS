@@ -15,6 +15,7 @@
   width: 3.2rem;
   height: 3.28rem;
   cursor: pointer;
+  z-index: 10;
 }
 .y_result-div2,
 .y_result-dark {

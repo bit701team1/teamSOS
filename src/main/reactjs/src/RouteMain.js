@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import UserInfo from './userpage/UserInfo'
@@ -21,17 +21,19 @@ import ResultPage2 from "./auctionpage/ResultPage2";
 import RedirectURI from "./user/naverlogin/RedirectURI";
 import RegisterProduct from "./product/RegisterProduct";
 import AuctionLive2 from './auctionpage/AuctionLive2';
-
+import RoomCreate from './auctionpage/RoomCreate';
 
 
 function RouteMain(props) {
     return (
         <div>
+             
+              
             <Routes>
                 <Route path='/userinfo' element={<UserInfo/>}/>
                 {/*<Route path='/room/:roomId' element={<AuctionLive/>}/>*/}
                 <Route path='/auction' element={<Mainauction/>}/>
-
+                <Route path='/roomcreate' element={<RoomCreate/>}/>
                 <Route path='/' element={<Menu/>}/>
 
                 <Route path='/manage/*' element={<ManagePageMain/>}/>
@@ -48,7 +50,6 @@ function RouteMain(props) {
                     <Route path={'livestream'} element={<LiveStream/>}/>
                 </Route>
                 <Route path='/product/*' element={<RegisterProduct/>}/>
-
                 <Route path='/*' element={
                     <div>
                         <h1>잘못된 URL 주소입니다</h1>
