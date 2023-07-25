@@ -41,7 +41,7 @@ public class MsgController {
               deleteNotification.setMsgId(msg.getMsgId());
               deleteNotification.setMsg(msg.getMsg());
               deleteNotification.setUserName(msg.getUserName()); 
-              deleteNotification.setUserName(msg.getEmailName()); 
+//              deleteNotification.setUserName(msg.getEmailName());
 
               // 모든 클라이언트에게 삭제 알림 메시지를 전달
               sendingOperations.convertAndSend("/sub/room/" + msg.getRoomId(), deleteNotification);

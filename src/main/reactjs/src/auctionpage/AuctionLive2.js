@@ -177,7 +177,7 @@ useEffect(()=>{
   }, []);
 
    /* 클라이언트에 채팅 보내기*/
-   const publish = (type,userName, msg,msgId,roomId, date, emailName) => {
+   const publish = (type,userName, msg,msgId,roomId, date) => {
     client.current.send( //send : StompJS라이브러리에서 제공하는 메서드:메시지 전송 역할
         '/pub/msg', // 목적지 주소
         {}, // 메시지 전송에 필요한 헤더를 지정
@@ -187,8 +187,8 @@ useEffect(()=>{
             userName, // 보낸 사람
             msg, // 채팅 메세지
             msgId, // 채팅 랜덤 id
-            date, // 현재시간
-            emailName
+            date // 현재시간
+            // emailName
         })
         //데이터 보낼때 json 형식을 맞추어 보낸다.
     )
@@ -219,8 +219,8 @@ useEffect(()=>{
             roomId, 
             userName, 
             msg:'', // 메세지를 지우겠다
-            msgId,
-            emailName
+            msgId
+
         })
     )
 };
@@ -269,7 +269,7 @@ const report = (userName, msg) => {
         else {
             //입력하면 
             const msgId = Math.random().toString(); //msgId 랜덤값으로 보냄 
-                publish('CHAT', userName, msgRef.current.value, msgId, roomId,emailName); // 채팅 메시지 전송
+                publish('CHAT', userName, msgRef.current.value, msgId, roomId); // 채팅 메시지 전송
                 // console.log("msgId:", msgId);
             }
          }
@@ -284,14 +284,14 @@ const report = (userName, msg) => {
     setInputVisible(false); // 평소에는 안보이게
   };
 
-  function maskUserName(userName) {
-    if (userName.length <= 2) {
-      return userName;
-    } else {
-      const maskedPart = '*'.repeat(userName.length - 1) + userName.slice(-1);
-      return maskedPart;
-    }
-  }
+  // function maskUserName(userName) {
+  //   if (userName.length <= 2) {
+  //     return userName;
+  //   } else {
+  //     const maskedPart = '*'.repeat(userName.length - 1) + userName.slice(-1);
+  //     return maskedPart;
+  //   }
+  // }
 
     return (
       <>

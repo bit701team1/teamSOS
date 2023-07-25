@@ -75,23 +75,23 @@ public class RoomController {
         return new ResponseEntity<>(email,HttpStatus.OK);
     }
     /* 로그인한 유저 이름 가져오기  */
-    @GetMapping("/username")
-    public ResponseEntity<String> Username(HttpServletRequest request) {
-        Cookie[] cookies = request.getCookies();
-        String accesstoken = "";
-
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("access_token")) {
-                    accesstoken = cookie.getValue();
-                    break;
-                }
-            }
-        }
-        String username = userMapper.getUserByUserId(tokenMapper.selectByAccessToken(accesstoken).getRt_key()).getUser_name();
-        
-        return new ResponseEntity<>(username,HttpStatus.OK);
-    }
+//    @GetMapping("/username")
+//    public ResponseEntity<String> Username(HttpServletRequest request) {
+//        Cookie[] cookies = request.getCookies();
+//        String accesstoken = "";
+//
+//        if (cookies != null) {
+//            for (Cookie cookie : cookies) {
+//                if (cookie.getName().equals("access_token")) {
+//                    accesstoken = cookie.getValue();
+//                    break;
+//                }
+//            }
+//        }
+//        String username = userMapper.getUserByUserId(tokenMapper.selectByAccessToken(accesstoken).getRt_key()).getUser_name();
+//
+//        return new ResponseEntity<>(username,HttpStatus.OK);
+//    }
     /* 로그인한 유저 dto 가져오기 */
     @GetMapping("/userdata")
     public ResponseEntity<UserDto> userData( HttpServletRequest request) {
