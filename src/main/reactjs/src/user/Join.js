@@ -56,7 +56,7 @@ function SignUpPage(props) {
         }  else {
 
             e.preventDefault();
-            Axios.post("/user/join", data)
+            Axios.post("/api/user/join", data)
                 .then(res => {
                     if (res.data === 1) {
                         alert("이미 존재하는 이메일입니다");
@@ -81,7 +81,7 @@ function SignUpPage(props) {
         if (data.hp == "") {
             alert("전화번호를 입력해주세요");
         } else {
-            Axios.post("/sms/send-one", data).then(res => {
+            Axios.post("/api/sms/send-one", data).then(res => {
                     //console.log(res.data);
                     setAuthnum(res.data);
                 }

@@ -25,7 +25,7 @@ const LoginPage = () => {
     //로그인
     const handleLoginClick = () => {
         //dto로 /user/login 으로 넘겨야함
-        let url = "/user/login";
+        let url = "/api/user/login";
 
         Axios.post(url, data).then(res => {
             alert("로그인 성공")

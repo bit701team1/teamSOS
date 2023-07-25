@@ -22,7 +22,7 @@ function UpdatePassPage(props) {
         if(rawpassword !== checkpassword){
             alert("비밀번호가 일치하지 않습니다");
         } else if (rawpassword!==""){
-            Axios.post("/user/passUpatebyHp", {hp:hp,rawpassword:rawpassword})
+            Axios.post("/api/user/passUpatebyHp", {hp:hp,rawpassword:rawpassword})
                 .then((response) => {
                     alert("성공적으로 변경되었습니다");
                 })

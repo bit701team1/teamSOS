@@ -31,7 +31,7 @@ function VerificationPage(props) {
             alert("전화번호를 입력해주세요");
         } else {
             alert("인증번호가 발송되었습니다");
-            Axios.post("/sms/send-one", {hp:hp}).then(res => {
+            Axios.post("/api/sms/send-one", {hp:hp}).then(res => {
                     //호출시 생성된 인증번호 저장
                     setAuthnum(res.data);
                 }

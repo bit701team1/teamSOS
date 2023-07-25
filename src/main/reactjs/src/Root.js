@@ -4,11 +4,11 @@ import { BrowserRouter } from 'react-router-dom';
 
 function Root(props) {
     return (
-        <div>
-            <BrowserRouter>
+        <BrowserRouter>
+            <div>
                 <RouteMain/>
-            </BrowserRouter>
-        </div>
+            </div>
+        </BrowserRouter>
     );
 }
 

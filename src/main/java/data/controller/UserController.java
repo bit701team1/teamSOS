@@ -27,7 +27,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
-@RequestMapping("/user")
+@RequestMapping("/api/user")
 public class UserController {
     @Autowired
     TokenMapper tokenMapper;
