@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Song+Myung&display=swap');
+
 .y_atbid-line,
 .y_bid-btn,
 .y_atbid-input,
@@ -17,7 +19,7 @@
   top: calc(50% - 129.5px);
 }
 .y_atbid-p1{
-  font-family: "Song Myung";
+  font-family: 'Roboto';
 }
 .y_bid-btn{
   top: calc(50% - 15.5px);
@@ -52,7 +54,7 @@
 .y_bid-btn p{
   margin-top: 6px;
   font-size: 21px;
-  font-family: inner;
+  font-family: 'Roboto';
 }
 .y_atbid-div{
   position: fixed;

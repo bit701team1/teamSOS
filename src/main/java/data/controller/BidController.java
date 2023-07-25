@@ -23,5 +23,17 @@ public class BidController {
         return bidService.getBidResult(productName);
     }
 
+    @GetMapping("/highestprice")
+    public BidDto getHighestPriceBid(@RequestParam("productName") String productName) {
+        return bidService.getHighestPriceBid(productName);
+    }
+    @GetMapping("/userbid")
+    public BidDto getUserBid(@RequestParam("productName") String productName, @RequestParam("userEmail") String userEmail) {
+        return bidService.getUserBid(productName, userEmail);
+    }
+    @GetMapping("/countbids")
+    public int countBidsByProductName(@RequestParam("productName") String productName) {
+        return bidService.countBidsByProductName(productName);
+    }
 
 }

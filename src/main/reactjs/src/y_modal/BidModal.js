@@ -6,7 +6,7 @@ const BidModal = ({ roomName,onClose }) => {
     const [userdata, setUserdata] = useState("");
     const [price, setPrice] = useState("");
     const [modalOpen, setModalOpen] = useState(true); // 모달 열림/닫힘 상태 추가
-    const [bidMessage, setBidMessage] = useState("");
+
 
     useEffect(() => {
         axios.get("/room/userdata")

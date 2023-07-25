@@ -13,9 +13,6 @@ import java.util.List;
 public class ProductService implements ProductServiceInter{
     private ProductMapper productMapper;
 
-
-
-
     @Override
     public void insertProduct(ProductDto dto) {
         productMapper.insertProduct(dto);
@@ -25,7 +22,6 @@ public class ProductService implements ProductServiceInter{
     public List<ProductDto> getWinnerAndFinalPriceByProductName(String product_name) {
         return productMapper.getWinnerAndFinalPriceByProductName(product_name);
     }
-
 
     @Override
     public void updateWinnerAndFinalPrice(ProductDto dto) {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import UserInfo from './userpage/UserInfo'
@@ -27,12 +27,16 @@ import PassFind from "./user/PassFind";
 import PassAuth from "./user/PassAuth";
 import PassUpdate from "./user/PassUpdate";
 import Intro from "./user/Intro";
+import RoomCreate from './auctionpage/RoomCreate';
+import PaymentResult from "./auctionpage/PaymentResult";
 
 
 
 function RouteMain(props) {
     return (
         <div>
+             
+              
             <Routes>
                 <Route path='/' element={<Menu/>}/>
 
@@ -45,7 +49,8 @@ function RouteMain(props) {
                 {/*<Route path='/room/:roomId' element={<AuctionLive/>}/>*/}
                 <Route path='/auction' element={<Mainauction/>}/>
 
-
+                <Route path='/roomcreate' element={<RoomCreate/>}/>
+                <Route path='/' element={<Menu/>}/>
 
                 <Route path='/manage/*' element={<ManagePageMain/>}/>
 
@@ -60,6 +65,7 @@ function RouteMain(props) {
                 <Route path={'/livestream'}>
                     <Route path={'livestream'} element={<LiveStream/>}/>
                 </Route>
+
                 <Route path='/product/*' element={<RegisterProduct/>}/>
 
                 <Route path='/passfind' element={<PassFind/>}/>
@@ -71,7 +77,7 @@ function RouteMain(props) {
                 <Route path='/intro' element={<Intro/>}/>
 
                 <Route path='/oauth' element={<RedirectURI/>}/>
-
+                <Route path='/paymentresult' element={<PaymentResult/>}/>
 
                 <Route path='/*' element={
                     <div>

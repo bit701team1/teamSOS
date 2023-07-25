@@ -1,7 +1,9 @@
 {
   "files": {
-    "main.css": "/static/css/main.ce5c7a5f.css",
-    "main.js": "/static/js/main.823f4de4.js",
+
+    "main.css": "/static/css/main.59a082da.css",
+    "main.js": "/static/js/main.090ddd54.js",
+
     "static/js/787.d3befce1.chunk.js": "/static/js/787.d3befce1.chunk.js",
     "static/media/kermit.gif": "/static/media/kermit.fe721bbd80f92534cc31.gif",
     "static/media/cel.gif": "/static/media/cel.3fa5e85cd104d7537a06.gif",
@@ -14,8 +16,8 @@
     "static/media/k_hpimg.png": "/static/media/k_hpimg.54eb11d54a4017b482e9.png",
     "static/media/ERR404.png": "/static/media/ERR404.077cdd9ef8a1b332a0be.png",
     "static/media/alert.png": "/static/media/alert.a4fa5827778217c1101b.png",
-    "static/media/k_alert.svg": "/static/media/k_alert.063ec467ec516ee61486f8439249cabe.svg",
-    "static/media/k_people_icon.svg": "/static/media/k_people_icon.7e2ae9010f764e73da48328d48dbac2c.svg",
+    "static/media/k_alert.svg": "/static/media/k_alert.b1fb5fbb979354b85d25180e9f8a341d.svg",
+    "static/media/k_people_icon.svg": "/static/media/k_people_icon.71e6b1e44326b34a65d5ca0bcf131728.svg",
     "index.html": "/index.html",
     "static/media/y_edit.svg": "/static/media/y_edit.87ceda4cdbcafbb539fea125c817c224.svg",
     "static/media/y_reporticon.svg": "/static/media/y_reporticon.4600e51372c55b71fd8d94b6fbb6317f.svg",

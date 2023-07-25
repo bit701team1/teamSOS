@@ -33,7 +33,6 @@ public class RoomService {
     }
     public RoomDto getRoom(String roomId) {//특정방
         return rooms.get(roomId);
-
     }
     public void deleteRoom(String roomId) {
         rooms.remove(roomId);
