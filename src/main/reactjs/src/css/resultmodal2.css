@@ -1,9 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Song+Myung&display=swap');
+
 .y_result-graph{
   position: absolute;
   top: 5rem;
   left: calc(50% - 180px);
   width: 23.38rem;
   height: 20.44rem;
+  font-family: 'Roboto';
 }
 .y_resultmodal-div {
   position: fixed;
@@ -16,6 +19,7 @@
   overflow: hidden;
   transform: translateY(100%);
   animation: slide-up 0.5s forwards;
+  font-family: 'Roboto';
 }
 @keyframes slide-up {
   0% {

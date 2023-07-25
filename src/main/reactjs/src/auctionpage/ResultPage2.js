@@ -2,7 +2,6 @@ import React, { useCallback, useState, useEffect } from 'react';
 import ResultModal from "../resultmodal/ResultModal";
 import PortalPopup from "../resultmodal/PortalPopup";
 import img from '../image/스폰지밥1.gif';
-import back from '../image/y_back.svg';
 import "../css/resultpage2.css";
 import axios from "axios";
 import {useLocation, useNavigate} from "react-router-dom";
@@ -167,6 +166,9 @@ function ResultPage2(props) {
       setFrameOpen(false);
     }, []);
 
+    const photo = process.env.REACT_APP_SUICONURL;
+
+
     // 결제하기 버튼 렌더링 여부를 결정하는 함수
     const shouldRenderPaymentButton = () => {
         if (userBid && highestPriceBid) {
@@ -181,7 +183,7 @@ function ResultPage2(props) {
 
           <img className="y_result-img" alt="" src={img}/>
           <img
-            alt="" src={back}
+            alt="" src={`${photo}y_back.svg`}
             className="y_result-back"
             onClick={onIconArrowRightCircledClick}
           />
