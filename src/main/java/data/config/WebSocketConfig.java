@@ -16,7 +16,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         //endpoints : 클라이언트가 접속할 수 있는 주소
         registry.addEndpoint("/ws")
-                .setAllowedOriginPatterns("http://localhost:3000","http://175.45.193.12")
+                .setAllowedOriginPatterns("*")
                 .withSockJS();
     }
     @Override
