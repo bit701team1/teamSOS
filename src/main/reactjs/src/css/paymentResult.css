@@ -3,7 +3,6 @@
     font-family: Arial, sans-serif;
 }
 
-
 .D_paymentResult {
     display: flex;
     flex-direction: column;
@@ -68,14 +67,10 @@
     text-decoration: none;
     border-radius: 50px;
     outline: none;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-.D_button:focus {
-    color: #fff;
-}
-
-.D_button:hover {
-    background-color: #232323;
+a.D_button:hover {
+    color: #b24c4b;
+    text-decoration: none;
     transition: background-color 0.3s ease;
 }

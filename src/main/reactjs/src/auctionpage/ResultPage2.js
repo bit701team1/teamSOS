@@ -175,7 +175,6 @@ function ResultPage2(props) {
         return false;
     };
 
-
     return (
       <>
         <div className="y_resultpage-div">
@@ -192,13 +191,13 @@ function ResultPage2(props) {
           <div className="y_result-div3" />
           <div className="y_result-p2">{highestPriceBid?.price+'원' || '없음'}</div>
           <div className="y_result-p3">경매 입찰</div>
-          <div className="y_result-p4">김성학의 오마카세</div>
+          <div className="y_result-p4">{roomName}</div>
           <div className="y_result-p5">{user_name}</div>
           <div className="y_result-p6">{`${userBid?.price+'원' || '없음'}`}</div>
           <div className="y_result-p7">
               {user_email}</div>
           <div className="y_result-p8">경매 결과</div>
-          <div className="y_result-p9">김성학의 오마카세</div>
+          <div className="y_result-p9">{roomName}</div>
           <div className="y_result-graph-div" onClick={openFrame}>
             <button className="y_result-graph-btn">낙찰 그래프</button>
           </div>

@@ -25,7 +25,9 @@ function AuctionLive2(props) {
   const [msg,setMsg] = useState([]); // 메세지 내용
   const chatScreenRef = useRef(null);
   const productName = roomName;
-  /////////////////////////모달////////////////////////////
+  const [isLoading, setIsLoading] = useState(true);
+
+    /////////////////////////모달////////////////////////////
   const openFrame = useCallback(() => {
     setFrameOpen(true);
   }, []);
@@ -254,11 +256,9 @@ const report = (userName, msg) => {
 
   //추가
     const navigate = useNavigate();
-    const goToResult = () => {
-        // 여기서 '/result2'는 이동할 경로입니다.
-        // 필요에 따라 다른 경로로 변경할 수 있습니다.
-        navigate(`/result2?roomName=${roomName}`);
-    };
+    // const goToResult = () => {
+    //     navigate(`/result2?roomName=${roomName}`);
+    // };
     return (
       <>
         <div className="y_auction-div">
@@ -318,7 +318,7 @@ const report = (userName, msg) => {
              </div>
                    );
               })}
-            <button type={"button"} onClick={goToResult} className={"D_gotoresult"}>결과창</button>
+            {/*<button type={"button"} onClick={goToResult} className={"D_gotoresult"}>결과창</button>*/}
         </div>
         <img className="y_auctionsend" alt="" src={send}
         style={{cursor:'pointer'}} 
