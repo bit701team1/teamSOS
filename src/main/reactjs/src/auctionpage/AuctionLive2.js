@@ -10,7 +10,7 @@ import AuctionBid from '../auctionmodal/AuctionBid';
 import PortalPopup from '../auctionmodal/PortalPopup';
 import axios from "axios";
 import alertImage from "../image/alert.png";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import * as SockJS from "sockjs-client";
 import * as StompJS from "@stomp/stompjs";
 function AuctionLive2(props) {
@@ -23,8 +23,11 @@ function AuctionLive2(props) {
   const [userName, setUserName] = useState(''); //email
   const msgRef = useRef(); // 메세지 함수
   const [msg,setMsg] = useState([]); // 메세지 내용
-  const chatScreenRef = useRef(null); 
-  /////////////////////////모달////////////////////////////
+  const chatScreenRef = useRef(null);
+  const productName = roomName;
+  const [isLoading, setIsLoading] = useState(true);
+
+    /////////////////////////모달////////////////////////////
   const openFrame = useCallback(() => {
     setFrameOpen(true);
   }, []);
@@ -67,8 +70,10 @@ function AuctionLive2(props) {
           console.error("Failed to check duplicate bid:", error);
       }
   };
-
-  checkDuplicateBid();
+    //중복실행 수정(빈값이 아닐때만 실행)
+     if (roomName !== "" && userName !== "") {
+         checkDuplicateBid();
+     }
 }, [roomName, userName]);
 
   /*채팅 스크롤*/
@@ -249,6 +254,11 @@ const report = (userName, msg) => {
     setInputVisible(false); // 평소에는 안보이게
   };
 
+  //추가
+    const navigate = useNavigate();
+    // const goToResult = () => {
+    //     navigate(`/result2?roomName=${roomName}`);
+    // };
     return (
       <>
         <div className="y_auction-div">
@@ -308,6 +318,7 @@ const report = (userName, msg) => {
              </div>
                    );
               })}
+            {/*<button type={"button"} onClick={goToResult} className={"D_gotoresult"}>결과창</button>*/}
         </div>
         <img className="y_auctionsend" alt="" src={send}
         style={{cursor:'pointer'}} 
@@ -341,7 +352,7 @@ const report = (userName, msg) => {
             placement="Centered"
             onOutsideClick={closeFrame1}
           >
-            <AuctionBid onClose={closeFrame1} />
+            <AuctionBid onClose={closeFrame1} roomName={roomName} userName={userName} productName={productName}/>
           </PortalPopup>
         )}
       </>

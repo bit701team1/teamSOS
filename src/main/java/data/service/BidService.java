@@ -28,5 +28,19 @@ public class BidService implements BidServiceInter{
     public List<BidDto> getBidResult(String productName) {
         return bidMapper.getBidResult(productName);
     }
-}
 
+    @Override
+    public BidDto getHighestPriceBid(String productName) {
+        return bidMapper.getHighestPriceBid(productName);
+    }
+
+    @Override
+    public BidDto getUserBid(String productName, String userEmail) {
+        return bidMapper.getUserBid(productName, userEmail);
+    }
+
+    @Override
+    public int countBidsByProductName(String productName) {
+        return bidMapper.countBidsByProductName(productName);
+    }
+}

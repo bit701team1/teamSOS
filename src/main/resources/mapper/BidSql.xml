@@ -21,4 +21,13 @@
             SELECT MIN(price) FROM bid
         )
     </select>
+    <select id="getHighestPriceBid" resultType="BidDto">
+        SELECT * FROM bid WHERE product_name = #{productName} ORDER BY price DESC LIMIT 1;
+    </select>
+    <select id="getUserBid" resultType="BidDto">
+        SELECT * FROM bid WHERE product_name = #{productName} AND user_email = #{userEmail};
+    </select>
+    <select id="countBidsByProductName" parameterType="String" resultType="int">
+        SELECT COUNT(*) FROM bid WHERE product_name = #{productName}
+    </select>
 </mapper>

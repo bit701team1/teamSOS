@@ -21,6 +21,7 @@ import ResultPage2 from "./auctionpage/ResultPage2";
 import RedirectURI from "./user/naverlogin/RedirectURI";
 import RegisterProduct from "./product/RegisterProduct";
 import AuctionLive2 from './auctionpage/AuctionLive2';
+import PaymentResult from "./auctionpage/PaymentResult";
 
 
 
@@ -47,8 +48,7 @@ function RouteMain(props) {
                 <Route path={'/livestream'}>
                     <Route path={'livestream'} element={<LiveStream/>}/>
                 </Route>
-                <Route path='/product/*' element={<RegisterProduct/>}/>
-
+                <Route path='/paymentresult' element={<PaymentResult/>}/>
                 <Route path='/*' element={
                     <div>
                         <h1>잘못된 URL 주소입니다</h1>
