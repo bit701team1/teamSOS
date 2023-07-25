@@ -18,6 +18,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
+import org.springframework.util.AntPathMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -26,6 +27,9 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 @Slf4j
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
@@ -44,18 +48,30 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         this.userMapper = userMapper;
         this.tokenMapper = tokenMapper;
     }
+    private static final AntPathMatcher PATH_MATCHER = new AntPathMatcher();
+    // 인증에서 제외할 url
+    private static final List<String> EXCLUDE_URL =
+            Collections.unmodifiableList(
+                    Arrays.asList(
+                            "/static/**",
+                            "/favicon.ico",
+                            "/"
 
+                    ));
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-        System.out.println("doFilterInternal");
         log.info(request.getRequestURI());
 
         if (!request.getRequestURI().contains("join") && !request.getRequestURI().contains("delete-") &&
                 !request.getRequestURI().contains("room") && !request.getRequestURI().contains("lobby") &&
                 !request.getRequestURI().contains("ws") && !request.getRequestURI().contains("oauth") &&
                 !request.getRequestURI().contains("sms") && !request.getRequestURI().contains("manage") &&
-                !request.getRequestURI().contains("product")
+                !request.getRequestURI().contains("product") && !request.getRequestURI().contains("static") &&
+                !request.getRequestURI().contains("pass") &&
+                !request.getRequestURI().contains("manifest") && !request.getRequestURI().contains("favicon") &&
+                !request.getRequestURI().contains("user") && !request.getRequestURI().equals("/") &&
+                !request.getRequestURI().contains("app")
             ){
             log.info("토큰 체크");
             UserDto dto = new UserDto();
@@ -139,8 +155,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 logger.error("Could not set user authentication in security context", ex);
             }
         }
-
+        
+        //예외 가능성
         filterChain.doFilter(request, response);
+    }
+
+    // Filter에서 제외할 URL 설정
+    @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+
+        String servletPath = request.getServletPath();
+        return EXCLUDE_URL.stream().anyMatch(pattern -> PATH_MATCHER.match(pattern, servletPath));
     }
 
     private String getJwtFromRequest(HttpServletRequest request) {

@@ -13,9 +13,8 @@ public interface UserServiceInter {
 
     public void insertUser(UserDto dto);
     public UserDto getUserByEmail(String email);
-
     public UserDto getUserByUserId(int user_id);
-
+    public void updateUserPassbyHp(String hp, String password);
 
     ///////////////////////////////////경철 ///////////////////////////////////////
 

@@ -1,0 +1,233 @@
+/* 구글 폰트 로드 */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&display=swap");
+
+/* 전체 페이지 설정 */
+.VerificationPage{
+    background-color: #2B2B2B;
+    width: 428px;
+    height: 926px;
+    overflow: hidden;
+    text-align: center;
+    color: #ffffff;
+    position: absolute;
+    top: calc(50% - 463px);
+    left: calc(50% - 214px);
+}
+
+/* 뒤로가기 아이콘 설정 */
+.VerificationIcon {
+    position: absolute;
+    width: 32.143px;
+    height: 25px;
+    flex-shrink: 0;
+    stroke-width: 6px;
+    top: 87px;
+    left: 32px;
+}
+
+/* 페이지 제목 설정 */
+.VerificationTitle {
+    position: absolute;
+    color: #ffffff;
+    text-align: center;
+    font-family: 'Roboto';
+    font-size: 25px;
+    font-weight: 500;
+    line-height: normal;
+    top: 85px;
+    left:165px;
+}
+
+/* 상단 텍스트 설정 */
+.VerificationHeaderText {
+    position: absolute;
+    width: 300px;
+    height: 30px;
+    color: #ffffff;
+    font-family: 'Roboto';
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+    top: 164px;
+    left: 44px;
+    text-align: left;
+}
+
+.ConfirmButton {
+    border: none;
+    background: transparent;
+    padding: 0;
+
+}
+
+.ConfirmIcon {
+    position: absolute;
+    width: 30.86px;
+    height: 30.86px;
+    flex-shrink: 0;
+    top: 266px;
+    left: 332px;
+}
+
+/* 인증번호 입력 필드 설정 */
+.VerificationInput {
+    position: relative;
+    top: 245px;
+    left: 44px;
+    margin-bottom: 49px;
+}
+
+.VerificationInput input {
+    font-size: 25px; /* 입력 필드의 텍스트 크기 수정 */
+    padding: 10px 10px 10px 5px;
+    border-radius: 15px;
+    background: rgba(217, 217, 217, 0.20);
+    display: block;
+    width: 340px;
+    height: 70px;
+    border: none;
+    color: #ffffff;
+    border-bottom: 1px solid #757575;
+    outline: none; /* 입력 필드에 포커스가 있을 때 아웃라인을 없애는 설정 */
+}
+
+.VerificationInput input::placeholder {
+    text-align: center;
+    font-size: 18px;
+}
+
+/* 라벨의 위치 및 색상 등을 설정 */
+.VerificationInput label {
+    color:#999;
+    font-size:10px;
+    font-weight:normal;
+    position:absolute;
+    pointer-events:none;
+    left:5px;
+    top:10px;
+    transition:0.2s ease all;
+    -moz-transition:0.2s ease all;
+    -webkit-transition:0.2s ease all;
+    opacity: 0;
+}
+
+.VerificationInput img{
+    position: absolute;
+    left: 16px;
+    opacity: 1; /* 기본적으로 이미지 표시 */
+    transition:0.2s ease all; /* 투명도 변경 효과를 부드럽게 만듦 */
+    -moz-transition:0.2s ease all;
+    -webkit-transition:0.2s ease all;
+}
+
+/* 입력 필드에 포커스가 있거나 유효한 입력이 있을 때 이미지 숨김 */
+.VerificationInput input:focus ~ img,
+.VerificationInput input:valid ~ img{
+    opacity: 0;
+}
+
+
+.VerificationPassIcon{
+    top: 23px;
+}
+
+.VerficationPhoneIcon{
+    top: 21px;
+}
+
+
+/* 입력 필드에 포커스가 있거나 유효한 입력이 있을 때 라벨의 위치 및 크기 변경 */
+.VerificationInput input:focus ~ label, input:valid ~ label {
+    top:-30px;
+    font-size:20px;
+    color:#D6B4A2;
+    opacity: 1;
+}
+
+/* 입력 필드 아래의 바를 설정 */
+.VerificationBar {
+    position: relative;
+    display: block;
+    width: 328px;
+}
+
+.VerificationBar:before,
+.VerificationBar:after {
+    content: '';
+    height: 2px;
+    width: 0;
+    bottom: 1px;
+    position: absolute;
+    background: #D6B4A2;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+}
+
+.VerificationBar:before {
+    left: 50%;
+}
+
+.VerificationBar:after {
+    right: 50%;
+}
+
+/* 입력 필드에 포커스가 있을 때 바의 길이를 확장 */
+input:focus ~ .VerificationBar:before,
+input:focus ~ .VerificationBar:after {
+    width: calc(50% - 3%);
+}
+
+/* 입력 필드에 포커스가 있을 때 하이라이트 표시 */
+.VerificationHighlight {
+    position: absolute;
+    height: 60%;
+    width: 100px;
+    top: 25%;
+    left: 0;
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+/* 하이라이트의 애니메이션 효과 설정 */
+input:focus ~ .VerificationHighlight {
+    -webkit-animation: inputHighlighter 0.3s ease;
+    -moz-animation: inputHighlighter 0.3s ease;
+    animation: inputHighlighter 0.3s ease;
+}
+
+/* 애니메이션 효과 설정 */
+@keyframes VerificationHighlight {
+    from {
+        background: #D6B4A2;
+    }
+    to {
+        width: 0;
+        background: transparent;
+    }
+}
+
+/* 확인 버튼 설정 */
+.VerificationButton {
+    position: absolute;
+    top: 730px;
+    left: 44px;
+    width: 340px;
+    height: 70px;
+    border-radius: 15px;
+    background: #D6B4A2;
+}
+
+/* 확인 버튼 내부의 텍스트 설정 */
+.VerificationButton span {
+    position: absolute;
+    top: 21px;
+    left: 134px;
+    color: #2b2b2b;
+    text-align: center;
+    font-family: 'Roboto';
+    font-size: 20px;
+    font-weight: 600;
+    line-height: normal;
+}

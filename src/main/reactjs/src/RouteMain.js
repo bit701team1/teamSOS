@@ -9,8 +9,8 @@ import AuctionLive from "./auctionpage/AuctionLive";
 import './manage_page/ManagePageMain.css';
 
 import errorimg from './image/ERR404.png';
-import JoinForm from "./user/JoinForm";
-import LoginForm from "./user/LoginForm";
+import JoinForm from "./user/oldcomponent/JoinForm";
+import LoginForm from "./user/oldcomponent/LoginForm";
 import Menu from "./user/Menu";
 import {ManagePageMain} from "./manage_page";
 
@@ -21,6 +21,12 @@ import ResultPage2 from "./auctionpage/ResultPage2";
 import RedirectURI from "./user/naverlogin/RedirectURI";
 import RegisterProduct from "./product/RegisterProduct";
 import AuctionLive2 from './auctionpage/AuctionLive2';
+import Login from "./user/Login";
+import Join from "./user/Join";
+import PassFind from "./user/PassFind";
+import PassAuth from "./user/PassAuth";
+import PassUpdate from "./user/PassUpdate";
+import Intro from "./user/Intro";
 import RoomCreate from './auctionpage/RoomCreate';
 import PaymentResult from "./auctionpage/PaymentResult";
 
@@ -32,9 +38,17 @@ function RouteMain(props) {
              
               
             <Routes>
+                <Route path='/' element={<Menu/>}/>
+
+                {/*<Route path='/app' element={<Menu/>}/>*/}
+                {/*<Route path='/app/passfind' element={<PassFind/>}/>*/}
+                {/*<Route path='/app/login' element={<Login/>}/>*/}
+
+
                 <Route path='/userinfo' element={<UserInfo/>}/>
                 {/*<Route path='/room/:roomId' element={<AuctionLive/>}/>*/}
                 <Route path='/auction' element={<Mainauction/>}/>
+
                 <Route path='/roomcreate' element={<RoomCreate/>}/>
                 <Route path='/' element={<Menu/>}/>
 
@@ -42,9 +56,9 @@ function RouteMain(props) {
 
                 <Route path='/result' element={<ResultPage/>}/>
 
-                <Route path='/join' element={<JoinForm/>}/>
-                <Route path='/login' element={<LoginForm/>}/>
-                <Route path='/oauth' element={<RedirectURI/>}/>
+                <Route path='/oldjoin' element={<JoinForm/>}/>
+                {/*<Route path='/login' element={<LoginForm/>}/>*/}
+
                 <Route path='/room/:roomId' element={<AuctionLive2/>}/>
                 <Route path='/manage/*' element={<ManagePageMain/>}/>
                 <Route path='/result2' element={<ResultPage2/>}/>
@@ -54,6 +68,15 @@ function RouteMain(props) {
 
                 <Route path='/product/*' element={<RegisterProduct/>}/>
 
+                <Route path='/passfind' element={<PassFind/>}/>
+                <Route path='/login' element={<Login/>}/>
+
+                <Route path='/join' element={<Join/>}/>
+                <Route path='/passauth' element={<PassAuth/>}/>
+                <Route path='/passupdate' element={<PassUpdate/>}/>
+                <Route path='/intro' element={<Intro/>}/>
+
+                <Route path='/oauth' element={<RedirectURI/>}/>
                 <Route path='/paymentresult' element={<PaymentResult/>}/>
 
                 <Route path='/*' element={
