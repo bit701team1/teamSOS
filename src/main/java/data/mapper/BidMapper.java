@@ -12,6 +12,8 @@ public interface BidMapper {
     void insertBid(BidDto dto);
     int checkDuplicateBid(@Param("productName") String productName, @Param("userEmail") String userEmail);
     List<BidDto> getBidResult(@Param("productName") String productName);
-
+    BidDto getHighestPriceBid(@Param("productName") String productName);
+    BidDto getUserBid(@Param("productName") String productName, @Param("userEmail") String userEmail);
+    int countBidsByProductName(@Param("productName") String productName);
 }
 
