@@ -57,7 +57,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 !request.getRequestURI().contains("product") && !request.getRequestURI().contains("static") &&
                 !request.getRequestURI().contains("pass") &&
                 !request.getRequestURI().contains("manifest") && !request.getRequestURI().contains("favicon") &&
-                !request.getRequestURI().contains("user")
+                !request.getRequestURI().contains("user") && !request.getRequestURI().equals("/")
             ){
             log.info("토큰 체크");
             UserDto dto = new UserDto();
@@ -141,7 +141,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 logger.error("Could not set user authentication in security context", ex);
             }
         }
-
+        
+        //예외 가능성
         filterChain.doFilter(request, response);
     }
 
