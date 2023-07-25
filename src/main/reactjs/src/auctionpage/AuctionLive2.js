@@ -55,6 +55,7 @@ function AuctionLive2(props) {
     setFrame2Open(false);
   }, []);
  /////////////////////////모달////////////////////////////
+useEffect(()=>{
 
   const checkDuplicateBid = async () => {
       try {
@@ -98,21 +99,21 @@ function AuctionLive2(props) {
         });
     const getUser = async () => {
         try {
-            const user_name = await axios.get('/room/username'); 
-            setUserName(user_name.data);// 이메일 출력
+            const user_name = await axios.get('/room/emailuser');
+            setUserName(user_name.data);
         } catch (error) {
             console.error("Failed to fetch user:", error);
         }
     };
-    const getEmailName = async () => {
-      try {
-          const emails = await axios.get('/room/emailuser'); 
-          setEmail(emails.data);
-      } catch (error) {
-          console.error("Failed to fetch user:", error);
-      }
-  };
-    getEmailName();
+  //   const getEmailName = async () => {
+  //     try {
+  //         const emails = await axios.get('/room/username');
+  //         setUserName(user_name.data);// 이메일 출력
+  //     } catch (error) {
+  //         console.error("Failed to fetch user:", error);
+  //     }
+  // };
+  //   getEmailName();
     getUser();
     connect();
     // 컴포넌트가 언마운트되면 소켓 연결 해제
@@ -291,13 +292,6 @@ const report = (userName, msg) => {
       return maskedPart;
     }
   }
-  
-
-  //추가
-    const navigate = useNavigate();
-    // const goToResult = () => {
-    //     navigate(`/result2?roomName=${roomName}`);
-    // };
 
     return (
       <>
@@ -329,7 +323,7 @@ const report = (userName, msg) => {
                                          <b style={{fontSize:'10px', color:'gray'}}>{item.date}</b>
                                         )}
                                         &nbsp;
-                                        <b>{maskUserName(Message.userName)} : {Message.msg}</b>
+                                        <b>{Message.userName} : {Message.msg}</b>
                                         {!isCurrentUser && admin &&(  //현재로그인한사용자가 아닌데 관리자면 삭제아이콘보임
                         <i
                             className="bi bi-trash" 
@@ -393,7 +387,7 @@ const report = (userName, msg) => {
           placement="Centered"
           onOutsideClick={closeFrame2}
         >
-          <AuctionEnd onClose={closeFrame2} />
+          <AuctionEnd onClose={closeFrame2} roomName={roomName}/>
         </PortalPopup>
       )}
         {isFrameOpen && (

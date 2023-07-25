@@ -59,9 +59,8 @@ public class MsgController {
               case "LIVE_END":
               room = roomService.getRoom(msg.getRoomId());
               MsgDto broadcastEnd = new MsgDto();
-              broadcastEnd.setType("BROADCAST_END");
+              broadcastEnd.setType("LIVE_END");
               broadcastEnd.setRoomId(msg.getRoomId());
-              broadcastEnd.setMsg("The broadcast has ended.");
       
               // 모든 클라이언트에게 방송 종료 메시지를 전달
               sendingOperations.convertAndSend("/sub/room/" + msg.getRoomId(), broadcastEnd);
