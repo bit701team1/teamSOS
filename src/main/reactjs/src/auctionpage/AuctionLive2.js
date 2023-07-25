@@ -6,10 +6,11 @@ import AuctionBid from '../auctionmodal/AuctionBid';
 import AuctionEnd from '../auctionmodal/AuctionEnd';
 import PortalPopup from '../auctionmodal/PortalPopup';
 import axios from "axios";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import * as SockJS from "sockjs-client";
 import * as StompJS from "@stomp/stompjs";
 function AuctionLive2(props) {
+  const navigate = useNavigate();
   const [hasBid, setHasBid] = useState(false); // 현재 로그인된 사용자의 입찰 여부를 관리하는 상태 변수
   const [isFrameOpen, setFrameOpen] = useState(false);
   const [isFrame1Open, setFrame1Open] = useState(false);
@@ -17,7 +18,8 @@ function AuctionLive2(props) {
   const { roomId } = useParams(); // 방 id
   const [roomName, setRoomName] =useState('');
   const client = useRef(); // 클라이언트
-  const [userName, setUserName] = useState(''); //email
+  const [userName, setUserName] = useState(''); //유저이름
+  const [emailName, setEmail] = useState(''); //유저이메일
   const msgRef = useRef(); // 메세지 함수
   const [msg,setMsg] = useState([]); // 메세지 내용
   const chatScreenRef = useRef(null); 
@@ -94,12 +96,21 @@ function AuctionLive2(props) {
         });
     const getUser = async () => {
         try {
-            const email = await axios.get('/room/emailuser'); 
-            setUserName(email.data);// 이메일 출력
+            const user_name = await axios.get('/room/username'); 
+            setUserName(user_name.data);// 이메일 출력
         } catch (error) {
             console.error("Failed to fetch user:", error);
         }
     };
+    const getEmailName = async () => {
+      try {
+          const emails = await axios.get('/room/emailuser'); 
+          setEmail(emails.data);
+      } catch (error) {
+          console.error("Failed to fetch user:", error);
+      }
+  };
+    getEmailName();
     getUser();
     connect();
     // 컴포넌트가 언마운트되면 소켓 연결 해제
@@ -124,9 +135,8 @@ function AuctionLive2(props) {
                 const kickUser = JSON.parse(data.body).userName;
                 if(kickUser === userName){
                     alert('나가');
-                    window.location.href = '/';
                 }
-            } else if(receivedMsg.type === 'BROADCAST_END') {
+            } else if(receivedMsg.type === 'LIVE_END') {
               openFrame2(); // 방송 종료 모달을 띄웁니다.
             }
             else {
@@ -164,7 +174,7 @@ function AuctionLive2(props) {
   }, []);
 
    /* 클라이언트에 채팅 보내기*/
-   const publish = (type,userName, msg,msgId,roomId, date) => {
+   const publish = (type,userName, msg,msgId,roomId, date, emailName) => {
     client.current.send( //send : StompJS라이브러리에서 제공하는 메서드:메시지 전송 역할
         '/pub/msg', // 목적지 주소
         {}, // 메시지 전송에 필요한 헤더를 지정
@@ -174,7 +184,8 @@ function AuctionLive2(props) {
             userName, // 보낸 사람
             msg, // 채팅 메세지
             msgId, // 채팅 랜덤 id
-            date // 현재시간
+            date, // 현재시간
+            emailName
         })
         //데이터 보낼때 json 형식을 맞추어 보낸다.
     )
@@ -186,7 +197,7 @@ function AuctionLive2(props) {
       '/pub/msg', 
       {}, 
       JSON.stringify({
-          type: 'BROADCAST_END', 
+          type: 'LIVE_END', 
           roomId
       })
   )
@@ -205,7 +216,8 @@ function AuctionLive2(props) {
             roomId, 
             userName, 
             msg:'', // 메세지를 지우겠다
-            msgId
+            msgId,
+            emailName
         })
     )
 };
@@ -219,8 +231,7 @@ function AuctionLive2(props) {
         JSON.stringify({
             type:'KICK',
             roomId, 
-            userName: kickUser,  // 강퇴할 대상의 userName을 보낸다.
-            msg: '' // 메시지는 비워둔다.
+            userName: kickUser  // 강퇴할 대상의 userName을 보낸다.
         })
     )
     console.log(kickUser + " was kicked out."); // 강퇴당한 사용자의 userName을 출력한다.
@@ -255,7 +266,7 @@ const report = (userName, msg) => {
         else {
             //입력하면 
             const msgId = Math.random().toString(); //msgId 랜덤값으로 보냄 
-                publish('CHAT', userName, msgRef.current.value, msgId, roomId); // 채팅 메시지 전송
+                publish('CHAT', userName, msgRef.current.value, msgId, roomId,emailName); // 채팅 메시지 전송
                 // console.log("msgId:", msgId);
             }
          }
@@ -269,7 +280,15 @@ const report = (userName, msg) => {
   const handleBlur = () => {
     setInputVisible(false); // 평소에는 안보이게
   };
-
+  function maskUserName(userName) {
+    if (userName.length <= 2) {
+      return userName;
+    } else {
+      const maskedPart = '*'.repeat(userName.length - 1) + userName.slice(-1);
+      return maskedPart;
+    }
+  }
+  
     return (
       <>
         <div className="y_auction-div">
@@ -300,7 +319,7 @@ const report = (userName, msg) => {
                                          <b style={{fontSize:'10px', color:'gray'}}>{item.date}</b>
                                         )}
                                         &nbsp;
-                                        <b>{Message.userName}  {Message.msg}</b>
+                                        <b>{maskUserName(Message.userName)} : {Message.msg}</b>
                                         {!isCurrentUser && admin &&(  //현재로그인한사용자가 아닌데 관리자면 삭제아이콘보임
                         <i
                             className="bi bi-trash" 
