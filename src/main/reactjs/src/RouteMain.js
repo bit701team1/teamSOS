@@ -36,6 +36,11 @@ function RouteMain(props) {
             <Routes>
                 <Route path='/' element={<Menu/>}/>
 
+                {/*<Route path='/app' element={<Menu/>}/>*/}
+                {/*<Route path='/app/passfind' element={<PassFind/>}/>*/}
+                {/*<Route path='/app/login' element={<Login/>}/>*/}
+
+
                 <Route path='/userinfo' element={<UserInfo/>}/>
                 {/*<Route path='/room/:roomId' element={<AuctionLive/>}/>*/}
                 <Route path='/auction' element={<Mainauction/>}/>
@@ -57,9 +62,10 @@ function RouteMain(props) {
                 </Route>
                 <Route path='/product/*' element={<RegisterProduct/>}/>
 
-                <Route path='/login' element={<Login/>}/>
-                <Route path='/join' element={<Join/>}/>
                 <Route path='/passfind' element={<PassFind/>}/>
+                <Route path='/login' element={<Login/>}/>
+
+                <Route path='/join' element={<Join/>}/>
                 <Route path='/passauth' element={<PassAuth/>}/>
                 <Route path='/passupdate' element={<PassUpdate/>}/>
                 <Route path='/intro' element={<Intro/>}/>

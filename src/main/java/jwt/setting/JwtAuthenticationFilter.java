@@ -57,7 +57,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 !request.getRequestURI().contains("product") && !request.getRequestURI().contains("static") &&
                 !request.getRequestURI().contains("pass") &&
                 !request.getRequestURI().contains("manifest") && !request.getRequestURI().contains("favicon") &&
-                !request.getRequestURI().contains("user") && !request.getRequestURI().equals("/")
+                !request.getRequestURI().contains("user") && !request.getRequestURI().equals("/") &&
+                !request.getRequestURI().contains("app")
             ){
             log.info("토큰 체크");
             UserDto dto = new UserDto();
