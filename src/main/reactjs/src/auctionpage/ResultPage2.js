@@ -44,6 +44,7 @@ function ResultPage2(props) {
         IMP.request_pay(data, callback);
     }
 
+
     /* 3. 콜백 함수 정의하기 */
     async function callback(response) {
         const {
@@ -74,6 +75,15 @@ function ResultPage2(props) {
                 buyer_name:user_name,
                 buyer_tel:userdata.hp,
                 buyer_email:user_email,
+            });
+            navi('/paymentresult',{
+                state: {
+                    productName: roomName,
+                    amount: userBid.price,
+                    merchant_uid,
+                    user_name,
+                    user_email,
+                },
             });
         } else {
             alert(`결제 실패: ${error_msg}`);

@@ -318,6 +318,7 @@ const report = (userName, msg) => {
              </div>
                    );
               })}
+            <button type={"button"} onClick={goToResult} className={"D_gotoresult"}>결과창</button>
         </div>
         <img className="y_auctionsend" alt="" src={send}
         style={{cursor:'pointer'}} 
@@ -334,7 +335,6 @@ const report = (userName, msg) => {
                            }}
                     />
                   )}
-            <button type={"button"} onClick={goToResult}>결과창</button>
       </div>
       {/* 모달 */}
         {isFrameOpen && (
