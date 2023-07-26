@@ -1,3 +1,4 @@
+import "./RedirectURI.css";
 import React, {useEffect, useState} from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Axios from 'axios';
@@ -7,6 +8,7 @@ const RedirectUri = (props) => {
     const location = useLocation();
     const [tokenAlreadyFetched, setTokenAlreadyFetched] = useState(false);
     const navi = useNavigate();
+     const spinner = "https://kr.object.ncloudstorage.com/aaa-bucket-teamsos/user/Spinner.svg";
 
     const getNaverToken = async () => {
         //alert("getNaverToken 호출")
@@ -42,8 +44,8 @@ const RedirectUri = (props) => {
         getNaverToken();
     }, [tokenAlreadyFetched]);
 
-    return <div>
-        대충 로그인 중이라는 화면
+    return <div className="RedirectPage">
+        <img className="NaverLoginSpinner" alt='spinner' src={spinner}/>
     </div>;
 };
 

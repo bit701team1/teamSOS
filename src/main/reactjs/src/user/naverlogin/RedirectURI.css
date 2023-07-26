@@ -1,0 +1,20 @@
+.RedirectPage {
+    background-color: #2b2b2b;
+    width: 428px;
+    height: 926px;
+    overflow: hidden;
+    text-align: center;
+    color: #ffffff;
+    position: absolute;
+    top: calc(50% - 463px);
+    left: calc(50% - 214px);
+    transform-origin: center; /* 변환 기준점을 중앙으로 설정 */
+    transform: scale(1); /* 초기 스케일 값을 1로 설정 */
+}
+
+/* Spinner 위치 설정 */
+.NaverLoginSpinner {
+    position: absolute;
+    top: 250px;
+    left: 95px;
+}

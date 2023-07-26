@@ -53,7 +53,7 @@ const LoginPage = () => {
 
         <div className="LoginPage">
             <div className="LoginPageHeader">
-                <a href='#'>
+                <a href='/enter'>
                     <img className="HeaderIcon" alt="뒤로가기 버튼" src={BackIcon}/>
                 </a>
                 <span className="HeaderTitle">로그인</span>
