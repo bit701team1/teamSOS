@@ -1,6 +1,10 @@
 /* 구글 폰트 로드 */
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&display=swap");
 
+body{
+    background-color: #2B2B2B;
+}
+
 /* 전체 페이지 설정 */
 .VerificationPage{
     background-color: #2B2B2B;
@@ -12,6 +16,8 @@
     position: absolute;
     top: calc(50% - 463px);
     left: calc(50% - 214px);
+    transform-origin: center; /* 변환 기준점을 중앙으로 설정 */
+    transform: scale(1); /* 초기 스케일 값을 1로 설정 */
 }
 
 /* 뒤로가기 아이콘 설정 */
@@ -230,4 +236,11 @@ input:focus ~ .VerificationHighlight {
     font-size: 20px;
     font-weight: 600;
     line-height: normal;
+}
+
+/* 휴대폰 가로 너비가 428px 이하일 때 스타일 변경 */
+@media screen and (max-width: 428px) {
+    .VerificationPage {
+        transform: scale(0.9); /* 스케일을 0.9로 설정하여 90%로 축소 */
+    }
 }
