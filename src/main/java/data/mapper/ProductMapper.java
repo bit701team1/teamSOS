@@ -15,4 +15,10 @@ public interface ProductMapper {
     public void updateWinnerAndFinalPrice(ProductDto dto);
 
     public ProductDto selectByCurDate();
+
+    public List<ProductDto> getProductDataRecent(String search);
+    public List<ProductDto> getProductDataOld(String search);
+    public List<ProductDto> getProductHighPrice(String search);
+
+
 }

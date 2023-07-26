@@ -62,6 +62,9 @@ public interface UserMapper {
 
     //블랙리스트 멤버 숫자(new)
     public int getBlockListCount();
+    //검색된 블랙리스트 유저의 총 토탈 카운트
+    public int getManageTotalCountWithBlockUserSearch(Map<String, Object> map);
+    
     //수연 알람
     public void updatealarm(UserDto dto);
     //수연 경고증가

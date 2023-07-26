@@ -41,6 +41,7 @@ public class MsgController {
               deleteNotification.setMsgId(msg.getMsgId());
               deleteNotification.setMsg(msg.getMsg());
               deleteNotification.setUserName(msg.getUserName()); 
+              deleteNotification.setUser(msg.getUser()); 
 //              deleteNotification.setUserName(msg.getEmailName());
 
               // 모든 클라이언트에게 삭제 알림 메시지를 전달
@@ -53,6 +54,7 @@ public class MsgController {
                 // 특정 사용자를 강퇴하는 로직 추가
                 kickuser.setType("KICK");
                 kickuser.setUserName(msg.getUserName());
+                kickuser.setRoomId(msg.getRoomId());
                 System.out.println("강퇴되었습니다.");
                  sendingOperations.convertAndSend("/sub/room/" + msg.getRoomId(), kickuser);
               break;

@@ -1,0 +1,192 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Song+Myung&display=swap');
+
+.k_productlist_main {
+    position: relative;
+    background-color: #d6b4a2;
+    width: 100%;
+    height: 58rem;
+    text-align: left;
+    font-size: 2rem;
+    color: #000;
+    margin: 0;
+    line-height: normal;
+}
+
+.k_product_info{
+    position: absolute;
+    overflow: hidden;
+}
+.k_product_info{
+    width: 100%;
+    top: 0rem;
+    right: 0;
+    left: 0;
+    background-color: #d6b4a2;
+    height: 5rem;
+    font-family: "Roboto";
+
+}
+
+.k-back-icon {
+    position: absolute;
+    height: 53.3%;
+    width: 8.29%;
+    top: 30%;
+    right: 88.38%;
+    bottom: 23.63%;
+    left: 3.33%;
+    max-width: 100%;
+    overflow: hidden;
+    max-height: 100%;
+}
+.k_info_title {
+    position: absolute;
+    top: calc(50% - (50px*0.363));
+    left: 28%;
+}
+
+.k_product_selectbar{
+    position: absolute;
+    overflow: hidden;
+}
+.k_product_selectbar {
+    top: 5rem;
+    background-color: #ffffff;
+    width: 100%;
+    height: 4rem;
+    text-align: center;
+
+}
+#k_product_select {
+    line-height: 1rem;
+    font-size: 1.5rem;
+}
+
+
+.k_product_searchbar
+{
+    position: absolute;
+    overflow: hidden;
+}
+.k_product_searchbar {
+    width: 100%;
+    top: 9.5rem;
+    right: 0;
+    left: 0;
+    background-color: #d6b4a2;
+    height: 4rem;
+}
+.k_product_searchbar_box {
+    position: absolute;
+    top: 0.5rem;
+    width: 90%;
+    height: 3rem;
+    overflow: hidden;
+    color: white;
+    margin-left: 5%;
+    border: none;
+
+
+}
+
+.k_product_searchbar_input {
+    position: absolute;
+    line-height: 2.5rem;
+    font-size: 1.5rem;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    font-family: "Roboto";
+    text-align: center;
+
+}
+
+
+.k_product_list
+{
+    position: absolute;
+    overflow: auto;
+}
+.k_product_list {
+    width: 100%;
+    top: 13rem;
+    right: 0;
+    left: 0;
+    background-color: #d6b4a2;
+}
+
+.k_product_list_show{
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    background-color: #d6b4a2;
+}
+
+.k_product_list_box{
+    width: 90%;
+    margin-top: 5%;
+    margin-left: 5%;
+    margin-bottom: 5%;
+    background-color: #ffffff;
+    height: 8rem;
+    border-radius: 5px;
+}
+
+.k_productlist_main_form{
+    border: none;
+    background-color: #ffffff;
+    font-family: "Roboto";
+
+}
+
+.k_product_list_detail_name {
+    position: relative;
+    font-family: "Roboto";
+    font-size: 1rem;
+    top: 15%;
+    width: 10rem;
+    margin-left: 22%;
+
+
+}
+.k_product_list_detail_winner {
+    position: relative;
+    font-family: "Roboto";
+    font-size: 0.7rem;
+    top: 18%;
+    width: 10rem;
+    margin-left: 34%;
+
+}
+.k_product_list_detail_price {
+    position: relative;
+    font-family: "Roboto";
+    font-size: 1rem;
+    top: 45%;
+    width: 10rem;
+    margin-left: 20%;
+
+}
+.k_product_list_detail_date {
+    position: relative;
+    font-family: "Roboto";
+    font-size: 1rem;
+    top: 30%;
+    width: 10rem;
+    margin-left: 60%;
+
+}
+
+.k_product_img {
+    position: relative;
+    top: 10%;
+    left: 1rem;
+    width: 6rem;
+    height: 6rem;
+    object-fit: cover;
+    float: left;
+}
+
+
