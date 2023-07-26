@@ -3,58 +3,59 @@
 /* 로그인 페이지 전체를 설정하는 스타일 */
 .LoginPage {
     background-color: #2b2b2b;
-    width: 23.4375rem;
-    height: 50.75rem;
+    width: 428px;
+    height: 926px;
     overflow: hidden;
     text-align: center;
     color: #ffffff;
     position: absolute;
-    top: calc(50% - 28.9375rem);
-    left: calc(50% - 13.375rem);
-    transform: translate(-50%, -50%);
+    top: calc(50% - 463px);
+    left: calc(50% - 214px);
+    transform-origin: center; /* 변환 기준점을 중앙으로 설정 */
+    transform: scale(1); /* 초기 스케일 값을 1로 설정 */
 }
 
 /* 헤더 아이콘 설정 */
 .HeaderIcon {
     position: absolute;
-    width: 2.00894rem;
-    height: 1.5625rem;
+    width: 32.143px;
+    height: 25px;
     flex-shrink: 0;
     stroke-width: 6px;
     stroke: #ffffff;
-    top: 3.5rem;
-    left: 2.37rem;
+    top: 87px;
+    left: 32px;
 }
 
 /* 헤더 제목 설정 */
 .HeaderTitle {
     position: absolute;
+    color: #ffffff;
     text-align: center;
-    font-family: "Roboto";
-    font-size: 1.5625rem;
-    font-style: normal;
+    font-family: 'Roboto';
+    font-size: 25px;
     font-weight: 500;
     line-height: normal;
-    top: 3.38rem;
-    left: 9.56rem;
+    top: 85px;
+    left:180px;
 }
 
 /* 로그인 입력 필드 설정 */
 .LoginPageInput {
     position: relative;
-    top: 11.5rem;
-    left: 2.38rem;
-    margin-bottom: 3.06rem;
+    top: 245px;
+    left: 44px;
+    margin-bottom: 49px;
 }
 
 .LoginPageInput input {
     font-size: 25px; /* 입력 필드의 텍스트 크기 수정 */
-    padding: 0.625rem 0.625rem 0.625rem 0.3125rem;
-    border-radius: 0.9375rem;
+    padding: 10px 10px 10px 5px;
+    border-radius: 15px;
     background: rgba(217, 217, 217, 0.20);
     display: block;
-    width: 18.75rem;
-    height: 4.375rem;
+    width: 340px;
+    height: 70px;
     border: none;
     color: #ffffff;
     border-bottom: 1px solid #757575;
@@ -63,18 +64,18 @@
 
 .LoginPageInput input::placeholder {
     text-align: center;
-    font-size: 1.125rem;
+    font-size: 18px;
 }
 
 /* 라벨의 위치 및 색상 등을 설정 */
-.LoginPageInput label{
+.LoginPageInput label {
     color:#999;
-    font-size: 0.625rem;;
+    font-size:10px;
     font-weight:normal;
     position:absolute;
     pointer-events:none;
-    left: 0.3125rem;
-    top: 0.625rem;
+    left:5px;
+    top:10px;
     transition:0.2s ease all;
     -moz-transition:0.2s ease all;
     -webkit-transition:0.2s ease all;
@@ -83,7 +84,7 @@
 
 .LoginPageInput img{
     position: absolute;
-    left: 1rem;
+    left: 16px;
     opacity: 1; /* 기본적으로 이미지 표시 */
     transition:0.2s ease all; /* 투명도 변경 효과를 부드럽게 만듦 */
     -moz-transition:0.2s ease all;
@@ -98,18 +99,18 @@
 
 
 .passicon{
-    top: 1.4375rem;
+    top: 23px;
 }
 
 .emailicon{
-    top: 1.625rem;
+    top: 26px;
 }
 
 
 /* 입력 필드에 포커스가 있거나 유효한 입력이 있을 때 라벨의 위치 및 크기 변경 */
 .LoginPageInput input:focus ~ label, input:valid ~ label {
-    top: -1.875rem;
-    font-size: 1.25rem;
+    top:-30px;
+    font-size:20px;
     color:#D6B4A2;
     opacity: 1;
 }
@@ -118,15 +119,15 @@
 .bar {
     position: relative;
     display: block;
-    width: 18.75rem;
+    width: 328px;
 }
 
 .bar:before,
 .bar:after {
     content: '';
-    height: 0.125rem;
+    height: 2px;
     width: 0;
-    bottom: 0.0625rem;
+    bottom: 1px;
     position: absolute;
     background: #D6B4A2;
     transition: 0.2s ease all;
@@ -152,7 +153,7 @@ input:focus ~ .bar:after {
 .highlight {
     position: absolute;
     height: 60%;
-    width: 6.25rem;
+    width: 100px;
     top: 25%;
     left: 0;
     pointer-events: none;
@@ -180,44 +181,37 @@ input:focus ~ .highlight {
 /* 로그인 체크박스 위치 설정 */
 .LoginPageCheck {
     position: absolute;
-    top: 24.06rem;
-    left: 3.13rem;
+    top: 443px;
+    left: 52px;
 }
 
 /* 로그인 링크 위치 설정 */
 .LoginPageLink {
     position: absolute;
-    top: 24.06rem;
-    right: 3.06rem;
-}
-
-.LoginPageLink a{
-    text-decoration: none;
-    color: #ffffff;
-    cursor: pointer;
+    top: 443px;
+    right: 52px;
 }
 
 /* 로그인 버튼 설정 */
 .LoginButton {
     position: absolute;
-    top: 29.94rem;
-    left: 2.38rem;
-    width: 18.75rem;
-    height: 4.375rem;
+    top: 540px;
+    left: 44px;
+    width: 340px;
+    height: 70px;
     border-radius: 15px;
     background: #D6B4A2;
-    cursor: pointer;
 }
 
 /* 로그인 버튼 내부의 텍스트 설정 */
 .LoginButton span {
     position: absolute;
-    top: 1.31rem;
-    left: 7.25rem;
+    top: 21px;
+    left: 136px;
     color: #2b2b2b;
     text-align: center;
     font-family: 'Roboto';
-    font-size: 1.5625rem;
+    font-size: 25px;
     font-weight: 600;
     line-height: normal;
 }
@@ -234,30 +228,25 @@ input:focus ~ .highlight {
 /* 네이버 로그인 버튼 위치 설정 */
 .LoginNaver {
     position: absolute;
-    top: 36.88rem;
-    left: 5.25rem;
+    top: 650px;
+    left: 89.71px;
 }
 
 /* 구글 로그인 버튼 위치 설정 */
 .LoginGoogle {
     position: absolute;
-    top: 36.88rem;
-    left: 10.42rem;
+    top: 650px;
+    left: 194.4px;
 }
 
 /* 카카오 로그인 버튼 위치 설정 */
 .LoginKakao {
     position: absolute;
-    top: 36.88rem;
-    left: 16.19rem;
+    top: 650px;
+    left: 301px;
 }
 
 /* 페이지 푸터 텍스트 설정 */
-
-.LoginPageFooter{
-    top: 43.75rem;
-    left: 5.12rem;
-}
 .LoginPageFooterText1 {
     color: #ffffff;
 }
@@ -269,4 +258,11 @@ input:focus ~ .highlight {
 .LoginPageFooterText3 {
     text-decoration: underline;
     color: #D6B4A2;
+}
+
+/* 휴대폰 가로 너비가 428px 이하일 때 스타일 변경 */
+@media screen and (max-width: 428px) {
+    .LoginPage {
+        transform: scale(0.82); /* 스케일을 0.82로 설정하여 82%로 축소 */
+    }
 }
