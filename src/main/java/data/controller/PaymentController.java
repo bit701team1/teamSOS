@@ -7,7 +7,12 @@ import data.dto.PaymentDto;
 import data.service.PaymentService;
 import lombok.AllArgsConstructor;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
+import org.springframework.web.servlet.view.RedirectView;
 
 
 @RestController
@@ -24,6 +29,20 @@ public class PaymentController {
         System.out.println("uid>>"+imp_uid);
         paymentService.insertPayment(dto,imp_uid);
     }
+//    @PostMapping("/insert")
+//    public ResponseEntity<Map<String, Object>> insert(@RequestBody Map<String, Object> data) {
+//        // 클라이언트에서 넘어온 결제 정보 처리 로직
+//        // paymentService.insertPayment(dto, imp_uid);
+//
+//        // 결제 요청에 대한 응답으로 리디렉션 URL 반환
+//        String redirectUrl = "https://api.iamport.kr/payments/complete"; // 결제 완료 후 리디렉션될 URL
+//
+//        Map<String, Object> response = new HashMap<>();
+//        response.put("success", true);
+//        response.put("redirect_url", redirectUrl);
+//
+//        return ResponseEntity.ok(response);
+//    }
 
     @PostMapping("/paymentinfo")
     public Boolean paymentinfo(@RequestBody PaymentDto dto) {
@@ -47,6 +66,26 @@ public class PaymentController {
             // 결제 정보가 일치하지 않으면 false 리턴
             System.out.println("결제정보 불일치");
             return false;
+        }
+    }
+
+    @GetMapping("/ordercompletemobile")
+    public RedirectView orderCompleteMobile(@RequestParam("imp_uid") String impUid,
+                                            @RequestParam("merchant_uid") String merchantUid,
+                                            @RequestParam("imp_success") boolean impSuccess) {
+        if (impSuccess) {
+            // 결제가 성공적으로 완료되었을 경우 필요한 처리를 수행합니다.
+            System.out.println("결과창 이동");
+
+            // 리다이렉션을 원하는 도메인 입력
+            String redirectUrl = "http://175.45.193.12/paymentresult";
+            RedirectView redirectView = new RedirectView(redirectUrl, true);
+            return redirectView;
+        } else {
+            // 결제가 실패한 경우 에러 페이지로 리다이렉트합니다.
+            String redirectUrl = "https://example.com/error";
+            RedirectView redirectView = new RedirectView(redirectUrl, true);
+            return redirectView;
         }
     }
 

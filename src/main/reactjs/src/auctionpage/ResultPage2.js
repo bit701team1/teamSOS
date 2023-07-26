@@ -42,62 +42,6 @@ function ResultPage2(props) {
     const { IMP } = window;
     IMP.init('imp57160077'); // 'imp00000000' 대신 발급받은 가맹점 식별코드를 사용합니다.
 
-    // const paymentClick = () => {
-    //     /* 결제 요청 */
-    //     const data = {
-    //         pg: "html5_inicis",
-    //         pay_method: "card",
-    //         merchant_uid: `merchant_${new Date().getTime()}`, // 가맹점에서 생성한 주문 번호
-    //         name:roomName,
-    //         amount:userBid.price,
-    //         buyer_email:user_email,
-    //         buyer_name:user_name,
-    //         buyer_tel:userdata.hp,
-    //         m_redirect_url:'http://175.45.193.12/paymentresult'
-    //     };
-    //
-    //     /* 4. 결제 창 호출하기 */
-    //     // IMP.request_pay(data, callback);
-    //     IMP.request_pay(data);
-    // }
-    // /* 3. 콜백 함수 정의하기 */
-    // async function callback(response) {
-    //     const {
-    //         success,
-    //         merchant_uid,
-    //         imp_uid,
-    //         error_msg
-    //     } = response;
-    //     if (success) {
-    //         setImp_uid(imp_uid);
-    //
-    //         // 결제 완료 시 데이터를 sessionStorage에 저장
-    //         sessionStorage.setItem('paymentData', JSON.stringify({
-    //             productName: roomName,
-    //             amount: userBid.price,
-    //             merchant_uid,
-    //             user_name,
-    //             user_email,
-    //         }));
-    //
-    //
-    //         //paymentinfo로 넘어갈 데이터 imp_uid, amount
-    //         const validationResult = await axios.post("/payment/paymentinfo", {
-    //             pg:pg,
-    //             pay_method:pay_method,
-    //             imp_uid: imp_uid,
-    //             amount: userBid.price,
-    //             merchant_uid,
-    //             name:roomName,
-    //             buyer_name:user_name,
-    //             buyer_tel:userdata.hp,
-    //             buyer_email:user_email,
-    //         });
-    //         navi('/paymentresult');
-    //     } else {
-    //         alert(`결제 실패: ${error_msg}`);
-    //     }
-    // };
     const paymentClick = () => {
         /* 결제 요청 */
         const data = {
@@ -109,53 +53,50 @@ function ResultPage2(props) {
             buyer_email:user_email,
             buyer_name:user_name,
             buyer_tel:userdata.hp,
-            m_redirect_url:'http://175.45.193.12/paymentresult'
+            m_redirect_url:'http://175.45.193.12/ordercompletemobile'
         };
 
         /* 4. 결제 창 호출하기 */
-        // 모바일에서는 새 창으로 열기 위해 window.open() 사용
-        const popup = IMP.request_pay(data);
+        IMP.request_pay(data, callback);
+    }
+    /* 3. 콜백 함수 정의하기 */
+    async function callback(response) {
+        const {
+            success,
+            merchant_uid,
+            imp_uid,
+            error_msg
+        } = response;
+        if (success) {
+            setImp_uid(imp_uid);
 
-        // 새 창이 열리면서 결제가 진행됩니다.
-        popup.then((response) => {
             // 결제 완료 시 데이터를 sessionStorage에 저장
-            if (response.success) {
-                sessionStorage.setItem('paymentData', JSON.stringify({
-                    productName: roomName,
-                    amount: userBid.price,
-                    merchant_uid: response.merchant_uid,
-                    user_name,
-                    user_email,
-                }));
+            sessionStorage.setItem('paymentData', JSON.stringify({
+                productName: roomName,
+                amount: userBid.price,
+                merchant_uid,
+                user_name,
+                user_email,
+            }));
 
-                //paymentinfo로 넘어갈 데이터 imp_uid, amount
-                const validationResult = axios.post("/payment/paymentinfo", {
-                    pg: pg,
-                    pay_method: pay_method,
-                    imp_uid: response.imp_uid,
-                    amount: userBid.price,
-                    merchant_uid: response.merchant_uid,
-                    name: roomName,
-                    buyer_name: user_name,
-                    buyer_tel: userdata.hp,
-                    buyer_email: user_email,
-                }).then(() => {
-                    // 결제 완료 후, 사용자를 원래 페이지로 되돌립니다.
-                    navi('/paymentresult');
-                }).catch((error) => {
-                    console.error('결제 정보 등록 중 에러가 발생했습니다!', error);
-                    // 결제 정보 등록 실패 시, 오류 처리를 해줄 수 있습니다.
-                });
-            } else {
-                alert(`결제 실패: ${response.error_msg}`);
-                // 결제 실패 시, 오류 처리를 해줄 수 있습니다.
-            }
-        }).catch((error) => {
-            console.error('결제 진행 중 에러가 발생했습니다!', error);
-            // 결제 진행 중 에러 시, 오류 처리를 해줄 수 있습니다.
-        });
+
+            //paymentinfo로 넘어갈 데이터 imp_uid, amount
+            const validationResult = await axios.post("/payment/paymentinfo", {
+                pg:pg,
+                pay_method:pay_method,
+                imp_uid: imp_uid,
+                amount: userBid.price,
+                merchant_uid,
+                name:roomName,
+                buyer_name:user_name,
+                buyer_tel:userdata.hp,
+                buyer_email:user_email,
+            });
+            navi('/paymentresult');
+        } else {
+            alert(`결제 실패: ${error_msg}`);
+        }
     };
-
 
     //여기까지 결제 필요
     const [userBid, setUserBid] = useState(null); // 사용자의 입찰 정보를 담을 상태 추가
