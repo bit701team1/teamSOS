@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import UserInfo from './userpage/UserInfo'
 import Mainauction from "./auctionpage/Mainauction";
-import AuctionLive from "./auctionpage/AuctionLive";
+
 
 
 import './manage_page/ManagePageMain.css';
@@ -16,7 +16,7 @@ import {ManagePageMain, ProductList} from "./manage_page";
 
 import LiveStream from "./auctionpage/LiveStream";
 
-import ResultPage from "./auctionpage/ResultPage";
+
 import ResultPage2 from "./auctionpage/ResultPage2";
 import RedirectURI from "./user/naverlogin/RedirectURI";
 import RegisterProduct from "./product/RegisterProduct";
@@ -44,7 +44,7 @@ function RouteMain(props) {
                 <Route path='/testlogin' element={<LoginForm/>}/>
 
                 <Route path='/userinfo' element={<UserInfo/>}/>
-                {/*<Route path='/room/:roomId' element={<AuctionLive/>}/>*/}
+
                 <Route path='/auction' element={<Mainauction/>}/>
 
                 <Route path='/auctionlist' element={<AuctionList/>}/>
@@ -55,7 +55,6 @@ function RouteMain(props) {
                 <Route path='/manage/*' element={<ManagePageMain/>}/>
                 <Route path='/productlist/*' element={<ProductList/>}/>
 
-                <Route path='/result' element={<ResultPage/>}/>
 
                 <Route path='/oldjoin' element={<JoinForm/>}/>
                 {/*<Route path='/login' element={<LoginForm/>}/>*/}

@@ -170,65 +170,65 @@ public class UserController {
         return result;
     }
 
-//    @GetMapping("/islogin")
-//    public ResponseEntity<String> isLogin(HttpServletRequest request, HttpServletResponse response) {
-//        Cookie[] cookies = request.getCookies();
-//
-//        String accessToken = null;
-//        String refreshToken = null;
-//
-//        // HTTP Only 쿠키에서 access_token 값 추출
-//        if (cookies != null) {
-//            for (Cookie cookie : cookies) {
-//                if (cookie.getName().equals("access_token")) {
-//                    accessToken = cookie.getValue();
-//                    System.out.println("accessToken : " + accessToken);
-//                    String email = cookieController.getEmailFromAccessToken(accessToken);
-//                    System.out.println("email!!!  " + email);
-//                } else {
-//                    return ResponseEntity.ok("User is not logged in");
-//                }
-//            }
-//        }
-//
-//        //accesstoken의 값을 db에서 찾고 존재하면 해당값 기반으로 refreshtoken값 가져옴
-//        refreshToken = tokenMapper.selectByRtKey(tokenMapper.selectByAccessToken(accessToken).getRt_key()).getRefreshtoken_value();
-//        //accesstoken값으로 email 값 가져옴
-//        String email = cookieController.getEmailFromAccessToken(accessToken);
-//        System.out.println("email!!!  " + email);
-//
-//        //String email = userMapper.getUserByUserId(tokenMapper.selectByAccessToken(accessToken).getRt_key()).getEmail();
-//
-//        System.out.println("accessToken = " + accessToken);
-//        System.out.println("refreshToken = " + refreshToken);
-//        System.out.println(JwtTokenProvider.validateToken(accessToken));
-//
-//        if (accessToken != null && JwtTokenProvider.validateToken(accessToken)) {
-//            System.out.println("access가 정상인 경우");
-//            // 토큰이 유효한 경우 로그인 상태로 응답합니다.
-//            return ResponseEntity.ok("User is logged in");
-//        } else if (refreshToken != null && JwtTokenProvider.validateToken(refreshToken)) {
-//            System.out.println("access가 비정상이라서 refresh로 확인하는 경우");
-//            // 액세스 토큰이 만료된 경우 리프레시 토큰을 사용하여 새로운 액세스 토큰을 발급합니다.
-//            String userId = JwtTokenProvider.getUserIdFromJWT(refreshToken);
-//            //UserDetails userDetails = customUserDetailsService.loadUserByUsername(userId);
-//            //System.out.println("userDetails = "+userDetails);
-//
-//            // 인증 정보를 기반으로 JWT 토큰을 재발급합니다.
-//            TokenDto newTokenDto = JwtTokenProvider.generateTokenDto(email);
-//            System.out.println("newAccessToekn = " + newTokenDto.getAccesstoken());
-//            // 새로운 액세스 토큰을 HTTP Only 쿠키에 저장합니다.
-//            Cookie newAccessTokenCookie = new Cookie("access_token", newTokenDto.getAccesstoken());
-//            newAccessTokenCookie.setPath("/");
-//            newAccessTokenCookie.setHttpOnly(true);
-//            response.addCookie(newAccessTokenCookie);
-//
-//            // 토큰 재발급 후 로그인 상태로 응답합니다.
-//            return ResponseEntity.ok("User is logged in (Token reissued)");
-//        } else {
-//            // 토큰이 유효하지 않거나 없는 경우 로그인 상태가 아님을 응답합니다.
-//            return ResponseEntity.ok("User is not logged in");
-//        }
-//    }
+    @GetMapping("/islogin")
+    public ResponseEntity<String> isLogin(HttpServletRequest request, HttpServletResponse response) {
+        Cookie[] cookies = request.getCookies();
+
+        String accessToken = null;
+        String refreshToken = null;
+
+        // HTTP Only 쿠키에서 access_token 값 추출
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("access_token")) {
+                    accessToken = cookie.getValue();
+                    System.out.println("accessToken : " + accessToken);
+                    String email = cookieController.getEmailFromAccessToken(accessToken);
+                    System.out.println("email!!!  " + email);
+                } else {
+                    return ResponseEntity.ok("User is not logged in");
+                }
+            }
+        }
+
+        //accesstoken의 값을 db에서 찾고 존재하면 해당값 기반으로 refreshtoken값 가져옴
+        refreshToken = tokenMapper.selectByRtKey(tokenMapper.selectByAccessToken(accessToken).getRt_key()).getRefreshtoken_value();
+        //accesstoken값으로 email 값 가져옴
+        String email = cookieController.getEmailFromAccessToken(accessToken);
+        System.out.println("email!!!  " + email);
+
+        //String email = userMapper.getUserByUserId(tokenMapper.selectByAccessToken(accessToken).getRt_key()).getEmail();
+
+        System.out.println("accessToken = " + accessToken);
+        System.out.println("refreshToken = " + refreshToken);
+        System.out.println(JwtTokenProvider.validateToken(accessToken));
+
+        if (accessToken != null && JwtTokenProvider.validateToken(accessToken)) {
+            System.out.println("access가 정상인 경우");
+            // 토큰이 유효한 경우 로그인 상태로 응답합니다.
+            return ResponseEntity.ok("User is logged in");
+        } else if (refreshToken != null && JwtTokenProvider.validateToken(refreshToken)) {
+            System.out.println("access가 비정상이라서 refresh로 확인하는 경우");
+            // 액세스 토큰이 만료된 경우 리프레시 토큰을 사용하여 새로운 액세스 토큰을 발급합니다.
+            String userId = JwtTokenProvider.getUserIdFromJWT(refreshToken);
+            //UserDetails userDetails = customUserDetailsService.loadUserByUsername(userId);
+            //System.out.println("userDetails = "+userDetails);
+
+            // 인증 정보를 기반으로 JWT 토큰을 재발급합니다.
+            TokenDto newTokenDto = JwtTokenProvider.generateTokenDto(email);
+            System.out.println("newAccessToekn = " + newTokenDto.getAccesstoken());
+            // 새로운 액세스 토큰을 HTTP Only 쿠키에 저장합니다.
+            Cookie newAccessTokenCookie = new Cookie("access_token", newTokenDto.getAccesstoken());
+            newAccessTokenCookie.setPath("/");
+            newAccessTokenCookie.setHttpOnly(true);
+            response.addCookie(newAccessTokenCookie);
+
+            // 토큰 재발급 후 로그인 상태로 응답합니다.
+            return ResponseEntity.ok("User is logged in (Token reissued)");
+        } else {
+            // 토큰이 유효하지 않거나 없는 경우 로그인 상태가 아님을 응답합니다.
+            return ResponseEntity.ok("User is not logged in");
+        }
+    }
    
 }
