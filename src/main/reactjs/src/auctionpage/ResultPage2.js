@@ -37,6 +37,7 @@ function ResultPage2(props) {
     const [buyer_addr, setBuyerAddr] = useState("");
     const [buyer_postcode, setBuyerPostcode] = useState("");
     const [imp_uid, setImp_uid] = useState("");
+    const [m_redirect_url, setM_redirect_url] =useState("");
     const navi = useNavigate();
     const { IMP } = window;
     IMP.init('imp57160077'); // 'imp00000000' 대신 발급받은 가맹점 식별코드를 사용합니다.
@@ -52,14 +53,12 @@ function ResultPage2(props) {
             buyer_email:user_email,
             buyer_name:user_name,
             buyer_tel:userdata.hp,
-
+            m_redirect_url:'http://175.45.193.12/paymentresult'
         };
 
         /* 4. 결제 창 호출하기 */
         IMP.request_pay(data, callback);
     }
-
-
     /* 3. 콜백 함수 정의하기 */
     async function callback(response) {
         const {
@@ -69,15 +68,17 @@ function ResultPage2(props) {
             error_msg
         } = response;
         if (success) {
-
             setImp_uid(imp_uid);
-            alert(
-                '결제 성공!!'
-                + '\n이름:' + user_name
-                + '\n금액:' + userBid.price
-                + '\n주문번호:' + merchant_uid
-                +'\n'+'uid:'+imp_uid
-            );
+
+            // 결제 완료 시 데이터를 sessionStorage에 저장
+            sessionStorage.setItem('paymentData', JSON.stringify({
+                productName: roomName,
+                amount: userBid.price,
+                merchant_uid,
+                user_name,
+                user_email,
+            }));
+
 
             //paymentinfo로 넘어갈 데이터 imp_uid, amount
             const validationResult = await axios.post("/payment/paymentinfo", {
@@ -91,15 +92,7 @@ function ResultPage2(props) {
                 buyer_tel:userdata.hp,
                 buyer_email:user_email,
             });
-            navi('/paymentresult',{
-                state: {
-                    productName: roomName,
-                    amount: userBid.price,
-                    merchant_uid,
-                    user_name,
-                    user_email,
-                },
-            });
+            navi('/paymentresult');
         } else {
             alert(`결제 실패: ${error_msg}`);
         }
@@ -110,13 +103,13 @@ function ResultPage2(props) {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     const roomName = searchParams.get('roomName');
-    // const roomName = "상품2";
     const [userdata, setUserdata] = useState('');
     const [userDataLoaded, setUserDataLoaded] = useState(false); // 사용자 데이터 로딩 상태 추가
     const [highestPriceBid, setHighestPriceBid] = useState(null); // highestPriceBid 상태 추가
     const [bidsCount, setBidsCount] = useState(0); // 경매에 해당하는 입찰 수 상태 추가
     const user_email=userdata.email;
     const user_name = userdata.user_name;
+
     //정보
     useEffect(() => {
         // 사용자 데이터 가져오기

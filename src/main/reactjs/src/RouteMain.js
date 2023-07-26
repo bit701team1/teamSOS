@@ -12,7 +12,7 @@ import errorimg from './image/ERR404.png';
 import JoinForm from "./user/oldcomponent/JoinForm";
 import LoginForm from "./user/oldcomponent/LoginForm";
 import Menu from "./user/Menu";
-import {ManagePageMain} from "./manage_page";
+import {ManagePageMain, ProductList} from "./manage_page";
 
 import LiveStream from "./auctionpage/LiveStream";
 
@@ -48,11 +48,14 @@ function RouteMain(props) {
                 <Route path='/userinfo' element={<UserInfo/>}/>
                 {/*<Route path='/room/:roomId' element={<AuctionLive/>}/>*/}
                 <Route path='/auction' element={<Mainauction/>}/>
+
                 <Route path='/auctionlist' element={<AuctionList/>}/>
+
                 <Route path='/roomcreate' element={<RoomCreate/>}/>
                 <Route path='/' element={<Menu/>}/>
 
                 <Route path='/manage/*' element={<ManagePageMain/>}/>
+                <Route path='/productlist/*' element={<ProductList/>}/>
 
                 <Route path='/result' element={<ResultPage/>}/>
 
@@ -65,7 +68,7 @@ function RouteMain(props) {
                 <Route path={'/livestream'}>
                     <Route path={'livestream'} element={<LiveStream/>}/>
                 </Route>
-
+                <Route path='/paymentresult' element={<PaymentResult/>}/>
                 <Route path='/product/*' element={<RegisterProduct/>}/>
 
                 <Route path='/passfind' element={<PassFind/>}/>
@@ -77,7 +80,7 @@ function RouteMain(props) {
                 <Route path='/intro' element={<Intro/>}/>
 
                 <Route path='/oauth' element={<RedirectURI/>}/>
-                <Route path='/paymentresult' element={<PaymentResult/>}/>
+
 
                 <Route path='/*' element={
                     <div>

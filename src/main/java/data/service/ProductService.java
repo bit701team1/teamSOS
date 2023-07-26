@@ -27,4 +27,22 @@ public class ProductService implements ProductServiceInter{
     public void updateWinnerAndFinalPrice(ProductDto dto) {
         productMapper.updateWinnerAndFinalPrice(dto);
     }
+
+
+    @Override
+    public List<ProductDto> getProductDataRecent(String search) {
+        return productMapper.getProductDataRecent(search);
+    }
+
+    @Override
+    public List<ProductDto> getProductDataOld(String search) {
+        return productMapper.getProductDataOld(search);
+    }
+
+    @Override
+    public List<ProductDto> getProductHighPrice(String search) {
+        return productMapper.getProductHighPrice(search);
+    }
+
+
 }

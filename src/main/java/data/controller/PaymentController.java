@@ -41,7 +41,6 @@ public class PaymentController {
         if (receivedAmount == fetchedAmount) {
             // 결제 정보가 일치하면 true 리턴하고, 데이터베이스에 추가
             paymentService.insertPayment(dto,dto.getImp_uid());
-            System.out.println("");
             System.out.println("결제확인 완료");
             return true;
         } else {

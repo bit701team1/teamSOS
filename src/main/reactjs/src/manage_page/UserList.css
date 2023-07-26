@@ -1,13 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Song+Myung&display=swap');
+
 .k_table-userlist{
     width: 90%;
     margin-left: 5%;
     font-size: 0.9rem;
-    border-radius: 100px;
+    border-radius: 25px;
+    font-family: 'Roboto';
+    text-align: center;
+    margin-top: 1rem;
+    overflow: hidden;
+
 }
 
 .k_table-blacklist{
     width: 90%;
     margin-left: 5%;
+    font-size: 0.9rem;
+    border-radius: 25px;
+    font-family: 'Roboto';
+    text-align: center;
+    margin-top: 1rem;
+    overflow: hidden;
+
+}
+
+.k_table-userlist tr:first-child th:first-child {
+    border-top-left-radius: 10px;
+}
+
+.k_table-userlist tr:first-child th:last-child {
+    border-top-right-radius: 10px;
+}
+
+.k_table-userlist tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+}
+
+.k_table-userlist tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
+}
+
+
+.k_table-blacklist tr:first-child th:first-child {
+    border-top-left-radius: 10px;
+}
+
+.k_table-blacklist tr:first-child th:last-child {
+    border-top-right-radius: 10px;
+}
+
+.k_table-blacklist tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+}
+
+.k_table-blacklist tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
+}
+
+.k_user_detail {
+    font-family: 'Roboto';
+}
+
+.k_blockuser_detail {
+    font-family: 'Roboto';
+}
+.k_product_manage {
+    font-family: 'Roboto';
+}
+
+.k_userlist_tr {
+    background-color: #ffffff;
+}
+.k_userBlocklist_tr {
+    background-color: #ffffff;
+}
+
+.k_paging {
+    width: 100%;
+    text-align: center;
     font-size: 1rem;
-    border-radius: 100px;
+}
+
+.userRowList {
+    background-color: #f6f6f6;
+    text-align: center;
+    height: 2.5rem;
+    font-size: 1rem;
+}
+
+.userBlockRowList {
+    background-color: #f6f6f6;
+    text-align: center;
+    height: 2.5rem;
+    font-size: 1rem;
 }
