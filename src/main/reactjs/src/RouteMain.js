@@ -65,7 +65,7 @@ function RouteMain(props) {
                 <Route path={'/livestream'}>
                     <Route path={'livestream'} element={<LiveStream/>}/>
                 </Route>
-
+                <Route path='/paymentresult' element={<PaymentResult/>}/>
                 <Route path='/product/*' element={<RegisterProduct/>}/>
 
                 <Route path='/passfind' element={<PassFind/>}/>
@@ -77,7 +77,7 @@ function RouteMain(props) {
                 <Route path='/intro' element={<Intro/>}/>
 
                 <Route path='/oauth' element={<RedirectURI/>}/>
-                <Route path='/paymentresult' element={<PaymentResult/>}/>
+
 
                 <Route path='/*' element={
                     <div>

@@ -8,15 +8,19 @@ const Component = ({ onClose, userName, productName, roomName }) => {
 
     const [price, setPrice] = useState("");
     const [modalOpen, setModalOpen] = useState(true); // 모달 열림/닫힘 상태 추가
+    const [isLoading, setLoading] = useState(false);
 
     const handleInputChange = (e) => {
         setPrice(e.target.value);
     };
 
-    const bidHandler = async (e) => {
-        console.log("roomName>>"+productName)
+    const Handlebidbutton = async (e) => {
+        if (isLoading) return; // 이미 요청 중이면 중복 클릭 방지
+
         e.preventDefault();
         try {
+            setLoading(true); // 요청 시작 시 isLoading 상태 변경
+
             const confirmBid = window.confirm(
                 "입찰은 한 번만 가능합니다. 정말 입찰하시겠습니까?"
             );
@@ -26,12 +30,12 @@ const Component = ({ onClose, userName, productName, roomName }) => {
                     {
                         user_email: userName,
                         price: parseInt(price),
-                        productName: productName
+                        productName: productName,
                     },
                     {
                         params: {
                             productName: productName,
-                        }
+                        },
                     }
                 );
 
@@ -44,10 +48,9 @@ const Component = ({ onClose, userName, productName, roomName }) => {
                 // console.log("bidDto>>"+JSON.stringify(bidDto))
 
                 // BidService.insertBid 호출하여 DB에 입찰 값 저장
-                await axios.post("/bid/insert",
-                    bidDto);
+                await axios.post("/bid/insert", bidDto);
 
-                alert("입찰이 완료되었습니다!")
+                alert("입찰이 완료되었습니다!");
 
                 // 모달 닫기
                 setModalOpen(false);
@@ -57,6 +60,8 @@ const Component = ({ onClose, userName, productName, roomName }) => {
         } catch (err) {
             alert("입찰 금액을 입력해주시기 바랍니다.");
             console.error("입찰 중 에러가 발생했습니다!", err);
+        } finally {
+            setLoading(false); // 요청 완료 시 isLoading 상태 변경
         }
     };
 
@@ -70,7 +75,7 @@ const Component = ({ onClose, userName, productName, roomName }) => {
                    step="100"
                    pattern="[0-9]*"
                    onChange={handleInputChange}/>
-            <button className="y_bid-btn" onClick={bidHandler}><p>입찰</p></button>
+            <button className="y_bid-btn" onClick={Handlebidbutton}><p>입찰</p></button>
         </div>
     );
 };
