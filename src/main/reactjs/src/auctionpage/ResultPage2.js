@@ -19,6 +19,7 @@ function ResultPage2(props) {
     const [buyer_addr, setBuyerAddr] = useState("");
     const [buyer_postcode, setBuyerPostcode] = useState("");
     const [imp_uid, setImp_uid] = useState("");
+    const [m_redirect_url, setM_redirect_url] =useState("");
     const navi = useNavigate();
 
     const { IMP } = window;
@@ -36,7 +37,7 @@ function ResultPage2(props) {
             buyer_email:user_email,
             buyer_name:user_name,
             buyer_tel:userdata.hp,
-
+            m_redirect_url:`/paymentresult?productName=${roomName}&amount=${userBid.price}&merchant_uid=merchant_${new Date().getTime()}&user_name=${user_name}&user_email=${user_email}`
         };
 
         /* 4. 결제 창 호출하기 */
@@ -53,15 +54,17 @@ function ResultPage2(props) {
             error_msg
         } = response;
         if (success) {
-
             setImp_uid(imp_uid);
-            alert(
-                '결제 성공!!'
-                + '\n이름:' + user_name
-                + '\n금액:' + userBid.price
-                + '\n주문번호:' + merchant_uid
-                +'\n'+'uid:'+imp_uid
-            );
+
+            // // 결제 완료 시 데이터를 sessionStorage에 저장
+            // sessionStorage.setItem('paymentData', JSON.stringify({
+            //     productName: roomName,
+            //     amount: userBid.price,
+            //     merchant_uid,
+            //     user_name,
+            //     user_email,
+            // }));
+
 
             //paymentinfo로 넘어갈 데이터 imp_uid, amount
             const validationResult = await axios.post("/payment/paymentinfo", {
@@ -75,16 +78,15 @@ function ResultPage2(props) {
                 buyer_tel:userdata.hp,
                 buyer_email:user_email,
             });
-            navi('/paymentresult', {
-                state: {
-                    productName: roomName,
-                    amount: userBid.price,
-                    merchant_uid,
-                    user_name,
-                    user_email,
-                },
-            });
-            window.location.replace('https://service.iamport.kr/payments/success');
+            // navi('/paymentresult', {
+            //     state: {
+            //         productName: roomName,
+            //         amount: userBid.price,
+            //         merchant_uid,
+            //         user_name,
+            //         user_email,
+            //     },
+            // });
         } else {
             alert(`결제 실패: ${error_msg}`);
         }

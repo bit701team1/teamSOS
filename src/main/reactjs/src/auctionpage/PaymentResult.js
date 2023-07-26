@@ -7,6 +7,7 @@ function PaymentResult(props) {
     const location = useLocation();
     const { state } = location;
 
+
     return (
         <div className="D_payment_page">
             <div className="D_paymentResult">
