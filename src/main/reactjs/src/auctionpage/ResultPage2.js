@@ -37,7 +37,7 @@ function ResultPage2(props) {
             buyer_email:user_email,
             buyer_name:user_name,
             buyer_tel:userdata.hp,
-            m_redirect_url:`/paymentresult`
+            m_redirect_url:'http://175.45.193.12/paymentresult'
         };
 
         /* 4. 결제 창 호출하기 */
@@ -76,15 +76,7 @@ function ResultPage2(props) {
                 buyer_tel:userdata.hp,
                 buyer_email:user_email,
             });
-            // navi('/paymentresult', {
-            //     state: {
-            //         productName: roomName,
-            //         amount: userBid.price,
-            //         merchant_uid,
-            //         user_name,
-            //         user_email,
-            //     },
-            // });
+            navi('/paymentresult');
         } else {
             alert(`결제 실패: ${error_msg}`);
         }
