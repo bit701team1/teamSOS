@@ -37,14 +37,12 @@ function ResultPage2(props) {
             buyer_email:user_email,
             buyer_name:user_name,
             buyer_tel:userdata.hp,
-            m_redirect_url:`http://175.45.193.12/paymentresult`
+            m_redirect_url:`/paymentresult`
         };
 
         /* 4. 결제 창 호출하기 */
         IMP.request_pay(data, callback);
     }
-
-
     /* 3. 콜백 함수 정의하기 */
     async function callback(response) {
         const {
@@ -56,7 +54,7 @@ function ResultPage2(props) {
         if (success) {
             setImp_uid(imp_uid);
 
-            // // 결제 완료 시 데이터를 sessionStorage에 저장
+            // 결제 완료 시 데이터를 sessionStorage에 저장
             sessionStorage.setItem('paymentData', JSON.stringify({
                 productName: roomName,
                 amount: userBid.price,
@@ -97,13 +95,13 @@ function ResultPage2(props) {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     const roomName = searchParams.get('roomName');
-    // const roomName = "상품2";
     const [userdata, setUserdata] = useState('');
     const [userDataLoaded, setUserDataLoaded] = useState(false); // 사용자 데이터 로딩 상태 추가
     const [highestPriceBid, setHighestPriceBid] = useState(null); // highestPriceBid 상태 추가
     const [bidsCount, setBidsCount] = useState(0); // 경매에 해당하는 입찰 수 상태 추가
     const user_email=userdata.email;
     const user_name = userdata.user_name;
+
     //정보
     useEffect(() => {
         // 사용자 데이터 가져오기
