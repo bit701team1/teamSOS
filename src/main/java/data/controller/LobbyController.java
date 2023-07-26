@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,8 +36,6 @@ public class LobbyController {
     UserMapper userMapper;
     @Autowired
     TokenMapper tokenMapper;
-     @Autowired
-    private SimpMessagingTemplate template; 
     @GetMapping("/list")
     public List<RoomDto> getList() {
         return roomService.getAll();
@@ -58,6 +57,11 @@ public class LobbyController {
 
         return createdRoom;
     }
+    // @PostMapping("/deleteroom")
+    // public void deleteRoom( @RequestBody String) {
+    //     String roomId = data.get(roomId).toString();
+    //     roomService.deleteRoom(roomId);
+    // }
 //    @PostMapping("/create")
 //    public ResponseEntity<RoomDto> postCreate(HttpServletRequest request,@RequestBody Map<String, Object> data) {
 //        String roomName = data.get("name").toString();

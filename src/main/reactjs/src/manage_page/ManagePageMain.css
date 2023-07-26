@@ -92,14 +92,12 @@
     height: 6rem;
     float: left;
 }
+
 .k-admin-name {
-    position: absolute;
     top: 2.5rem;
     left: 8.5rem;
     font-family: 'Roboto';
     font-weight: 800;
-
-
 }
 .k-admin-info,
 .k-logout {

@@ -37,7 +37,4 @@ public class RoomService {
     public void deleteRoom(String roomId) {
         rooms.remove(roomId);
     }
-    public void deleteChat(String msg) {
-        msgs.get(msg);
-    }
 }

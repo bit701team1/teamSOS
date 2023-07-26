@@ -10,6 +10,6 @@ public class MsgDto {
     private String userName; // 메세지 보낸 사람
     private String msg; // 메세지 내용
     private String msgId; // 삭제하고자 하는 메시지의 id 
-//    private String emailName; //이메일 정보 넣기
+    private String user; //이메일 정보 넣기
 }
 

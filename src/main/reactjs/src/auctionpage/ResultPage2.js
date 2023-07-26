@@ -4,8 +4,26 @@ import PortalPopup from "../resultmodal/PortalPopup";
 import img from '../image/스폰지밥1.gif';
 import "../css/resultpage2.css";
 import axios from "axios";
-import {useLocation, useNavigate} from "react-router-dom";
+import {useLocation,useNavigate} from "react-router-dom";
 function ResultPage2(props) {
+    const navigate = useNavigate();
+    const locations = useLocation();
+
+    useEffect(() => {
+        const handlePopState = () => {
+            // 홈으로 이동
+            navigate("/");
+        };
+
+        // 브라우저 뒤로가기 이벤트 리스너 등록
+        window.addEventListener("popstate", handlePopState);
+
+        return () => {
+            // 컴포넌트가 언마운트되면 이벤트 리스너 제거
+            window.removeEventListener("popstate", handlePopState);
+        };
+    }, [navigate]);
+   
     const [isFrameOpen, setFrameOpen] = useState(false);
     //동호 추가
     //결제 기능 추가
@@ -21,9 +39,7 @@ function ResultPage2(props) {
     const [imp_uid, setImp_uid] = useState("");
     const [m_redirect_url, setM_redirect_url] =useState("");
     const navi = useNavigate();
-
     const { IMP } = window;
-
     IMP.init('imp57160077'); // 'imp00000000' 대신 발급받은 가맹점 식별코드를 사용합니다.
 
     const paymentClick = () => {
@@ -172,14 +188,18 @@ function ResultPage2(props) {
 
     return (
       <>
+       
+            
         <div className="y_resultpage-div">
-
+        
           <img className="y_result-img" alt="" src={img}/>
           <img
             alt="" src={`${photo}y_back.svg`}
             className="y_result-back"
             onClick={onIconArrowRightCircledClick}
           />
+           
+
           <div className="y_result-dark" />
           <div className="y_result-div2" />
           <div className="y_result-p1">경매 결과를 확인 하세요</div>

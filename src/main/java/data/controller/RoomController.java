@@ -1,16 +1,11 @@
 package data.controller;
 
-import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
-
 import data.dto.UserDto;
 import data.mapper.TokenMapper;
 import data.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -32,30 +27,26 @@ public class RoomController {
     UserMapper userMapper;
     @Autowired
     TokenMapper tokenMapper;
-     @Autowired
-    private SimpMessagingTemplate template; 
     /*방 생성 */ 
     @GetMapping("/info/{id}")
     public RoomDto getInfo(@PathVariable String id) {
 
         RoomDto room = roomService.getRoom(id);
-        // 방 삭제 후 웹소켓 메시지 전송
-        if (room != null) {
-            // 방 정보를 가져왔을 때만 타이머를 시작하고, 10초 후에 방을 삭제하도록 설정
-            Timer timer = new Timer();
-            timer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    roomService.deleteRoom(id);
-                    timer.cancel(); // 타이머 종료
-                }
-            }, 10* 60 * 1000);
 
-            
-        }
         return room;
     }
-    
+    // @PostMapping("/deleteroom")
+    // public RoomDto deleteroom(@PathVariable String id){
+    //     RoomDto room = new RoomDto();
+    //      roomService.deleteRoom(id);
+
+    //      return room;
+    // }
+    @PostMapping("/deleteroom/{id}")
+    public ResponseEntity<?> deleteRoom(@PathVariable String id) {
+    roomService.deleteRoom(id);
+    return ResponseEntity.ok().build();
+}
     /* 로그인한 유저 이메일 가져오기  */
     @GetMapping("/emailuser")
     public ResponseEntity<String> emailUser(HttpServletRequest request) {
@@ -75,23 +66,23 @@ public class RoomController {
         return new ResponseEntity<>(email,HttpStatus.OK);
     }
     /* 로그인한 유저 이름 가져오기  */
-//    @GetMapping("/username")
-//    public ResponseEntity<String> Username(HttpServletRequest request) {
-//        Cookie[] cookies = request.getCookies();
-//        String accesstoken = "";
-//
-//        if (cookies != null) {
-//            for (Cookie cookie : cookies) {
-//                if (cookie.getName().equals("access_token")) {
-//                    accesstoken = cookie.getValue();
-//                    break;
-//                }
-//            }
-//        }
-//        String username = userMapper.getUserByUserId(tokenMapper.selectByAccessToken(accesstoken).getRt_key()).getUser_name();
-//
-//        return new ResponseEntity<>(username,HttpStatus.OK);
-//    }
+    @GetMapping("/username")
+   public ResponseEntity<String> userName(HttpServletRequest request) {
+       Cookie[] cookies = request.getCookies();
+       String accesstoken = "";
+
+       if (cookies != null) {
+           for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("access_token")) {
+                    accesstoken = cookie.getValue();
+                    break;
+                }
+            }
+        }
+        String user_name = userMapper.getUserByUserId(tokenMapper.selectByAccessToken(accesstoken).getRt_key()).getUser_name();
+
+        return new ResponseEntity<>(user_name,HttpStatus.OK);
+    }
     /* 로그인한 유저 dto 가져오기 */
     @GetMapping("/userdata")
     public ResponseEntity<UserDto> userData( HttpServletRequest request) {
