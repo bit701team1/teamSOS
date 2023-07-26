@@ -71,8 +71,6 @@ public class UserService implements UserServiceInter{
         return userMapper.getManageTotalCountWithSearch(map);
     }
 
-
-
     //블랙리스트  회원 카운트
     public int getBlockListCount(){
         return userMapper.getBlockListCount();
@@ -87,6 +85,14 @@ public class UserService implements UserServiceInter{
         map.put("perPage",perPage);
         return userMapper.getBlockList(map);
     }
+    //검색된 블랙리스트 유저의 총 토탈 카운트
+    @Override
+    public int getManageTotalCountWithBlockUserSearch(String search) {
+        Map<String,Object> map=new HashMap<>();
+        map.put("search",search);
+        return userMapper.getManageTotalCountWithBlockUserSearch(map);
+    }
+
 
     // report_num 증가
     public void updateReportNum(String email){

@@ -16,4 +16,37 @@
     <select id="selectByCurDate" resultType="ProductDto">
         select * from product where transaction_date = current_date
     </select>
+
+    <!--  경철  -->
+    <!--  상품을 최신순으로  -->
+    <select id="getProductDataRecent" parameterType="String" resultType="ProductDto">
+        SELECT* FROM product
+        <if test="search != null and search != ''">
+            where product.product_name like CONCAT('%',#{search},'%')
+            or product.winner like CONCAT('%',#{search},'%')
+        </if>
+        ORDER By transaction_date desc
+    </select>
+
+    <!--    상품을 오래된 순으로 -->
+    <select id="getProductDataOld" parameterType="String" resultType="ProductDto">
+        SELECT* FROM product
+        <if test="search != null and search != ''">
+            where product.product_name like CONCAT('%',#{search},'%')
+            or product.winner like CONCAT('%',#{search},'%')
+        </if>
+        ORDER By transaction_date
+    </select>
+
+    <!--  상품을 비싼 순으로  -->
+    <select id="getProductHighPrice" parameterType="String" resultType="ProductDto">
+        SELECT* FROM product
+        <if test="search != null and search != ''">
+            where product.product_name like CONCAT('%',#{search},'%')
+            or product.winner like CONCAT('%',#{search},'%')
+        </if>
+        ORDER By final_price DESC;
+    </select>
+
+
 </mapper>

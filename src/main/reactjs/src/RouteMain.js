@@ -12,7 +12,7 @@ import errorimg from './image/ERR404.png';
 import JoinForm from "./user/oldcomponent/JoinForm";
 import LoginForm from "./user/oldcomponent/LoginForm";
 import Menu from "./user/Menu";
-import {ManagePageMain} from "./manage_page";
+import {ManagePageMain, ProductList} from "./manage_page";
 
 import LiveStream from "./auctionpage/LiveStream";
 
@@ -49,10 +49,12 @@ function RouteMain(props) {
                 {/*<Route path='/room/:roomId' element={<AuctionLive/>}/>*/}
                 <Route path='/auction' element={<Mainauction/>}/>
 
+
                 <Route path='/roomcreate' element={<RoomCreate/>}/>
                 <Route path='/' element={<Menu/>}/>
 
                 <Route path='/manage/*' element={<ManagePageMain/>}/>
+                <Route path='/productlist/*' element={<ProductList/>}/>
 
                 <Route path='/result' element={<ResultPage/>}/>
 
