@@ -37,7 +37,7 @@ function ResultPage2(props) {
             buyer_email:user_email,
             buyer_name:user_name,
             buyer_tel:userdata.hp,
-            m_redirect_url:`http://175.45.193.12/paymentresult?productName=${roomName}&amount=${userBid.price}&merchant_uid=merchant_${new Date().getTime()}&user_name=${user_name}&user_email=${user_email}`
+            m_redirect_url:`localhost:3000/paymentresult`
         };
 
         /* 4. 결제 창 호출하기 */
@@ -57,13 +57,13 @@ function ResultPage2(props) {
             setImp_uid(imp_uid);
 
             // // 결제 완료 시 데이터를 sessionStorage에 저장
-            // sessionStorage.setItem('paymentData', JSON.stringify({
-            //     productName: roomName,
-            //     amount: userBid.price,
-            //     merchant_uid,
-            //     user_name,
-            //     user_email,
-            // }));
+            sessionStorage.setItem('paymentData', JSON.stringify({
+                productName: roomName,
+                amount: userBid.price,
+                merchant_uid,
+                user_name,
+                user_email,
+            }));
 
 
             //paymentinfo로 넘어갈 데이터 imp_uid, amount
