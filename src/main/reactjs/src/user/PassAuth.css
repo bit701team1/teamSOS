@@ -241,6 +241,6 @@ input:focus ~ .VerificationHighlight {
 /* 휴대폰 가로 너비가 428px 이하일 때 스타일 변경 */
 @media screen and (max-width: 428px) {
     .VerificationPage {
-        transform: scale(0.85); /* 스케일을 0.85로 설정하여 85%로 축소 */
+        transform: scale(0.82); /* 스케일을 0.82로 설정하여 82%로 축소 */
     }
 }
