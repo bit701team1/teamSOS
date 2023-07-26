@@ -19,7 +19,7 @@ function AuctionLive2(props) {
   const [roomName, setRoomName] =useState('');
   const client = useRef(); // 클라이언트
   const [userName, setUserName] = useState(''); //유저이름
-  const [emailName, setEmail] = useState(''); //유저이메일
+  const [user, setUser] = useState(''); //
   const msgRef = useRef(); // 메세지 함수
   const [msg,setMsg] = useState([]); // 메세지 내용
 
@@ -101,20 +101,23 @@ useEffect(()=>{
         try {
             const user_name = await axios.get('/room/emailuser');
             setUserName(user_name.data);
+
         } catch (error) {
             console.error("Failed to fetch user:", error);
         }
     };
-  //   const getEmailName = async () => {
-  //     try {
-  //         const emails = await axios.get('/room/username');
-  //         setUserName(user_name.data);// 이메일 출력
-  //     } catch (error) {
-  //         console.error("Failed to fetch user:", error);
-  //     }
-  // };
-  //   getEmailName();
+    const getUserName = async () => {
+      try {
+          const user = await axios.get('/room/username');
+          setUser(user.data);
+          console.log(user.data); 
+          
+      } catch (error) {
+          console.error("Failed to fetch user:", error);
+      }
+  };
     getUser();
+    getUserName();
     connect();
     // 컴포넌트가 언마운트되면 소켓 연결 해제
     return () => {
@@ -124,8 +127,8 @@ useEffect(()=>{
 
    /* 소켓연결 */
    const connect = () => { //소켓 연결용 함수
-    // let sock = new SockJS('http://localhost:9003/ws'); //endpoint 주소 소켓을 저기로 연결하겠다
-       let sock = new SockJS('http://175.45.193.12/ws'); //endpoint 주소 소켓을 저기로 연결하겠다
+    let sock = new SockJS('http://localhost:9003/ws'); //endpoint 주소 소켓을 저기로 연결하겠다
+      //  let sock = new SockJS('http://175.45.193.12/ws'); //endpoint 주소 소켓을 저기로 연결하겠다
     client.current = StompJS.Stomp.over(sock); //StompJS를 사용하여 소켓 연결을 관리하는 클라이언트 객체를 생성
     let ws = client.current;
     ws.connect({}, () => {
@@ -136,10 +139,11 @@ useEffect(()=>{
                 //preMsg 배열에서 receivedMsh의 msgId와 다른 메시지만 남기도록 필터링 역할
                 setMsg(prevMsg => prevMsg.filter(message => message.msgId !== receivedMsg.msgId));
             } else if(receivedMsg.type === 'KICK'){
-                const kickUser = JSON.parse(data.body).userName;
-                if(kickUser === userName){
-                    alert('나가');
-                }
+              const kickUser = JSON.parse(data.body).userName;
+              // 현재 로그인한 사용자가 강퇴당하는 사용자와 같은지 확인
+              if(kickUser === userName){
+                  navigate('/');
+              }
             } else if(receivedMsg.type === 'LIVE_END') {
               openFrame2(); // 방송 종료 모달을 띄웁니다.
             }
@@ -147,6 +151,7 @@ useEffect(()=>{
                 AddChat(data.body,  receivedMsg.msgId);
             }
           });
+          
         //입장
         publish('ENTER', '');
     
@@ -162,7 +167,18 @@ useEffect(()=>{
         { message: data , msgId: msgId, date: timeString} // 새로운 메시지 객체를 추가, 메시지 내용과 msgId 속성을 포함
     ]);
 };
-
+/* 강퇴 기능*/
+const kick = (kickUser) =>{ // 강퇴할 대상의 userName을 인자로 받는다.
+  client.current.send( // 웹소켓 서버로 강퇴 이벤트를 보낸다.
+      '/pub/msg',
+      {},
+      JSON.stringify({
+          type:'KICK',
+          roomId,
+          userName :kickUser // 강퇴할 대상의 userName을 보낸다.
+      })
+  )
+};
   /* 관리자에게 권한 주기  */
   const [admin, setAdmin] = useState('');
   useEffect(() => {
@@ -178,7 +194,7 @@ useEffect(()=>{
   }, []);
 
    /* 클라이언트에 채팅 보내기*/
-   const publish = (type,userName, msg,msgId,roomId, date) => {
+   const publish = (type,userName, msg,msgId,roomId,user, date) => {
     client.current.send( //send : StompJS라이브러리에서 제공하는 메서드:메시지 전송 역할
         '/pub/msg', // 목적지 주소
         {}, // 메시지 전송에 필요한 헤더를 지정
@@ -188,13 +204,14 @@ useEffect(()=>{
             userName, // 보낸 사람
             msg, // 채팅 메세지
             msgId, // 채팅 랜덤 id
-            date // 현재시간
-            // emailName
+            date, // 현재시간
+            user
         })
         //데이터 보낼때 json 형식을 맞추어 보낸다.
     )
     // 메시지 전송 후 입력창 초기화
     msgRef.current.value = '';
+    console.log('user : '+user);
 };
   const modalopen = () =>{
     client.current.send(
@@ -216,30 +233,17 @@ useEffect(()=>{
         '/pub/msg', 
         {}, 
         JSON.stringify({
-            type: 'DELETE', 
+            type: 'DELETE',
             roomId, 
             userName, 
+            user,
             msg:'', // 메세지를 지우겠다
             msgId
-
         })
     )
 };
 
-   /* 강퇴 기능*/
-   const kick = (kickUser) =>{ // 강퇴할 대상의 userName을 인자로 받는다.
-       
-    client.current.send( // 웹소켓 서버로 강퇴 이벤트를 보낸다.
-        '/pub/msg',
-        {},
-        JSON.stringify({
-            type:'KICK',
-            roomId, 
-            userName: kickUser  // 강퇴할 대상의 userName을 보낸다.
-        })
-    )
-    console.log(kickUser + " was kicked out."); // 강퇴당한 사용자의 userName을 출력한다.
-};
+  
 
 /* 신고 기능*/
 const report = (userName, msg) => {
@@ -254,6 +258,7 @@ const report = (userName, msg) => {
     .then(response => response.json())
     .then(data => {
       console.log(msg +"," + userName);
+      alert("신고되었습니다");
     })
     .catch(error => {
       // 오류 처리
@@ -270,7 +275,7 @@ const report = (userName, msg) => {
         else {
             //입력하면 
             const msgId = Math.random().toString(); //msgId 랜덤값으로 보냄 
-                publish('CHAT', userName, msgRef.current.value, msgId, roomId); // 채팅 메시지 전송
+            publish('CHAT', userName, msgRef.current.value, msgId, roomId, user);
                 // console.log("msgId:", msgId);
             }
          }
@@ -285,14 +290,14 @@ const report = (userName, msg) => {
     setInputVisible(false); // 평소에는 안보이게
   };
 
-  // function maskUserName(userName) {
-  //   if (userName.length <= 2) {
-  //     return userName;
-  //   } else {
-  //     const maskedPart = '*'.repeat(userName.length - 1) + userName.slice(-1);
-  //     return maskedPart;
-  //   }
-  // }
+  function maskUserName(user) {
+    if (user.length <= 2) {
+      return user;
+    } else {
+      const maskedPart = '*'.repeat(user.length - 1) + user.slice(-1);
+      return maskedPart;
+    }
+  }
 
     return (
       <>
@@ -324,7 +329,7 @@ const report = (userName, msg) => {
                                          <b style={{fontSize:'10px', color:'gray'}}>{item.date}</b>
                                         )}
                                         &nbsp;
-                                        <b>{Message.userName} : {Message.msg}</b>
+                                        <b>{maskUserName(Message.user)} : {Message.msg}</b>
                                         {!isCurrentUser && admin &&(  //현재로그인한사용자가 아닌데 관리자면 삭제아이콘보임
                         <i
                             className="bi bi-trash" 
@@ -339,7 +344,7 @@ const report = (userName, msg) => {
                     className="bi bi-person-x"
                     style={{ cursor: 'pointer', marginRight:10}}
                     onClick={() => {
-                        kick(Message.userName);
+                        kick(item.userName);
                     }
                     }
                     
@@ -356,8 +361,8 @@ const report = (userName, msg) => {
                         ></img>
                     )}
                      {!isCurrentUser &&(
-                                        <b style={{fontSize:'10px', color:'gray'}}>{item.date}</b>
-                                        )}
+                       <b style={{fontSize:'10px', color:'gray'}}>{item.date}</b>
+                        )}
                     <br/>
                     
              </div>
@@ -386,9 +391,8 @@ const report = (userName, msg) => {
         <PortalPopup
           overlayColor="rgba(113, 113, 113, 0.3)"
           placement="Centered"
-          onOutsideClick={closeFrame2}
         >
-          <AuctionEnd onClose={closeFrame2} roomName={roomName}/>
+          <AuctionEnd onClose={closeFrame2} roomName={roomName} roomId={roomId}/>
         </PortalPopup>
       )}
         {isFrameOpen && (

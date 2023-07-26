@@ -29,6 +29,7 @@ import PassUpdate from "./user/PassUpdate";
 import Intro from "./user/Intro";
 import RoomCreate from './auctionpage/RoomCreate';
 import PaymentResult from "./auctionpage/PaymentResult";
+import AuctionList from './auctionpage/AuctionList';
 
 
 
@@ -44,11 +45,10 @@ function RouteMain(props) {
                 {/*<Route path='/app/passfind' element={<PassFind/>}/>*/}
                 {/*<Route path='/app/login' element={<Login/>}/>*/}
 
-
                 <Route path='/userinfo' element={<UserInfo/>}/>
                 {/*<Route path='/room/:roomId' element={<AuctionLive/>}/>*/}
                 <Route path='/auction' element={<Mainauction/>}/>
-
+                <Route path='/auctionlist' element={<AuctionList/>}/>
                 <Route path='/roomcreate' element={<RoomCreate/>}/>
                 <Route path='/' element={<Menu/>}/>
 
