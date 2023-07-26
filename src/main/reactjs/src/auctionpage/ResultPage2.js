@@ -37,7 +37,7 @@ function ResultPage2(props) {
             buyer_email:user_email,
             buyer_name:user_name,
             buyer_tel:userdata.hp,
-            m_redirect_url:`/paymentresult?productName=${roomName}&amount=${userBid.price}&merchant_uid=merchant_${new Date().getTime()}&user_name=${user_name}&user_email=${user_email}`
+            m_redirect_url:`http://175.45.193.12/paymentresult?productName=${roomName}&amount=${userBid.price}&merchant_uid=merchant_${new Date().getTime()}&user_name=${user_name}&user_email=${user_email}`
         };
 
         /* 4. 결제 창 호출하기 */
