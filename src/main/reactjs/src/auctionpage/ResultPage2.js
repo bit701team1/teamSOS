@@ -75,7 +75,7 @@ function ResultPage2(props) {
                 buyer_tel:userdata.hp,
                 buyer_email:user_email,
             });
-            navi('/paymentresult',{
+            navi('/paymentresult', {
                 state: {
                     productName: roomName,
                     amount: userBid.price,
@@ -84,6 +84,7 @@ function ResultPage2(props) {
                     user_email,
                 },
             });
+            window.location.replace('https://service.iamport.kr/payments/success');
         } else {
             alert(`결제 실패: ${error_msg}`);
         }
