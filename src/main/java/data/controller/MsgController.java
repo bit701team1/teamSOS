@@ -41,6 +41,7 @@ public class MsgController {
               deleteNotification.setMsgId(msg.getMsgId());
               deleteNotification.setMsg(msg.getMsg());
               deleteNotification.setUserName(msg.getUserName()); 
+//              deleteNotification.setUserName(msg.getEmailName());
 
               // 모든 클라이언트에게 삭제 알림 메시지를 전달
               sendingOperations.convertAndSend("/sub/room/" + msg.getRoomId(), deleteNotification);
@@ -55,7 +56,16 @@ public class MsgController {
                 System.out.println("강퇴되었습니다.");
                  sendingOperations.convertAndSend("/sub/room/" + msg.getRoomId(), kickuser);
               break;
-             
+              case "LIVE_END":
+              room = roomService.getRoom(msg.getRoomId());
+              MsgDto broadcastEnd = new MsgDto();
+              broadcastEnd.setType("LIVE_END");
+              broadcastEnd.setRoomId(msg.getRoomId());
+      
+              // 모든 클라이언트에게 방송 종료 메시지를 전달
+              sendingOperations.convertAndSend("/sub/room/" + msg.getRoomId(), broadcastEnd);
+              System.out.println(broadcastEnd);
+              break;
             default:
             break;
         }

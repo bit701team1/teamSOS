@@ -34,15 +34,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private final UserMapper userMapper;
     private final TokenMapper tokenMapper;
 
-//    @Override
-//    public void configure(WebSecurity web) {
-//        web.ignoring()
-//                .antMatchers(
-//                        "/h2-console/**"
-//                        ,"/favicon.ico"
-//                        ,"/error"
-//                );
-//    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         System.out.println("HttpSecurity 진입");
@@ -67,13 +59,22 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
                 .authorizeRequests() // (5)
 
+                // 나머지는 전부 인증 필요
+                .antMatchers("/**").authenticated()
+
                 // login, 회원가입 API는 토큰이 없는 상태에서 요청이 들어오기 때문에 permitAll
                 // 허용 영역 설정
-                .antMatchers("/","/user/**").permitAll()
+                .antMatchers("/").permitAll()
+                .antMatchers("/**").permitAll()
                 .antMatchers("/oauth/**").permitAll()
 
+                .antMatchers("/app/**").permitAll()
 
-                .antMatchers("/ws/**","/sub/**","/pub/**","/info/**").permitAll()
+                .antMatchers("/passfind").permitAll()
+                .antMatchers("/join").permitAll()
+                .antMatchers("/login").permitAll()
+
+                .antMatchers("/ws","/ws/**","/sub/**","/pub/**","/info/**").permitAll()
 
                 .antMatchers("/lobby/**").permitAll()
                 .antMatchers("/room/**").permitAll()
@@ -84,22 +85,26 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
                 .antMatchers("/api/**").permitAll()
                 .antMatchers("/sms/**").permitAll()
+                .antMatchers("/user/**").permitAll()
 
                 .antMatchers("/livestream/**").permitAll()
                 .antMatchers("/payment/**").permitAll()
                 .antMatchers("/product/**").permitAll()
                 .antMatchers("/bid/**").permitAll()
+                .antMatchers("/paymentresult/**").permitAll()
 
-                .antMatchers("/static/**","/main/**","/manifest/**","/resources/**","/css/**","/favicon*/**").permitAll()
+                .antMatchers("/static/**","/main/**","/manifest/**",
+                        "/resources/**","/css/**","/favicon*/**","/manifest.json").permitAll()
+
+                // 위에 해당하지 않는 url은 security 인증 적용
+                .anyRequest()
+                .authenticated()
+
 
                 //.antMatchers("/user/rejection").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
                 //.antMatchers("/trade/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
                 //.antMatchers("/user/withdrawal").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN") // 회원 탈퇴
 
-
-                // 나머지는 전부 인증 필요
-                .antMatchers("/**")
-                .authenticated()
 
                 // 시큐리티는 기본적으로 세션을 사용
                 // 여기서는 세션을 사용하지 않기 때문에 세션 설정을 Stateless 로 설정
@@ -113,7 +118,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         System.out.println("corsConfigurationSource 진입");
         CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "https://nid.naver.com"));
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "https://nid.naver.com","http://175.45.193.12","http://localhost:9003"));
         configuration.setAllowedMethods(Arrays.asList("HEAD", "GET", "POST", "PUT", "DELETE"));
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Authorization-refresh", "Cache-Control", "Content-Type"));
         /* 응답 헤더 설정 추가*/
@@ -126,17 +131,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     // Spring security룰을 무시하게 하는 url규칙
-//	@Override
-//	public void configure(WebSecurity web) {
-//		System.out.println("web security");
-//		web.ignoring()
-//		.antMatchers("/h2-console/**", "/favicon.ico")
-//        .antMatchers("/static/**","/main/**","/manifest/**","/resources/**","/css/**","/favicon*/**")
-//		.antMatchers("/v2/api-docs", "/swagger-resources/**", "/swagger-ui.html", "/webjars/**", "/swagger/**");
-//		//              .antMatchers("/vendor/**")
-//		//              .antMatchers("/js/**")
-//		//              .antMatchers("/img/**")
-//	}
+	@Override
+	public void configure(WebSecurity web) {
+		web.ignoring()
+//            .antMatchers("/h2-console/**", "/favicon.ico","/logo*.png")
+//            .antMatchers("/static/**","/main/**","/manifest.json","/resources/**","/css/**","/favicon*/**")
+//            .antMatchers("/v2/api-docs", "/swagger-resources/**", "/swagger-ui.html", "/webjars/**", "/swagger/**");
+                .antMatchers("/**");
+		//              .antMatchers("/vendor/**")
+		//              .antMatchers("/js/**")
+		//              .antMatchers("/img/**")
+	}
 
 
     //비밀번호 암호화를 위한 Encoder 설정

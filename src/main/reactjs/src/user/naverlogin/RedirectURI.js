@@ -30,7 +30,7 @@ const RedirectUri = (props) => {
 
                 Axios.post("http://localhost:3000/oauth/naverlogin", res.data.response)
                     .then((res) => {
-                            navi("/menu");
+                            navi("/");
                     }) .catch(error => {
                     //alert(error);
                     alert("로그인에 실패했습니다.");

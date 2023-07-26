@@ -20,6 +20,10 @@
     <select id="getUserByUserId" parameterType="int" resultType="UserDto">
         select * from user where user_id = #{user_id}
     </select>
+    <select id="updateUserPassbyHp" parameterType="String">
+        update user set password = #{password} where hp = #{hp}
+    </select>
+
 
     <!-- /////////////////////////////////////  경철 (ManagePage)  //////////////////////////////////////////////////-->
 

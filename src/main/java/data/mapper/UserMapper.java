@@ -21,6 +21,15 @@ public interface UserMapper {
 
     public UserDto getUserByUserName(String user_name);
 
+    ///
+
+    public UserDto getUserByUserId(int user_id);
+
+    public int countEmail(String email);
+
+    public void updateUserPassbyHp(Map<String,String> map);
+
+
     //스프링 시큐리티용 회원가입
     public void insertUser(UserDto dto);
 
@@ -66,10 +75,6 @@ public interface UserMapper {
     // refresh_token 삭제
     public void deleteRefreshToken(int user_id);
 
-
-    public UserDto getUserByUserId(int user_id);
-
-    public int countEmail(String email);
 
 
     ///////////////////////////////////경철 ///////////////////////////////////////

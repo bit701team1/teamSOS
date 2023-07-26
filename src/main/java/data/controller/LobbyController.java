@@ -11,6 +11,7 @@ import data.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,7 +35,8 @@ public class LobbyController {
     UserMapper userMapper;
     @Autowired
     TokenMapper tokenMapper;
-
+     @Autowired
+    private SimpMessagingTemplate template; 
     @GetMapping("/list")
     public List<RoomDto> getList() {
         return roomService.getAll();
@@ -52,7 +54,7 @@ public class LobbyController {
                 roomService.deleteRoom(createdRoom.getRoomId());
                 timer.cancel(); // 타이머 종료
             }
-        }, 600 * 1000); // 10초 (밀리초)
+        }, 10 * 60 * 1000); // 10초 (밀리초)
 
         return createdRoom;
     }

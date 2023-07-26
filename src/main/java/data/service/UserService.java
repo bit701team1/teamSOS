@@ -31,6 +31,14 @@ public class UserService implements UserServiceInter{
     }
 
     @Override
+    public void updateUserPassbyHp(String hp, String password) {
+        Map<String, String> map = new HashMap<>();
+        map.put("hp",hp);
+        map.put("password",password);
+        userMapper.updateUserPassbyHp(map);
+    }
+
+    @Override
     public int countEmail(String email) {
         return userMapper.countEmail(email);
     }

@@ -1,30 +1,34 @@
 import React, {useEffect, useRef, useCallback, useState} from 'react';
 import '../css/auctionlive2.css';
-import send from'../image/y_msgsend.svg';
-import info from'../image/y_info.svg';
-import coin from '../image/y_coin.svg';
-import back from '../image/y_back.svg';
 import img from '../image/스폰지밥1.gif';
 import AuctionInfo from '../auctionmodal/AuctionInfo';
 import AuctionBid from '../auctionmodal/AuctionBid';
+import AuctionEnd from '../auctionmodal/AuctionEnd';
 import PortalPopup from '../auctionmodal/PortalPopup';
 import axios from "axios";
-import alertImage from "../image/alert.png";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import * as SockJS from "sockjs-client";
 import * as StompJS from "@stomp/stompjs";
 function AuctionLive2(props) {
+  const navigate = useNavigate();
   const [hasBid, setHasBid] = useState(false); // 현재 로그인된 사용자의 입찰 여부를 관리하는 상태 변수
   const [isFrameOpen, setFrameOpen] = useState(false);
   const [isFrame1Open, setFrame1Open] = useState(false);
+  const [isFrame2Open, setFrame2Open] = useState(false);
   const { roomId } = useParams(); // 방 id
   const [roomName, setRoomName] =useState('');
   const client = useRef(); // 클라이언트
-  const [userName, setUserName] = useState(''); //email
+  const [userName, setUserName] = useState(''); //유저이름
+  const [emailName, setEmail] = useState(''); //유저이메일
   const msgRef = useRef(); // 메세지 함수
   const [msg,setMsg] = useState([]); // 메세지 내용
+
   const chatScreenRef = useRef(null); 
-  /////////////////////////모달////////////////////////////
+  const photo = process.env.REACT_APP_SUICONURL;
+  const productName = roomName;
+  const [isLoading, setIsLoading] = useState(true);
+    /////////////////////////모달////////////////////////////
+
   const openFrame = useCallback(() => {
     setFrameOpen(true);
   }, []);
@@ -40,15 +44,18 @@ function AuctionLive2(props) {
     setFrame1Open(true);
   }
   }, [hasBid]);
-
   const closeFrame1 = useCallback(() => {
     setFrame1Open(false);
   }, []);
+  const openFrame2 = useCallback(() => {
+    setFrame2Open(true);
+  }, []);
+
+  const closeFrame2 = useCallback(() => {
+    setFrame2Open(false);
+  }, []);
  /////////////////////////모달////////////////////////////
- //동호님 입찰
- useEffect(() => {
-  console.log("roomname>>" + roomName);
-  console.log("userName>>" + userName);
+useEffect(()=>{
 
   const checkDuplicateBid = async () => {
       try {
@@ -67,8 +74,10 @@ function AuctionLive2(props) {
           console.error("Failed to check duplicate bid:", error);
       }
   };
-
-  checkDuplicateBid();
+    //중복실행 수정(빈값이 아닐때만 실행)
+     if (roomName !== "" && userName !== "") {
+         checkDuplicateBid();
+     }
 }, [roomName, userName]);
 
   /*채팅 스크롤*/
@@ -84,16 +93,27 @@ function AuctionLive2(props) {
     fetch('/room/info/' + roomId)
         .then(res => res.json()) // 메서드로부터 받은 응답 데이터를 json 형식으로 변환하는 과정임
         .then(res => {
+         
             setRoomName(res.roomName); // json데이터를 처리하는 부분
+          
         });
     const getUser = async () => {
         try {
-            const email = await axios.get('/room/emailuser'); 
-            setUserName(email.data);// 이메일 출력
+            const user_name = await axios.get('/room/emailuser');
+            setUserName(user_name.data);
         } catch (error) {
             console.error("Failed to fetch user:", error);
         }
     };
+  //   const getEmailName = async () => {
+  //     try {
+  //         const emails = await axios.get('/room/username');
+  //         setUserName(user_name.data);// 이메일 출력
+  //     } catch (error) {
+  //         console.error("Failed to fetch user:", error);
+  //     }
+  // };
+  //   getEmailName();
     getUser();
     connect();
     // 컴포넌트가 언마운트되면 소켓 연결 해제
@@ -104,12 +124,12 @@ function AuctionLive2(props) {
 
    /* 소켓연결 */
    const connect = () => { //소켓 연결용 함수
-    let sock = new SockJS('http://localhost:9003/ws'); //endpoint 주소 소켓을 저기로 연결하겠다
+    // let sock = new SockJS('http://localhost:9003/ws'); //endpoint 주소 소켓을 저기로 연결하겠다
+       let sock = new SockJS('http://175.45.193.12/ws'); //endpoint 주소 소켓을 저기로 연결하겠다
     client.current = StompJS.Stomp.over(sock); //StompJS를 사용하여 소켓 연결을 관리하는 클라이언트 객체를 생성
     let ws = client.current;
     ws.connect({}, () => {
-        //연결 성공시 실행할 코드
-        ws.subscribe('/sub/room/' + roomId, data => {
+        ws.subscribe('/sub/room/' + roomId, data=> {
             const receivedMsg = JSON.parse(data.body);
             if (receivedMsg.type === 'DELETE') {
                 // 해당 메시지 ID를 가진 메시지를 삭제
@@ -119,24 +139,27 @@ function AuctionLive2(props) {
                 const kickUser = JSON.parse(data.body).userName;
                 if(kickUser === userName){
                     alert('나가');
-                    window.location.href = '/';
                 }
-            } 
+            } else if(receivedMsg.type === 'LIVE_END') {
+              openFrame2(); // 방송 종료 모달을 띄웁니다.
+            }
             else {
                 AddChat(data.body,  receivedMsg.msgId);
             }
-        });
-       
+          });
         //입장
         publish('ENTER', '');
+    
     });
 };
 
    /*채팅 추가 */
    const AddChat = (data, msgId) => { // 메시지를 추가하는 함수, data와 msgId를 인자로 받음
+    const now = new Date();
+    const timeString = now.toLocaleTimeString('UTC', { hour: '2-digit', minute: '2-digit' });
     setMsg((prevMsg) => [
         ...prevMsg, // 이전 메시지 배열을 펼쳐서 새 배열을 만듦
-        { message: data , msgId: msgId} // 새로운 메시지 객체를 추가, 메시지 내용과 msgId 속성을 포함
+        { message: data , msgId: msgId, date: timeString} // 새로운 메시지 객체를 추가, 메시지 내용과 msgId 속성을 포함
     ]);
 };
 
@@ -155,7 +178,7 @@ function AuctionLive2(props) {
   }, []);
 
    /* 클라이언트에 채팅 보내기*/
-   const publish = (type,userName, msg,msgId,roomId) => {
+   const publish = (type,userName, msg,msgId,roomId, date) => {
     client.current.send( //send : StompJS라이브러리에서 제공하는 메서드:메시지 전송 역할
         '/pub/msg', // 목적지 주소
         {}, // 메시지 전송에 필요한 헤더를 지정
@@ -164,13 +187,26 @@ function AuctionLive2(props) {
             roomId, //방 주소
             userName, // 보낸 사람
             msg, // 채팅 메세지
-            msgId // 채팅 랜덤 id
+            msgId, // 채팅 랜덤 id
+            date // 현재시간
+            // emailName
         })
         //데이터 보낼때 json 형식을 맞추어 보낸다.
     )
     // 메시지 전송 후 입력창 초기화
     msgRef.current.value = '';
 };
+  const modalopen = () =>{
+    client.current.send(
+      '/pub/msg', 
+      {}, 
+      JSON.stringify({
+          type: 'LIVE_END', 
+          roomId
+      })
+  )
+};
+
 
    /* 채팅 메세지 삭제 함수*/
    const deleteMessage = (msgId) => {
@@ -185,6 +221,7 @@ function AuctionLive2(props) {
             userName, 
             msg:'', // 메세지를 지우겠다
             msgId
+
         })
     )
 };
@@ -198,13 +235,13 @@ function AuctionLive2(props) {
         JSON.stringify({
             type:'KICK',
             roomId, 
-            userName: kickUser,  // 강퇴할 대상의 userName을 보낸다.
-            msg: '' // 메시지는 비워둔다.
+            userName: kickUser  // 강퇴할 대상의 userName을 보낸다.
         })
     )
     console.log(kickUser + " was kicked out."); // 강퇴당한 사용자의 userName을 출력한다.
 };
 
+/* 신고 기능*/
 const report = (userName, msg) => {
   const requestBody = {
     userName,
@@ -238,7 +275,6 @@ const report = (userName, msg) => {
             }
          }
      }
-
   /*send 버튼 클릭시 입력창 띄움 */
   const [isInputVisible, setInputVisible] = useState(false);
   const toggleInput = () => {
@@ -249,21 +285,33 @@ const report = (userName, msg) => {
     setInputVisible(false); // 평소에는 안보이게
   };
 
+  // function maskUserName(userName) {
+  //   if (userName.length <= 2) {
+  //     return userName;
+  //   } else {
+  //     const maskedPart = '*'.repeat(userName.length - 1) + userName.slice(-1);
+  //     return maskedPart;
+  //   }
+  // }
+
     return (
       <>
         <div className="y_auction-div">
         <img className="y_auction-img" alt="" src={img}/>
+        {admin &&
+        <button className="y_liveend-btn" onClick={modalopen}>방송종료</button>
+        }
         <img
           className="y_back-icon"
           alt=""
-          src={back}
+          src={`${photo}y_back.svg`}
         />
         <div className="y_icon-div1" />
         <div className="y_icon-div2" />
         <div className="y_icon-div3" />
-        <img className="y_auctioninfo" alt="" src={info} style={{cursor:'pointer'}}
+        <img className="y_auctioninfo" alt="" src={`${photo}y_info.svg`} style={{cursor:'pointer'}}
         onClick={openFrame} />
-        <img className="y_auctionbid" alt="" src={coin}  style={{cursor:'pointer'}} 
+        <img className="y_auctionbid" alt="" src={`${photo}y_coin.svg`}  style={{cursor:'pointer'}} 
         onClick={openFrame1} />
         <div className="y_chatscreen"  ref={chatScreenRef}>
         {msg.map((item) => {
@@ -272,8 +320,11 @@ const report = (userName, msg) => {
                         const isCurrentUser = Message.userName === userName;  // userName은 현재 사용자의 이름을 가지고 있는 변수라고 가정
                         return (
                             <div key={msgId} className={isCurrentUser ? 'message-right' : 'message-left'} > {/*왼쪽은 보낸사람 오른쪽은 현재 보내는 사람 */}
-                                
-                                        <b>{Message.userName}  {Message.msg}</b>
+                                       {isCurrentUser &&(
+                                         <b style={{fontSize:'10px', color:'gray'}}>{item.date}</b>
+                                        )}
+                                        &nbsp;
+                                        <b>{Message.userName} : {Message.msg}</b>
                                         {!isCurrentUser && admin &&(  //현재로그인한사용자가 아닌데 관리자면 삭제아이콘보임
                         <i
                             className="bi bi-trash" 
@@ -297,19 +348,24 @@ const report = (userName, msg) => {
              {!isCurrentUser && !admin && ( //현재 로그인한 사용자가 아닌데 일반사용자면 신고아이콘 보임
                         <img
                             alt=""
-                            src={alertImage}
-                            style={{ width: '20px', cursor: "pointer"}}
+                            src={`${photo}alert.png`}
+                            style={{ width: '18px', cursor: "pointer", marginBottom:6 ,marginLeft:5}}
                             onClick={() => {
                                 report(Message.userName, Message.msg);
                             }}
                         ></img>
                     )}
+                     {!isCurrentUser &&(
+                                        <b style={{fontSize:'10px', color:'gray'}}>{item.date}</b>
+                                        )}
                     <br/>
+                    
              </div>
                    );
+                   
               })}
         </div>
-        <img className="y_auctionsend" alt="" src={send}
+        <img className="y_auctionsend" alt="" src={`${photo}y_msgsend.svg`}
         style={{cursor:'pointer'}} 
         onClick={toggleInput}/>
          {isInputVisible && (
@@ -326,6 +382,15 @@ const report = (userName, msg) => {
                   )}
       </div>
       {/* 모달 */}
+      {isFrame2Open && (
+        <PortalPopup
+          overlayColor="rgba(113, 113, 113, 0.3)"
+          placement="Centered"
+          onOutsideClick={closeFrame2}
+        >
+          <AuctionEnd onClose={closeFrame2} roomName={roomName}/>
+        </PortalPopup>
+      )}
         {isFrameOpen && (
           <PortalPopup
             overlayColor="rgba(113, 113, 113, 0.3)"
@@ -341,7 +406,7 @@ const report = (userName, msg) => {
             placement="Centered"
             onOutsideClick={closeFrame1}
           >
-            <AuctionBid onClose={closeFrame1} />
+            <AuctionBid onClose={closeFrame1} roomName={roomName} userName={userName} productName={productName}/>
           </PortalPopup>
         )}
       </>

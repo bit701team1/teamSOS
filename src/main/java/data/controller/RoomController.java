@@ -39,6 +39,7 @@ public class RoomController {
     public RoomDto getInfo(@PathVariable String id) {
 
         RoomDto room = roomService.getRoom(id);
+        // 방 삭제 후 웹소켓 메시지 전송
         if (room != null) {
             // 방 정보를 가져왔을 때만 타이머를 시작하고, 10초 후에 방을 삭제하도록 설정
             Timer timer = new Timer();
@@ -48,10 +49,13 @@ public class RoomController {
                     roomService.deleteRoom(id);
                     timer.cancel(); // 타이머 종료
                 }
-            }, 600 * 1000);
+            }, 10* 60 * 1000);
+
+            
         }
         return room;
     }
+    
     /* 로그인한 유저 이메일 가져오기  */
     @GetMapping("/emailuser")
     public ResponseEntity<String> emailUser(HttpServletRequest request) {
@@ -66,11 +70,28 @@ public class RoomController {
                 }
             }
         }
-
         String email = userMapper.getUserByUserId(tokenMapper.selectByAccessToken(accesstoken).getRt_key()).getEmail();
-
-        return new ResponseEntity<>(email, HttpStatus.OK);
+        
+        return new ResponseEntity<>(email,HttpStatus.OK);
     }
+    /* 로그인한 유저 이름 가져오기  */
+//    @GetMapping("/username")
+//    public ResponseEntity<String> Username(HttpServletRequest request) {
+//        Cookie[] cookies = request.getCookies();
+//        String accesstoken = "";
+//
+//        if (cookies != null) {
+//            for (Cookie cookie : cookies) {
+//                if (cookie.getName().equals("access_token")) {
+//                    accesstoken = cookie.getValue();
+//                    break;
+//                }
+//            }
+//        }
+//        String username = userMapper.getUserByUserId(tokenMapper.selectByAccessToken(accesstoken).getRt_key()).getUser_name();
+//
+//        return new ResponseEntity<>(username,HttpStatus.OK);
+//    }
     /* 로그인한 유저 dto 가져오기 */
     @GetMapping("/userdata")
     public ResponseEntity<UserDto> userData( HttpServletRequest request) {
@@ -138,7 +159,7 @@ public class RoomController {
         userMapper.updatealarm(user);
         return ResponseEntity.ok(user);
     }
-
+    //신고기능
     @PostMapping("/insertreport")
      public ResponseEntity<ReportDto>insertreport( HttpServletRequest request, @RequestBody MsgDto msg, ReportDto reportdto, UserDto userdto) {
       Cookie[] cookies = request.getCookies();

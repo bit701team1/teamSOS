@@ -33,7 +33,7 @@ import java.util.List;
 import java.util.Random;
 
 @RestController
-@RequestMapping("/sms")
+@RequestMapping("/api/sms")
 @CrossOrigin(origins = "https://api.coolsms", methods = RequestMethod.POST)
 public class SmsController {
     private DefaultMessageService messageService;

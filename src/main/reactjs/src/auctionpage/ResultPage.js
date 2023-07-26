@@ -15,7 +15,6 @@ function ResultPage(props) {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     const roomName = searchParams.get('roomName');
-
     const [data, setData] = useState([]);
     useEffect(() => {
         // 서버로부터 데이터 가져오는 함수
