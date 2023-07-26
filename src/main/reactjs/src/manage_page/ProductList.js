@@ -75,7 +75,7 @@ function ProductList(props) {
 
             <div className="k_product_searchbar">
                 <div className="k_product_searchbar_box">
-                    <input type={'text'} placeholder={'검색할 상품을 입력하세요'}
+                    <input type={'text'} placeholder={'검색 할 상품을 입력하세요'}
                            onChange={handleSearchChange} value={searchProduct}
                            className="k_product_searchbar_input"></input>
 

@@ -60,7 +60,6 @@ function RouteMain(props) {
                 {/*<Route path='/login' element={<LoginForm/>}/>*/}
 
                 <Route path='/room/:roomId' element={<AuctionLive2/>}/>
-                <Route path='/manage/*' element={<ManagePageMain/>}/>
                 <Route path='/result2' element={<ResultPage2/>}/>
                 <Route path={'/livestream'}>
                     <Route path={'livestream'} element={<LiveStream/>}/>

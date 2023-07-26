@@ -6,19 +6,25 @@ function ProductListOld({productList}) {
     return (
         <>
             {productList.map((product, index) => (
-                <div className='k_product_list_box' style={{textAlign:'center'}} key={index}>
-                    <img className={'k_product_img'} alt='product' src={s1}/>
-                    <div className='k_product_list_detail_name'>
-                         {product.product_name}<br/>
+                <div className='k_product_list_box'  key={index}>
+                    <div className={'k_product_img_box'}>
+                        <img className={'k_product_img'} alt='product' src={s1}/>
                     </div>
-                    <div className='k_product_list_detail_winner'>
-                        낙찰자 : {product.winner}<br/>
-                    </div>
-                    <div className='k_product_list_detail_price'>
-                        $ {product.final_price}<br/>
-                    </div>
-                    <div className='k_product_list_detail_date' >
-                         {product.transaction_date}
+                    <div className={'k_product_list_detail_box'}>
+                        <div className='k_product_list_detail_name'>
+                            {product.product_name}
+                        </div>
+                        <div className='k_product_list_detail_winner'>
+                            낙찰자 : {product.winner}
+                        </div>
+                        <div className='k_product_list_detail_date' >
+                            <div className={'k_product_list_detail_text'}>
+                                {product.transaction_date}
+                            </div>
+                        </div>
+                        <div className='k_product_list_detail_price'>
+                            $ {product.final_price}
+                        </div>
                     </div>
                 </div>
             ))}

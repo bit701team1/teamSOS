@@ -57,10 +57,10 @@ function UserList(props) {
         <div>
 
             <div className="k-searchbox">
-                <img className="k-people-icon" alt="" src={`${k_photo}k_search_icon.svg`} />
+                <img className="k-people-icon" alt="" src={`${k_photo}k_icon_search.svg`} />
                 <input type={'text'} className="k-search-bar" onChange={handleSearchChange} placeholder={'회원명 또는 Email을 입력하세요'} value={searchValue} style={{fontSize:'1rem',textAlign:'center'}}>
                 </input>
-                <img className="k-search-icon" alt="검색" src={`${k_photo}k_search_icon.svg`} onClick={handleSearch} style={{cursor:'pointer'}} />
+                <img className="k-search-icon" alt="필터" src={`${k_photo}k_icon_filtter.svg`} onClick={handleSearch} style={{cursor:'pointer'}} />
             </div>
 
             <div className={'k-list-show'} style={{fontSize:'1rem'}}>
