@@ -37,7 +37,7 @@ function ResultPage2(props) {
             buyer_email:user_email,
             buyer_name:user_name,
             buyer_tel:userdata.hp,
-            m_redirect_url:`localhost:3000/paymentresult`
+            m_redirect_url:`http://175.45.193.12/paymentresult`
         };
 
         /* 4. 결제 창 호출하기 */
