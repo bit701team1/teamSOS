@@ -1,15 +1,14 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import './ProductList.css';
-import k_back_icon from "../k_manage_image/k_back_icon.svg";
 import {useNavigate} from "react-router-dom";
-import {FormControl, InputLabel, MenuItem, Select, SelectChangeEvent} from "@mui/material";
+import {FormControl, MenuItem, Select} from "@mui/material";
 import ProductListRecent from "./ProductListRecent";
 import ProductListOld from "./ProductListOld";
 import ProductListPrice from "./ProductListPrice";
 import axios from "axios";
 
 function ProductList(props) {
-
+    const k_photo=process.env.REACT_APP_MANAGE;
     const navi=useNavigate();
 
     const [productList, setProductList] = useState([]);
@@ -54,7 +53,7 @@ function ProductList(props) {
         <div className="k_productlist_main">
 
             <div className="k_product_info">
-                <img className="k-back-icon" alt="" src={k_back_icon} onClick={handleBeforePage}/>
+                <img className="k-back-icon" alt="" src={`${k_photo}k_back_icon.svg`} onClick={handleBeforePage}/>
                 <div className="k_info_title">낙찰 목록 관리</div>
             </div>
 

@@ -1,33 +1,23 @@
-import React, {useEffect, useState} from 'react';
-import Axios from "axios";
-import productimg from "../k_manage_image/productimg.jpg";
+import React from 'react';
 
 function ProductListPrice({productList}) {
-    // const [highpricelist,setHighpricelist]=useState([]);
-    //
-    // const hlist=()=>{
-    //     const highpricelistUrl="/productlist/highpricelist";
-    //     Axios.get(highpricelistUrl)
-    //         .then(res=>{
-    //             console.log("highpricelistt>>",res.data);
-    //             setHighpricelist(res.data);
-    //         })
-    // }
-    //
-    // useEffect(()=>{
-    //     hlist();
-    // },[]);
 
     return (
         <>
             {productList.map((product, index) => (
                 <div className='k_product_list_box' style={{textAlign:'center'}} key={index}>
-                    <img alt='상품사진' src={productimg} style={{width:'15rem', marginTop:'3rem'}}/>
-                    <div className='k_product_list_detail' style={{marginTop:'1rem', fontSize:'1.5rem'}}>
+                    <img alt='상품사진' src={''} style={{width:'15rem', marginTop:'3rem'}}/>
+                    <div className='k_product_list_detail' style={{marginTop:'0.5rem', fontSize:'1.4rem'}}>
                         상품이름 : {product.product_name}<br/>
+                    </div>
+                    <div className='k_product_list_detail' style={{marginTop:'0.3rem', fontSize:'1.2rem'}}>
                         낙찰자 : {product.winner}<br/>
+                    </div>
+                    <div className='k_product_list_detail' style={{marginTop:'0.5rem', fontSize:'0.9rem'}}>
                         낙찰가격 : {product.final_price}<br/>
-                        상품날짜 : {product.transaction_date}
+                    </div>
+                    <div className='k_product_list_detail' style={{marginTop:'0.5rem', fontSize:'0.9rem'}}>
+                        낙찰 일자 : {product.transaction_date}
                     </div>
                 </div>
             ))}

@@ -1,14 +1,12 @@
 import React from 'react';
 import './ManagePageMain.css';
 import {NavLink, Route, Routes, useNavigate} from "react-router-dom";
-import k_alert from '../k_manage_image/k_alert.svg';
-import k_back_icon from '../k_manage_image/k_back_icon.svg';
 import {BlockList, Monitor, UserList} from "./index";
-import sesoimg from '../k_manage_image/sesoimg.jpg';
 import adminimg from '../k_manage_image/s72.jpg';
 import Axios from "axios";
 
 function ManagePageMain(props) {
+    const k_photo=process.env.REACT_APP_MANAGE;
 
     const navi=useNavigate();
 
@@ -27,12 +25,10 @@ function ManagePageMain(props) {
 
     return (
         <div className="k-containermain">
-            {/*<div className="k-ct-header" />*/}
 
             <div className="k-ct-nav">
-                <img className="k-back-icon" alt="" src={k_back_icon} onClick={handleBeforePage}/>
+                <img className="k-back-icon" alt="" src={`${k_photo}k_back_icon.svg`} onClick={handleBeforePage}/>
                 <div className="k-nav-title">관리자 페이지</div>
-                <img className="k-alert-icon" alt="" src={k_alert} />
             </div>
 
             <div className="k-admin-info">
@@ -45,21 +41,18 @@ function ManagePageMain(props) {
 
             <div className="k-manage-bar">
                 <NavLink to={'/manage/userlist'}>
-                    <div className="k-manage-bar-textbox1">
-                        <div className="k-manage-bar-text1">일반유저</div>
-                    </div>
+                    <div className="k-manage-bar-textbox1"></div>
+                    <div className="k-manage-bar-text1">일반유저</div>
                 </NavLink>
 
                 <NavLink to={'/manage/blocklist'}>
-                    <div className="k-manage-bar-textbox2">
-                        <div className="k-manage-bar-text1">신고회원</div>
-                    </div>
+                    <div className="k-manage-bar-textbox2"></div>
+                    <div className="k-manage-bar-text2">신고회원</div>
                 </NavLink>
 
                 <NavLink to={'/manage/monitor'}>
-                    <div className="k-manage-bar-textbox3">
-                        <div className="k-manage-bar-text1">모니터링</div>
-                    </div>
+                    <div className="k-manage-bar-textbox3"></div>
+                    <div className="k-manage-bar-text3">모니터링</div>
                 </NavLink>
             </div>
 

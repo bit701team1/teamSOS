@@ -3,6 +3,7 @@ import {Button, Dialog, DialogContent, DialogTitle, Typography} from "@mui/mater
 import userimg from "../k_manage_image/k_mange_user.jpg";
 import DialogActions from "@mui/material/DialogActions";
 import blockimg from '../image/alert.png';
+import './UserList.css';
 
 function BlockRowList(props) {
     const { idx, row, no, onDelete, currentPage } = props;
@@ -27,8 +28,7 @@ function BlockRowList(props) {
     const ShortMsg=limitMsg(row.msg, 10);
 
     return (
-        <tr style={{ backgroundColor: '#f6f6f6', textAlign: 'center',
-            borderStyle:'unset',height:'2.5rem',border:'none',fontSize:'1rem'}}>
+        <tr className={'userBlockRowList'} style={{borderStyle:'unset',border:'none'}} >
             <td>{idx+1}</td>
             <td>{row.email}</td>
             <td style={{ cursor:'pointer' }} onClick={handleClickOpen}>{ShortMsg}</td>
@@ -37,6 +37,8 @@ function BlockRowList(props) {
                 onClose={handleClose}
                 aria-labelledby="customized-dialog-title"
                 open={open}
+                className={'k_blockuser_detail'}
+
             >
                 <DialogTitle id="customized-dialog-title" onClose={handleClose}   style={{width:'22rem'}} >
                     <img alt={'슬픔이'} src={userimg} style={{width:'4rem',height:'4rem',borderRadius:'100px',marginRight:'4px'}}/>

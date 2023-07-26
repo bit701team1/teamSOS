@@ -2,13 +2,14 @@ import React from 'react';
 import './ManagePageMain.css';
 import {NavLink, Route, Routes, useNavigate} from "react-router-dom";
 import {ProductList} from "./index";
+import './UserList.css';
 
 function Monitor(props) {
 
     const navi=useNavigate();
 
     return (
-        <div>
+        <div className={'k_product_manage'}>
             <div className={'k-moniter-send-list'} >
                 <button type={"button"} className={"btn k-send-button"}>
                     경매 알림 문자 발송

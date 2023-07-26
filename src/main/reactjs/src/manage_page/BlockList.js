@@ -1,6 +1,4 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import k_people_icon from "../k_manage_image/k_people_icon.svg";
-import k_search_icon from "../k_manage_image/k_search_icon.svg";
 import './ManagePageMain.css';
 import {Link, NavLink, useNavigate, useParams} from "react-router-dom";
 import Axios from "axios";
@@ -8,7 +6,7 @@ import BlockRowList from "./BlockRowList";
 import './UserList.css';
 
 function BlockList(props) {
-
+    const k_photo=process.env.REACT_APP_MANAGE;
     const [data,setData]=useState([]);
     const {currentPage}=useParams();
     const [searchValueBlock, setSearchValueBlock] = useState('');
@@ -50,19 +48,18 @@ function BlockList(props) {
     return (
         <div>
             <div className="k-searchbox">
-                <img className="k-people-icon" alt="" src={k_people_icon} />
-                <input type={'text'} className="k-search-bar" onChange={handleSearchChange} value={searchValueBlock} style={{fontSize:'1rem'}}>
+                <img className="k-people-icon" alt="" src={`${k_photo}k_people_icon.svg`} />
+                <input type={'text'} className="k-search-bar" onChange={handleSearchChange} placeholder={'회원명 또는 Email을 입력하세요'} value={searchValueBlock} style={{fontSize:'1rem',textAlign:'center'}}>
                 </input>
-                <img className="k-search-icon" alt="검색" src={k_search_icon} onClick={handleSearch} style={{cursor:'pointer'}} />
+                <img className="k-search-icon" alt="검색" src={`${k_photo}k_search_icon.svg`} onClick={handleSearch} style={{cursor:'pointer'}} />
             </div>
 
             <div className={'k-list-show'}  style={{fontSize:'1rem'}}>
 
-                {/*<b style={{marginLeft:'15%'}}>총 {data.totalCount} 명</b>*/}
 
-                <table className={"table k_table-blacklist"} style={{textAlign:'center',marginTop:'1rem',borderRadius:'10px',overflow:'hidden'}}>
+                <table className={"table k_table-blacklist"}>
                     <tbody>
-                    <tr style={{backgroundColor:'lightpink'}}>
+                    <tr className={'k_userBlocklist_tr'}>
                         <th style={{width:'20%'}}>번호</th>
                         <th style={{width:'30%'}}>이메일</th>
                         <th style={{width:'50%'}}>신고내용</th>
@@ -74,7 +71,7 @@ function BlockList(props) {
                     }
                 </table>
 
-                <div style={{width:'100%',textAlign:'center',fontSize:'1rem'}}>
+                <div className={'k_paging'}>
                     {/* 페이징처리 */}
                     {
                         //이전
