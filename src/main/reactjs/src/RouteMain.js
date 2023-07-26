@@ -29,23 +29,18 @@ import PassUpdate from "./user/PassUpdate";
 import Intro from "./user/Intro";
 import RoomCreate from './auctionpage/RoomCreate';
 import PaymentResult from "./auctionpage/PaymentResult";
-import TestMain from "./user/TestMain";
+import Enter from "./user/Enter";
 
 
 
 function RouteMain(props) {
     return (
         <div>
-             
-              
             <Routes>
                 <Route path='/' element={<Menu/>}/>
-                <Route path='/testmain' element={<TestMain/>}/>
+                <Route path='/enter' element={<Enter/>}/>
 
-                {/*<Route path='/app' element={<Menu/>}/>*/}
-                {/*<Route path='/app/passfind' element={<PassFind/>}/>*/}
-                {/*<Route path='/app/login' element={<Login/>}/>*/}
-
+                <Route path='/testlogin' element={<LoginForm/>}/>
 
                 <Route path='/userinfo' element={<UserInfo/>}/>
                 {/*<Route path='/room/:roomId' element={<AuctionLive/>}/>*/}

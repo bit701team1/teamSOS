@@ -19,7 +19,7 @@ function LoginForm(props) {
 
     const handleLoginClick = () => {
         //dto로 /user/login 으로 넘겨야함
-        let url = "/user/login";
+        let url = "/api/user/login";
 
         Axios.post(url, data).then(res => {             
             alert("로그인 성공")
@@ -30,15 +30,15 @@ function LoginForm(props) {
         });
     }
 
-    // const handleIsLoginClick = () => {
-    //     let url = "/user/islogin";
-    //     Axios.get(url).then(res => {
-    //         alert("로그인 중입니다")
-    //     }).catch(error => {
-    //         // 로그인 실패 처리
-    //         alert("회원정보가 없습니다");
-    //     });
-    // }
+    const handleIsLoginClick = () => {
+        let url = "/api/user/islogin";
+        Axios.get(url).then(res => {
+            alert("로그인 중입니다")
+        }).catch(error => {
+            // 로그인 실패 처리
+            alert("회원정보가 없습니다");
+        });
+    }
 
     //naver Login
     const { naver } = window
@@ -55,7 +55,7 @@ function LoginForm(props) {
 
     // 단체 알림 서비스
     const handleClickAlarm = ()=>{
-        let url = "/sms/send-many";
+        let url = "/api/sms/send-many";
         Axios.post(url).then(res => {
             alert("발송 되었습니다");
         }).catch(error => {
@@ -86,7 +86,7 @@ function LoginForm(props) {
                 <button onClick={handleLoginClick}>로그인</button>
             </div>
             <br/>
-            {/*<button onClick={handleIsLoginClick}>islogin</button>*/}
+            <button onClick={handleIsLoginClick}>islogin</button>
             <br/><br/>
             <div className="grid-naver" id='naverIdLogin'></div>
             <br/><br/>

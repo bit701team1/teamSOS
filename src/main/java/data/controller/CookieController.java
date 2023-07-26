@@ -1,5 +1,9 @@
 package data.controller;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 
 @RestController
 public class CookieController {
+
+    private static final String JWT_SECRET = "KbPeShVmYq3t6w9z$C&F)H@McQfTjWnZ";
 
     @GetMapping("/api/get-cookie")
     public ResponseEntity<String> getCookieValue(HttpServletRequest request) {
@@ -32,6 +38,20 @@ public class CookieController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    // JWT 토큰에서 email 값을 추출하는 메서드
+    @GetMapping("/api/getemail")
+    public String getEmailFromAccessToken(String AccessToken) {
+        // JWT 토큰 디코딩 및 파싱
+        Claims claims = Jwts.parserBuilder()
+                .setSigningKey(Keys.secretKeyFor(SignatureAlgorithm.HS256))
+                .build()
+                .parseClaimsJws(AccessToken)
+                .getBody();
+
+        // email 값을 추출
+        return claims.getSubject();
     }
 
     @DeleteMapping("/api/delete-cookie")

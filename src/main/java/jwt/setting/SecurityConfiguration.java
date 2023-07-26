@@ -133,13 +133,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(WebSecurity web) {
 		web.ignoring()
-//            .antMatchers("/h2-console/**", "/favicon.ico","/logo*.png")
-//            .antMatchers("/static/**","/main/**","/manifest.json","/resources/**","/css/**","/favicon*/**")
-//            .antMatchers("/v2/api-docs", "/swagger-resources/**", "/swagger-ui.html", "/webjars/**", "/swagger/**");
-                .antMatchers("/**");
-		//              .antMatchers("/vendor/**")
-		//              .antMatchers("/js/**")
-		//              .antMatchers("/img/**")
+            .antMatchers("/h2-console/**", "/favicon.ico","/logo*.png")
+            .antMatchers("/static/**","/main/**","/manifest.json","/resources/**","/css/**","/favicon*/**")
+            .antMatchers("/v2/api-docs", "/swagger-resources/**", "/swagger-ui.html", "/webjars/**", "/swagger/**")
+//                .antMatchers("/**");
+		              .antMatchers("/vendor/**")
+		              .antMatchers("/js/**")
+		              .antMatchers("/img/**");
 	}
 
 

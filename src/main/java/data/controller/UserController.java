@@ -192,6 +192,9 @@ public class UserController {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("access_token")) {
                     accessToken = cookie.getValue();
+                    System.out.println("accessToken : " + accessToken);
+                    String email = cookieController.getEmailFromAccessToken(accessToken);
+                    System.out.println("email!!!  " + email);
                 } else {
                     return ResponseEntity.ok("User is not logged in");
                 }
@@ -201,7 +204,10 @@ public class UserController {
         //accesstoken의 값을 db에서 찾고 존재하면 해당값 기반으로 refreshtoken값 가져옴
         refreshToken = tokenMapper.selectByRtKey(tokenMapper.selectByAccessToken(accessToken).getRt_key()).getRefreshtoken_value();
         //accesstoken값으로 email 값 가져옴
-        String email = userMapper.getUserByUserId(tokenMapper.selectByAccessToken(accessToken).getRt_key()).getEmail();
+        String email = cookieController.getEmailFromAccessToken(accessToken);
+        System.out.println("email!!!  " + email);
+
+        //String email = userMapper.getUserByUserId(tokenMapper.selectByAccessToken(accessToken).getRt_key()).getEmail();
 
         System.out.println("accessToken = " + accessToken);
         System.out.println("refreshToken = " + refreshToken);
