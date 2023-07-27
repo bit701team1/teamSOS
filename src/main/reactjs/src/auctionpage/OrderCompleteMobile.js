@@ -44,6 +44,9 @@ function OrderCompleteMobile() {
                         })
                         .then((response) => {
                             console.log('결제 정보가 데이터베이스에 저장되었습니다.');
+                            console.log(response.data);
+                            console.log("amount>"+response.data.amount+"&requestAmount>"+requestAmount);
+                            console.log("imp_uid>"+response.data.imp_uid+"&requsetImpUid>"+requsetImpUid);
                             setResult(true); // 결제가 성공한 경우 result 값을 true로 설정
                         })
                         .catch((error) => {
@@ -53,8 +56,9 @@ function OrderCompleteMobile() {
                 } else {
                     // 결제 정보가 일치하지 않는 경우
                     console.log('결제 정보가 맞지 않습니다.')
-                    console.log("amount>"+amount+"&requestAmount>"+requestAmount);
-                    console.log("imp_uid>"+imp_uid+"&requsetImpUid>"+requsetImpUid);
+                    console.log(response.data);
+                    console.log("amount>"+response.data.amount+"&requestAmount>"+requestAmount);
+                    console.log("imp_uid>"+response.data.imp_uid+"&requsetImpUid>"+requsetImpUid);
                     setResult(false); // 결제가 실패한 경우 result 값을 false로 설정
                 }
             })
