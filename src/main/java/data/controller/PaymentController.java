@@ -8,6 +8,7 @@ import data.service.PaymentService;
 import lombok.AllArgsConstructor;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -72,10 +73,13 @@ public class PaymentController {
     @GetMapping("/ordercompletemobile")
     public RedirectView orderCompleteMobile(@RequestParam("imp_uid") String impUid,
                                             @RequestParam("merchant_uid") String merchantUid,
-                                            @RequestParam("imp_success") boolean impSuccess) {
+                                            @RequestParam("imp_success") boolean impSuccess,
+                                            Model model) {
         if (impSuccess) {
             // 결제가 성공적으로 완료되었을 경우 필요한 처리를 수행합니다.
-            System.out.println("결과창 이동");
+            JsonNode token = paymentService.getToken();
+            String accessToken = token.get("response").get("access_token").asText();
+            JsonNode paymentInfo = paymentService.getPaymentData(accessToken, impUid);
 
             // 리다이렉션을 원하는 도메인 입력
             String redirectUrl = "http://175.45.193.12/paymentresult";
