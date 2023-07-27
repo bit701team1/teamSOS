@@ -8,13 +8,7 @@ function OrderCompleteMobile() {
     const { imp_uid, merchant_uid, imp_success } = useParams();
 
     useEffect(() => {
-        axios.get("/payment/getcompleteresult", {
-            params: {
-                imp_uid: imp_uid,
-                merchant_uid: merchant_uid,
-                imp_success: imp_success
-            }
-        })
+        axios.get(`/payment/getcompleteresult?imp_uid=${imp_uid}&merchant_uid=${merchant_uid}&imp_success=${imp_success}`)
             .then(response => {
                 // 성공적으로 처리된 경우, response에 결제 정보가 담겨 있을 것입니다.
                 console.log(response.data);
