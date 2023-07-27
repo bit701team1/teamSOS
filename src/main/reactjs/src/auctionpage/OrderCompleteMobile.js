@@ -28,15 +28,17 @@ function OrderCompleteMobile() {
                 console.log("amount>"+response.data.response.amount);
                 console.log("merchant_uid>"+response.data.response.merchant_uid);
 
-                const { amount, merchant_uid } = response.data;
+                // const { amount, merchant_uid } = response.data;
+                const amount = Number(response.data.response.amount);
+                const merchant_uid = response.data.response.merchant_uid;
 
                 const paymentDataStr = sessionStorage.getItem('paymentData');
                 const paymentData = JSON.parse(paymentDataStr);
-                const requestAmount = paymentData.data.amount;
-                const requsetMerchant_uid = paymentData.data.merchant_uid;
+                const requestAmount = Number(paymentData.data.amount);
+                const requestMerchant_uid = paymentData.data.merchant_uid;
 
                 //결제정보 비교
-                if (amount === requestAmount && merchant_uid === requsetMerchant_uid) {
+                if (amount === requestAmount && merchant_uid === requestMerchant_uid) {
                     axios
                         .post('/payment/insert', paymentData.data, {
                             params: {
@@ -47,7 +49,7 @@ function OrderCompleteMobile() {
                             console.log('결제 정보가 데이터베이스에 저장되었습니다.');
                             console.log(response.data);
                             console.log("amount>"+response.data.response.amount+"&requestAmount>"+requestAmount);
-                            console.log("merchant_uid>"+response.data.response.merchant_uid+"&requsetImpUid>"+requsetMerchant_uid);
+                            console.log("merchant_uid>"+response.data.response.merchant_uid+"&requestMerchant_uid>"+requestMerchant_uid);
                             setResult(true); // 결제가 성공한 경우 result 값을 true로 설정
                         })
                         .catch((error) => {
