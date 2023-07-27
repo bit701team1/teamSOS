@@ -21,8 +21,13 @@ import java.util.Map;
 public class PaymentService implements PaymentServiceInter{
     private PaymentMapper paymentMapper;
 
+//    @Override
+//    public void insertPayment(PaymentDto dto, String imp_uid) {
+//        paymentMapper.insertPayment(dto);
+//    }
     @Override
     public void insertPayment(PaymentDto dto, String imp_uid) {
+        dto.setImp_uid(imp_uid);
         paymentMapper.insertPayment(dto);
     }
 
