@@ -16,20 +16,18 @@ import org.springframework.stereotype.Service;
 public class UserService implements UserServiceInter{
 
     private UserMapper userMapper;
-
+    @Override
     public void insertUser(UserDto dto) {
         userMapper.insertUser(dto);
     }
-
     @Override
     public UserDto getUserByEmail(String email) {
         return userMapper.getUserByEmail(email);
     }
-
+    @Override
     public UserDto getUserByUserId(int user_id){
         return userMapper.getUserByUserId(user_id);
     }
-
     @Override
     public void updateUserPassbyHp(String hp, String password) {
         Map<String, String> map = new HashMap<>();
@@ -37,7 +35,7 @@ public class UserService implements UserServiceInter{
         map.put("password",password);
         userMapper.updateUserPassbyHp(map);
     }
-
+    //email 중복 확인
     @Override
     public int countEmail(String email) {
         return userMapper.countEmail(email);

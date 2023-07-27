@@ -10,8 +10,6 @@ import {useNavigate} from "react-router-dom";
 
 function VerificationPage(props) {
 
-
-
     const BackIcon = process.env.REACT_APP_BUCKET + "/icon/back-arrow.svg";
     const Phone = process.env.REACT_APP_BUCKET + "/icon/phone-icon.svg";
     const Pass = process.env.REACT_APP_BUCKET + "/icon/password-icon.svg";
@@ -47,9 +45,9 @@ function VerificationPage(props) {
 
             navi(
                 "/passupdate",{
-                state: {
-                    hp: hp
-                }
+                    state: {
+                        hp: hp
+                    }
                 }
             )
 

@@ -16,8 +16,8 @@ function UpdatePassPage(props) {
     const [checkpassword, setCheckPassWord] = useState("");
 
     const handleUpdateClick = ()=>{
-        alert(hp);
-        alert(rawpassword);
+        // alert(hp);
+        // alert(rawpassword);
 
         if(rawpassword !== checkpassword){
             alert("비밀번호가 일치하지 않습니다");
@@ -27,9 +27,7 @@ function UpdatePassPage(props) {
                     alert("성공적으로 변경되었습니다");
                 })
                 .catch((error) => {
-                    // 에러가 발생했을 때의 처리
                     console.error("오류 발생:", error);
-                    // 또는 오류 메시지를 사용자에게 보여주기 위해 alert로 처리
                     alert("오류가 발생했습니다. 다시 시도해주세요.");
                 });
 

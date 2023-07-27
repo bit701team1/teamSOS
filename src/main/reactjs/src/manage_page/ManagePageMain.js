@@ -22,7 +22,6 @@ function ManagePageMain(props) {
     }
 
 
-
     return (
         <div className="k-containermain">
 
@@ -72,7 +71,6 @@ function ManagePageMain(props) {
                 <Route path={'blocklist/:currentPage'} element={
                     <BlockList/>
                 }/>
-
 
                 <Route path={'monitor'} element={<Monitor/>}/>
             </Routes>
