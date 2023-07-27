@@ -26,17 +26,17 @@ function OrderCompleteMobile() {
             .then((response) => {
                 // 성공적으로 처리된 경우, response에 결제 정보가 담겨 있을 것입니다.
                 console.log("amount>"+response.data.response.amount);
-                console.log("imp_uid>"+response.data.response.imp_uid);
+                console.log("merchant_uid>"+response.data.response.merchant_uid);
 
-                const { amount, imp_uid } = response.data;
+                const { amount, merchant_uid } = response.data;
 
                 const paymentDataStr = sessionStorage.getItem('paymentData');
                 const paymentData = JSON.parse(paymentDataStr);
                 const requestAmount = paymentData.data.amount;
-                const requsetImpUid = paymentData.data.imp_uid;
+                const requsetMerchant_uid = paymentData.data.merchant_uid;
 
                 //결제정보 비교
-                if (amount === requestAmount && imp_uid === requsetImpUid) {
+                if (amount === requestAmount && merchant_uid === requsetMerchant_uid) {
                     axios
                         .post('/payment/insert', paymentData.data, {
                             params: {
@@ -47,7 +47,7 @@ function OrderCompleteMobile() {
                             console.log('결제 정보가 데이터베이스에 저장되었습니다.');
                             console.log(response.data);
                             console.log("amount>"+response.data.response.amount+"&requestAmount>"+requestAmount);
-                            console.log("imp_uid>"+response.data.response.imp_uid+"&requsetImpUid>"+requsetImpUid);
+                            console.log("merchant_uid>"+response.data.response.merchant_uid+"&requsetImpUid>"+requsetMerchant_uid);
                             setResult(true); // 결제가 성공한 경우 result 값을 true로 설정
                         })
                         .catch((error) => {
@@ -58,9 +58,9 @@ function OrderCompleteMobile() {
                     // 결제 정보가 일치하지 않는 경우
                     console.log('결제 정보가 맞지 않습니다.');
                     console.log("amount>"+response.data.response.amount);
-                    console.log("imp_uid>"+response.data.response.imp_uid);
+                    console.log("merchant_uid>"+response.data.response.merchant_uid);
                     console.log("amount>"+response.data.response.amount+"&requestAmount>"+requestAmount);
-                    console.log("imp_uid>"+response.data.response.imp_uid+"&requsetImpUid>"+requsetImpUid);
+                    console.log("merchant_uid>"+response.data.response.merchant_uid+"&requsetImpUid>"+requsetMerchant_uid);
                     setResult(false); // 결제가 실패한 경우 result 값을 false로 설정
                 }
             })
