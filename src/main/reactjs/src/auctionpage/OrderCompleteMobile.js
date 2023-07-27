@@ -6,13 +6,13 @@ function OrderCompleteMobile() {
     const [result, setResult] = useState(null);
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
-    // const imp_uid = queryParams.get('imp_uid');
-    // const merchant_uid = queryParams.get('merchant_uid');
-    // const imp_success = queryParams.get('imp_success');
+    const imp_uid = queryParams.get('imp_uid');
+    const merchant_uid = queryParams.get('merchant_uid');
+    const imp_success = queryParams.get('imp_success');
 
     // paymentData를 세션에서 읽어옴
     const paymentData = JSON.parse(sessionStorage.getItem("paymentData"));
-    const { imp_uid, merchant_uid, imp_success } = queryParams;
+    // const { imp_uid, merchant_uid, imp_success } = queryParams;
 
     useEffect(() => {
         axios
@@ -37,7 +37,11 @@ function OrderCompleteMobile() {
                 //결제정보 비교
                 if (amount === requestAmount && imp_uid === requsetImpUid) {
                     axios
-                        .post('/payment/insert', paymentData.data)
+                        .post('/payment/insert', paymentData.data, {
+                            params: {
+                                imp_uid: imp_uid,
+                            },
+                        })
                         .then((response) => {
                             console.log('결제 정보가 데이터베이스에 저장되었습니다.');
                             setResult(true); // 결제가 성공한 경우 result 값을 true로 설정
