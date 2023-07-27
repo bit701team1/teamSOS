@@ -31,6 +31,7 @@ import RoomCreate from './auctionpage/RoomCreate';
 import PaymentResult from "./auctionpage/PaymentResult";
 import Enter from "./user/Enter";
 import AuctionList from './auctionpage/AuctionList';
+import OrderCompleteMobile from "./auctionpage/OrderCompleteMobile";
 
 
 
@@ -70,7 +71,7 @@ function RouteMain(props) {
 
                 <Route path='/passfind' element={<PassFind/>}/>
                 <Route path='/login' element={<Login/>}/>
-
+                <Route path='ordercompletemobile' element={<OrderCompleteMobile/>}/>
                 <Route path='/join' element={<Join/>}/>
                 <Route path='/passauth' element={<PassAuth/>}/>
                 <Route path='/passupdate' element={<PassUpdate/>}/>

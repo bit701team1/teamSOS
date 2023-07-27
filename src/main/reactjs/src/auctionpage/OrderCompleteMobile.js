@@ -1,7 +1,9 @@
-import React, {useEffect} from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from "axios";
 
 function OrderCompleteMobile(props) {
+    const [result, setResult] = useState('');
+
     useEffect(() => {
         // URL 파라미터로 전달받은 값을 가져옵니다.
         const { imp_uid, merchant_uid, imp_success } = props.match.params;
@@ -15,6 +17,7 @@ function OrderCompleteMobile(props) {
                 // 성공적으로 처리된 경우, response에 결제 정보가 담겨 있을 것입니다.
                 console.log(response.data);
                 // 이후 필요한 처리를 수행하시면 됩니다.
+                setResult(response.data); // 결제 정보를 상태에 저장
             })
             .catch(error => {
                 // 결제 실패 또는 오류가 발생한 경우
@@ -25,7 +28,7 @@ function OrderCompleteMobile(props) {
 
     return (
         <div>
-
+            {result}
         </div>
     );
 }
