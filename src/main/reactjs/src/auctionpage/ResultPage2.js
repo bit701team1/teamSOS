@@ -54,7 +54,6 @@ function ResultPage2(props) {
             buyer_name:user_name,
             buyer_tel:userdata.hp,
             m_redirect_url:'http://175.45.193.12/ordercompletemobile',
-            imp_uid:imp_uid
         };
         console.log("imp_uid>"+imp_uid);
         // 결제 요청 시 데이터를 sessionStorage에 저장

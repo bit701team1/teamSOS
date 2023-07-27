@@ -31,6 +31,7 @@ function OrderCompleteMobile() {
                 // const { amount, merchant_uid } = response.data;
                 const amount = Number(response.data.response.amount);
                 const merchant_uid = response.data.response.merchant_uid;
+                const imp_uid = response.data.response.imp_uid;
 
                 const paymentDataStr = sessionStorage.getItem('paymentData');
                 const paymentData = JSON.parse(paymentDataStr);
