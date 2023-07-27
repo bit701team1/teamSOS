@@ -86,16 +86,19 @@
     left: 1.5rem;
     border-radius: 15px;
     background-color: #f6f6f6;
+    box-shadow: 0 8.200000286102295px 14.4px rgba(0, 0, 0, 0.12);
+    border: 0.9px solid #e2e2e2;
     width: 5.5rem;
     height: 6rem;
     float: left;
 }
 
 .k-admin-name {
+    position: absolute;
     font-family: 'Roboto';
-    font-weight: 800;
-    margin-left: 35%;
-    margin-top: 10%;
+    font-weight: 500;
+    margin-left: 8rem;
+    margin-top: 2.8rem;
 }
 .k-admin-info,
 .k-logout {
@@ -323,4 +326,6 @@
     font-family: 'Roboto';
 }
 
-
+.active-link {
+    color: red;
+}

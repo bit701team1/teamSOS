@@ -4,12 +4,24 @@ import {NavLink, Route, Routes, useNavigate} from "react-router-dom";
 import {ProductList} from "./index";
 import './UserList.css';
 import './monitor.css';
+import Axios from "axios";
 
 function Monitor(props) {
 
     const k_photo=process.env.REACT_APP_MANAGE;
 
     const navi=useNavigate();
+
+    // 단체 알림 서비스
+    const handleClickAlarm = ()=>{
+        let url = "/api/sms/send-many";
+        Axios.post(url).then(res => {
+            alert("발송 되었습니다");
+        }).catch(error => {
+            // 로그인 실패 처리
+            alert("발송 실패");
+        });
+    }
 
     return (
         <div className={'k_product_manage'}>
@@ -20,7 +32,7 @@ function Monitor(props) {
                     </div>
 
                     <div className="k_product_nav_text1">알림 문자 발송</div>
-                    <div className="k_product_nav_icon1">
+                    <div className="k_product_nav_icon1" onClick={handleClickAlarm}>
                         <img
                             className="k_product_nav_icon1_right1"
                             alt="1"

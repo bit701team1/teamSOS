@@ -19,7 +19,7 @@ function UserRowList(props) {
     const k_photo=process.env.REACT_APP_MANAGE;
 
     return (
-        <tr className={'userRowList'} style={{borderStyle:'unset',border:'none'}}>
+        <tr className={'userRowList'} style={{borderStyle:'unset',border:'snow'}}>
             <td>{no-idx}</td>
             <td >{row.user_name}</td>
             <td onClick={handleClickOpen} style={{cursor:'pointer'}}>{row.email}</td>
@@ -55,7 +55,7 @@ function UserRowList(props) {
                     </Typography>
                     <Typography gutterBottom>
                         <img alt={'card이미지'} src={`${k_photo}k_cardimg.png`} style={{width:'2.5rem'}}/>
-                        &nbsp;총 지불금액 : {row.total_payment}
+                        &nbsp;총 지불금액 : ₩ {Number(row.total_payment).toLocaleString('ko-KR')}
                     </Typography>
                 </DialogContent>
                 <DialogActions>

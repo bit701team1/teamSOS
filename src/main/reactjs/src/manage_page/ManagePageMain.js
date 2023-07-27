@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './ManagePageMain.css';
 import {NavLink, Route, Routes, useNavigate} from "react-router-dom";
 import {BlockList, Monitor, UserList} from "./index";
@@ -17,10 +17,12 @@ function ManagePageMain(props) {
     const handleDeleteAdminCookie = () => {
         Axios.delete("/api/delete-cookie")
             .then(res => {
-                alert("쿠키값이 제거 => 로그아웃!")
+                alert("로그아웃이 되었습니다.")
+                navi("/login");
             })
     }
 
+    const [activeLink, setActiveLink] = useState('userlist');
 
 
     return (
@@ -40,25 +42,25 @@ function ManagePageMain(props) {
             </div>
 
             <div className="k-manage-bar">
-                <NavLink to={'/manage/userlist'}>
+                <NavLink to={'/manage/userlist'} onClick={() => setActiveLink('userlist')}>
                     <div className="k-manage-bar-textbox1">
                         <img className="k_icons" alt={'logout'} src={`${k_photo}k_icon_people.svg`}/>
                     </div>
-                    <div className="k-manage-bar-text1">일반유저</div>
+                    <div className={activeLink === 'userlist' ? 'k-manage-bar-text1 active-link' : 'k-manage-bar-text1'}>일반유저</div>
                 </NavLink>
 
-                <NavLink to={'/manage/blocklist'}>
+                <NavLink to={'/manage/blocklist'} onClick={() => setActiveLink('blocklist')}>
                     <div className="k-manage-bar-textbox2">
                         <img className="k_icons" alt={'logout'} src={`${k_photo}k_icon_block.svg`}/>
                     </div>
-                    <div className="k-manage-bar-text2">신고회원</div>
+                    <div className={activeLink === 'blocklist' ? 'k-manage-bar-text2 active-link' : 'k-manage-bar-text2'}>신고회원</div>
                 </NavLink>
 
-                <NavLink to={'/manage/monitor'}>
+                <NavLink to={'/manage/monitor'} onClick={() => setActiveLink('monitor')}>
                     <div className="k-manage-bar-textbox3">
                         <img className="k_icons" alt={'logout'} src={`${k_photo}k_icon_monitor.svg`}/>
                     </div>
-                    <div className="k-manage-bar-text3">모니터링</div>
+                    <div className={activeLink === 'monitor' ? 'k-manage-bar-text3 active-link' : 'k-manage-bar-text3'}>모니터링</div>
                 </NavLink>
             </div>
 
@@ -80,7 +82,7 @@ function ManagePageMain(props) {
                 }/>
 
 
-                <Route path={'monitor'} element={<Monitor/>}/>
+                <Route path={'monitor/*'} element={<Monitor/>}/>
             </Routes>
 
         </div>

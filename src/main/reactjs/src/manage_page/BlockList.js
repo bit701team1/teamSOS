@@ -17,7 +17,6 @@ function BlockList(props) {
         const url="/manage/blocklist?currentPage="+(currentPage==null?1:currentPage)+"&search="+(searchValueBlock || '');
         Axios.get(url)
             .then(res=>{
-                console.log("res.data="+res.data);
                 setData(res.data);
             })
 
@@ -64,11 +63,11 @@ function BlockList(props) {
                         <th style={{width:'30%'}}>이메일</th>
                         <th style={{width:'50%'}}>신고내용</th>
                     </tr>
-                    </tbody>
                     {
                         data.Blocklist &&
                         data.Blocklist.map((row,idx)=><BlockRowList key={idx} row={row} no={data.no} idx={idx} onDelete={deleteBlockUser} currentPage={currentPage}/>)
                     }
+                    </tbody>
                 </table>
 
                 <div className={'k_paging'}>

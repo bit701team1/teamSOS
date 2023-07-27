@@ -28,7 +28,7 @@ function BlockRowList(props) {
     const ShortMsg=limitMsg(row.msg, 10);
 
     return (
-        <tr className={'userBlockRowList'} style={{borderStyle:'unset',border:'none'}} >
+        <tr className={'userBlockRowList'} style={{borderStyle:'unset',border:'snow'}} >
             <td>{idx+1}</td>
             <td>{row.email}</td>
             <td style={{ cursor:'pointer' }} onClick={handleClickOpen}>{ShortMsg}</td>

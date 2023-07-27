@@ -2,7 +2,7 @@
 
 .k_productlist_main {
     position: relative;
-    background-color: #d6b4a2;
+    background-color: #f2ebdc;
     width: 100%;
     height: 58rem;
     text-align: left;
@@ -21,7 +21,7 @@
     top: 0rem;
     right: 0;
     left: 0;
-    background-color: #d6b4a2;
+    background-color: #f2ebdc;
     height: 5rem;
     font-family: "Roboto";
 
@@ -42,8 +42,9 @@
 .k_info_title {
     position: absolute;
     top: calc(50% - (50px*0.363));
-    left: 28%;
-    font-weight: 800;
+    margin-left: 27%;
+    font-weight: 600;
+    font-family: 'Roboto';
 }
 
 .k_product_selectbar{
@@ -52,7 +53,7 @@
 }
 .k_product_selectbar {
     top: 5rem;
-    background-color: #ffffff;
+    background-color: white;
     width: 100%;
     height: 4rem;
     text-align: center;
@@ -74,7 +75,7 @@
     top: 9.5rem;
     right: 0;
     left: 0;
-    background-color: #d6b4a2;
+    background-color: #f2ebdc;
     height: 4rem;
 }
 .k_product_searchbar_box {
@@ -92,15 +93,15 @@
 
 .k_product_searchbar_input {
     position: absolute;
-    line-height: 2.5rem;
+    line-height: 2.6rem;
     font-size: 1.5rem;
-    width: 100%;
+    width: 95%;
+    margin-left: 2.5%;
     border: none;
-    border-radius: 5px;
     outline: none;
     font-family: "Roboto";
     text-align: center;
-    border-radius: 100px;
+    border-radius: 50px;
 
 }
 
@@ -115,7 +116,7 @@
     top: 13rem;
     right: 0;
     left: 0;
-    background-color: #d6b4a2;
+    background-color: #f2ebdc;
 }
 
 .k_product_list_show{
@@ -123,7 +124,7 @@
     margin-left: 5%;
     margin-top: 5%;
     margin-bottom: 5%;
-    background-color: #d6b4a2;
+    background-color: #f2ebdc;
 }
 
 .k_product_list_box{
@@ -139,14 +140,14 @@
 
 .k_productlist_main_form{
     border: none;
-    background-color: #ffffff;
+    background-color: white;
     font-family: "Roboto";
 
 }
 .k_product_img_box {
     float: left;
-    margin-left: 5%;
-    margin-top: 5%;
+    margin-left: 1rem;
+    margin-top: 1rem;
 }
 
 .k_product_list_detail_box {
@@ -160,56 +161,59 @@
 }
 
 .k_product_list_detail_name {
-    position: relative;
+    position: absolute;
     font-family: "Roboto";
-    font-size: 1.4rem;
-    width: 90%;
-    margin-top: 5%;
-    font-weight: 700;
+    font-size: 1rem;
+    width: 53%;
+    margin-top: 1rem;
+    font-weight: 600;
+    white-space: pre-line;
 }
 
 
 .k_product_list_detail_winner {
-    position: relative;
+    position: absolute;
     font-family: "Roboto";
     font-size: 0.8rem;
-    margin-top: 5%;
-    width: 15rem;
+    margin-top: 3.8rem;
+    width: 55%;
+    white-space: pre-line;
 
 }
 
 .k_product_list_detail_date {
-    position: relative;
+    position: absolute;
     font-family: "Roboto";
-    top: 15%;
-    width: 6rem;
-    margin-left: 48%;
+    top: 5.3rem;
+    width: 5rem;
+    margin-left: 29%;
     border-radius: 100px;
-    background-color: #eeeeee;
+    background-color: #f2ebdc;
 }
 .k_product_list_detail_text {
     margin-left: 10%;
-    font-size: 1rem;
+    font-size: 0.8rem;
     font-weight: 500;
 }
 
 
 .k_product_list_detail_price {
-    position: relative;
+    position: absolute;
     font-family: "Roboto";
     font-size: 1rem;
-    top: 5%;
-    width: 10rem;
+    top: 6rem;
+    width: 7rem;
     font-weight: 600;
 
 }
 
 .k_product_img {
-    position: relative;
+    position: absolute;
     width: 6rem;
     height: 6rem;
     object-fit: cover;
     float: left;
+    border-radius: 15px;
 }
 
 

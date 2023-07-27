@@ -24,7 +24,6 @@ function UserList(props) {
         const url="/manage/userlist?currentPage="+(currentPage==null?1:currentPage)+"&search="+(searchValue || '');
         Axios.get(url)
             .then(res=>{
-                console.log(res.data);
                 setData(res.data);
             })
 
@@ -72,12 +71,13 @@ function UserList(props) {
                         <th style={{width:'40%'}}>회원명</th>
                         <th style={{width:'40%'}}>이메일</th>
                     </tr>
-                    </tbody>
                     {
                         // userlist.map((row,idx)=><UserRowList key={idx} row={row} idx={idx} onDelete={deleteUser}/>)
                         data.getUserList &&
                         data.getUserList.map((row,idx)=><UserRowList key={idx} row={row} no={data.no} idx={idx} onDelete={deleteUser} currentPage={currentPage}/>)
                     }
+                    </tbody>
+
                 </table>
 
                 <div className={'k_paging'}>

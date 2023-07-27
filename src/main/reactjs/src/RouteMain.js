@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
+import {Route, Routes, useNavigate} from 'react-router-dom';
 import './App.css';
 import UserInfo from './userpage/UserInfo'
 import Mainauction from "./auctionpage/Mainauction";
@@ -31,10 +31,13 @@ import RoomCreate from './auctionpage/RoomCreate';
 import PaymentResult from "./auctionpage/PaymentResult";
 import Enter from "./user/Enter";
 import AuctionList from './auctionpage/AuctionList';
+import axios from "axios";
 
 
 
 function RouteMain(props) {
+    const navigate = useNavigate();
+
     return (
         <div>
             <Routes>
@@ -50,11 +53,8 @@ function RouteMain(props) {
                 <Route path='/auctionlist' element={<AuctionList/>}/>
 
                 <Route path='/roomcreate' element={<RoomCreate/>}/>
-                <Route path='/' element={<Menu/>}/>
-
                 <Route path='/manage/*' element={<ManagePageMain/>}/>
                 <Route path='/productlist/*' element={<ProductList/>}/>
-
 
                 <Route path='/oldjoin' element={<JoinForm/>}/>
                 {/*<Route path='/login' element={<LoginForm/>}/>*/}
