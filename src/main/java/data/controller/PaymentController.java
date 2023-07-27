@@ -28,8 +28,10 @@ public class PaymentController {
     public void insert(@RequestBody PaymentDto dto, @RequestParam("imp_uid") String imp_uid) {
         System.out.println("insert>>" + dto);
         System.out.println("uid>>" + imp_uid);
-        paymentService.insertPayment(dto, imp_uid);
+        dto.setImp_uid(imp_uid); // imp_uid를 dto에 설정
+        paymentService.insertPayment(dto); // 수정된 dto를 서비스로 전달
     }
+
 //    @PostMapping("/insert")
 //    public ResponseEntity<Map<String, Object>> insert(@RequestBody Map<String, Object> data) {
 //        // 클라이언트에서 넘어온 결제 정보 처리 로직
@@ -60,7 +62,7 @@ public class PaymentController {
 
         if (receivedAmount == fetchedAmount) {
             // 결제 정보가 일치하면 true 리턴하고, 데이터베이스에 추가
-            paymentService.insertPayment(dto,dto.getImp_uid());
+            paymentService.insertPayment(dto);
             System.out.println("결제확인 완료");
             return true;
         } else {

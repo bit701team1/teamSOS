@@ -26,8 +26,7 @@ public class PaymentService implements PaymentServiceInter{
 //        paymentMapper.insertPayment(dto);
 //    }
     @Override
-    public void insertPayment(PaymentDto dto, String imp_uid) {
-        dto.setImp_uid(imp_uid);
+    public void insertPayment(PaymentDto dto) {
         paymentMapper.insertPayment(dto);
     }
 
