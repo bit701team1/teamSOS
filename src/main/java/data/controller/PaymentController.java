@@ -94,10 +94,10 @@ public class PaymentController {
 //            return redirectView;
 //        }
 //    }
-    @PostMapping("/getcompleteresult")
-    public String orderCompleteMobile(@RequestParam("imp_uid") String impUid,
-                                      @RequestParam("merchant_uid") String merchantUid,
-                                      @RequestParam("imp_success") boolean impSuccess) {
+    @GetMapping("/getcompleteresult")
+    public String getcompleteresult(@RequestParam("imp_uid") String impUid,
+                                    @RequestParam("merchant_uid") String merchantUid,
+                                    @RequestParam("imp_success") boolean impSuccess) {
         if (impSuccess == true) {
             // 결제가 성공적으로 완료되었을 경우 필요한 처리를 수행합니다.
             JsonNode token = paymentService.getToken();

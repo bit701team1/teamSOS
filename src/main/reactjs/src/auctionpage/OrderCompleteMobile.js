@@ -6,7 +6,7 @@ function OrderCompleteMobile(props) {
         // URL 파라미터로 전달받은 값을 가져옵니다.
         const { imp_uid, merchant_uid, imp_success } = props.match.params;
 
-        axios.post("/payment/getcompleteresult", {
+        axios.get("/payment/getcompleteresult", {
             imp_uid: imp_uid,
             merchant_uid: merchant_uid,
             imp_success: imp_success
