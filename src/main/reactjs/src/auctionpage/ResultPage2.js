@@ -53,7 +53,7 @@ function ResultPage2(props) {
             buyer_email:user_email,
             buyer_name:user_name,
             buyer_tel:userdata.hp,
-            // m_redirect_url:'http://175.45.193.12/ordercompletemobile'
+            m_redirect_url:'http://175.45.193.12/ordercompletemobile'
         };
 
         /* 4. 결제 창 호출하기 */

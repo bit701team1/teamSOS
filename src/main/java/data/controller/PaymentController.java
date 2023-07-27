@@ -8,6 +8,7 @@ import data.service.PaymentService;
 import lombok.AllArgsConstructor;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -70,7 +71,7 @@ public class PaymentController {
         }
     }
 
-    @GetMapping("/ordercompletemobile")
+    @PostMapping("/ordercompletemobile")
     public RedirectView orderCompleteMobile(@RequestParam("imp_uid") String impUid,
                                             @RequestParam("merchant_uid") String merchantUid,
                                             @RequestParam("imp_success") boolean impSuccess,
@@ -81,6 +82,7 @@ public class PaymentController {
             String accessToken = token.get("response").get("access_token").asText();
             JsonNode paymentInfo = paymentService.getPaymentData(accessToken, impUid);
 
+            System.out.println("paymentinfo(portone에서 넘어온)>>"+paymentInfo.toString());
             // 리다이렉션을 원하는 도메인 입력
             String redirectUrl = "http://175.45.193.12/paymentresult";
             RedirectView redirectView = new RedirectView(redirectUrl, true);
