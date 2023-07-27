@@ -33,7 +33,7 @@ function OrderCompleteMobile() {
             });
     }, [imp_uid, merchant_uid, imp_success]); // URL 파라미터가 변경될 때마다 useEffect를 실행합니다.
 
-    return <div>{result}</div>;
+    return <div>{JSON.stringify(result)}</div>;
 }
 
 export default OrderCompleteMobile;
