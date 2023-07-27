@@ -71,7 +71,7 @@ function RouteMain(props) {
 
                 <Route path='/passfind' element={<PassFind/>}/>
                 <Route path='/login' element={<Login/>}/>
-                <Route path='/ordercompletemobile/imp_uid=:imp_uid&merchant_uid=:merchant_uid&imp_success=:imp_success' element={<OrderCompleteMobile />} />
+                <Route path='/ordercompletemobile?imp_uid=:imp_uid&merchant_uid=:merchant_uid&imp_success=:imp_success' element={<OrderCompleteMobile />} />
                 <Route path='/join' element={<Join/>}/>
                 <Route path='/passauth' element={<PassAuth/>}/>
                 <Route path='/passupdate' element={<PassUpdate/>}/>
