@@ -112,7 +112,8 @@ public class PaymentController {
     @GetMapping("/getcompleteresult")
     public boolean getcompleteresult(@RequestParam("imp_uid") String impUid,
                                      @RequestParam("merchant_uid") String merchantUid,
-                                     @RequestParam("imp_success") boolean impSuccess) {
+                                     @RequestParam("imp_success") boolean impSuccess,
+                                     HttpServletRequest request) {
         try {
             String paymentDataStr = (String) request.getSession().getAttribute("paymentData");
             System.out.println("paydata>>"+paymentDataStr);
