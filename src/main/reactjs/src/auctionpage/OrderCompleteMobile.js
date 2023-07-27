@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useLocation } from 'react-router-dom';
+import {useLocation, useNavigate} from 'react-router-dom';
 
 function OrderCompleteMobile() {
     const [result, setResult] = useState(null);
@@ -9,7 +9,7 @@ function OrderCompleteMobile() {
     const imp_uid = queryParams.get('imp_uid');
     const merchant_uid = queryParams.get('merchant_uid');
     const imp_success = queryParams.get('imp_success');
-
+    const navi = useNavigate();
     // paymentData를 세션에서 읽어옴
     const paymentData = JSON.parse(sessionStorage.getItem("paymentData"));
     // const { imp_uid, merchant_uid, imp_success } = queryParams;
@@ -52,7 +52,7 @@ function OrderCompleteMobile() {
                             console.log("amount>"+response.data.response.amount+"&requestAmount>"+requestAmount);
                             console.log("merchant_uid>"+response.data.response.merchant_uid+"&requestMerchant_uid>"+requestMerchant_uid);
                             setResult(true); // 결제가 성공한 경우 result 값을 true로 설정
-                            return;
+                            navi("/PaymentResult");
                         })
                         .catch((error) => {
                             console.error('결제 정보를 데이터베이스에 저장하는데 실패했습니다.');
