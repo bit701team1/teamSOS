@@ -115,7 +115,7 @@ public class PaymentController {
                                      @RequestParam("imp_success") boolean impSuccess) {
         try {
             String paymentDataStr = (String) request.getSession().getAttribute("paymentData");
-
+            System.out.println("paydata>>"+paymentDataStr);
             // paymentDataStr를 JSON 객체로 변환
             ObjectMapper objectMapper = new ObjectMapper();
 
