@@ -12,6 +12,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 
@@ -21,7 +22,7 @@ import java.util.Map;
 @RequestMapping("/payment")
 public class PaymentController {
     PaymentService paymentService;
-
+    HttpServletRequest request;
 
     @PostMapping("/insert")
     public void insert(@RequestBody PaymentDto dto, String imp_uid)
@@ -111,12 +112,13 @@ public class PaymentController {
     @GetMapping("/getcompleteresult")
     public boolean getcompleteresult(@RequestParam("imp_uid") String impUid,
                                      @RequestParam("merchant_uid") String merchantUid,
-                                     @RequestParam("imp_success") boolean impSuccess,
-                                     @RequestParam("paymentData") String paymentDataStr ) {
+                                     @RequestParam("imp_success") boolean impSuccess) {
         try {
+            String paymentDataStr = (String) request.getSession().getAttribute("paymentData");
+
             // paymentDataStr를 JSON 객체로 변환
             ObjectMapper objectMapper = new ObjectMapper();
-            // paymentDataStr를 Map 객체로 변환
+
             Map<String, Object> paymentDataJson = objectMapper.readValue(paymentDataStr, Map.class);
             Map<String, Object> dataJson = (Map<String, Object>) paymentDataJson.get("data");
 

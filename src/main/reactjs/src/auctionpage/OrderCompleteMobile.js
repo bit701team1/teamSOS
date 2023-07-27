@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 
 function OrderCompleteMobile() {
-    const [result, setResult] = useState('');
+    const [result, setResult] = useState(null); // 결제 결과를 저장할 상태값, 초기값은 null
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const paymentData = JSON.parse(sessionStorage.getItem("paymentData"));
@@ -18,7 +18,7 @@ function OrderCompleteMobile() {
                     imp_uid: imp_uid,
                     merchant_uid: merchant_uid,
                     imp_success: imp_success,
-                    paymentData:paymentData
+                    paymentData: JSON.stringify(paymentData)
                 },
             })
             .then((response) => {
@@ -32,9 +32,18 @@ function OrderCompleteMobile() {
                 console.error(error);
                 // 에러 처리를 하시거나 필요한 작업을 수행하시면 됩니다.
             });
-    }, [imp_uid, merchant_uid, imp_success]); // URL 파라미터가 변경될 때마다 useEffect를 실행합니다.
+    }, []); // useEffect를 한 번만 실행하도록 빈 배열을 전달
 
-    return <div>{JSON.stringify(result)}</div>;
+    // 결제가 성공했을 때 결과창을 표시
+    if (result === true) {
+        return <div>결제가 성공적으로 완료되었습니다!</div>;
+    } else if (result === false) {
+        // 결제가 실패했을 때 결과창을 표시
+        return <div>결제가 실패하였습니다. 다시 시도해주세요.</div>;
+    } else {
+        // 아직 결제 결과가 도착하지 않았을 때 로딩 상태를 표시
+        return <div>결제 결과 확인 중...</div>;
+    }
 }
 
 export default OrderCompleteMobile;
