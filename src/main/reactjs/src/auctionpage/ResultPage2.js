@@ -58,10 +58,7 @@ function ResultPage2(props) {
 
         // 결제 요청 시 데이터를 sessionStorage에 저장
         sessionStorage.setItem('paymentData', JSON.stringify({
-            productName: roomName,
-            amount: userBid.price,
-            user_name,
-            user_email,
+            data
         }));
 
         /* 4. 결제 창 호출하기 */

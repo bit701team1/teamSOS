@@ -18,7 +18,7 @@ function OrderCompleteMobile() {
                     imp_uid: imp_uid,
                     merchant_uid: merchant_uid,
                     imp_success: imp_success,
-                    amount:paymentData.amount,
+                    paymentData:paymentData
                 },
             })
             .then((response) => {
