@@ -52,7 +52,9 @@ function OrderCompleteMobile() {
                         });
                 } else {
                     // 결제 정보가 일치하지 않는 경우
-                    console.log('결제 정보가 맞지 않습니다.');
+                    console.log('결제 정보가 맞지 않습니다.')
+                    console.log("amount>"+amunt+"&requestAmount>"+requestAmount);
+                    console.log("imp_uid>"+imp_uid+"&requsetImpUid>"+requsetImpUid);
                     setResult(false); // 결제가 실패한 경우 result 값을 false로 설정
                 }
             })
