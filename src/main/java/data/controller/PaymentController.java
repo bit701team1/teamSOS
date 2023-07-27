@@ -97,13 +97,14 @@ public class PaymentController {
     @GetMapping("/getcompleteresult")
     public String getcompleteresult(@RequestParam("imp_uid") String impUid,
                                     @RequestParam("merchant_uid") String merchantUid,
-                                    @RequestParam("imp_success") boolean impSuccess) {
+                                    @RequestParam("imp_success") boolean impSuccess,
+                                    @RequestParam("amount") int amount) {
         if (impSuccess == true) {
             // 결제가 성공적으로 완료되었을 경우 필요한 처리를 수행합니다.
             JsonNode token = paymentService.getToken();
             String accessToken = token.get("response").get("access_token").asText();
             JsonNode paymentInfo = paymentService.getPaymentData(accessToken, impUid);
-
+            System.out.println("front_amount>>"+amount);
             System.out.println("paymentinfo(portone에서 넘어온)>>" + paymentInfo.toString());
             String info = paymentInfo.toString();
             // 나중에 paymentInfo 데이터를 출력 할 탬플릿(예 : orderComplete.html)으로 연결

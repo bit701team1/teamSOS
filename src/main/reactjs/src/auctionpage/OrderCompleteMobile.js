@@ -6,7 +6,7 @@ function OrderCompleteMobile() {
     const [result, setResult] = useState('');
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
-
+    const paymentData = JSON.parse(sessionStorage.getItem("paymentData"));
     const imp_uid = queryParams.get('imp_uid');
     const merchant_uid = queryParams.get('merchant_uid');
     const imp_success = queryParams.get('imp_success');
@@ -18,6 +18,7 @@ function OrderCompleteMobile() {
                     imp_uid: imp_uid,
                     merchant_uid: merchant_uid,
                     imp_success: imp_success,
+                    amount:paymentData.amount,
                 },
             })
             .then((response) => {
