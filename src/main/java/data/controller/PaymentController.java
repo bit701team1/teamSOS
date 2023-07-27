@@ -71,29 +71,52 @@ public class PaymentController {
         }
     }
 
+//    @PostMapping("/ordercompletemobile")
+//    public RedirectView orderCompleteMobile(@RequestParam("imp_uid") String impUid,
+//                                            @RequestParam("merchant_uid") String merchantUid,
+//                                            @RequestParam("imp_success") boolean impSuccess,
+//                                            Model model) {
+//        if (impSuccess==true) {
+//            // 결제가 성공적으로 완료되었을 경우 필요한 처리를 수행합니다.
+//            JsonNode token = paymentService.getToken();
+//            String accessToken = token.get("response").get("access_token").asText();
+//            JsonNode paymentInfo = paymentService.getPaymentData(accessToken, impUid);
+//
+//            System.out.println("paymentinfo(portone에서 넘어온)>>"+paymentInfo.toString());
+//            // 리다이렉션을 원하는 도메인 입력
+//            String redirectUrl = "http://175.45.193.12/paymentresult";
+//            RedirectView redirectView = new RedirectView(redirectUrl, true);
+//            return redirectView;
+//        } else {
+//            // 결제가 실패한 경우 에러 페이지로 리다이렉트합니다.
+//            String redirectUrl = "https://example.com/error";
+//            RedirectView redirectView = new RedirectView(redirectUrl, true);
+//            return redirectView;
+//        }
+//    }
     @PostMapping("/ordercompletemobile")
-    public RedirectView orderCompleteMobile(@RequestParam("imp_uid") String impUid,
-                                            @RequestParam("merchant_uid") String merchantUid,
-                                            @RequestParam("imp_success") boolean impSuccess,
-                                            Model model) {
-        if (impSuccess) {
+    public String orderCompleteMobile(@RequestParam("imp_uid") String impUid,
+                                      @RequestParam("merchant_uid") String merchantUid,
+                                      @RequestParam("imp_success") boolean impSuccess,
+                                      Model model) {
+        if (impSuccess == true) {
             // 결제가 성공적으로 완료되었을 경우 필요한 처리를 수행합니다.
             JsonNode token = paymentService.getToken();
             String accessToken = token.get("response").get("access_token").asText();
             JsonNode paymentInfo = paymentService.getPaymentData(accessToken, impUid);
 
-            System.out.println("paymentinfo(portone에서 넘어온)>>"+paymentInfo.toString());
-            // 리다이렉션을 원하는 도메인 입력
-            String redirectUrl = "http://175.45.193.12/paymentresult";
-            RedirectView redirectView = new RedirectView(redirectUrl, true);
-            return redirectView;
+            System.out.println("paymentinfo(portone에서 넘어온)>>" + paymentInfo.toString());
+
+            // Model 객체에 paymentInfo를 추가
+            model.addAttribute("paymentInfo", paymentInfo);
+            // 나중에 paymentInfo 데이터를 출력 할 탬플릿(예 : orderComplete.html)으로 연결
+            return "orderComplete";
         } else {
             // 결제가 실패한 경우 에러 페이지로 리다이렉트합니다.
-            String redirectUrl = "https://example.com/error";
-            RedirectView redirectView = new RedirectView(redirectUrl, true);
-            return redirectView;
+            return "redirect:https://example.com/error";
         }
     }
+
 
 }
 
