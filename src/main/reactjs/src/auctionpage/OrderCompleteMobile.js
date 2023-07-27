@@ -52,10 +52,9 @@ function OrderCompleteMobile() {
                             console.log("amount>"+response.data.response.amount+"&requestAmount>"+requestAmount);
                             console.log("merchant_uid>"+response.data.response.merchant_uid+"&requestMerchant_uid>"+requestMerchant_uid);
                             setResult(true); // 결제가 성공한 경우 result 값을 true로 설정
-                            navi("/PaymentResult");
                         })
                         .catch((error) => {
-                            console.error('결제 정보를 데이터베이스에 저장하는데 실패했습니다.');
+                            console.error('결제 정보를 데이터베이스에 저장하는데 실패했습니다.'+"error>"+error);
                             setResult(false); // 결제가 실패한 경우 result 값을 false로 설정
                         });
                 } else {
