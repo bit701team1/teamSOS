@@ -62,7 +62,7 @@ function OrderCompleteMobile() {
                     console.log("amount>"+response.data.response.amount);
                     console.log("merchant_uid>"+response.data.response.merchant_uid);
                     console.log("amount>"+response.data.response.amount+"&requestAmount>"+requestAmount);
-                    console.log("merchant_uid>"+response.data.response.merchant_uid+"&requsetImpUid>"+requsetMerchant_uid);
+                    console.log("merchant_uid>"+response.data.response.merchant_uid+"&requsetImpUid>"+requestMerchant_uid);
                     setResult(false); // 결제가 실패한 경우 result 값을 false로 설정
                 }
             })
