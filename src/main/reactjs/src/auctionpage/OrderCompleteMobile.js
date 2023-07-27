@@ -52,6 +52,7 @@ function OrderCompleteMobile() {
                             console.log("amount>"+response.data.response.amount+"&requestAmount>"+requestAmount);
                             console.log("merchant_uid>"+response.data.response.merchant_uid+"&requestMerchant_uid>"+requestMerchant_uid);
                             setResult(true); // 결제가 성공한 경우 result 값을 true로 설정
+                            return;
                         })
                         .catch((error) => {
                             console.error('결제 정보를 데이터베이스에 저장하는데 실패했습니다.');
@@ -82,6 +83,6 @@ function OrderCompleteMobile() {
     } else {
         return <div>결제 결과 확인 중...</div>;
     }
-};
+}
 
 export default OrderCompleteMobile;
