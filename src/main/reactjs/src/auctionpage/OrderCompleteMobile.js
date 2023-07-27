@@ -17,8 +17,7 @@ function OrderCompleteMobile() {
                 params: {
                     imp_uid: imp_uid,
                     merchant_uid: merchant_uid,
-                    imp_success: imp_success,
-                    paymentData: JSON.stringify(paymentData)
+                    imp_success: imp_success
                 },
             })
             .then((response) => {
