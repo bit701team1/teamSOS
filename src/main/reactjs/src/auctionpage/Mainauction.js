@@ -20,12 +20,12 @@ const StyledSwitch = styled(Switch)(({ theme }) => ({
 }));
 
 function Mainauction({onRoomCreate}) {
+
     const navigate=useNavigate();
     const [lst,setList]=useState([]);//방 목록
     const [message, setMessage] = useState("");
     const [room, setRoom] = useState(null);
-    
-    const location = useLocation();
+
     const logincheck = async (roomId) =>{
         try {
             await axios.get('/lobby/logincheck');
@@ -64,17 +64,17 @@ function Mainauction({onRoomCreate}) {
             <b>{userdata.email}</b>
               <hr/> 
              
-              <ul>
+              
                   {
                       lst.map((item,idx)=>{
                           return (
-                              <li key={idx} onClick={() => logincheck(item.roomId)} style={{cursor:'pointer'}}>
-                                  {idx+1}. {item.roomName}
-                              </li>
+                              <button key={idx} onClick={() => logincheck(item.roomId)} style={{cursor:'pointer'}}>
+                                  방송
+                              </button>
                           );
                       })
                   }
-              </ul>
+              
     </div>
                 
       );

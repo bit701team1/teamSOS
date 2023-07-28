@@ -10,17 +10,19 @@
         FROM bid
         WHERE product_name = #{productName} AND user_email = #{userEmail}
     </select>
-    <select id="getBidResult" resultType="BidDto">
-        SELECT * FROM bid WHERE price IN (
-            SELECT MAX(price) FROM bid
-            UNION ALL
-            SELECT price FROM (
-                                  SELECT price FROM bid ORDER BY price DESC LIMIT 1 OFFSET 1
-                              ) AS subquery
-            UNION ALL
-            SELECT MIN(price) FROM bid
-        )
-    </select>
+ <select id="getBidResult" resultType="BidDto">
+    SELECT * FROM bid WHERE product_name = #{product_name} AND price IN (
+        SELECT MAX(price) FROM bid WHERE product_name = #{product_name}
+        UNION ALL
+        SELECT price FROM (
+            SELECT price FROM bid WHERE product_name = #{product_name} ORDER BY price DESC LIMIT 1 OFFSET 1
+        ) AS subquery
+        UNION ALL
+        SELECT MIN(price) FROM bid WHERE product_name = #{product_name}
+    )
+</select>
+
+
     <select id="getHighestPriceBid" resultType="BidDto">
         SELECT * FROM bid WHERE product_name = #{productName} ORDER BY price DESC LIMIT 1;
     </select>

@@ -19,7 +19,7 @@
   top: calc(50% - 129.5px);
 }
 .y_atbid-p1{
-  font-family: 'Roboto';
+  font-family: 'SongMyung';
 }
 .y_bid-btn{
   top: calc(50% - 15.5px);
@@ -48,13 +48,10 @@
   border-radius: 5px;
   cursor: pointer;
   border: none;
+  font-size: 1.3rem;
   color:#fff;
-  background-color: #b24c4b;
-}
-.y_bid-btn p{
-  margin-top: 6px;
-  font-size: 21px;
   font-family: 'Roboto';
+  background-color: #b24c4b;
 }
 .y_atbid-div{
   position: fixed;

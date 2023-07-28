@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useCallback, useState} from 'react';
-import '../css/auctionlive2.css';
+import '../css/auctionlive_station.css';
 import img from '../image/스폰지밥1.gif';
 import AuctionInfo from '../auctionmodal/AuctionInfo';
 import AuctionBid from '../auctionmodal/AuctionBid';
@@ -9,7 +9,8 @@ import axios from "axios";
 import {useNavigate, useParams} from "react-router-dom";
 import * as SockJS from "sockjs-client";
 import * as StompJS from "@stomp/stompjs";
-function AuctionLive2(props) {
+import LiveStream from './LiveStream';
+function AuctionLive_station(props) {
   const navigate = useNavigate();
 
 
@@ -131,8 +132,8 @@ useEffect(()=>{
 
    /* 소켓연결 */
    const connect = () => { //소켓 연결용 함수
-    // let sock = new SockJS('http://localhost:9003/ws'); //endpoint 주소 소켓을 저기로 연결하겠다
-       let sock = new SockJS('http://175.45.193.12/ws'); //endpoint 주소 소켓을 저기로 연결하겠다
+    let sock = new SockJS('http://localhost:9003/ws'); //endpoint 주소 소켓을 저기로 연결하겠다
+      //  let sock = new SockJS('http://175.45.193.12/ws'); //endpoint 주소 소켓을 저기로 연결하겠다
     client.current = StompJS.Stomp.over(sock); //StompJS를 사용하여 소켓 연결을 관리하는 클라이언트 객체를 생성
     let ws = client.current;
     ws.connect({}, () => {
@@ -303,7 +304,10 @@ const report = (userName, msg) => {
     return (
       <>
         <div className="y_auction-div">
-        <img className="y_auction-img" alt="" src={img}/>
+        {/* <img className="y_auction-img" alt="" src={img}/> */}
+        <div className='y_auction-img'>
+          <LiveStream />
+        </div>
         {admin &&
         <button className="y_liveend-btn" onClick={modalopen}>방송종료</button>
         }
@@ -417,4 +421,4 @@ const report = (userName, msg) => {
       </>
     );
   };
-export default AuctionLive2;
+export default AuctionLive_station;
