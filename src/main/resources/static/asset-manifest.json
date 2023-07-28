@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.084e5bef.css",
-    "main.js": "/static/js/main.7de653b6.js",
+    "main.js": "/static/js/main.e0ed5365.js",
     "static/js/787.d3befce1.chunk.js": "/static/js/787.d3befce1.chunk.js",
     "static/media/kermit.gif": "/static/media/kermit.fe721bbd80f92534cc31.gif",
     "static/media/스폰지밥1.gif": "/static/media/스폰지밥1.cdd17038c344033cb747.gif",
@@ -16,11 +16,11 @@
     "static/media/SlidePageTwo-Icon.svg": "/static/media/SlidePageTwo-Icon.10718b203394b581a0ad25cac916fd53.svg",
     "static/media/SlidePageOne-Arrow.svg": "/static/media/SlidePageOne-Arrow.adb3f97ee436d4cec45f689a8bd4aa62.svg",
     "main.084e5bef.css.map": "/static/css/main.084e5bef.css.map",
-    "main.7de653b6.js.map": "/static/js/main.7de653b6.js.map",
+    "main.e0ed5365.js.map": "/static/js/main.e0ed5365.js.map",
     "787.d3befce1.chunk.js.map": "/static/js/787.d3befce1.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.084e5bef.css",
-    "static/js/main.7de653b6.js"
+    "static/js/main.e0ed5365.js"
   ]
 }

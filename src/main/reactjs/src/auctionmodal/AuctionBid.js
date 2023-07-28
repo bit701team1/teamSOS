@@ -18,6 +18,18 @@ const Component = ({ onClose, userName, productName, roomName }) => {
         if (isLoading) return; // 이미 요청 중이면 중복 클릭 방지
 
         e.preventDefault();
+
+        // productName이 존재하는지 체크
+        if (!productName) {
+            alert("상품명이 존재하지 않습니다. 다시 시도해주세요.");
+            return;
+        }
+
+        // price 값 유효성 검사
+        if (isNaN(price) || price <= 0) {
+            alert("올바른 입찰 금액을 입력해주세요.");
+            return;
+        }
         try {
             setLoading(true); // 요청 시작 시 isLoading 상태 변경
 
@@ -25,37 +37,31 @@ const Component = ({ onClose, userName, productName, roomName }) => {
                 "입찰은 한 번만 가능합니다. 정말 입찰하시겠습니까?"
             );
             if (confirmBid) {
-                const response = await axios.post(
-                    "/product/price-compare",
-                    {
-                        user_email: userName,
-                        price: parseInt(price),
-                        productName: productName,
-                    },
-                    {
-                        params: {
-                            productName: productName,
-                        },
-                    }
-                );
-
-                // BidDto 생성
                 const bidDto = {
                     product_name: productName,
                     user_email: userName,
                     price: parseInt(price),
                 };
-                // console.log("bidDto>>"+JSON.stringify(bidDto))
+                const response = await axios.post(
+                    "/product/price-compare",
+                    bidDto
+                );
 
-                // BidService.insertBid 호출하여 DB에 입찰 값 저장
-                await axios.post("/bid/insert", bidDto);
+                // 입찰 가능한지 결과에 따라 다음 동작 수행
+                if (response.data === "입찰이 성공적으로 완료되었습니다!") {
+                    // BidService.insertBid 호출하여 DB에 입찰 값 저장
+                    await axios.post("/bid/insert", bidDto);
 
-                alert("입찰이 완료되었습니다!");
+                    alert("입찰이 완료되었습니다!");
 
-                // 모달 닫기
-                setModalOpen(false);
-                onClose();
-                window.location.reload();
+                    // 모달 닫기
+                    setModalOpen(false);
+                    onClose();
+                    window.location.reload();
+                } else {
+                    // 입찰 불가능한 경우에 대한 처리
+                    alert(response.data);
+                }
             }
         } catch (err) {
             alert("입찰 금액을 입력해주시기 바랍니다.");
@@ -68,7 +74,7 @@ const Component = ({ onClose, userName, productName, roomName }) => {
     return (
         <div className="y_atbid-div">
             <div className="y_atbid-line" />
-            <div className="y_atbid-p1">"{userName}" "{productName}</div>
+            <div className="y_atbid-p1">경매 입찰</div>
             <input className="y_atbid-input"
                    type="number"
                    min="0"

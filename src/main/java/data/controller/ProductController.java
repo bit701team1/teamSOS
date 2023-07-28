@@ -28,13 +28,50 @@ public class ProductController {
         bidService.insertBid(bidDto);
     }
 
+//    @PostMapping("/price-compare")
+//    public ResponseEntity<Object> bid(@RequestParam("productName") String product_name, @RequestBody BidDto bidDto) {
+//        System.out.println("product_name: " + product_name);
+//        System.out.println("bidDto: " + bidDto.toString());
+//        try {
+//            List<ProductDto> products = productService.getWinnerAndFinalPriceByProductName(product_name);
+//            System.out.println("products>>" + products + "||productName>>" + product_name);
+//            System.out.println("bidDto::"+bidDto);
+//            if (!products.isEmpty()) {
+//                ProductDto product = products.get(0);
+//                System.out.println("!product>>" + product);
+//
+//                if (bidDto.getPrice() > product.getFinal_price()) {
+//                    product.setWinner(bidDto.getUser_email());
+//                    product.setFinal_price(bidDto.getPrice());
+//
+//                    System.out.println("winner>>" + product.getWinner());
+//                    System.out.println("final_price>>" + product.getFinal_price());
+//
+//                    productService.updateWinnerAndFinalPrice(product);
+//
+//                    bidService.insertBid(bidDto); // Insert bid into bid table
+//                    return ResponseEntity.ok("입찰이 성공적으로 완료되었습니다!");
+//                } else if (bidDto.getPrice()==0) {
+//                    return ResponseEntity.badRequest().body("금액을 입력해주세요.");
+//                }
+//                else {
+//                    return ResponseEntity.ok("입찰이 성공적으로 완료되었습니다!");
+//                }
+//            } else {
+//                return ResponseEntity.notFound().build();
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+//        }
+//    }
     @PostMapping("/price-compare")
-    public ResponseEntity<Object> bid(@RequestParam("productName") String product_name, @RequestBody BidDto bidDto) {
-        System.out.println("product_name: " + product_name);
+    public ResponseEntity<Object> bid(@RequestBody BidDto bidDto) {
+        System.out.println("product_name: " + bidDto.getProduct_name());
         System.out.println("bidDto: " + bidDto.toString());
         try {
-            List<ProductDto> products = productService.getWinnerAndFinalPriceByProductName(product_name);
-            System.out.println("products>>" + products + "||productName>>" + product_name);
+            List<ProductDto> products = productService.getWinnerAndFinalPriceByProductName(bidDto.getProduct_name());
+            System.out.println("products>>" + products + "||productName>>" + bidDto.getProduct_name());
             System.out.println("bidDto::"+bidDto);
             if (!products.isEmpty()) {
                 ProductDto product = products.get(0);
