@@ -7,7 +7,6 @@ import axios from "axios";
 import {useLocation,useNavigate} from "react-router-dom";
 function ResultPage2(props) {
     const navigate = useNavigate();
-    const locations = useLocation();
 
     useEffect(() => {
         const handlePopState = () => {
@@ -53,8 +52,13 @@ function ResultPage2(props) {
             buyer_email:user_email,
             buyer_name:user_name,
             buyer_tel:userdata.hp,
-            m_redirect_url:'http://175.45.193.12/paymentresult'
+            m_redirect_url:'http://175.45.193.12/ordercompletemobile',
         };
+        console.log("imp_uid>"+imp_uid);
+        // 결제 요청 시 데이터를 sessionStorage에 저장
+        sessionStorage.setItem('paymentData', JSON.stringify({
+            data
+        }));
 
         /* 4. 결제 창 호출하기 */
         IMP.request_pay(data, callback);
@@ -70,14 +74,14 @@ function ResultPage2(props) {
         if (success) {
             setImp_uid(imp_uid);
 
-            // 결제 완료 시 데이터를 sessionStorage에 저장
-            sessionStorage.setItem('paymentData', JSON.stringify({
-                productName: roomName,
-                amount: userBid.price,
-                merchant_uid,
-                user_name,
-                user_email,
-            }));
+            // // 결제 완료 시 데이터를 sessionStorage에 저장
+            // sessionStorage.setItem('paymentData', JSON.stringify({
+            //     productName: roomName,
+            //     amount: userBid.price,
+            //     merchant_uid,
+            //     user_name,
+            //     user_email,
+            // }));
 
 
             //paymentinfo로 넘어갈 데이터 imp_uid, amount
@@ -188,8 +192,6 @@ function ResultPage2(props) {
 
     return (
       <>
-       
-            
         <div className="y_resultpage-div">
         
           <img className="y_result-img" alt="" src={img}/>
@@ -198,8 +200,6 @@ function ResultPage2(props) {
             className="y_result-back"
             onClick={onIconArrowRightCircledClick}
           />
-           
-
           <div className="y_result-dark" />
           <div className="y_result-div2" />
           <div className="y_result-p1">경매 결과를 확인 하세요</div>
@@ -235,7 +235,7 @@ function ResultPage2(props) {
             placement="Centered"
             onOutsideClick={closeFrame}
           >
-            <ResultModal onClose={closeFrame} />
+            <ResultModal onClose={closeFrame} productName={roomName}/>
           </PortalPopup>
         )}
       </>

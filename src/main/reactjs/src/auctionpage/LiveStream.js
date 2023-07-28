@@ -28,7 +28,7 @@ function LiveStream(props) {
                         className='react-player'
                         url={videoUrl}
                         width='100%'
-                        height='51.06rem'
+                        height='15.38rem'
                         playing={true}
                         muted={true}
                         controls={true}

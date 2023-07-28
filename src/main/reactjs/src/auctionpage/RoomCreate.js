@@ -38,6 +38,9 @@ function RoomCreate(props) {
                 ...lst
             ])
         })
+        .catch(error=>{
+            alert("방송이 끝났습니다");
+        })
     }
     return (
         <div>

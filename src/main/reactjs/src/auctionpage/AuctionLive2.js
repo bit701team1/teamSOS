@@ -11,6 +11,8 @@ import * as SockJS from "sockjs-client";
 import * as StompJS from "@stomp/stompjs";
 function AuctionLive2(props) {
   const navigate = useNavigate();
+
+
   const [hasBid, setHasBid] = useState(false); // 현재 로그인된 사용자의 입찰 여부를 관리하는 상태 변수
   const [isFrameOpen, setFrameOpen] = useState(false);
   const [isFrame1Open, setFrame1Open] = useState(false);
@@ -26,7 +28,6 @@ function AuctionLive2(props) {
   const chatScreenRef = useRef(null); 
   const photo = process.env.REACT_APP_SUICONURL;
   const productName = roomName;
-  const [isLoading, setIsLoading] = useState(true);
     /////////////////////////모달////////////////////////////
 
   const openFrame = useCallback(() => {
@@ -96,7 +97,10 @@ useEffect(()=>{
          
             setRoomName(res.roomName); // json데이터를 처리하는 부분
           
-        });
+        }).catch(error => {
+          alert("방송이 끝났습니다");
+          navigate('/');
+        })
     const getUser = async () => {
         try {
             const user_name = await axios.get('/room/emailuser');
@@ -127,8 +131,8 @@ useEffect(()=>{
 
    /* 소켓연결 */
    const connect = () => { //소켓 연결용 함수
-    let sock = new SockJS('http://localhost:9003/ws'); //endpoint 주소 소켓을 저기로 연결하겠다
-      //  let sock = new SockJS('http://175.45.193.12/ws'); //endpoint 주소 소켓을 저기로 연결하겠다
+    // let sock = new SockJS('http://localhost:9003/ws'); //endpoint 주소 소켓을 저기로 연결하겠다
+       let sock = new SockJS('http://175.45.193.12/ws'); //endpoint 주소 소켓을 저기로 연결하겠다
     client.current = StompJS.Stomp.over(sock); //StompJS를 사용하여 소켓 연결을 관리하는 클라이언트 객체를 생성
     let ws = client.current;
     ws.connect({}, () => {
@@ -244,24 +248,22 @@ const kick = (kickUser) =>{ // 강퇴할 대상의 userName을 인자로 받는�
 };
 
   
-
+const [reported, setReported] = useState(false);
 /* 신고 기능*/
 const report = (userName, msg) => {
+  if(reported) return; // 이미 보고됨, 추가 보고 방지
   const requestBody = {
     userName,
     msg
   };
-
   let url ='/room/insertreport';
     axios.post(url,requestBody)
-   
-    .then(response => response.json())
     .then(data => {
-      console.log(msg +"," + userName);
-      alert("신고되었습니다");
+        alert("신고되었습니다");
+        setReported(true); // 보고 완료
     })
     .catch(error => {
-      // 오류 처리
+      alert("오류야");
     });
 };
 
@@ -298,7 +300,6 @@ const report = (userName, msg) => {
       return maskedPart;
     }
   }
-
     return (
       <>
         <div className="y_auction-div">

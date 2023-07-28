@@ -115,6 +115,7 @@
   background-color: #fff;
   width: 23.06rem;
   border: none;
+  box-shadow:1px 1px 5px 0 rgb(191, 191, 191);
   height: 14.69rem;
   font-family: 'Roboto';
   overflow-y:auto;
