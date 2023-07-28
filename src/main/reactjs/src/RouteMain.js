@@ -6,7 +6,7 @@ import Mainauction from "./auctionpage/Mainauction";
 
 
 
-import './manage_page/ManagePageMain.css';
+import './css/ManagePageCSS/managePageMain.css';
 
 import errorimg from './image/ERR404.png';
 import JoinForm from "./user/oldcomponent/JoinForm";
@@ -35,6 +35,8 @@ import AuctionLive2 from './auctionpage/AuctionLive_station';
 
 
 function RouteMain(props) {
+    const navigate = useNavigate();
+
     return (
         <div>
             <Routes>
@@ -49,15 +51,13 @@ function RouteMain(props) {
                 <Route path='/auctionlist' element={<AuctionList/>}/>
 
                 <Route path='/roomcreate' element={<RoomCreate/>}/>
-                <Route path='/' element={<Menu/>}/>
-
                 <Route path='/manage/*' element={<ManagePageMain/>}/>
                 <Route path='/productlist/*' element={<ProductList/>}/>
+
                 <Route path='/oldjoin' element={<JoinForm/>}/>
                 {/*<Route path='/login' element={<LoginForm/>}/>*/}
 
                 <Route path='/room/:roomId' element={<AuctionLive2/>}/>
-                <Route path='/manage/*' element={<ManagePageMain/>}/>
                 <Route path='/result2' element={<ResultPage2/>}/>
                 <Route path={'/livestream'}>
                     <Route path={'livestream'} element={<LiveStream/>}/>

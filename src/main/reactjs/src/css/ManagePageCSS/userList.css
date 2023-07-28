@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Song+Myung&display=swap');
+
+/*유저 리스트 table */
+.k_table-userlist{
+    width: 90%;
+    margin-left: 5%;
+    font-size: 0.9rem;
+    border-radius: 25px;
+    font-family: 'Roboto';
+    text-align: center;
+    margin-top: 1rem;
+    overflow: hidden;
+}
+
+
+.k_table-userlist tr:first-child th:first-child {
+    border-top-left-radius: 10px;
+}
+.k_table-userlist tr:first-child th:last-child {
+    border-top-right-radius: 10px;
+}
+.k_table-userlist tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+}
+.k_table-userlist tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
+}
+
+/* 전체 폰트 속성 */
+.k_user_detail,
+.k_product_manage
+{
+    font-family: 'Roboto';
+}
+
+/* 유저와 tr 속성 */
+.k_userlist_tr
+{
+    background-color: #ffffff;
+}
+
+.k_paging {
+    width: 100%;
+    text-align: center;
+    font-size: 1rem;
+}
+
+.userRowList {
+    background-color: #f6f6f6;
+    text-align: center;
+    height: 2.5rem;
+    font-size: 1rem;
+}
+
+.k_user_delete {
+    font-size:0.9rem;
+    color:red;
+    border:none;
+    cursor:pointer;
+    margin-left:1%;
+    margin-right: 40%;
+    background-color:white;
+}
+.k_user_dialog_header {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 100px;
+    float: left;
+}
+
+.k_user_dialog_header_text {
+    width: 30%;
+    margin-left: 1rem;
+    margin-top: 1rem;
+    float: left;
+}
+
+.k_report_numbox {
+    width: 25%;
+    float: left;
+    margin-left: 3rem;
+    margin-top: 1.2rem;
+    float: left;
+}
+.k_report_num {
+    width: 1.5rem;
+    float: left;
+}
+.k_report_num_text {
+    font-size: 0.9rem;
+    width: 50%;
+    float: left;
+    margin-left: 0.5rem;
+    margin-top: 0.2rem;
+}
+.k_user_dialog_email {
+    font-family: 'Song Myung';
+}
+
+.k_user_dialog_emailimg {
+    width: 2.5rem;
+}
+.k_userlist_email {
+    font-family: 'Song Myung';
+}
+

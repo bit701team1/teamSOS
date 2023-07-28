@@ -29,16 +29,19 @@ public class ProductService implements ProductServiceInter{
     }
 
 
+    //    상품 최신순으로 조회
     @Override
     public List<ProductDto> getProductDataRecent(String search) {
         return productMapper.getProductDataRecent(search);
     }
 
+    //    상품 오래된순으로 조회
     @Override
     public List<ProductDto> getProductDataOld(String search) {
         return productMapper.getProductDataOld(search);
     }
 
+    //    상품 가격순으로 조회
     @Override
     public List<ProductDto> getProductHighPrice(String search) {
         return productMapper.getProductHighPrice(search);
