@@ -52,8 +52,13 @@ function ResultPage2(props) {
             buyer_email:user_email,
             buyer_name:user_name,
             buyer_tel:userdata.hp,
-            m_redirect_url:'http://175.45.193.12/paymentresult'
+            m_redirect_url:'http://175.45.193.12/ordercompletemobile',
         };
+        console.log("imp_uid>"+imp_uid);
+        // 결제 요청 시 데이터를 sessionStorage에 저장
+        sessionStorage.setItem('paymentData', JSON.stringify({
+            data
+        }));
 
         /* 4. 결제 창 호출하기 */
         IMP.request_pay(data, callback);
@@ -69,14 +74,14 @@ function ResultPage2(props) {
         if (success) {
             setImp_uid(imp_uid);
 
-            // 결제 완료 시 데이터를 sessionStorage에 저장
-            sessionStorage.setItem('paymentData', JSON.stringify({
-                productName: roomName,
-                amount: userBid.price,
-                merchant_uid,
-                user_name,
-                user_email,
-            }));
+            // // 결제 완료 시 데이터를 sessionStorage에 저장
+            // sessionStorage.setItem('paymentData', JSON.stringify({
+            //     productName: roomName,
+            //     amount: userBid.price,
+            //     merchant_uid,
+            //     user_name,
+            //     user_email,
+            // }));
 
 
             //paymentinfo로 넘어갈 데이터 imp_uid, amount

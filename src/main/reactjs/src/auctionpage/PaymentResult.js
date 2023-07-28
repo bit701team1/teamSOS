@@ -2,13 +2,15 @@ import React from 'react';
 import "../css/paymentResult.css";
 import {useLocation} from "react-router-dom";
 
+
 function PaymentResult(props) {
-    // useLocation 훅을 사용하여 전달받은 데이터를 받아옵니다.
-    const location = useLocation();
-    const { state } = location;
+    // // useLocation 훅을 사용하여 전달받은 데이터를 받아옵니다.
+    // const location = useLocation();
+    // const { state } = location;
 
     // 결제 성공 시 sessionStorage에 저장한 데이터를 가져옵니다.
     const paymentData = JSON.parse(sessionStorage.getItem('paymentData'));
+
 
     return (
         <div className="D_payment_page">
