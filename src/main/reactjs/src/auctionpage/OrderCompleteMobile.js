@@ -113,9 +113,9 @@ function OrderCompleteMobile() {
                         .then((insertresponse) => {
                             const insertdata = insertresponse.data.response
                             console.log('결제 정보가 데이터베이스에 저장되었습니다.');
-                            console.log(insertresponse.data);
-                            console.log('amount>' + insertdata.amount + '&requestAmount>' + requestAmount);
-                            console.log('merchant_uid>' + insertdata.merchant_uid + '&requestMerchant_uid>' + requestMerchant_uid);
+                            // console.log("insertdata>"+insertdata);
+                            // console.log('amount>' + insertdata.amount + '&requestAmount>' + requestAmount);
+                            // console.log('merchant_uid>' + insertdata.merchant_uid + '&requestMerchant_uid>' + requestMerchant_uid);
                             setResult(true); // 결제가 성공한 경우 result 값을 true로 설정
                         })
                         .catch((error) => {
@@ -125,10 +125,10 @@ function OrderCompleteMobile() {
                 } else {
                     // 결제 정보가 일치하지 않는 경우
                     console.log('결제 정보가 맞지 않습니다.');
-                    console.log('amount>' + response.amount);
-                    console.log('merchant_uid>' + response.merchant_uid);
-                    console.log('amount>' + response.amount + '&requestAmount>' + requestAmount);
-                    console.log('merchant_uid>' + response.merchant_uid + '&requsetImpUid>' + requestMerchant_uid);
+                    // console.log('amount>' + response.amount);
+                    // console.log('merchant_uid>' + response.merchant_uid);
+                    // console.log('amount>' + response.amount + '&requestAmount>' + requestAmount);
+                    // console.log('merchant_uid>' + response.merchant_uid + '&requsetImpUid>' + requestMerchant_uid);
                     setResult(false); // 결제가 실패한 경우 result 값을 false로 설정
                 }
             })
