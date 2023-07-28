@@ -39,11 +39,9 @@ function Menu(props) {
                 <li><NavLink to={"/manage/userlist"}><h2>manage</h2></NavLink></li>
                 <li><NavLink to={"/userinfo"}><h2>마이페이지</h2></NavLink></li>
                 <li><NavLink to={"/result"}><h2>결과페이지</h2></NavLink></li>
-                <li><NavLink to={"/auction"}><h2>경매메인</h2></NavLink></li>
                 <li><NavLink to={"/result"}><h2>결제</h2></NavLink></li>
                 <li><NavLink to={"/result2"}><h2>결과페이지수정</h2></NavLink></li>
                 <li><NavLink to={"/intro"}><h2>Intro</h2></NavLink></li>
-                <li><NavLink to={"/roomcreate"}><h2>방만들기</h2></NavLink></li>
                 <li onClick={userTypeCheck} style={{cursor:'pointer'}}>
                      <h2>마이페이지or 관리자페이지 아이콘</h2>
                 </li>

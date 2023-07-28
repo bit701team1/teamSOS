@@ -2,7 +2,6 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import UserInfo from './userpage/UserInfo'
-import Mainauction from "./auctionpage/Mainauction";
 
 
 
@@ -24,7 +23,6 @@ import PassFind from "./user/PassFind";
 import PassAuth from "./user/PassAuth";
 import PassUpdate from "./user/PassUpdate";
 import Intro from "./user/Intro";
-import RoomCreate from './auctionpage/RoomCreate';
 import PaymentResult from "./auctionpage/PaymentResult";
 import Enter from "./user/Enter";
 import AuctionList from './auctionpage/AuctionList';
@@ -35,7 +33,6 @@ import AuctionLive2 from './auctionpage/AuctionLive_station';
 
 
 function RouteMain(props) {
-    const navigate = useNavigate();
 
     return (
         <div>
@@ -46,11 +43,8 @@ function RouteMain(props) {
                 <Route path='/testlogin' element={<LoginForm/>}/>
 
                 <Route path='/userinfo' element={<UserInfo/>}/>
-                <Route path='/auction' element={<Mainauction/>}/>
 
                 <Route path='/auctionlist' element={<AuctionList/>}/>
-
-                <Route path='/roomcreate' element={<RoomCreate/>}/>
                 <Route path='/manage/*' element={<ManagePageMain/>}/>
                 <Route path='/productlist/*' element={<ProductList/>}/>
 

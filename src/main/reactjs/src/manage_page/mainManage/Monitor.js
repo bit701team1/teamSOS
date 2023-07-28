@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import '../../css/ManagePageCSS/managePageMain.css';
 import {NavLink, Route, Routes, useNavigate} from "react-router-dom";
 import {ProductList} from "../index";
@@ -21,7 +21,32 @@ function Monitor(props) {
             alert("발송 실패");
         });
     }
+    const [lst,setList]=useState([]);//방 목록
+    const handleRoomCreate = () =>{
+        let name=prompt('방제 입력').trim();
+        if(!name) return alert('방 이름은 반드시 입력해야합니다');
+        //방 생성 소스 들어갈 부분이다
+        //서버와 fetch 통신함
 
+        //방 만들기
+        fetch('/lobby/create',{
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({name})
+        })
+            .then(res=>res.json())
+            .then(res=>{
+                setList([
+                    res,
+                    ...lst
+                ])
+            })
+            .catch(error=>{
+                alert("방송이 끝났습니다");
+            })
+    }
     return (
         <div className={'k_product_manage'}>
             <div className="k_product_container" >
@@ -46,7 +71,7 @@ function Monitor(props) {
                     </div>
 
                     <div className="k_product_nav_text2">경매 시작 승인</div>
-                    <div className="k_product_nav_icon2">
+                    <div className="k_product_nav_icon2" onClick={handleRoomCreate}>
                         <img
                             className="k_product_nav_icon2_right1"
                             alt="1"
