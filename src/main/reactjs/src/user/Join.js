@@ -122,129 +122,131 @@ function SignUpPage(props) {
 
 
     return (
-        <div className='SignUpPage'>
-            <div className="SignUpPageHeader">
-                <a href='/login'>
-                    <img className="SignUpIcon" alt="뒤로가기 버튼" src={BackIcon2}/>
-                </a>
-                <span className="SignUpTitle">회원가입</span>
-            </div>
+        <div className="SignUpBackgroundColor">
+            <div className='SignUpPage'>
+                <div className="SignUpPageHeader">
+                    <a href='/enter'>
+                        <img className="SignUpIcon" alt="뒤로가기 버튼" src={BackIcon2}/>
+                    </a>
+                    <span className="SignUpTitle">회원가입</span>
+                </div>
 
-            <div className="SignUpPageBody">
-                <form>
-                    <div className="SignUpPageInput">
-                        <input type="text" required placeholder='이름을 입력하세요'
-                               value={data.user_name} onChange={(e) => setData({
-                            ...data,
-                            user_name: e.target.value
-                        })
-                        }/>
-                        <span className="SignUpHighlight"></span>
-                        <span className="SignUpBar"></span>
-                        <img className="UserIcon" src={UserIcon} alt="이름"/>
-                        <label>이름</label>
+                <div className="SignUpPageBody">
+                    <form>
+                        <div className="SignUpPageInput">
+                            <input type="text" required placeholder='이름을 입력하세요'
+                                   value={data.user_name} onChange={(e) => setData({
+                                ...data,
+                                user_name: e.target.value
+                            })
+                            }/>
+                            <span className="SignUpHighlight"></span>
+                            <span className="SignUpBar"></span>
+                            <img className="UserIcon" src={UserIcon} alt="이름"/>
+                            <label>이름</label>
+                        </div>
+
+                        <div className="SignUpPageInput">
+                            <input type="text" required placeholder='이메일을 입력하세요'
+                                   value={data.email} onChange={(e) => setData({
+                                ...data,
+                                email: e.target.value
+                            })
+                            }/>
+                            <span className="highlight"></span>
+                            <span className="bar"></span>
+                            <img className="EmailIcon" src={EmailIcon} alt="이메일"/>
+                            <label>이메일</label>
+                        </div>
+
+                        <div className="SignUpPageInput">
+                            <input type="password" required placeholder='비밀번호를 입력하세요'
+                                   value={data.password} onChange={(e) => setData({
+                                ...data,
+                                password: e.target.value
+                            })
+                            }/>
+                            <span className="highlight"></span>
+                            <span className="bar"></span>
+                            <img className="PassIcon" src={PassIcon} alt="비밀번호"/>
+                            <label>비밀번호</label>
+                        </div>
+
+                        <div className="SignUpPageInput">
+                            <input type="text" required placeholder='휴대폰 번호를 입력하세요'
+                                   value={data.hp} onChange={(e) => setData({
+                                ...data,
+                                hp: e.target.value
+                            })
+                            }/>
+                            <span className="highlight"></span>
+                            <span className="bar"></span>
+                            <img className="PhoneIcon" src={PhoneIcon} alt="휴대폰"/>
+                            <label>휴대폰</label>
+                        </div>
+                    </form>
+
+                    <div className="SignUpPageLink">
+                        <span className="SignUpPageLinkText1">아직 회원이 아니신가요?</span>
+                        <span className="SignUpPageLinkText2">{` `}</span>
+                        <a onClick={handleClickOpen}>
+                            <span className="SignUpPageLinkText3">모바일 인증</span>
+                        </a>
                     </div>
 
-                    <div className="SignUpPageInput">
-                        <input type="text" required placeholder='이메일을 입력하세요'
-                               value={data.email} onChange={(e) => setData({
-                            ...data,
-                            email: e.target.value
-                        })
-                        }/>
-                        <span className="highlight"></span>
-                        <span className="bar"></span>
-                        <img className="EmailIcon" src={EmailIcon} alt="이메일"/>
-                        <label>이메일</label>
+                    <div className="SignUpButton" onClick={handleJoinClick} >
+                        <span className="SignUpButtonText">회원가입</span>
                     </div>
+                </div>
 
-                    <div className="SignUpPageInput">
-                        <input type="password" required placeholder='비밀번호를 입력하세요'
-                               value={data.password} onChange={(e) => setData({
-                            ...data,
-                            password: e.target.value
-                        })
-                        }/>
-                        <span className="highlight"></span>
-                        <span className="bar"></span>
-                        <img className="PassIcon" src={PassIcon} alt="비밀번호"/>
-                        <label>비밀번호</label>
-                    </div>
-
-                    <div className="SignUpPageInput">
-                        <input type="text" required placeholder='휴대폰 번호를 입력하세요'
-                               value={data.hp} onChange={(e) => setData({
-                            ...data,
-                            hp: e.target.value
-                        })
-                        }/>
-                        <span className="highlight"></span>
-                        <span className="bar"></span>
-                        <img className="PhoneIcon" src={PhoneIcon} alt="휴대폰"/>
-                        <label>휴대폰</label>
-                    </div>
-                </form>
-
-                <div className="SignUpPageLink">
-                    <span className="SignUpPageLinkText1">아직 회원이 아니신가요?</span>
-                    <span className="SignUpPageLinkText2">{` `}</span>
-                    <a onClick={handleClickOpen}>
-                        <span className="SignUpPageLinkText3">모바일 인증</span>
+                <div className="SingUpPageFooter">
+                    <span className="SingUpFooterText1">이미 회원이신가요?</span>
+                    <span className="SingUpFooterText2">{` `}</span>
+                    <a href="/login">
+                        <span className="SingUpFooterText3">로그인</span>
                     </a>
                 </div>
 
-                <div className="SignUpButton" onClick={handleJoinClick} >
-                    <span className="SignUpButtonText">회원가입</span>
-                </div>
+                {
+                    data.isAuth && <div>인증 OOO</div>
+                }
+                {
+                    !data.isAuth && <div>인증 XXX</div>
+                }
+
+                {/*모바일 인증번호 Diaglog*/}
+                <ThemeProvider theme={theme}>
+                    <Dialog open={open} onClose={handleClose}>
+                        <DialogTitle><b>SMS 인증</b></DialogTitle>
+                        <DialogContent>
+                            <DialogContentText>
+                                입력하신 휴대전화 번호로 전송받은 인증번호를 입력해주세요
+                            </DialogContentText>
+                            <TextField
+                                autoFocus
+                                margin="dense"
+                                id="name"
+                                label="인증번호"
+                                InputLabelProps={{
+                                    style: { fontWeight: 'bold' },
+                                }}
+                                type="email"
+                                fullWidth
+                                variant="standard"
+                                onChange={(event) => {
+                                    setInputAuthnum(event.target.value);
+                                }}
+                            />
+                        </DialogContent>
+                        <DialogActions>
+                            <Button onClick={handleAuthClick}>확인</Button>
+                            <Button onClick={handleClose}>취소</Button>
+                        </DialogActions>
+                    </Dialog>
+                </ThemeProvider>
+
+
             </div>
-
-            <div className="SingUpPageFooter">
-                <span className="SingUpFooterText1">이미 회원이신가요?</span>
-                <span className="SingUpFooterText2">{` `}</span>
-                <a href="/login">
-                    <span className="SingUpFooterText3">로그인</span>
-                </a>
-            </div>
-
-            {
-                data.isAuth && <div>인증 OOO</div>
-            }
-            {
-                !data.isAuth && <div>인증 XXX</div>
-            }
-
-            {/*모바일 인증번호 Diaglog*/}
-            <ThemeProvider theme={theme}>
-                <Dialog open={open} onClose={handleClose}>
-                    <DialogTitle><b>SMS 인증</b></DialogTitle>
-                    <DialogContent>
-                        <DialogContentText>
-                            입력하신 휴대전화 번호로 전송받은 인증번호를 입력해주세요
-                        </DialogContentText>
-                        <TextField
-                            autoFocus
-                            margin="dense"
-                            id="name"
-                            label="인증번호"
-                            InputLabelProps={{
-                                style: { fontWeight: 'bold' },
-                            }}
-                            type="email"
-                            fullWidth
-                            variant="standard"
-                            onChange={(event) => {
-                                setInputAuthnum(event.target.value);
-                            }}
-                        />
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={handleAuthClick}>확인</Button>
-                        <Button onClick={handleClose}>취소</Button>
-                    </DialogActions>
-                </Dialog>
-            </ThemeProvider>
-
-
         </div>
     );
 }

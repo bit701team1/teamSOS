@@ -27,6 +27,8 @@ public class RoomController {
     UserMapper userMapper;
     @Autowired
     TokenMapper tokenMapper;
+    @Autowired
+    CookieController cookieController;
     /*방 생성 */ 
     @GetMapping("/info/{id}")
     public RoomDto getInfo(@PathVariable String id) {
@@ -61,8 +63,9 @@ public class RoomController {
                 }
             }
         }
-        String email = userMapper.getUserByUserId(tokenMapper.selectByAccessToken(accesstoken).getRt_key()).getEmail();
-        
+        //String email = userMapper.getUserByUserId(tokenMapper.selectByAccessToken(accesstoken).getRt_key()).getEmail();
+        String email = cookieController.getEmailFromAccessToken(accesstoken);
+
         return new ResponseEntity<>(email,HttpStatus.OK);
     }
     /* 로그인한 유저 이름 가져오기  */

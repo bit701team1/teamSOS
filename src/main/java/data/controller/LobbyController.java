@@ -31,11 +31,13 @@ public class LobbyController {
 
     @Autowired
     RoomService roomService;
-
     @Autowired
     UserMapper userMapper;
     @Autowired
     TokenMapper tokenMapper;
+    @Autowired
+    CookieController cookieController;
+
     @GetMapping("/list")
     public List<RoomDto> getList() {
         return roomService.getAll();
@@ -64,7 +66,9 @@ public class LobbyController {
         if (accesstoken == null) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
-        String email = userMapper.getUserByUserId(tokenMapper.selectByAccessToken(accesstoken).getRt_key()).getEmail();
+
+        String email = cookieController.getEmailFromAccessToken(accesstoken);
+        //String email = userMapper.getUserByUserId(tokenMapper.selectByAccessToken(accesstoken).getRt_key()).getEmail();
         String user_name = userMapper.getUserByUserId(tokenMapper.selectByAccessToken(accesstoken).getRt_key()).getUser_name();
 
         System.out.println(email + user_name);

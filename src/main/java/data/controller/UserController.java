@@ -48,7 +48,7 @@ public class UserController {
     @Autowired
     CustomUserDetailsService customUserDetailsService;
 
-    //
+
     @PostMapping("/passUpatebyHp")
     public void passUpatebyHp(@RequestBody UserDto dto){
         //password 암호화
@@ -139,11 +139,6 @@ public class UserController {
             System.out.println("이메일 중복 진입");
             return 1;
         }
-        //email 인증 확인
-
-
-        // 1. Login ID/PW 를 기반으로 AuthenticationToken 생성
-        //UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(dto.getEmail(), dto.getPassword());
 
         // 비밀번호 암호화
         PasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -155,22 +150,17 @@ public class UserController {
 
         userMapper.insertUser(dto);
 
-        // 2. 실제로 검증 (사용자 비밀번호 체크)이 이루어지는 부분
-//        System.out.println("2번 시작");
-//        Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
-//        System.out.println("2번 끝");
-
-        // 3. 이메일 정보를 기반으로 JWT 토큰 생성
+        //이메일 정보를 기반으로 JWT 토큰 생성
         TokenDto tokenDto = JwtTokenProvider.generateTokenDto(dto.getEmail());
 
-        // 4. RefreshToken 저장
+        //RefreshToken 저장
         RefreshTokenDto RTDto = new RefreshTokenDto();
         RTDto.setRt_key(dto.getUser_id());
         RTDto.setRefreshtoken_expire(tokenDto.getRefreshtokenexpire());
         RTDto.setRefreshtoken_value(tokenDto.getRefreshtoken());
 
         tokenMapper.insertRefreshToken(RTDto);
-
+        //Naver Login은
         if(dto.isNaver()){
             System.out.println("Naver: join --> signIn");
             signIn(dto, dto.getResponse());
@@ -192,6 +182,9 @@ public class UserController {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("access_token")) {
                     accessToken = cookie.getValue();
+                    System.out.println("accessToken : " + accessToken);
+                    String email = cookieController.getEmailFromAccessToken(accessToken);
+                    System.out.println("email!!!  " + email);
                 } else {
                     return ResponseEntity.ok("User is not logged in");
                 }
@@ -201,7 +194,10 @@ public class UserController {
         //accesstoken의 값을 db에서 찾고 존재하면 해당값 기반으로 refreshtoken값 가져옴
         refreshToken = tokenMapper.selectByRtKey(tokenMapper.selectByAccessToken(accessToken).getRt_key()).getRefreshtoken_value();
         //accesstoken값으로 email 값 가져옴
-        String email = userMapper.getUserByUserId(tokenMapper.selectByAccessToken(accessToken).getRt_key()).getEmail();
+        String email = cookieController.getEmailFromAccessToken(accessToken);
+        System.out.println("email!!!  " + email);
+
+        //String email = userMapper.getUserByUserId(tokenMapper.selectByAccessToken(accessToken).getRt_key()).getEmail();
 
         System.out.println("accessToken = " + accessToken);
         System.out.println("refreshToken = " + refreshToken);
