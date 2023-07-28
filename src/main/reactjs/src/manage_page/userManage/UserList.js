@@ -63,9 +63,9 @@ function UserList(props) {
                 <table className={"table k_table-userlist"}>
                     <tbody>
                     <tr className={'k_userlist_tr'}>
-                        <th style={{width:'20%'}}>번호</th>
-                        <th style={{width:'40%'}}>회원명</th>
-                        <th style={{width:'40%'}}>이메일</th>
+                        <th style={{width:'30%'}}>번호</th>
+                        <th style={{width:'35%'}}>회원명</th>
+                        <th style={{width:'35%'}}>이메일</th>
                     </tr>
                     {
                         // userlist.map((row,idx)=><UserRowList key={idx} row={row} idx={idx} onDelete={deleteUser}/>)

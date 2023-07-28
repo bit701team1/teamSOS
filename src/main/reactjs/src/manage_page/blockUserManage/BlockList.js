@@ -59,9 +59,9 @@ function BlockList(props) {
                 <table className={"table k_table-blacklist"}>
                     <tbody>
                     <tr className={'k_userBlocklist_tr'}>
-                        <th style={{width:'20%'}}>번호</th>
-                        <th style={{width:'30%'}}>이메일</th>
-                        <th style={{width:'50%'}}>신고내용</th>
+                        <th style={{width:'30%'}}>번호</th>
+                        <th style={{width:'35%'}}>이메일</th>
+                        <th style={{width:'35%'}}>신고내용</th>
                     </tr>
                     {
                         data.Blocklist &&
