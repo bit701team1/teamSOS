@@ -7,7 +7,6 @@ import axios from "axios";
 import {useLocation,useNavigate} from "react-router-dom";
 function ResultPage2(props) {
     const navigate = useNavigate();
-    const locations = useLocation();
 
     useEffect(() => {
         const handlePopState = () => {
@@ -188,8 +187,6 @@ function ResultPage2(props) {
 
     return (
       <>
-       
-            
         <div className="y_resultpage-div">
         
           <img className="y_result-img" alt="" src={img}/>
@@ -198,8 +195,6 @@ function ResultPage2(props) {
             className="y_result-back"
             onClick={onIconArrowRightCircledClick}
           />
-           
-
           <div className="y_result-dark" />
           <div className="y_result-div2" />
           <div className="y_result-p1">경매 결과를 확인 하세요</div>
@@ -235,7 +230,7 @@ function ResultPage2(props) {
             placement="Centered"
             onOutsideClick={closeFrame}
           >
-            <ResultModal onClose={closeFrame} />
+            <ResultModal onClose={closeFrame} productName={roomName}/>
           </PortalPopup>
         )}
       </>

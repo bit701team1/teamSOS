@@ -1,7 +1,20 @@
 import "../css/auctioninfo_modal.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleHeart} from "@fortawesome/free-solid-svg-icons";
 const Component1 = ({ onClose }) => {
   return (
     <div className="y_auctioninfo-div">
+       <div className="y_atinfo-floor">Floor</div>
+      <div className="y_atinfo-amount">Amount</div>
+      <div className="y_atinfo-waiting">Waiting</div>
+      <div className="y_atinfo-likes">Likes</div>
+      <div className="y_atinfo-1">39,800</div>
+      <div className="y_atinfo-2">104</div>
+      <div className="y_atinfo-3">27</div>
+      <div className="y_atinfo-4">1</div>
+      <div className="y_atinfo-heart">
+      <i className="bi bi-suit-heart-fill" style={{color:'#fe7171'}}></i>
+      </div>
       <i className="y_atif-p1">김성학의 오마카세</i>
       <div className="y_atif-line" />
       <i className="y_atif-p2">상품 설명</i>

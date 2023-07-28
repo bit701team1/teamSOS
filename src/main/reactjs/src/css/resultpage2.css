@@ -166,6 +166,7 @@
   color: rgba(99, 99, 102, 0.8);
 }
 .y_result-box{
+  position: absolute;
   top: calc(50% + 241px);
   left: calc(50% - 128px);
   border-radius: 20px;

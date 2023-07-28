@@ -75,7 +75,7 @@ const Component = ({ onClose, userName, productName, roomName }) => {
                    step="100"
                    pattern="[0-9]*"
                    onChange={handleInputChange}/>
-            <button className="y_bid-btn" onClick={Handlebidbutton}><p>입찰</p></button>
+            <button className="y_bid-btn" onClick={Handlebidbutton}>입찰</button>
         </div>
     );
 };

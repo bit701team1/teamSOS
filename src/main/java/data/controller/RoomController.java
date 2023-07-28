@@ -164,12 +164,12 @@ public class RoomController {
             }
         }
         int userId = tokenMapper.selectByAccessToken(accessToken).getRt_key();
+        // if(msg.getMsgId() ==)
         UserDto user = userMapper.getUserByUserId(userId);
         reportdto.setEmail(msg.getUserName());
         reportdto.setMsg(msg.getMsg());
         userMapper.insertReport(reportdto);
         userMapper.updateReportNum(msg.getUserName());
-        
         return ResponseEntity.ok(reportdto);
     }
      //정보 수정 
