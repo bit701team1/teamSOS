@@ -149,7 +149,7 @@ function OrderCompleteMobile() {
                 <div className="D_payment_container">
                     <div className="D_payment_item">
                         <label>상품명</label>
-                        <span>{paymentData.data.productName}</span>
+                        <span>{paymentData.data.name}</span>
                     </div>
                     <div className="D_payment_item">
                         <label>거래번호</label>
@@ -157,7 +157,7 @@ function OrderCompleteMobile() {
                     </div>
                     <div className="D_payment_item">
                         <label>구매자명</label>
-                        <span>{paymentData.data.user_name}</span>
+                        <span>{paymentData.data.buyer_name}</span>
                     </div>
                     <div className="D_payment_item">
                         <label>결제금액</label>
