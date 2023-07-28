@@ -119,8 +119,7 @@ public class LobbyController {
         }
 
         String email = cookieController.getEmailFromAccessToken(accesstoken);
-        //String email = userMapper.getUserByUserId(tokenMapper.selectByAccessToken(accesstoken).getRt_key()).getEmail();
-        String user_name = userMapper.getUserByUserId(tokenMapper.selectByAccessToken(accesstoken).getRt_key()).getUser_name();
+        String user_name = userMapper.getUserByEmail(email).getUser_name();
 
         System.out.println(email + user_name);
         if (email == null || user_name == null) {
