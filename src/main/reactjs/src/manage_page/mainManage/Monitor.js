@@ -1,18 +1,17 @@
 import React from 'react';
-import './ManagePageMain.css';
+import '../../css/ManagePageCSS/managePageMain.css';
 import {NavLink, Route, Routes, useNavigate} from "react-router-dom";
-import {ProductList} from "./index";
-import './UserList.css';
-import './monitor.css';
+import {ProductList} from "../index";
+import '../../css/ManagePageCSS/userList.css';
+import '../../css/ManagePageCSS/monitor.css';
 import Axios from "axios";
 
 function Monitor(props) {
 
     const k_photo=process.env.REACT_APP_MANAGE;
-
     const navi=useNavigate();
 
-    // 단체 알림 서비스
+    // 경매 전 문자 알림 서비스 (isalarm이 1 전부)
     const handleClickAlarm = ()=>{
         let url = "/api/sms/send-many";
         Axios.post(url).then(res => {

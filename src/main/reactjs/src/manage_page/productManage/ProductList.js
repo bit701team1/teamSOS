@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import './ProductList.css';
+import '../../css/ManagePageCSS/productList.css';
 import {useNavigate} from "react-router-dom";
 import {FormControl, MenuItem, Select} from "@mui/material";
 import ProductListRecent from "./ProductListRecent";

@@ -127,6 +127,7 @@ public class LobbyController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    //    UserType 체크 후 mypage, manage 페이지 경로 구별 
     @GetMapping("/mypagecheck")
     public int mypagecheck(HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();

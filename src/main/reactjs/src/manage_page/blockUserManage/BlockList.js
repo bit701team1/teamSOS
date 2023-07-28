@@ -1,9 +1,9 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import './ManagePageMain.css';
+import '../../css/ManagePageCSS/managePageMain.css';
 import {Link, NavLink, useNavigate, useParams} from "react-router-dom";
 import Axios from "axios";
 import BlockRowList from "./BlockRowList";
-import './UserList.css';
+import '../../css/ManagePageCSS/blocklist.css';
 
 function BlockList(props) {
     const k_photo=process.env.REACT_APP_MANAGE;
@@ -48,9 +48,9 @@ function BlockList(props) {
         <div>
             <div className="k-searchbox">
                 <img className="k-people-icon" alt="" src={`${k_photo}k_icon_search.svg`} />
-                <input type={'text'} className="k-search-bar" onChange={handleSearchChange} placeholder={'회원명 또는 Email을 입력하세요'} value={searchValueBlock} style={{fontSize:'1rem',textAlign:'center'}}>
+                <input type={'text'} className="k-search-bar" onChange={handleSearchChange} placeholder={'회원명 또는 Email을 입력하세요'} value={searchValueBlock}>
                 </input>
-                <img className="k-search-icon" alt="검색" src={`${k_photo}k_icon_filtter.svg`} onClick={handleSearch} style={{cursor:'pointer'}} />
+                <img className="k-search-icon" alt="검색" src={`${k_photo}k_icon_filtter.svg`} onClick={handleSearch}/>
             </div>
 
             <div className={'k-list-show'}  style={{fontSize:'1rem'}}>

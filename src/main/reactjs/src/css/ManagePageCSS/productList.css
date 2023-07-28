@@ -58,6 +58,7 @@
     height: 4rem;
     text-align: center;
 
+
 }
 #k_product_select {
     line-height: 1rem;
@@ -102,6 +103,7 @@
     font-family: "Roboto";
     text-align: center;
     border-radius: 50px;
+    box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
 
 }
 
@@ -136,6 +138,7 @@
     height: 8rem;
     border-radius: 20px;
     position: relative;
+    box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
 }
 
 .k_productlist_main_form{
@@ -203,7 +206,7 @@
     font-size: 1rem;
     top: 6rem;
     width: 7rem;
-    font-weight: 600;
+    font-weight: 500;
 
 }
 
@@ -214,6 +217,10 @@
     object-fit: cover;
     float: left;
     border-radius: 15px;
+}
+
+.k_product_winner {
+    font-family: 'Song Myung';
 }
 
 

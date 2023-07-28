@@ -2,24 +2,19 @@ import React, {useCallback, useEffect, useState} from 'react';
 import Axios from "axios";
 import UserRowList from "./UserRowList";
 import {Link, NavLink, useNavigate, useParams} from "react-router-dom";
-import './ManagePageMain.css';
-import './UserList.css';
+import '../../css/ManagePageCSS/managePageMain.css';
+import '../../css/ManagePageCSS/userList.css';
 
 
 
 function UserList(props) {
-
     const k_photo=process.env.REACT_APP_MANAGE;
-
     const [data,setData]=useState([]);
-
     const {currentPage}=useParams();
-
     const [searchValue, setSearchValue] = useState('');
-
     const navi=useNavigate();
 
-    //출력 이벤트
+    //리스트 출력 함수
     const getUserList=useCallback(()=>{
         const url="/manage/userlist?currentPage="+(currentPage==null?1:currentPage)+"&search="+(searchValue || '');
         Axios.get(url)
@@ -29,15 +24,16 @@ function UserList(props) {
 
     },[currentPage,searchValue]);
 
+    // 검색 이벤트
     const handleSearchChange=(e)=>{
         setSearchValue(e.target.value);
     };
-
+    // 검색 후 목록 출력
     const handleSearch=()=>{
         getUserList();
     };
 
-
+    // 유저 삭제 이벤트
     const deleteUser=(user_id)=>{
         const url="/manage/delete?user_id="+user_id;
         Axios.delete(url)
@@ -57,9 +53,9 @@ function UserList(props) {
 
             <div className="k-searchbox">
                 <img className="k-people-icon" alt="" src={`${k_photo}k_icon_search.svg`} />
-                <input type={'text'} className="k-search-bar" onChange={handleSearchChange} placeholder={'회원명 또는 Email을 입력하세요'} value={searchValue} style={{fontSize:'1rem',textAlign:'center'}}>
+                <input type={'text'} className="k-search-bar" onChange={handleSearchChange} placeholder={'회원명 또는 Email을 입력하세요'} value={searchValue}>
                 </input>
-                <img className="k-search-icon" alt="필터" src={`${k_photo}k_icon_filtter.svg`} onClick={handleSearch} style={{cursor:'pointer'}} />
+                <img className="k-search-icon" alt="필터" src={`${k_photo}k_icon_filtter.svg`} onClick={handleSearch}/>
             </div>
 
             <div className={'k-list-show'} style={{fontSize:'1rem'}}>

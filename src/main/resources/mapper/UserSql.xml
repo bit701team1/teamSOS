@@ -27,12 +27,10 @@
 
     <!-- /////////////////////////////////////  경철 (ManagePage)  //////////////////////////////////////////////////-->
 
-    <!--  회원 삭제, 회원탈퇴-->
+    <!--  회원 삭제, 회원 탈퇴-->
     <delete id="deleteUser">
         delete from user where user_id=#{user_id}
     </delete>
-
-
     <!--    관리자페이지에서 유저목록 조회 페이징리스트 검색추가-->
     <select id="getManagePagingList" parameterType="map" resultType="UserDto">
         select * from user
@@ -46,7 +44,6 @@
     <select id="getManageTotalCount" resultType="int">
         select count(*) from user
     </select>
-
     <!--  검색한 유저의 수 토탈카운트   -->
     <select id="getManageTotalCountWithSearch" parameterType="map" resultType="int">
         select count(*) from user
@@ -55,12 +52,10 @@
         </if>
     </select>
 
-
     <!--   관리자 페이지에서 신고된 유저 카운트 -->
     <select id="getBlockListCount" resultType="int">
         select count(*) from report where num
     </select>
-
     <!--   관리자페이자 신고된 유저의 목록 조회 페이징 리스트 및 검색추가 -->
     <select id="getBlockList" parameterType="map" resultType="ReportDto">
         select * from report
@@ -76,8 +71,6 @@
             where email like CONCAT('%',#{search},'%')
         </if>
     </select>
-
-
     <!--  클릭하면 report_num이 1증가 시키기  -->
     <update id="updateReportNum">
         update user set report_num=report_num+1 where email=#{email}

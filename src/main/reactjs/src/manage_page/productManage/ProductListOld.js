@@ -1,9 +1,9 @@
 import React from 'react';
-import s1 from "../k_manage_image/s72.jpg";
 
-function ProductListRecent({productList}) {
+function ProductListOld({productList}) {
 
     const k_photo=process.env.REACT_APP_MANAGE;
+
     const k_productimg=process.env.REACT_APP_Product;
 
 
@@ -19,7 +19,7 @@ function ProductListRecent({productList}) {
                             {product.product_name}
                         </div>
                         <div className='k_product_list_detail_winner'>
-                            낙찰자 : {product.winner}
+                            낙찰자 : <span className={'k_product_winner'}>{product.winner}</span>
                         </div>
                         <div className='k_product_list_detail_date' >
                             <div className={'k_product_list_detail_text'}>
@@ -36,5 +36,4 @@ function ProductListRecent({productList}) {
     );
 }
 
-export default ProductListRecent;
-
+export default ProductListOld;

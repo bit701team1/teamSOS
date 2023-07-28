@@ -46,7 +46,7 @@ function Menu(props) {
                 <li><NavLink to={"/roomcreate"}><h2>방만들기</h2></NavLink></li>
 
                 <li onClick={userTypeCheck} style={{cursor:'pointer'}}>
-                     <h2>마이페이지</h2>
+                     <h2>마이페이지or 관리자페이지 아이콘</h2>
                 </li>
             </ul>
         </div>

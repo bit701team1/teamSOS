@@ -6,7 +6,7 @@ import Mainauction from "./auctionpage/Mainauction";
 
 
 
-import './manage_page/ManagePageMain.css';
+import './css/ManagePageCSS/managePageMain.css';
 
 import errorimg from './image/ERR404.png';
 import JoinForm from "./user/oldcomponent/JoinForm";

@@ -55,8 +55,11 @@
     top: 0.8rem;
     bottom: 5.3rem;
     left: 20%;
+    font-size: 1rem;
+    text-align: center;
     border-radius: 50px;
     background-color: #f5f5f5;
+    box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
 }
 .k-search-icon {
     width: 3rem;
@@ -66,6 +69,7 @@
     left: 82%;
     max-width: 100%;
     max-height: 100%;
+    cursor: pointer;
 }
 .k-admin-photo,
 .k-search-icon,
@@ -80,14 +84,15 @@
     left: 0;
     background-color: #ffffff;
     height: 4rem;
+
 }
 .k-admin-photo {
     top: 1rem;
     left: 1.5rem;
     border-radius: 15px;
     background-color: #f6f6f6;
-    box-shadow: 0 8.200000286102295px 14.4px rgba(0, 0, 0, 0.12);
-    border: 0.9px solid #e2e2e2;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+
     width: 5.5rem;
     height: 6rem;
     float: left;
@@ -106,20 +111,23 @@
     overflow: hidden;
 }
 .k-logout {
-    top: 2rem;
+    top: 2.5rem;
     left: 80%;
     border-radius: 15px;
     background-color: #2b2b2b;
-    width: 4rem;
-    height: 4rem;
+    width: 3rem;
+    height: 3rem;
     font-size: 0.9rem;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    cursor: pointer;
+
 }
 
 .k_logout_text{
     font-family: 'Roboto';
     margin-top: 15%;
     margin-left: 25%;
-    width: 2.5rem;
+    width: 2rem;
 }
 
 .k_icons {
@@ -144,29 +152,35 @@
 .k-manage-bar-text1 {
     top: 78%;
     position: absolute;
-    font-weight: 800;
-    margin-left: 12%;
+    font-weight: 600;
+    margin-left: 9%;
     font-size: 1.2rem;
     font-family: 'Roboto';
     color: black;
+    width: 6.3rem;
+    text-align: center;
 }
 .k-manage-bar-text2 {
     top: 78%;
     position: absolute;
-    font-weight: 800;
-    margin-left: 42%;
+    font-weight: 600;
+    margin-left: 39.5%;
     font-size: 1.2rem;
     font-family: 'Roboto';
     color: black;
+    width: 6.3rem;
+    text-align: center;
 }
 .k-manage-bar-text3 {
     top: 78%;
     position: absolute;
-    font-weight: 800;
-    margin-left: 72%;
+    font-weight: 600;
+    margin-left: 69.5%;
     font-size: 1.2rem;
     font-family: 'Roboto';
     color: black;
+    width: 6.3rem;
+    text-align: center;
 }
 
 .k-manage-bar-textbox1 {
@@ -238,7 +252,10 @@
     left: 5%;
     border-radius: 35px;
     background-color: #f6f6f6;
-    /*font-size: 1rem;*/
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    /*box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;*/
+
+
 }
 .k-moniter-send-list {
     width: 90%;
@@ -323,9 +340,13 @@
     background-color: #d6b4a2;
 }
 .k_paging {
+    margin-bottom: 0.8rem;
     font-family: 'Roboto';
 }
 
 .active-link {
-    color: red;
+    color: #979797;
+    border-radius: 28.8px;
+    box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
 }
+

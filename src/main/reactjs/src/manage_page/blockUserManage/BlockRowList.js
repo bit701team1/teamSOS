@@ -1,15 +1,14 @@
 import React from 'react';
 import {Button, Dialog, DialogContent, DialogTitle, Typography} from "@mui/material";
-import userimg from "../k_manage_image/k_mange_user.jpg";
 import DialogActions from "@mui/material/DialogActions";
-import blockimg from '../image/alert.png';
-import './UserList.css';
+import blockimg from '../../image/alert.png';
+import '../../css/ManagePageCSS/blocklist.css';
 
 function BlockRowList(props) {
     const { idx, row, no, onDelete, currentPage } = props;
-
     const [open, setOpen] = React.useState(false);
 
+    // blockuser dialog
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -25,12 +24,13 @@ function BlockRowList(props) {
         }
     };
 
+    const k_photo=process.env.REACT_APP_MANAGE;
     const ShortMsg=limitMsg(row.msg, 10);
 
     return (
         <tr className={'userBlockRowList'} style={{borderStyle:'unset',border:'snow'}} >
             <td>{idx+1}</td>
-            <td>{row.email}</td>
+            <td className={'k_blocklist_email'}>{row.email}</td>
             <td style={{ cursor:'pointer' }} onClick={handleClickOpen}>{ShortMsg}</td>
 
             <Dialog
@@ -41,17 +41,23 @@ function BlockRowList(props) {
 
             >
                 <DialogTitle id="customized-dialog-title" onClose={handleClose}   style={{width:'22rem'}} >
-                    <img alt={'슬픔이'} src={userimg} style={{width:'4rem',height:'4rem',borderRadius:'100px',marginRight:'4px'}}/>
-                    &nbsp;{row.email}
+                    <img alt={'슬픔이'} src={`${k_photo}k_mange_user.jpg`} className={'k_block_dialog_header'}/>
+                    <div className={'k_block_dialog_header_text'}>
+                        {row.email}
+                    </div>
                 </DialogTitle>
                 <DialogContent dividers style={{whiteSpace: 'pre-line'}}>
                     <Typography gutterBottom>
-                        <img alt={'경고이미지'} src={blockimg} style={{width:'1.5rem'}}/>
-                        &nbsp;
+                        <div className={'k_block_textbox'}>
+                            <img alt={'경고이미지'} src={blockimg} className={'k_block_img'}/>
+                            <div className={'k_block_text'}>신고 메세지</div>
+                        </div>
                     </Typography>
 
                     <Typography variant="body2">
-                        {row.msg}
+                        <div className={'k_block_msg'}>
+                            {row.msg}
+                        </div>
                     </Typography>
                 </DialogContent>
                 <DialogActions>
