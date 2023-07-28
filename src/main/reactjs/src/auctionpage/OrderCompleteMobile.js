@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import {useLocation, useNavigate} from 'react-router-dom';
+import "../css/paymentResult.css";
 
 function OrderCompleteMobile() {
     const [result, setResult] = useState(null);
@@ -141,7 +142,31 @@ function OrderCompleteMobile() {
 
     // result 값에 따라서 결과창을 표시합니다.
     if (result === true) {
-        return <div>결제가 성공적으로 완료되었습니다!</div>;
+        return (
+        <div className="D_payment_page">
+            <div className="D_paymentResult">
+                <h1 className="D_title">결제 성공!</h1>
+                <div className="D_payment_container">
+                    <div className="D_payment_item">
+                        <label>상품명</label>
+                        <span>{paymentData.productName}</span>
+                    </div>
+                    <div className="D_payment_item">
+                        <label>거래번호</label>
+                        <span>{paymentData.merchant_uid}</span>
+                    </div>
+                    <div className="D_payment_item">
+                        <label>구매자명</label>
+                        <span>{paymentData.user_name}</span>
+                    </div>
+                    <div className="D_payment_item">
+                        <label>결제금액</label>
+                        <span>{paymentData.amount}원</span>
+                    </div>
+                </div>
+                <a href="/" className="D_button">결제 확인</a>
+            </div>
+        </div>);
     } else if (result === false) {
         return <div>결제가 실패하였습니다. 다시 시도해주세요.</div>;
     } else {
