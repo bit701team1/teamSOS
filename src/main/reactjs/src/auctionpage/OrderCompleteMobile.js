@@ -74,22 +74,24 @@ function OrderCompleteMobile() {
     //             setResult(false); // 결제가 실패한 경우 result 값을 false로 설정
     //         });
     // }, []);
+
+    //두번쨰
     useEffect(() => {
         axios
             .get('/payment/getcompleteresult', {
                 params: {
                     imp_uid: imp_uid,
                     merchant_uid: merchant_uid,
-                    imp_success: imp_success
+                    imp_success: imp_success,
                 },
             })
             .then((thenresponse) => {
-                const response = thenresponse.data.response; // 객체 정의
+                const response = thenresponse.data; // 수정: 객체 정의
 
                 console.log(response); // 추가
                 // 성공적으로 처리된 경우, response에 결제 정보가 담겨 있을 것입니다.
-                console.log("amount>" + response.amount);
-                console.log("merchant_uid>" + response.merchant_uid);
+                console.log('amount>' + response.amount);
+                console.log('merchant_uid>' + response.merchant_uid);
 
                 const amount = Number(response.amount);
                 const merchant_uid = response.merchant_uid;
@@ -111,21 +113,21 @@ function OrderCompleteMobile() {
                         .then((insertresponse) => {
                             console.log('결제 정보가 데이터베이스에 저장되었습니다.');
                             console.log(insertresponse.data);
-                            console.log("amount>" + insertresponse.data.response.amount + "&requestAmount>" + requestAmount);
-                            console.log("merchant_uid>" + insertresponse.data.response.merchant_uid + "&requestMerchant_uid>" + requestMerchant_uid);
+                            console.log('amount>' + insertresponse.data.response.amount + '&requestAmount>' + requestAmount);
+                            console.log('merchant_uid>' + insertresponse.data.response.merchant_uid + '&requestMerchant_uid>' + requestMerchant_uid);
                             setResult(true); // 결제가 성공한 경우 result 값을 true로 설정
                         })
                         .catch((error) => {
-                            console.error('결제 정보를 데이터베이스에 저장하는데 실패했습니다.' + "error>" + error);
+                            console.error('결제 정보를 데이터베이스에 저장하는데 실패했습니다.' + 'error>' + error);
                             setResult(false); // 결제가 실패한 경우 result 값을 false로 설정
                         });
                 } else {
                     // 결제 정보가 일치하지 않는 경우
                     console.log('결제 정보가 맞지 않습니다.');
-                    console.log("amount>" + response.amount);
-                    console.log("merchant_uid>" + response.merchant_uid);
-                    console.log("amount>" + response.amount + "&requestAmount>" + requestAmount);
-                    console.log("merchant_uid>" + response.merchant_uid + "&requsetImpUid>" + requestMerchant_uid);
+                    console.log('amount>' + response.amount);
+                    console.log('merchant_uid>' + response.merchant_uid);
+                    console.log('amount>' + response.amount + '&requestAmount>' + requestAmount);
+                    console.log('merchant_uid>' + response.merchant_uid + '&requsetImpUid>' + requestMerchant_uid);
                     setResult(false); // 결제가 실패한 경우 result 값을 false로 설정
                 }
             })
