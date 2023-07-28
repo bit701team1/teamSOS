@@ -90,7 +90,7 @@ public class SmsController {
         List<String> HpList = authMapper.selectHpList();
         //System.out.println("HpList : " + HpList);
 
-        //product내용을 불러올 방법 필요함
+        //해당일의 product 내용 가져옴
         ProductDto dto = new ProductDto();
         dto = productMapper.selectByCurDate();
         //System.out.println("dto : " + dto);

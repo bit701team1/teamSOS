@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.Cookie;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @RestController
+@RequestMapping("/api")
 public class CookieController {
 
     private final JwtTokenProvider jwtTokenProvider;
@@ -25,7 +27,7 @@ public class CookieController {
     }
 
     // JWT 토큰에서 email 값을 추출하는 메서드
-    @GetMapping("/api/getemail")
+    @GetMapping("/getemail")
     public String getEmailFromAccessToken(String AccessToken) {
         // JWT 토큰 디코딩 및 파싱
         Claims claims = Jwts.parserBuilder()
@@ -39,7 +41,7 @@ public class CookieController {
     }
     
     //Cookie 값 획득
-    @GetMapping("/api/get-cookie")
+    @GetMapping("/get-cookie")
     public ResponseEntity<String> getCookieValue(HttpServletRequest request) {
         // HTTP Only 쿠키 값을 가져옵니다.
         Cookie[] cookies = request.getCookies();
@@ -62,7 +64,7 @@ public class CookieController {
     }
     
     //Cookie 값 제거
-    @DeleteMapping("/api/delete-cookie")
+    @DeleteMapping("/delete-cookie")
     public ResponseEntity<String> deleteCookie(HttpServletResponse response) {
         // 쿠키 삭제를 위해 동일한 이름과 path, domain을 가진 쿠키를 생성하여 만료시간을 0으로 설정합니다.
         Cookie cookie = new Cookie("access_token", null);

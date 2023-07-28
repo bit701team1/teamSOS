@@ -180,8 +180,12 @@ input:focus ~ .SignUpHighlight {
 /* 링크 텍스트 설정 */
 .SignUpPageLink{
     position: absolute;
-    top: 624px;
-    left: 106px;
+    top: 630px;
+    left: 65px;
+    /*width: 340px;*/
+    /*height: 70px;*/
+    /*border-radius: 15px;*/
+    /*background: #D6B4A2;*/
 }
 
 .SignUpPageLinkText1 {
@@ -194,7 +198,15 @@ input:focus ~ .SignUpHighlight {
 
 .SignUpPageLinkText3 {
     text-decoration: underline;
+    /*text-align: center;*/
+    /*font-family: 'Roboto';*/
+    /*font-size: 20px;*/
+    /*font-weight: 600;*/
+    /*line-height: 70px;*/
+    /*color: black;*/
     color: #B24C4B;
+    cursor: pointer;
+
 }
 
 /* 회원가입 버튼 설정 */
@@ -239,6 +251,30 @@ input:focus ~ .SignUpHighlight {
 .SingUpFooterText3 {
     text-decoration: underline;
     color: #B24C4B;
+}
+
+.MsgIcon{
+    width: 23px;
+    margin-bottom: 5px;
+}
+.RedCrossIcon{
+    position: absolute;
+    width: 25px;
+    margin-bottom: 5px;
+    bottom: 55px;
+    left: 280px;
+}
+.GreenCheckIcon{
+    position: absolute;
+    width: 25px;
+    margin-bottom: 5px;
+    bottom: 55px;
+    left: 280px;
+}
+
+.SignUpAuthButton{
+    cursor: pointer;
+    margin-left: 30px;
 }
 
 /* 휴대폰 가로 너비가 428px 이하일 때 스타일 변경 */

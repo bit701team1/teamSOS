@@ -54,7 +54,8 @@ function RouteMain(props) {
                 <Route path='/manage/*' element={<ManagePageMain/>}/>
                 <Route path='/productlist/*' element={<ProductList/>}/>
 
-                <Route path='/oldjoin' element={<JoinForm/>}/>
+
+                {/*<Route path='/oldjoin' element={<JoinForm/>}/>*/}
                 {/*<Route path='/login' element={<LoginForm/>}/>*/}
 
                 <Route path='/room/:roomId' element={<AuctionLive2/>}/>
