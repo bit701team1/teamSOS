@@ -86,7 +86,7 @@ function OrderCompleteMobile() {
                 },
             })
             .then((thenresponse) => {
-                const response = thenresponse.data; // 수정: 객체 정의
+                const response = thenresponse.data.response; // 수정: 객체 정의
 
                 console.log(response); // 추가
                 // 성공적으로 처리된 경우, response에 결제 정보가 담겨 있을 것입니다.
@@ -111,10 +111,11 @@ function OrderCompleteMobile() {
                             },
                         })
                         .then((insertresponse) => {
+                            const insertdata = insertresponse.data.response
                             console.log('결제 정보가 데이터베이스에 저장되었습니다.');
                             console.log(insertresponse.data);
-                            console.log('amount>' + insertresponse.data.response.amount + '&requestAmount>' + requestAmount);
-                            console.log('merchant_uid>' + insertresponse.data.response.merchant_uid + '&requestMerchant_uid>' + requestMerchant_uid);
+                            console.log('amount>' + insertdata.amount + '&requestAmount>' + requestAmount);
+                            console.log('merchant_uid>' + insertdata.merchant_uid + '&requestMerchant_uid>' + requestMerchant_uid);
                             setResult(true); // 결제가 성공한 경우 result 값을 true로 설정
                         })
                         .catch((error) => {
