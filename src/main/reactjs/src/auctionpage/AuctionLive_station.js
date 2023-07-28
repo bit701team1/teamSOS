@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useCallback, useState} from 'react';
-import '../css/auctionlive2.css';
+import '../css/auctionlive_station.css';
 import img from '../image/스폰지밥1.gif';
 import AuctionInfo from '../auctionmodal/AuctionInfo';
 import AuctionBid from '../auctionmodal/AuctionBid';
@@ -9,7 +9,8 @@ import axios from "axios";
 import {useNavigate, useParams} from "react-router-dom";
 import * as SockJS from "sockjs-client";
 import * as StompJS from "@stomp/stompjs";
-function AuctionLive2(props) {
+import LiveStream from './LiveStream';
+function AuctionLive_station(props) {
   const navigate = useNavigate();
 
 
@@ -303,7 +304,10 @@ const report = (userName, msg) => {
     return (
       <>
         <div className="y_auction-div">
-        <img className="y_auction-img" alt="" src={img}/>
+        {/* <img className="y_auction-img" alt="" src={img}/> */}
+        <div className='y_auction-img'>
+          <LiveStream />
+        </div>
         {admin &&
         <button className="y_liveend-btn" onClick={modalopen}>방송종료</button>
         }
@@ -417,4 +421,4 @@ const report = (userName, msg) => {
       </>
     );
   };
-export default AuctionLive2;
+export default AuctionLive_station;

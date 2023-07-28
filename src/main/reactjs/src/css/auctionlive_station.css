@@ -2,12 +2,11 @@
 
 .y_auction-img{
   position: absolute;
-  top: 0;
-  left: calc(50% - 214px);
-  border-radius: 0 0 45px 45px;
+  top: 7rem;
+  left: calc(50% - 184px);
   background-color: #d9d9d9;
-  width: 26.75rem;
-  height: 30.38rem;
+  width: 22.9rem;
+
 }
 .message-right b{
   font-family: 'Roboto';
@@ -59,7 +58,7 @@
   height: 5.13%;
   top: 5.58%;
   bottom: 89.28%;
-  left: calc(50% - 177.07px);
+  left: calc(50% - 188px);
   max-height: 100%;
   width: 3.3rem;
 }
@@ -109,21 +108,21 @@
 }
 .y_chatscreen{
   position: absolute;
-  top: 32.69rem;
+  top: 22.69rem;
   left: calc(50% - 185px);
   border-radius: 10px;
   background-color: #fff;
   width: 23.06rem;
   border: none;
   box-shadow:1px 1px 5px 0 rgb(191, 191, 191);
-  height: 14.69rem;
+  height: 24.69rem;
   font-family: 'Roboto';
   overflow-y:auto;
 }
 .y_liveend-btn{
   position: absolute;
-  left: calc(50% - 185px);
-  top: 27.69rem;
+  left: calc(50% + 110px);
+  top: 5.3rem;
   border:none;
   border-radius: 5px;
   background-color:#b24c4b;
