@@ -82,7 +82,8 @@ public class RoomController {
                 }
             }
         }
-        String user_name = userMapper.getUserByUserId(tokenMapper.selectByAccessToken(accesstoken).getRt_key()).getUser_name();
+        String email = cookieController.getEmailFromAccessToken(accesstoken);
+        String user_name = userMapper.getUserByEmail(email).getUser_name();
 
         return new ResponseEntity<>(user_name,HttpStatus.OK);
     }

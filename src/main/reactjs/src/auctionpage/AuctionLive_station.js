@@ -132,8 +132,8 @@ useEffect(()=>{
 
    /* 소켓연결 */
    const connect = () => { //소켓 연결용 함수
-    // let sock = new SockJS('http://localhost:9003/ws'); //endpoint 주소 소켓을 저기로 연결하겠다
-       let sock = new SockJS('http://175.45.193.12/ws'); //endpoint 주소 소켓을 저기로 연결하겠다
+    let sock = new SockJS('http://localhost:9003/ws'); //endpoint 주소 소켓을 저기로 연결하겠다
+      //  let sock = new SockJS('http://175.45.193.12/ws'); //endpoint 주소 소켓을 저기로 연결하겠다
     client.current = StompJS.Stomp.over(sock); //StompJS를 사용하여 소켓 연결을 관리하는 클라이언트 객체를 생성
     let ws = client.current;
     ws.connect({}, () => {
@@ -216,7 +216,6 @@ const kick = (kickUser) =>{ // 강퇴할 대상의 userName을 인자로 받는�
     )
     // 메시지 전송 후 입력창 초기화
     msgRef.current.value = '';
-    console.log('user : '+user);
 };
   const modalopen = () =>{
     client.current.send(

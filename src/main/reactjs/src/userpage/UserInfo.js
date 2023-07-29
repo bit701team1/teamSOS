@@ -137,7 +137,7 @@ const togglePasswordVisibility = () => {
             <div className="y_input-field3">
               <input className="y_info-input"
               type={showPassword ? 'text' : 'password'} 
-              style={{width:'80%'}}
+              style={{width:'70%'}}
               onChange={handlePasswordChange} >
             </input>
             </div>
