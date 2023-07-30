@@ -121,9 +121,9 @@
   }
 }
 .y_atbid-p2{
-  font-size: 4px;
+  font-size: 0.61rem;
   top: calc(50% + 33px);
-  left: calc(210px);
+  left: calc(46%);
   font-family: 'Roboto';
   color: #979797;
 }
