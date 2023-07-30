@@ -167,6 +167,10 @@ function ResultPage2(props) {
             });
     }, [roomName, userdata.email]);
 
+    const formatPrice = (value) => {
+        return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    };
+
     //여기까지
     const onIconArrowRightCircledClick = useCallback(() => {
       // Please sync "경매방송페이지" to the project
@@ -209,11 +213,13 @@ function ResultPage2(props) {
           <div className="y_result-div2" />
           <div className="y_result-p1">경매 결과를 확인 하세요</div>
           <div className="y_result-div3" />
-          <div className="y_result-p2">{highestPriceBid?.price+'원' || '없음'}</div>
+          {/*<div className="y_result-p2">{highestPriceBid?.price+'원' || '없음'}</div>*/}
+            <div className="y_result-p2">{highestPriceBid ? formatPrice(highestPriceBid.price) + '원' : '없음'}</div>
           <div className="y_result-p3">경매 입찰</div>
           <div className="y_result-p4">{roomName}</div>
           <div className="y_result-p5">{user_name}</div>
-          <div className="y_result-p6">{`${userBid?.price+'원' || '없음'}`}</div>
+          {/*<div className="y_result-p6">{`${userBid?.price+'원' || '없음'}`}</div>*/}
+            <div className="y_result-p6">{userBid ? formatPrice(userBid.price) + '원' : '없음'}</div>
           <div className="y_result-p7">
               {user_email}</div>
           <div className="y_result-p8">경매 결과</div>

@@ -13,6 +13,10 @@ function OrderCompleteMobile() {
     const navi = useNavigate();
     // paymentData를 세션에서 읽어옴
     const paymentData = JSON.parse(sessionStorage.getItem("paymentData"));
+
+    const formatPrice = (value) => {
+        return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    };
     // const { imp_uid, merchant_uid, imp_success } = queryParams;
 
     // useEffect(() => {
@@ -161,7 +165,7 @@ function OrderCompleteMobile() {
                     </div>
                     <div className="D_payment_item">
                         <label>결제금액</label>
-                        <span>{paymentData.data.amount}원</span>
+                        <span>{formatPrice(paymentData.data.amount)}원</span>
                     </div>
                 </div>
                 <a href="/" className="D_button">결제 확인</a>
