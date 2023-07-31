@@ -180,8 +180,6 @@ function ResultPage2(props) {
     }, []);
 
     const photo = process.env.REACT_APP_SUICONURL;
-
-
     // 결제하기 버튼 렌더링 여부를 결정하는 함수
     const shouldRenderPaymentButton = () => {
         if (userBid && highestPriceBid) {

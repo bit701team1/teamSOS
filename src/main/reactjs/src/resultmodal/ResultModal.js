@@ -1,27 +1,26 @@
 import axios from "axios";
 import "../css/resultmodal2.css";
-import React, {PureComponent, useEffect, useState} from 'react';
-import { BarChart, Bar,
-  Cell, XAxis,
-  YAxis, CartesianGrid,
-  Tooltip, Legend,
+import React, { PureComponent, useEffect, useState } from 'react';
+import {
+  Bar, XAxis,
   LabelList,
-  LineChart,
-  Line,
-  ComposedChart} from 'recharts';
-const ResultModal = ({ onClose,productName }) => {
-    const [data, setData] = useState([]);
-    const randomizeData = () => {
-      setData([
-          { name: "최고가", price: Math.floor(Math.random() * 1000000) },
-          { name: "2순위", price: Math.floor(Math.random() * 1000000) },
-          { name: "최저가", price: Math.floor(Math.random() * 1000000) }
-      ]);
+  ComposedChart
+} from 'recharts';
+
+/*순위 출력*/
+const ResultModal = ({ onClose, productName }) => {
+  const [data, setData] = useState([]);
+  const randomizeData = () => {
+    setData([
+      { name: "최고가", price: Math.floor(Math.random() * 1000000) },
+      { name: "2순위", price: Math.floor(Math.random() * 1000000) },
+      { name: "최저가", price: Math.floor(Math.random() * 1000000) }
+    ]);
   }
-  
-    useEffect(() => {
-      const interval = setInterval(randomizeData, 500);
-      axios.get(`/bid/bidresult?productName=${productName}`)
+
+  useEffect(() => {
+    const interval = setInterval(randomizeData, 500);
+    axios.get(`/bid/bidresult?productName=${productName}`)
       .then(response => {
         setTimeout(() => {
           clearInterval(interval);
@@ -37,21 +36,21 @@ const ResultModal = ({ onClose,productName }) => {
           setData(newData);
         }, 2000);
       });
-    }, [productName]);
-      
+  }, [productName]);
+
   return (
     <div className="y_resultmodal-div">
-    <div className="y_result-graph" >
-  <ComposedChart width={350} height={350} data={data} margin={{left:10}}>
-                 <XAxis dataKey="name"/>   
-                  <Bar dataKey="price" fill="#b24c4b" animationEasing="ease-in-out">
-                  <LabelList dataKey="price" position="top" />
-                  </Bar>
-                  {/* <Line type="monotone" dataKey="price" stroke="#ff7300"/> */}
-  </ComposedChart>
+      <div className="y_result-graph" >
+        <ComposedChart width={350} height={350} data={data} margin={{ left: 10 }}>
+          <XAxis dataKey="name" />
+          <Bar dataKey="price" fill="#b24c4b" animationEasing="ease-in-out">
+            <LabelList dataKey="price" position="top" />
+          </Bar>
+          {/* <Line type="monotone" dataKey="price" stroke="#ff7300"/> */}
+        </ComposedChart>
       </div>
-  </div>
-  
+    </div>
+
   );
 };
 
