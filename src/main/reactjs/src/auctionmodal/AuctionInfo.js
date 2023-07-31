@@ -1,6 +1,4 @@
 import "../css/auctioninfo_modal.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleHeart} from "@fortawesome/free-solid-svg-icons";
 const Component1 = ({ onClose }) => {
   return (
     <div className="y_auctioninfo-div">

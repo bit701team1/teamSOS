@@ -1,9 +1,9 @@
 /* 구글 폰트 로드 */
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&display=swap");
 
-body{
-    background-color: #2B2B2B;
-}
+/*body{*/
+/*    background-color: #2B2B2B;*/
+/*}*/
 
 /* 전체 페이지 설정 */
 .VerificationPage{

@@ -66,7 +66,7 @@
 .y_icon-div2,
 .y_icon-div1{
   position: absolute;
-  top: 49.69rem;
+  top: 41.69rem;
   left: calc(50% - 163px);
   border-radius: 50%;
   background-color: #fff;
@@ -86,7 +86,7 @@
 .y_auctionsend{
   position: absolute;
   height: 4.54%;
-  top: 87.37%;
+  top: 73.5%;
   bottom: 8.1%;
   left: calc(50% - 21px);
   max-height: 100%;
@@ -94,28 +94,27 @@
 .y_auctionbid,
 .y_auctionsend {
   height: 2.83%;
-  top: 88.22%;
+  top: 74.5%;
   bottom: 8.94%;
   left: calc(50% - 146.05px);
   width: 2.19rem;
 }
 .y_auctionbid{
   height: 4.54%;
-  top: 87.37%;
+  top: 73.5%;
   bottom: 8.1%;
   left: calc(50% + 107px);
   width: 2.63rem;
 }
 .y_chatscreen{
   position: absolute;
-  top: 22.69rem;
-  left: calc(50% - 185px);
-  border-radius: 10px;
+  top: 22.4rem;
+  left: calc(50% - 184px);
   background-color: #fff;
-  width: 23.06rem;
+  width: 22.9rem;
   border: none;
   box-shadow:1px 1px 5px 0 rgb(191, 191, 191);
-  height: 24.69rem;
+  height: 17.69rem;
   font-family: 'Roboto';
   overflow-y:auto;
 }

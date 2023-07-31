@@ -25,6 +25,10 @@ function SignUpPage(props) {
     const PassIcon = process.env.REACT_APP_BUCKET + "/iconblack/pass-black.svg";
     const PhoneIcon = process.env.REACT_APP_BUCKET + "/iconblack/phone-black.svg";
 
+    const MsgIcon = process.env.REACT_APP_BUCKET + "/user/mail.png";
+    const RedCrossIcon = process.env.REACT_APP_BUCKET + "/user/cross.png";
+    const GreenCheckIcon = process.env.REACT_APP_BUCKET + "/user/check.png";
+
     const [data, setData] = useState({
         email: '',
         password: "",
@@ -77,7 +81,7 @@ function SignUpPage(props) {
     //모바일 인증 Dialog
     const [open, setOpen] = React.useState(false);
 
-    const handleClickOpen = () => {
+    const handleClickAuth = () => {
         if (data.hp == "") {
             alert("전화번호를 입력해주세요");
         } else {
@@ -89,8 +93,7 @@ function SignUpPage(props) {
             setOpen(true);
         }
     }
-
-
+    
     const handleClose = () => {
         setOpen(false);
     };
@@ -187,11 +190,23 @@ function SignUpPage(props) {
                     </form>
 
                     <div className="SignUpPageLink">
-                        <span className="SignUpPageLinkText1">아직 회원이 아니신가요?</span>
+                        <span className="SignUpPageLinkText1">모바일 인증을 진행해주세요</span>
                         <span className="SignUpPageLinkText2">{` `}</span>
-                        <a onClick={handleClickOpen}>
-                            <span className="SignUpPageLinkText3">모바일 인증</span>
-                        </a>
+                        <span className="SignUpPageLinkText3" onClick={handleClickAuth}> 인증번호 전송  </span>
+                        {/*<div className="SignUpAuthButton" onClick={handleClickAuth}>*/}
+                        {/*    <span>*/}
+                        {/*        <img src = {MsgIcon} alt = "MsgIcon" className="MsgIcon"/>*/}
+                        {/*        <span className="SignUpPageLinkText3"> 인증번호 전송  </span>*/}
+                        {/*    </span>*/}
+                        {/*</div>*/}
+                        <div>
+                            {
+                                !data.isAuth && <img src = {RedCrossIcon} alt = "RedCrossIcon" className="RedCrossIcon"/>
+                            }
+                            {
+                                data.isAuth && <img src = {GreenCheckIcon} alt = "GreenCheckIcon" className="GreenCheckIcon"/>
+                            }
+                        </div>
                     </div>
 
                     <div className="SignUpButton" onClick={handleJoinClick} >
@@ -206,13 +221,6 @@ function SignUpPage(props) {
                         <span className="SingUpFooterText3">로그인</span>
                     </a>
                 </div>
-
-                {
-                    data.isAuth && <div>인증 OOO</div>
-                }
-                {
-                    !data.isAuth && <div>인증 XXX</div>
-                }
 
                 {/*모바일 인증번호 Diaglog*/}
                 <ThemeProvider theme={theme}>

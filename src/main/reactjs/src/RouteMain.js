@@ -2,11 +2,10 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import UserInfo from './userpage/UserInfo'
-import Mainauction from "./auctionpage/Mainauction";
 
 
 
-import './manage_page/ManagePageMain.css';
+import './css/ManagePageCSS/managePageMain.css';
 
 import errorimg from './image/ERR404.png';
 import JoinForm from "./user/oldcomponent/JoinForm";
@@ -24,7 +23,6 @@ import PassFind from "./user/PassFind";
 import PassAuth from "./user/PassAuth";
 import PassUpdate from "./user/PassUpdate";
 import Intro from "./user/Intro";
-import RoomCreate from './auctionpage/RoomCreate';
 import PaymentResult from "./auctionpage/PaymentResult";
 import Enter from "./user/Enter";
 import AuctionList from './auctionpage/AuctionList';
@@ -35,6 +33,7 @@ import AuctionLive2 from './auctionpage/AuctionLive_station';
 
 
 function RouteMain(props) {
+
     return (
         <div>
             <Routes>
@@ -44,20 +43,16 @@ function RouteMain(props) {
                 <Route path='/testlogin' element={<LoginForm/>}/>
 
                 <Route path='/userinfo' element={<UserInfo/>}/>
-                <Route path='/auction' element={<Mainauction/>}/>
 
                 <Route path='/auctionlist' element={<AuctionList/>}/>
-
-                <Route path='/roomcreate' element={<RoomCreate/>}/>
-                <Route path='/' element={<Menu/>}/>
-
                 <Route path='/manage/*' element={<ManagePageMain/>}/>
                 <Route path='/productlist/*' element={<ProductList/>}/>
-                <Route path='/oldjoin' element={<JoinForm/>}/>
+
+
+                {/*<Route path='/oldjoin' element={<JoinForm/>}/>*/}
                 {/*<Route path='/login' element={<LoginForm/>}/>*/}
 
                 <Route path='/room/:roomId' element={<AuctionLive2/>}/>
-                <Route path='/manage/*' element={<ManagePageMain/>}/>
                 <Route path='/result2' element={<ResultPage2/>}/>
                 <Route path={'/livestream'}>
                     <Route path={'livestream'} element={<LiveStream/>}/>

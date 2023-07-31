@@ -145,8 +145,7 @@ public class ManageController {
     }
 
 
-
-
+    //    유저 삭제
     @DeleteMapping("/delete")
     public void deleteUser(int user_id)
     {
