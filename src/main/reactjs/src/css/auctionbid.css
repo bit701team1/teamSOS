@@ -3,7 +3,8 @@
 .y_atbid-line,
 .y_bid-btn,
 .y_atbid-input,
-.y_atbid-p1{
+.y_atbid-p1,
+.y_atbid-p2{
   position: absolute;
   left: calc(50% - 186px);
 }
@@ -19,7 +20,12 @@
   top: calc(50% - 129.5px);
 }
 .y_atbid-p1{
-  font-family: 'SongMyung';
+  font-family: 'Roboto';
+  position: absolute;
+  top: calc(50% - 129.5px);
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 25px;
 }
 .y_bid-btn{
   top: calc(50% - 15.5px);
@@ -36,22 +42,60 @@
   box-sizing: border-box;
   padding: 0.5rem 0.5rem;
   font-size: 1.5rem;
+  -moz-appearance: textfield;
+  text-align: right;
+}
+.y_atbid-input::-webkit-inner-spin-button,
+.y_atbid-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 .y_atbid-input:focus{
   border-radius: 4px;
   outline: 2px solid  #d9d9d9;
 }
-.y_bid-btn{
+.y_bid-btn {
+  position: absolute;
   top: calc(50% + 75.5px);
-  left: calc(50% + 117px);
-  width: 4.31rem;
-  border-radius: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8.31rem;
+  border-radius: 50px;
   cursor: pointer;
   border: none;
+  color: #fff;
+  background-color: #2b2b2b;
+}
+.y_atbid-reddiv{
+  position: fixed;
+  bottom: calc(22.94rem - 350px - 6px);  /* 뒤에 겹친 지점이 6px 상단에 노출되게 조정 */
+  left: calc(50% - 225px);
   font-size: 1.3rem;
   color:#fff;
   font-family: 'Roboto';
   background-color: #b24c4b;
+  width: 28.5rem;
+  height: 22.94rem;
+  border-radius: 40px 40px 0 0;
+  z-index: -1;
+  transform: translateY(100%);
+  animation: slide-up 0.5s forwards ;
+}
+
+/*.y_bid-btn{*/
+/*  top: calc(50% + 75.5px);*/
+/*  left: calc(50% + 117px);*/
+/*  width: 4.31rem;*/
+/*  border-radius: 5px;*/
+/*  cursor: pointer;*/
+/*  border: none;*/
+/*  color:#fff;*/
+/*  background-color: #b24c4b;*/
+/*}*/
+.y_bid-btn p{
+  margin-top: 6px;
+  font-size: 21px;
+  font-family: 'Roboto';
 }
 .y_atbid-div{
   position: fixed;
@@ -59,7 +103,7 @@
   border-radius: 40px 40px 0 0;
   background-color: #fff;
   width: 28.5rem;
-  left: calc(50% - 225px);
+  left: calc(50% - 228px);
   height: 22.94rem;
   overflow: hidden;
   text-align: left;
@@ -73,6 +117,13 @@
     transform: translateY(100%); /* 아래에서 시작 */
   }
   100% {
-    transform: translateY(0); /* 위로 이동 */
+    transform: translateY(10px); /* 위로 이동 */
   }
+}
+.y_atbid-p2{
+  font-size: 0.61rem;
+  top: calc(50% + 33px);
+  left: calc(46%);
+  font-family: 'Roboto';
+  color: #979797;
 }
