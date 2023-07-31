@@ -13,9 +13,9 @@
   bottom : 0;
   border-radius: 50px 50px 0 0;
   background-color: #fff;
-  width: 28.5rem;
+  width: 26.5rem;
   height: 30.5rem;
-  left: calc(50% - 225px);
+  left: calc(50% - 211.5px);
   overflow: hidden;
   transform: translateY(100%);
   animation: slide-up 0.5s forwards;

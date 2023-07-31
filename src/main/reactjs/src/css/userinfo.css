@@ -39,14 +39,14 @@
   .y_input-field1 {
     position: absolute;
     top: 39.69rem;
-    left: calc(50% - 101px);
-    width: 18.31rem;
+    left: calc(50% - 90px);
+    width: 16rem;
     height: 2.94rem;
     color: rgba(17, 17, 19, 0.6);
   }
   .y_input-field1 {
     top: 49.06rem;
-    left: calc(50% - 103px);
+    left: calc(50% - 90px);
   }
 
   .y_info-input2,
@@ -61,7 +61,7 @@
     position: absolute;
     width: 3.1rem;
     height: 2.94rem;
-    left: calc(50% + 140px);
+    left: calc(50% + 115px);
     top: 44.2rem;
     border-radius: 3px;
     border: none;
@@ -87,8 +87,8 @@
   .y_input-field2 {
     position: absolute;
     top: 44.19rem;
-    left: calc(50% - 101px);
-    width: 18.19rem;
+    left: calc(50% - 90px);
+    width: 18rem;
     height: 3.31rem;
     font-size: 0.81rem;
     color: #111113;
@@ -96,14 +96,14 @@
   .y_infoemail-p{
     position: absolute;
     top: 40.5rem;
-    left: calc(50% - 193px);
+    left: calc(50% - 170px);
     line-height: 140%;
   }
   .y_input-field4 {
     position: absolute;
     top: 35.19rem;
-    left: calc(50% - 101px);
-    width: 18.31rem;
+    left: calc(50% - 90px);
+    width: 16rem;
     height: 2.94rem;
     color: rgba(17, 17, 19, 0.6);
   }
@@ -112,7 +112,7 @@
   .y_hp-p {
     position: absolute;
     top: 36rem;
-    left: calc(50% - 193px);
+    left: calc(50% - 170px);
     line-height: 140%;
   }
   .y_pwd-p,
@@ -193,7 +193,7 @@
   .y_info-p2,
   .y_info-p3{
     position: absolute;
-    left: calc(50% - 193px);
+    left: calc(50% - 170px);
     line-height: 140%;
   }
   .y_info-p2{
@@ -275,9 +275,9 @@
   .y_infoline{
     position: absolute;
     top: 31.94rem;
-    left: calc(50% - 193px);
+    left: calc(50% - 170px);
     background-color: #000;
-    width: 23.94rem;
+    width: 21rem;
     height: 0.06rem;
   }
   .y_infoboxline1,

@@ -1,12 +1,10 @@
 import "../css/auctionend.css";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useEffect } from "react";
 const AuctionEnd = ({ onClose, roomName, roomId }) => {
   const navigate = useNavigate();
   const photo = process.env.REACT_APP_SUICONURL;
   const handleDeleteRoom = () => {
-    
     // 해당 방 삭제 API 호출
     const url = `/room/deleteroom/${roomId}`;
     axios.post(url)
@@ -17,25 +15,8 @@ const AuctionEnd = ({ onClose, roomName, roomId }) => {
       })
       .catch(error => {
         console.error(error); // 오류를 콘솔에 출력하여 디버깅에 도움
-        
       });
   };
-
-//   useEffect(() => {
-//     const deleteroom = (event) => {
-//       event.preventDefault();
-//       navigate('/');
-//     };
-  
-//     window.addEventListener('popstate', deleteroom);
-    
-//     handleDeleteRoomAndPreventBack();
-
-//     // cleanup function
-//     return () => {
-//       window.removeEventListener('popstate', deleteroom);
-//     };
-// }, []);
 
   return (
     <div className="y_end-div">
@@ -45,7 +26,7 @@ const AuctionEnd = ({ onClose, roomName, roomId }) => {
         className="y_end-gogo"
         alt=""
         src={`${photo}y_resultgo.svg`}
-        onClick= {
+        onClick={
           handleDeleteRoom // 이미지 클릭 시 결과 페이지로 이동
         }
       />
