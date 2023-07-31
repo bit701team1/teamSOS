@@ -1,0 +1,42 @@
+.countdown-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    transform: scale(0.8);
+
+}
+
+/* 시 분 초 숫자*/
+.countdown-item {
+    color: #000000;
+    font-size: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    line-height: 30px;
+    margin: 10px;
+    padding-top: 10px;
+    position: relative;
+    width: 100px;
+    height: 100px;
+}
+
+/* 시 분 초 글씨*/
+.countdown-item span {
+    color: #000000;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.countdown-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.countdown-svg path {
+    transition: d 0.5s linear;
+}

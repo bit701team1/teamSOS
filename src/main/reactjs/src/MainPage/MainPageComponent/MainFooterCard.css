@@ -1,0 +1,97 @@
+/* 구글 폰트 로드 */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Song+Myung&display=swap');
+
+.MainFooterCard {
+    position: relative;
+    padding: 0;
+    margin: 0;
+    height: 100vh;
+    /*height: 182vh;*/
+    width: 100vw;
+    color: white;
+    overflow: hidden;
+    z-index: 4;
+}
+
+.main-footer-card__slider-section {
+    height: 22vh;
+    bottom: 0;
+    position: relative;
+    width: 100%;
+}
+
+.main-footer-card__wheel {
+    position: absolute;
+    top: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 300vw;
+    height: 300vw;
+    max-width: 2000px;
+    max-height: 2000px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.main-footer-card__wheel-card {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 6%;
+    max-width: 200px;
+    aspect-ratio: 1 / 1;
+    cursor: pointer;
+}
+
+.MainFooterCardImg {
+    width: 100%;
+    pointer-events: none;
+    z-index: 999;
+    cursor: pointer;
+}
+
+.main-footer-card__header {
+    position: absolute;
+    top: 10%;
+    /*left: -10%;*/
+    width: 100%;
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.main-footer-card__header img {
+    width: 80vw;
+    height: 100vw;
+    max-height: 350px;
+    max-width: 350px;
+}
+
+/* SCROLL DOWN */
+.main-footer-card__scroll-down {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    color: white;
+    text-transform: uppercase;
+    overflow: visible;
+    font-family: 'Roboto';
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.main-footer-card__scroll-down .main-footer-card__arrow {
+    position: relative;
+    top: 0px;
+    margin: 0 auto;
+    width: 15px;
+    height: 15px;
+    filter: invert(1);
+    background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHBhdGggZmlsbD0iYmxhY2siIGQ9Ik00ODMuMiwxOTIuMmMtMjAuNS0yMC41LTUzLjUtMjAuOC03My43LTAuNkwyNTcsMzQ0LjFMMTA0LjUsMTkxLjZjLTIwLjItMjAuMi01My4yLTE5LjktNzMuNywwLjYKCWMtMjAuNSwyMC41LTIwLjgsNTMuNS0wLjYsNzMuN2wxOTAsMTkwYzEwLjEsMTAuMSwyMy40LDE1LjEsMzYuOCwxNWMxMy4zLDAuMSwyNi43LTQuOSwzNi44LTE1bDE5MC0xOTAKCUM1MDMuOSwyNDUuNyw1MDMuNywyMTIuNyw0ODMuMiwxOTIuMnoiLz4KPC9zdmc+);
+    background-size: contain;
+    transform: rotate(180deg);
+}

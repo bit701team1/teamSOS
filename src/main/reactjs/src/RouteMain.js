@@ -28,6 +28,7 @@ import Enter from "./user/Enter";
 import AuctionList from './auctionpage/AuctionList';
 import OrderCompleteMobile from "./auctionpage/OrderCompleteMobile";
 import AuctionLive2 from './auctionpage/AuctionLive_station';
+import MainPage from "./MainPage/MainPage";
 
 
 
@@ -41,12 +42,15 @@ function RouteMain(props) {
                 <Route path='/enter' element={<Enter/>}/>
 
                 <Route path='/testlogin' element={<LoginForm/>}/>
+                <Route path='/main/*' element={<MainPage/>}/>
+
 
                 <Route path='/userinfo' element={<UserInfo/>}/>
 
                 <Route path='/auctionlist' element={<AuctionList/>}/>
                 <Route path='/manage/*' element={<ManagePageMain/>}/>
                 <Route path='/productlist/*' element={<ProductList/>}/>
+
 
 
                 {/*<Route path='/oldjoin' element={<JoinForm/>}/>*/}

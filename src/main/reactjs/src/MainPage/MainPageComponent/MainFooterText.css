@@ -1,0 +1,128 @@
+/* 구글 폰트 로드 */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Song+Myung&display=swap');
+
+@keyframes scroll {
+    0%, 10% {
+        transform: translateY(0);
+    }
+    15%, 25% {
+        transform: translateY(-66px);
+    }
+    30%, 40% {
+        transform: translateY(-132px);
+    }
+    45%, 55% {
+        transform: translateY(-198px);
+    }
+    60%, 70% {
+        transform: translateY(-264px);
+    }
+    75%, 85% {
+        transform: translateY(-330px);
+    }
+    90%, 100% {
+        transform: translateY(-396px);
+    }
+}
+
+.main-footer-text {
+    position: absolute;
+    top: -2vh;
+    left: 40%;
+    width: 400px;
+    height: 300px;
+    transform: translateX(-50%);
+    z-index: 6;
+    scale: 0.8;
+}
+
+#footer-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vmin;
+    min-height: 0;
+    max-height: 100%;
+}
+
+#footer-container .content {
+    height: auto;
+}
+
+#footer-container-scroller {
+    height: 66px;
+    overflow: hidden;
+    position: relative;
+}
+
+.footer-section {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
+
+#footer-header {
+    font-family: "Roboto";
+    font-size: 60px;
+    line-height: 1;
+    font-weight: bold;
+    letter-spacing: 0;
+}
+
+.footer-text-item {
+    display: block;
+    padding-bottom: 6px;
+    animation: scroll 15s cubic-bezier(0.645, 0.045, 0.355, 1) infinite alternate;
+}
+
+.footer-text {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+    text-decoration: none;
+    color: #2c9ab7;
+}
+
+.footer-text-item:nth-child(1) .footer-text,
+.footer-text-item:nth-child(10) .footer-text {
+    color: #E65F48;
+}
+
+.footer-text-item:nth-child(2) .footer-text {
+    color: cornflowerblue;
+}
+
+.footer-text-item:nth-child(3) .footer-text {
+    color: #76BCAD;
+}
+
+.footer-text-item:nth-child(4) .footer-text {
+    color: #84719f;
+}
+
+.footer-text-item:nth-child(5) .footer-text {
+    color: #d47787;
+}
+
+.footer-text-item:nth-child(6) .footer-text {
+    color: #F09551;
+}
+
+.footer-text-item:nth-child(7) .footer-text {
+    color: #349AB5;
+}
+
+.footer-text-item:nth-child(8) .footer-text {
+    color: #e86042;
+}
+
+.footer-text-item:nth-child(9) .footer-text {
+    color: #74bcae;
+}

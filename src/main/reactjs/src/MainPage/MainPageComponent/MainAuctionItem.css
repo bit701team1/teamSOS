@@ -1,0 +1,152 @@
+:root {
+    --cover-timing: 0.5s;
+    --cover-ease: cubic-bezier(0.66, 0.08, 0.19, 0.97);
+    --cover-stagger: 0.15s;
+    --text-timing: .75s;
+    --text-stagger: 0.015s;
+    --text-ease: cubic-bezier(0.38, 0.26, 0.05, 1.07);
+    --title-stagger: 0.05s;
+    --highlight: white;
+}
+
+.AuctionCard {
+    position: absolute;
+    top: 38%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+    width: 13.125rem;
+    height: 22.5rem;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    border-radius: 7.5rem;
+    box-shadow: rgba(255, 255, 255, 0.3) 0 5vw 6vw -8vw, rgba(255, 255, 255, 0) 0 4.5vw 5vw -6vw, rgba(50, 50, 80, 0.5) 0px 4vw 8vw -2vw, rgba(0, 0, 0, 0.8) 0px 4vw 5vw -3vw;
+    transition: box-shadow 1s var(--cover-ease);
+}
+
+.AuctionCard > * {
+    z-index: 2;
+}
+
+.AuctionCardImg {
+    z-index: 0;
+    transition: all 0.8s cubic-bezier(0.66, 0.08, 0.19, 0.97);
+}
+
+.AuctionCard::before, .AuctionCard::after {
+    content: "";
+    width: 100%;
+    height: 50%;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    transform-origin: left;
+    transform: scaleX(0);
+    transition: all var(--cover-timing) var(--cover-ease);
+    z-index: 1;
+}
+
+.AuctionCard::after {
+    transition-delay: var(--cover-stagger);
+    top: 50%;
+}
+
+.AuctionCard:hover, .AuctionCard:focus {
+    box-shadow: white 0 5vw 6vw -9vw, var(--highlight) 0 5.5vw 5vw -7.5vw, rgba(50, 50, 80, 0.5) 0px 4vw 8vw -2vw, rgba(0, 0, 0, 0.8) 0px 4vw 5vw -3vw;
+}
+
+.AuctionCard:hover::before, .AuctionCard:hover::after, .auctionCard:focus::before, .auctionCard:focus::after {
+    transform: scaleX(1);
+}
+
+.AuctionCard:hover h2 .char, .AuctionCard:hover p .word, .auctionCard:focus h2 .char, .auctionCard:focus p .word {
+    opacity: 1;
+    transform: translateY(0);
+    color: inherit;
+}
+
+.AuctionCard:nth-of-type(1) {
+    --highlight: coral;
+}
+
+.AuctionCard:nth-of-type(2) {
+    --highlight: #56ffe5;
+}
+
+.AuctionText {
+    position: absolute;
+    inset: 20px;
+    /*top: auto;*/
+}
+
+.AuctionText h2 {
+    position: absolute;
+    top: 50%;
+    left: -5%;
+    font-family: 'Roboto';
+    color: #ffffff;
+    font-size: 30px;
+    font-size: clamp(20px, 4vw, 40px);
+    font-weight: 800;
+    margin-bottom: 0.2em;
+    width: 80%; /*h2 요소의 너비를 설정합니다.*/
+    white-space: normal; /* 텍스트가 너비를 초과하면 자동으로 줄바꿈하게 합니다.*/
+    overflow: hidden; /*너비를 초과하는 내용은 숨깁니다.*/
+    text-overflow: ellipsis; /*너비를 초과하는 텍스트를 '...'로 표시합니다.*/
+    display: -webkit-box; /*flexbox 레이아웃을 사용합니다. (줄바꿈을 위해 필요)*/
+    -webkit-line-clamp: 2; /*표시할 최대 줄 수를 2로 설정합니다.*/
+    -webkit-box-orient: vertical; /*수직 방향으로 박스를 정렬합니다.*/
+}
+
+.AuctionText p {
+    font-family: 'Roboto';
+    color: #ffffff;
+    font-size: 12px;
+    font-size: clamp(10px, 1.25vw, 14px);
+    line-height: 1.4;
+    text-align: justify;
+    margin-top: 0.2em;
+    margin-bottom: 0;
+    position: absolute;
+    bottom: 20%;
+    left: -5%;
+}
+
+h2 .char, p .word {
+    color: var(--highlight);
+    display: inline-block;
+    opacity: 0;
+    position: relative;
+    transform: translateY(20px);
+    transition-property: transform, opacity, color;
+    transition-timing-function: var(--text-ease);
+    transition-duration: var(--text-timing), var(--text-timing), calc(var(--text-timing) * 2);
+}
+
+.AuctionCardImg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 7px;
+}
+
+#mainAuctionSection {
+    grid-template-columns: 1fr;
+    grid-template-rows: 60px;
+    grid-gap: 2em;
+}
+
+@media screen and (min-width: 600px) {
+    #mainAuctionSection {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: min-content 1fr;
+    }
+
+    .AuctionCard {
+        width: 40vw;
+    }
+}
