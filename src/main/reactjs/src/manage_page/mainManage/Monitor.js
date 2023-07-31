@@ -60,7 +60,7 @@ function Monitor(props) {
                         <img
                             className="k_product_nav_icon1_right1"
                             alt="1"
-                            src={`${k_photo}k_icon_right.svg`}
+                            src={`${k_photo}k_icon_rightmove.svg`}
                         />
                     </div>
                 </div>
@@ -75,7 +75,7 @@ function Monitor(props) {
                         <img
                             className="k_product_nav_icon2_right1"
                             alt="1"
-                            src={`${k_photo}k_icon_right.svg`}
+                            src={`${k_photo}k_icon_rightmove.svg`}
                         />
                     </div>
                 </div>
@@ -91,7 +91,7 @@ function Monitor(props) {
                             <img
                                 className="k_product_nav_icon3_right1"
                                 alt="1"
-                                src={`${k_photo}k_icon_right.svg`}
+                                src={`${k_photo}k_icon_rightmove.svg`}
                             />
                         </div>
                     </NavLink>
@@ -107,7 +107,7 @@ function Monitor(props) {
                         <img
                             className="k_product_nav_icon4_right1"
                             alt="1"
-                            src={`${k_photo}k_icon_right.svg`}
+                            src={`${k_photo}k_icon_rightmove.svg`}
                         />
                     </div>
                 </div>

@@ -22,7 +22,7 @@
 .k-nav-title {
     position: absolute;
     top: calc(50% - (50px*0.363));
-    left: calc(45% - (221px*0.366));
+    left: calc(48% - (221px*0.366));
     font-family: 'Roboto';
     font-weight: 800;
 }
