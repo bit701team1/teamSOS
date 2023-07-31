@@ -1,7 +1,6 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import ResultModal from "../resultmodal/ResultModal";
 import PortalPopup from "../resultmodal/PortalPopup";
-import img from '../image/스폰지밥1.gif';
 import "../css/resultpage2.css";
 import axios from "axios";
 import {useLocation,useNavigate} from "react-router-dom";
@@ -192,7 +191,7 @@ function ResultPage2(props) {
       <>
         <div className="y_resultpage-div">
         
-          <img className="y_result-img" alt="" src={img}/>
+          <img className="y_result-img" alt="" src={`${photo}ohmakase.jpeg`}/>
           <img
             alt="" src={`${photo}y_back.svg`}
             className="y_result-back"

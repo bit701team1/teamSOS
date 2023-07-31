@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useCallback, useState } from 'react';
 import '../css/auctionlive2.css';
-import img from '../image/스폰지밥1.gif';
 import AuctionInfo from '../auctionmodal/AuctionInfo';
 import AuctionBid from '../auctionmodal/AuctionBid';
 import AuctionEnd from '../auctionmodal/AuctionEnd';
@@ -297,7 +296,7 @@ function AuctionLive2(props) {
   return (
     <>
       <div className="y_auction-div">
-        <img className="y_auction-img" alt="" src={img} />
+        <img className="y_auction-img" alt="" src={`${photo}ohmakase.jpeg`} />
         {admin &&
           <button className="y_liveend-btn" onClick={modalopen}>방송종료</button>
         }

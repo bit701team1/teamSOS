@@ -125,7 +125,7 @@ function UserInfo(props) {
 
   return (
     <div className="y_info-div">
-      <img className="y_myimage" alt="" src={kermit} />
+      <img className="y_myimage" alt=""  src={`${photo}userimg.jpeg`} />
       <div className="y_input-field">
         <input className="y_info-input" value={userdata.email}
           onChange={handleEmailChange} />

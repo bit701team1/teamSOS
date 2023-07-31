@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import '../css/auctionlist.css';
-import oh from '../image/ohmakase.jpeg';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 function AuctionList({ onRoomCreate }) {
@@ -32,7 +31,7 @@ function AuctionList({ onRoomCreate }) {
     <div className="y_auctionlist-div">
       <b className="y_atlist-p1">오늘의 경매 리스트</b>
       <div className="y_atlist-p2">특별한 사람과 특별한 시간을 구입하세요</div>
-      <img className="y_atlist-mainimg" alt="" src={oh} />
+      <img className="y_atlist-mainimg" alt="" src={`${photo}ohmakase.jpeg`} />
       <div className="y_atlist-namediv" />
       <div className="y_atlist-p3">{`김성학의 오마카세 `}</div>
       <div className="y_atlist-p4">개발자 김성학의 특별한 코스 요리</div>
