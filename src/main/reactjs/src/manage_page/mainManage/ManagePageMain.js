@@ -56,9 +56,9 @@ function ManagePageMain(props) {
 
                 <NavLink to={'/manage/monitor'} onClick={() => setActiveLink('monitor')}>
                     <div className="k-manage-bar-textbox3">
-                        <img className="k_icons" alt={'logout'} src={`${k_photo}k_icon_monitor.svg`}/>
+                        <img className="k_icons" alt={'logout'} src={`${k_photo}k_icon_auctionhammer.svg`}/>
                     </div>
-                    <div className={activeLink === 'monitor' ? 'k-manage-bar-text3 active-link' : 'k-manage-bar-text3'}>모니터링</div>
+                    <div className={activeLink === 'monitor' ? 'k-manage-bar-text3 active-link' : 'k-manage-bar-text3'}>경매관리</div>
                 </NavLink>
             </div>
 
