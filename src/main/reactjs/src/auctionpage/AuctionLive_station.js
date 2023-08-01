@@ -294,6 +294,9 @@ function AuctionLive_station(props) {
       return maskedPart;
     }
   }
+  const handleGoBack = () => {
+    navigate(-1); // -1을 전달하여 뒤로가기 기능을 수행합니다.
+  };
   return (
     <>
       <div className="y_auction-div">
@@ -304,6 +307,7 @@ function AuctionLive_station(props) {
         <img
           className="y_back-icon"
           alt=""
+          onClick={handleGoBack}
           src={`${photo}y_back.svg`}
         />
         <div className="y_icon-div1" />

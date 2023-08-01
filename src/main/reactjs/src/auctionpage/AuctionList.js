@@ -26,7 +26,9 @@ function AuctionList({ onRoomCreate }) {
         setList(res);
       });
   }, []);
-
+  const handleGoBack = () => {
+    navigate(-1); // -1을 전달하여 뒤로가기 기능을 수행합니다.
+  };
   return (
     <div className="y_auctionlist-div">
       <b className="y_atlist-p1">오늘의 경매 리스트</b>

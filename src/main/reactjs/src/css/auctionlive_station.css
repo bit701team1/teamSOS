@@ -2,7 +2,7 @@
 
 .y_livestationall{
   position: absolute;
-  top: 15vh;
+  top: 13vh;
   left: calc(50% - 184px);
 }
 .y_auction-img{
@@ -51,7 +51,7 @@
 }
 .y_chatinput3 {
   position: absolute;
-  top: 73vh;
+  top: 76vh;
   left: calc(50% - 136px);
   width: 20.06rem ;
   height: 3rem;
@@ -75,7 +75,7 @@
 .y_icon-div2,
 .y_icon-div1{
   position: absolute;
-  top: 82vh;
+  top: 80vh;
   left: calc(50% - 163px);
   border-radius: 50%;
   background-color: #fff;
@@ -94,21 +94,21 @@
 .y_auctioninfo{
   position: absolute;
   height: 2.5rem;
-  top: 83.7vh;
+  top: 82vh;
   left: calc(50% - 19px);
 }
 
 .y_auctionsend {
   position: absolute;
   height: 2.5rem;
-  top: 83.7vh;
+  top: 82vh;
   left: calc(50% - 146.05px);
   width: 2.19rem;
 }
 .y_auctionbid{
   position: absolute;
   height: 2.5rem;
-  top: 83.7vh;
+  top: 82vh;
   left: calc(50% + 107px);
   width: 2.63rem;
 }
@@ -116,7 +116,7 @@
 .y_liveend-btn{
   position: absolute;
   left: calc(50% + 110px);
-  top: 12vh;
+  top: 10vh;
   border:none;
   border-radius: 5px;
   background-color:#b24c4b;
