@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import '../css/userinfo.css';
 import { styled } from '@mui/system';
 import Switch from '@mui/material/Switch';
-import kermit from '../image/kermit.gif';
 import axios from 'axios';
 function UserInfo(props) {
   const StyledSwitch = styled(Switch)(({ theme }) => ({

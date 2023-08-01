@@ -56,6 +56,8 @@ function AuctionList({ onRoomCreate }) {
         <i class="bi bi-heart-fill" style={{ color: '#fe7171' }}></i>
       </div>
       <b className="y_atlist-p5">다음 경매 리스트</b>
+      <div className='swiper-container-main non-scroll'>
+      <div className='swiper-inner'>
       <img className="y_atlist-imgbox" alt="" src={`${photo}dateimg1.jpg`} />
       <img className="y_auctionlist-div2" alt="" src={`${photo}dateimg2.jpg`} />
       <div className="y_atlist-text1" />
@@ -73,6 +75,8 @@ function AuctionList({ onRoomCreate }) {
         <p className="y_atlist-p">이수연 개발자와 함께 식사를 하</p>
         <p className="y_atlist-p">며 다양한 이야기를 나눠보세요.</p>
       </div>
+      </div>
+    </div>
     </div>
   );
 }
