@@ -7,30 +7,29 @@
   .y_atlist-p1,
   .y_atlist-p2{
     position: absolute;
-    top: calc(50% - 369.5px);
     left: calc(50% - 170px);
   }
   .y_atlist-p1,
   .y_atlist-p2{
-    top: calc(50% - 425px);
+    top: 5vh;
     font-size: 1.5rem;
   }
   .y_atlist-p2{
-    top: calc(50% - 390px);
+    top: 9vh;
     font-size: 1rem;
     color: #636366;
   }
   .y_atlist-mainimg,
   .y_atlist-namediv{
     position: absolute;
-    top: calc(50% - 350px);
+    top: 15vh;
     left: calc(50% - 174px);
     border-radius: 12px;
     width: 21.75rem;
     height: 21.75rem;
   }
   .y_atlist-namediv{
-    top: calc(50% - 100px);
+    top: 43vh;
     left: calc(50% - 124px);
     border-radius: 16px;
     background-color: rgba(255, 255, 255, 0.7);
@@ -44,24 +43,24 @@
     font-weight: 500;
   }
   .y_atlist-p3 {
-    top: calc(50% - 85px);
+    top: 44.5vh;
     font-size: 1rem;
     font-weight: bold;
   }
   .y_atlist-p4 {
-    top: calc(50% - 63px);
+    top: 47vh;
     color: #393939;
   }
   .y_liveoff-icon{
     position: absolute;
-    top: calc(50% - 83px);
+    top: 44.8vh;
     left: calc(50% + 85.5px);
     width: 1.69rem;
     height: 1.9rem;
   }
   .y_liveon-icon{
     position: absolute;
-    top: calc(50% - 83px);
+    top: 44.8vh;
     left: calc(50% + 85.5px);
     width: 1.69rem;
     height: 1.9rem;
@@ -81,7 +80,7 @@
   }
   .y_atlist-p5 {
     position: absolute;
-    top: calc(50% + 20px);
+    top: 65vh;
     left: calc(50% - 170px);
     font-size: 1.25rem;
   }
@@ -90,7 +89,6 @@
   .y_atlist-imgbox,
   .y_auctionlist-div2{
     position: absolute;
-    top: calc(50% + 209.5px);
     left: calc(50% - 170px);
     border-radius: 10px 10px 0 0;
     width: 8.69rem;
@@ -104,7 +102,7 @@
   
   .y_atlist-imgbox,
 .y_auctionlist-div2{
-  top: calc(50% + 80px);
+  top: 70vh;
   border-radius: 10px 10px 0 0;
   width: 9.81rem;
   height: 6.81rem;
@@ -119,7 +117,7 @@
   }
   .y_atlist-text1,
   .y_atlist-text2{
-    top: calc(50% + 190.5px);
+    top: 83vh;
     border-radius: 0 0 10px 10px;
     background-color: #fff;
     width: 9.81rem;
@@ -137,7 +135,7 @@
   .y_auctionlist-div4,
   .y_auctionlist-div5{
     position: absolute;
-    top: calc(50% + 195.5px);
+    top: 84vh;
     left: calc(50% - 163px);
   }
   .y_auctionlist-div3,
@@ -147,7 +145,7 @@
   }
   .y_auctionlist-div4,
   .y_auctionlist-div5 {
-    top: calc(50% + 225.5px);
+    top: 87vh;
     left: calc(50% - 163px);
     font-size: 0.56rem;
     color: #636366;

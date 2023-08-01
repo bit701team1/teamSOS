@@ -297,9 +297,7 @@ function AuctionLive_station(props) {
   return (
     <>
       <div className="y_auction-div">
-        <div className='y_auction-img'>
-          <LiveStream />
-        </div>
+      
         {admin &&
           <button className="y_liveend-btn" onClick={modalopen}>방송종료</button>
         }
@@ -315,6 +313,10 @@ function AuctionLive_station(props) {
           onClick={openFrame} />
         <img className="y_auctionbid" alt="" src={`${photo}y_coin.svg`} style={{ cursor: 'pointer' }}
           onClick={openFrame1} />
+          <div className='y_livestationall'>
+           <div className='y_auction-img'>
+          <LiveStream />
+        </div>
         <div className="y_chatscreen" ref={chatScreenRef}>
           {/* 메세지를 가져오는 부분 */}
           {msg.map((item) => {
@@ -366,6 +368,7 @@ function AuctionLive_station(props) {
               </div>
             );
           })}
+        </div>
         </div>
         <img className="y_auctionsend" alt="" src={`${photo}y_msgsend.svg`}
           style={{ cursor: 'pointer' }}
