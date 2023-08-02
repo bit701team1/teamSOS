@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
-import '../../css/ManagePageCSS/managePageMain.css';
+import '../../css/managepagecss/managepagemain.css';
 import {NavLink, Route, Routes, useNavigate} from "react-router-dom";
 import {ProductList} from "../index";
-import '../../css/ManagePageCSS/userList.css';
-import '../../css/ManagePageCSS/monitor.css';
+import '../../css/managepagecss/userlist.css';
+import '../../css/managepagecss/monitor.css';
 import Axios from "axios";
 
 function Monitor(props) {

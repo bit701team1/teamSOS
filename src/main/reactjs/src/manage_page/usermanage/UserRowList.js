@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button, Dialog, DialogContent, DialogTitle, Typography} from "@mui/material";
 import DialogActions from "@mui/material/DialogActions";
-import '../../css/ManagePageCSS/userList.css';
+import '../../css/managepagecss/userlist.css';
 import reportimg from '../../image/alert.png';
 
 function UserRowList(props) {

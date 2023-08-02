@@ -5,7 +5,7 @@ import UserInfo from './userpage/UserInfo'
 
 
 
-import './css/ManagePageCSS/managePageMain.css';
+import './css/managepagecss/managepagemain.css';
 
 import errorimg from './image/ERR404.png';
 import JoinForm from "./user/oldcomponent/JoinForm";
