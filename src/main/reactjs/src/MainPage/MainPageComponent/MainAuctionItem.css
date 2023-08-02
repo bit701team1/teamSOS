@@ -53,15 +53,15 @@
     top: 50%;
 }
 
-.AuctionCard:hover, .AuctionCard:focus {
+.AuctionCard.active {
     box-shadow: white 0 5vw 6vw -9vw, var(--highlight) 0 5.5vw 5vw -7.5vw, rgba(50, 50, 80, 0.5) 0px 4vw 8vw -2vw, rgba(0, 0, 0, 0.8) 0px 4vw 5vw -3vw;
 }
 
-.AuctionCard:hover::before, .AuctionCard:hover::after, .auctionCard:focus::before, .auctionCard:focus::after {
+.AuctionCard.active::before, .AuctionCard.active::after {
     transform: scaleX(1);
 }
 
-.AuctionCard:hover h2 .char, .AuctionCard:hover p .word, .auctionCard:focus h2 .char, .auctionCard:focus p .word {
+.AuctionCard.active h2 .char, .AuctionCard.active p .word {
     opacity: 1;
     transform: translateY(0);
     color: inherit;
@@ -78,12 +78,11 @@
 .AuctionText {
     position: absolute;
     inset: 20px;
-    /*top: auto;*/
 }
 
 .AuctionText h2 {
     position: absolute;
-    top: 50%;
+    top: 45%;
     left: -5%;
     font-family: 'Roboto';
     color: #ffffff;
@@ -91,13 +90,13 @@
     font-size: clamp(20px, 4vw, 40px);
     font-weight: 800;
     margin-bottom: 0.2em;
-    width: 80%; /*h2 요소의 너비를 설정합니다.*/
-    white-space: normal; /* 텍스트가 너비를 초과하면 자동으로 줄바꿈하게 합니다.*/
-    overflow: hidden; /*너비를 초과하는 내용은 숨깁니다.*/
-    text-overflow: ellipsis; /*너비를 초과하는 텍스트를 '...'로 표시합니다.*/
-    display: -webkit-box; /*flexbox 레이아웃을 사용합니다. (줄바꿈을 위해 필요)*/
-    -webkit-line-clamp: 2; /*표시할 최대 줄 수를 2로 설정합니다.*/
-    -webkit-box-orient: vertical; /*수직 방향으로 박스를 정렬합니다.*/
+    width: 80%;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
 .AuctionText p {
@@ -110,7 +109,7 @@
     margin-top: 0.2em;
     margin-bottom: 0;
     position: absolute;
-    bottom: 20%;
+    bottom: 14%;
     left: -5%;
 }
 
@@ -134,14 +133,14 @@ h2 .char, p .word {
     border-radius: 7px;
 }
 
-#mainAuctionSection {
+#MainAuctionItem {
     grid-template-columns: 1fr;
     grid-template-rows: 60px;
     grid-gap: 2em;
 }
 
 @media screen and (min-width: 600px) {
-    #mainAuctionSection {
+    #MainAuctionItem {
         grid-template-columns: 1fr 1fr;
         grid-template-rows: min-content 1fr;
     }

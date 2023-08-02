@@ -40,24 +40,24 @@ function SignUpPage(props) {
     const [authnum, setAuthnum] = useState("");
     const [inputauthnum, setInputAuthnum] = useState("");
 
-    const navi  = useNavigate();
+    const navi = useNavigate();
 
     const handleJoinClick = (e) => {
 
         // const form = e.target.closest('form');
         // form.submit();
 
-        if(data.user_name==""){
+        if (data.user_name == "") {
             alert("이름을 입력해주세요");
-        } else if (data.email=="") {
+        } else if (data.email == "") {
             alert("이메일을 입력해주세요");
-        } else if (data.password=="") {
+        } else if (data.password == "") {
             alert("비밀번호를 입력해주세요");
-        } else if (data.hp=="") {
+        } else if (data.hp == "") {
             alert("전화번호를 입력해주세요");
         } else if (!data.isAuth) {
             alert("전화번호 인증이 필요합니다");
-        }  else {
+        } else {
 
             e.preventDefault();
             Axios.post("/api/user/join", data)
@@ -93,7 +93,7 @@ function SignUpPage(props) {
             setOpen(true);
         }
     }
-    
+
     const handleClose = () => {
         setOpen(false);
     };
@@ -136,7 +136,7 @@ function SignUpPage(props) {
 
                 <div className="SignUpPageBody">
                     <form>
-                        <div className="SignUpPageInput">
+                        <div className="SignUpPageInputName">
                             <input type="text" required placeholder='이름을 입력하세요'
                                    value={data.user_name} onChange={(e) => setData({
                                 ...data,
@@ -149,7 +149,7 @@ function SignUpPage(props) {
                             <label>이름</label>
                         </div>
 
-                        <div className="SignUpPageInput">
+                        <div className="SignUpPageInputEmail">
                             <input type="text" required placeholder='이메일을 입력하세요'
                                    value={data.email} onChange={(e) => setData({
                                 ...data,
@@ -162,7 +162,7 @@ function SignUpPage(props) {
                             <label>이메일</label>
                         </div>
 
-                        <div className="SignUpPageInput">
+                        <div className="SignUpPageInputPassword">
                             <input type="password" required placeholder='비밀번호를 입력하세요'
                                    value={data.password} onChange={(e) => setData({
                                 ...data,
@@ -175,7 +175,7 @@ function SignUpPage(props) {
                             <label>비밀번호</label>
                         </div>
 
-                        <div className="SignUpPageInput">
+                        <div className="SignUpPageInputPhone">
                             <input type="text" required placeholder='휴대폰 번호를 입력하세요'
                                    value={data.hp} onChange={(e) => setData({
                                 ...data,
@@ -190,9 +190,11 @@ function SignUpPage(props) {
                     </form>
 
                     <div className="SignUpPageLink">
-                        <span className="SignUpPageLinkText1">모바일 인증을 진행해주세요</span>
-                        <span className="SignUpPageLinkText2">{` `}</span>
-                        <span className="SignUpPageLinkText3" onClick={handleClickAuth}> 인증번호 전송  </span>
+                        <div className="MobileVerification">
+                            <span className="SignUpPageLinkText1">모바일 인증을 진행해주세요</span>
+                            <span className="SignUpPageLinkText2">{` `}</span>
+                            <span className="SignUpPageLinkText3" onClick={handleClickAuth}> 인증번호 전송  </span>
+                        </div>
                         {/*<div className="SignUpAuthButton" onClick={handleClickAuth}>*/}
                         {/*    <span>*/}
                         {/*        <img src = {MsgIcon} alt = "MsgIcon" className="MsgIcon"/>*/}
@@ -201,15 +203,16 @@ function SignUpPage(props) {
                         {/*</div>*/}
                         <div>
                             {
-                                !data.isAuth && <img src = {RedCrossIcon} alt = "RedCrossIcon" className="RedCrossIcon"/>
+                                !data.isAuth && <img src={RedCrossIcon} alt="RedCrossIcon" className="RedCrossIcon"/>
                             }
                             {
-                                data.isAuth && <img src = {GreenCheckIcon} alt = "GreenCheckIcon" className="GreenCheckIcon"/>
+                                data.isAuth &&
+                                <img src={GreenCheckIcon} alt="GreenCheckIcon" className="GreenCheckIcon"/>
                             }
                         </div>
                     </div>
 
-                    <div className="SignUpButton" onClick={handleJoinClick} >
+                    <div className="SignUpButton" onClick={handleJoinClick}>
                         <span className="SignUpButtonText">회원가입</span>
                     </div>
                 </div>
@@ -236,7 +239,7 @@ function SignUpPage(props) {
                                 id="name"
                                 label="인증번호"
                                 InputLabelProps={{
-                                    style: { fontWeight: 'bold' },
+                                    style: {fontWeight: 'bold'},
                                 }}
                                 type="email"
                                 fullWidth

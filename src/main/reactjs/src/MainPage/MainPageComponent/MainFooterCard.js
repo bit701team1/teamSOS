@@ -7,16 +7,17 @@ gsap.registerPlugin(Flip);
 
 function MainFooterCard(props) {
     const imageUrls = [
-        "https://assets.codepen.io/756881/amys-1.jpg",
-        "https://assets.codepen.io/756881/amys-2.jpg",
-        "https://assets.codepen.io/756881/amys-3.jpg",
-        "https://assets.codepen.io/756881/amys-4.jpg",
-        "https://assets.codepen.io/756881/amys-5.jpg",
-        "https://assets.codepen.io/756881/amys-6.jpg",
-        "https://assets.codepen.io/756881/amys-7.jpg",
-        "https://assets.codepen.io/756881/amys-5.jpg",
-        "https://assets.codepen.io/756881/amys-6.jpg",
-        "https://assets.codepen.io/756881/amys-7.jpg"
+        "https://kr.object.ncloudstorage.com/aaa-bucket-teamsos/auction/review-item-1.png",
+        "https://kr.object.ncloudstorage.com/aaa-bucket-teamsos/auction/review-item-2.png",
+        "https://kr.object.ncloudstorage.com/aaa-bucket-teamsos/auction/review-item-3.png",
+        "https://kr.object.ncloudstorage.com/aaa-bucket-teamsos/auction/review-item-4.png",
+        "https://kr.object.ncloudstorage.com/aaa-bucket-teamsos/auction/review-item-5.png",
+        "https://kr.object.ncloudstorage.com/aaa-bucket-teamsos/auction/review-item-6.png",
+        "https://kr.object.ncloudstorage.com/aaa-bucket-teamsos/auction/review-item-7.png",
+        "https://kr.object.ncloudstorage.com/aaa-bucket-teamsos/auction/review-item-8.png",
+        "https://kr.object.ncloudstorage.com/aaa-bucket-teamsos/auction/review-item-9.png",
+        "https://kr.object.ncloudstorage.com/aaa-bucket-teamsos/auction/review-item-10.png"
+
     ];
 
     const wheelRef = useRef(null);
@@ -75,7 +76,7 @@ function MainFooterCard(props) {
         wheel.addEventListener("touchmove", (e) => {
             if (isDragging) {
                 let dragDistance = e.touches[0].pageX - initialDragPosition;
-                let rotation = currentRotation - dragDistance;
+                let rotation = currentRotation + dragDistance / 10;
 
                 // 각도 제한을 적용
                 const maxRotation = 1; // 최대 회전 각도 (15도)
@@ -147,7 +148,7 @@ function MainFooterCard(props) {
             </section>
             <div className="main-footer-card__scroll-down">
                 <div ref={arrowRef} className="main-footer-card__arrow"></div>
-                사용자 리뷰
+                Review
             </div>
         </div>
     );

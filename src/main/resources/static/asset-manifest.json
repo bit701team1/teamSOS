@@ -7,6 +7,7 @@
     "static/media/ERR404.png": "/static/media/ERR404.077cdd9ef8a1b332a0be.png",
     "static/media/alert.png": "/static/media/alert.8e17e6976cb4dc00592d.png",
     "index.html": "/index.html",
+
     "static/media/SlidePageOne-Icon.svg": "/static/media/SlidePageOne-Icon.2e78a0dbd7dd88b84e1ae2f1e1745305.svg",
     "static/media/SlidePageThree-Icon.svg": "/static/media/SlidePageThree-Icon.22aca88b83e5eaa3dbcd1987b6ce6675.svg",
     "static/media/SlidePageTwo-Icon.svg": "/static/media/SlidePageTwo-Icon.946c31958b013af6c4e0f9a63a091d4c.svg",
@@ -18,5 +19,6 @@
   "entrypoints": [
     "static/css/main.51e336fb.css",
     "static/js/main.aa03f166.js"
+
   ]
 }

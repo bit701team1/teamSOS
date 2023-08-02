@@ -3,24 +3,28 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    top: 5vh;
+    top: 12vh;
     left: 50%;
     transform: translateX(-50%);
     z-index: 901;
+}
+
+.AuctionNavBtn{
+    margin-left: -10px;
 }
 
 .MainHeaderNavBar nav {
     position: relative;
     top: 10%;
     width: 319px;
-    display: table;
+    display: flex;
+    justify-content: space-between;
     margin: 0 auto;
 }
 
-.MainHeaderNavBar nav a {
+.MainHeaderNavBar nav > * {
     position: relative;
     width: 33.333%;
-    display: table-cell;
     text-align: center;
     color: #000000;
     text-decoration: none;
@@ -30,8 +34,8 @@
     transition: 0.2s ease color;
 }
 
-.MainHeaderNavBar nav a:before,
-.MainHeaderNavBar nav a:after {
+.MainHeaderNavBar nav p:before,
+.MainHeaderNavBar nav p:after {
     content: "";
     position: absolute;
     border-radius: 50%;
@@ -39,74 +43,63 @@
     transition: 0.2s ease transform;
 }
 
-.MainHeaderNavBar nav a:before {
+.MainHeaderNavBar nav p:before {
     top: 0;
     left: 10px;
     width: 6px;
     height: 6px;
 }
 
-.MainHeaderNavBar nav a:after {
+.MainHeaderNavBar nav p:after {
     top: 5px;
     left: 18px;
     width: 4px;
     height: 4px;
 }
 
-.MainHeaderNavBar nav a:nth-child(1):before {
+.MainHeaderNavBar nav p:nth-child(1):before {
     background-color: yellow;
 }
 
-.MainHeaderNavBar nav a:nth-child(1):after {
+.MainHeaderNavBar nav p:nth-child(1):after {
     background-color: red;
 }
 
-.MainHeaderNavBar nav a:nth-child(2):before {
+.MainHeaderNavBar nav p:nth-child(2):before {
     background-color: #00e2ff;
 }
 
-.MainHeaderNavBar nav a:nth-child(2):after {
+.MainHeaderNavBar nav p:nth-child(2):after {
     background-color: #89ff00;
 }
 
-.MainHeaderNavBar nav a:nth-child(3):before {
+.MainHeaderNavBar nav p:nth-child(3):before {
     background-color: purple;
 }
 
-.MainHeaderNavBar nav a:nth-child(3):after {
+.MainHeaderNavBar nav p:nth-child(3):after {
     background-color: palevioletred;
 }
 
-#indicator {
-    position: absolute;
-    left: 5%;
-    bottom: 0;
-    width: 30px;
-    height: 3px;
-    background-color: #B24C4B;
-    border-radius: 5px;
-    transition: 0.2s ease left;
-}
-
-.MainHeaderNavBar nav a:hover {
+.MainHeaderNavBar nav p:hover {
     color: #7d7d7d;
 }
 
-.MainHeaderNavBar nav a:hover:before,
-.MainHeaderNavBar nav a:hover:after {
+.MainHeaderNavBar nav p:hover:before,
+.MainHeaderNavBar nav p:hover:after {
     transform: scale(1);
 }
 
-.MainHeaderNavBar nav a:nth-child(1):hover ~ #indicator {
+.MainHeaderNavBar nav p:nth-child(1):hover ~ #indicator {
     background: linear-gradient(130deg, yellow, red);
 }
 
-.MainHeaderNavBar nav a:nth-child(2):hover ~ #indicator {
+.MainHeaderNavBar nav p:nth-child(2):hover ~ #indicator {
     left: 34%;
     background: linear-gradient(130deg, #00e2ff, #89ff00);
 }
 
-.MainHeaderNavBar nav a:nth-child(3):hover ~ #indicator {
+.MainHeaderNavBar nav p:nth-child(3):hover ~ #indicator {
     left: 70%;
     background: linear-gradient(130deg, purple, palevioletred);
 }
