@@ -2,7 +2,7 @@ import React from 'react';
 import {Button, Dialog, DialogContent, DialogTitle, Typography} from "@mui/material";
 import DialogActions from "@mui/material/DialogActions";
 import blockimg from '../../image/alert.png';
-import '../../css/ManagePageCSS/blocklist.css';
+import '../../css/managepagecss/blocklist.css';
 
 function BlockRowList(props) {
     const { idx, row, no, onDelete, currentPage } = props;

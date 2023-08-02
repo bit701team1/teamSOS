@@ -1,9 +1,9 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import '../../css/ManagePageCSS/managePageMain.css';
+import '../../css/managepagecss/managepagemain.css';
 import {Link, NavLink, useNavigate, useParams} from "react-router-dom";
 import Axios from "axios";
 import BlockRowList from "./BlockRowList";
-import '../../css/ManagePageCSS/blocklist.css';
+import '../../css/managepagecss/blocklist.css';
 
 function BlockList(props) {
     const k_photo=process.env.REACT_APP_MANAGE;
