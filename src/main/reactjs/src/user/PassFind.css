@@ -58,6 +58,7 @@
 
 /* 인증 버튼 설정*/
 .FindPassPhoneButton {
+    cursor: pointer;
     position: absolute;
     top: 244px;
     left: 44px;
