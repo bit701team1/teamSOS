@@ -76,10 +76,10 @@
     bottom: 50px;
     left: 50%;
     transform: translate(-50%, 0);
-    color: white;
+    color: #ffffff;
     text-transform: uppercase;
     overflow: visible;
-    font-family: 'Roboto';
+    font-family: 'Song Myung';
     font-weight: 600;
     font-size: 20px;
 }

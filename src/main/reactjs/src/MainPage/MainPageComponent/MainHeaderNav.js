@@ -27,14 +27,13 @@ function MainHeaderNav(props) {
             });
     }
 
-
     return (
         <div className='MainHeaderNavBar'>
             <nav>
                 <NavLink to={"/main"}>HOME</NavLink>
-                <NavLink to={"/auctionlist"}>AUCTION</NavLink>
-                <div onClick={userTypeCheck} style={{cursor:'pointer'}}>
-                    MYPAGE
+                <NavLink className="AuctionNavBtn" to={"/auctionlist"}><p>AUCTION</p></NavLink>
+                <div onClick={userTypeCheck}>
+                    <p>USER</p>
                 </div>
                 {/*로그인 상태창으로 활용*/}
                 {/*<div id="indicator"></div>*/}

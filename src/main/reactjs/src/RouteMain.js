@@ -32,7 +32,6 @@ import MainPage from "./MainPage/MainPage";
 
 
 
-
 function RouteMain(props) {
 
     return (
@@ -50,7 +49,6 @@ function RouteMain(props) {
                 <Route path='/auctionlist' element={<AuctionList/>}/>
                 <Route path='/manage/*' element={<ManagePageMain/>}/>
                 <Route path='/productlist/*' element={<ProductList/>}/>
-
 
 
                 {/*<Route path='/oldjoin' element={<JoinForm/>}/>*/}

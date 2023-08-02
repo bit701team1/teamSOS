@@ -11,7 +11,7 @@ function ManagePageMain(props) {
 
     // 뒤로 가기버튼을 누르면 / 으로
     const handleBeforePage=()=>{
-        navi("/");
+        navi("/main");
     };
 
     // 로그아웃 버튼

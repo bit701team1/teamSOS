@@ -1,144 +1,34 @@
 /* 구글 폰트 로드 */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Song+Myung&display=swap');
 
-/* 페이지 전체 스타일 영역*/
-/*html,*/
-/*body {*/
-/*    margin: 0;*/
-/*    padding: 0;*/
-/*    width: 100%;*/
-/*}*/
-
-.HomePage {
-    background-color: #ffffff;
-    color: #000000;
-    top: calc(50% - 463px);
-    left: calc(50% - 214px);
-    transform-origin: center;
-    transform: scale(1);
-    overflow-x: hidden;
+* {
+    box-sizing: border-box;
 }
 
+.HomePage {
+    position: fixed;
+    background-color: #ffffff;
+    color: #000000;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
 
-/*@keyframes animatedBackground1 {*/
-/*    from {*/
-/*        background-size: 460%;*/
-/*    }*/
-/*    to {*/
-/*        background-size: 110%;*/
-/*    }*/
-/*}*/
-
-/*@keyframes animatedBackground2 {*/
-/*    from {*/
-/*        background-size: 760%;*/
-/*    }*/
-/*    to {*/
-/*        background-size: 210%;*/
-/*    }*/
-/*}*/
-
-/*!* 인트로 페이지에 대한 반응형 설정 *!*/
-
-/*@media (max-width: 428px) {*/
-/*    .left-section,*/
-/*    .right-section {*/
-/*        width: 100%;*/
-/*        height: 100vh;*/
-/*    }*/
-
-/*    .right-section {*/
-/*        top: 100vh;*/
-/*        left: 0;*/
-/*    }*/
-/*}*/
-
-/*.loading-screen {*/
-/*    position: fixed;*/
-/*    width: 100%;*/
-/*    height: 100vh;*/
-/*    background: #000;*/
-/*    z-index: 9999;*/
-/*    overflow: hidden;*/
-/*}*/
-
-/*.marquee {*/
-/*    overflow: hidden;*/
-/*    white-space: nowrap;*/
-/*    opacity: 0.2;*/
-/*    text-transform: uppercase;*/
-/*    line-height: 180px;*/
-/*    margin: 0;*/
-/*    padding: 0;*/
-/*    color: #646464;*/
-/*    font-size: 200px;*/
-/*    font-family: 'Song Myung';*/
-/*}*/
-
-/*.marquee.right p {*/
-/*    animation: rightMarquee linear infinite;*/
-/*}*/
-
-/*.marquee.left p {*/
-/*    animation: leftMarquee linear infinite;*/
-/*}*/
-
-/*.marquee.slow p {*/
-/*    animation-duration: 9s;*/
-/*}*/
-
-/*.marquee.medium p {*/
-/*    animation-duration: 7s;*/
-/*}*/
-
-/*.marquee.fast p {*/
-/*    animation-duration: 5s;*/
-/*}*/
-
-/*@keyframes rightMarquee {*/
-/*    0% {*/
-/*        transform: translateX(-100%);*/
-/*    }*/
-/*    100% {*/
-/*        transform: translateX(100%);*/
-/*    }*/
-/*}*/
-
-/*@keyframes leftMarquee {*/
-/*    0% {*/
-/*        transform: translateX(100%);*/
-/*    }*/
-/*    100% {*/
-/*        transform: translateX(-100%);*/
-/*    }*/
-/*}*/
-
-/*.loading-screen .RealMainIntro {*/
-/*    position: absolute;*/
-/*    top: 50%;*/
-/*    left: 50%;*/
-/*    transform: translate(-50%, -50%);*/
-/*    text-align: center;*/
-/*}*/
-
-/*.loading-screen .RealMainIntro p {*/
-/*    font-size: 25px;*/
-/*    font-weight: 200;*/
-/*    color: #fff;*/
-/*    font-family: "Song Myung";*/
-/*    width: fit-content;*/
-/*}*/
-
-/*.title-animation .letter {*/
-/*    display: inline-block;*/
-/*    line-height: 1em;*/
-/*}*/
 
 /* 본문 영역에 대한 스타일 */
 .RealMainBodyPage {
     width: 100%;
     height: 100vh;
-    background: #121212;
+    background: #ffffff;
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+.RealMainHeader, .RealMainUpBody, .RealMainDownBody, .RealMainFooter {
+    scroll-snap-align: start;
+    height: 100vh;
 }
 
 .RealMainContent {
@@ -152,8 +42,8 @@
     position: relative;
     width: 100%;
     height: 100vh;
-    background-color: #F2EFEB;
-    /*background: linear-gradient(120deg, #ffffff,#ffffff,#ffffff);*/
+    background-color: #ffffff;
+    /*background: linear-gradient(120deg, #ffffff, #F2EFEB, #F2EFEB, #ffffff, #ffffff);*/
     /*background-size: 400% 400%;*/
     /*animation: gradient 10s ease infinite;*/
 }
@@ -170,19 +60,21 @@
     }
 }
 
-.RealMainHeaderLogo {
+.RealMainHeaderLogo{
     position: absolute;
-    left: 50%;
+    top: 3vh;
+    left: 40%;
     transform: translateX(-50%);
-    width: 37vh;
-    height: 41vh;
+    width: 285px;
+    height: 70px;
+    scale: 0.8;
 }
 
 .RealMainHeaderTitle {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    top: 20vh;
+    top: -55vh;
     text-align: center;
     font-family: 'Roboto', sans-serif;
     font-weight: 800;
@@ -190,16 +82,16 @@
 
 .RealMainHeader h1 {
     position: absolute;
-    z-index: 4;
     font-family: 'Song Myung', sans-serif;
     font-size: 1.3rem;
     font-weight: 700;
-    top: 71vh;
+    top: 68vh;
     left: 50%;
     transform: translateX(-50%);
     white-space: nowrap;
     overflow: hidden;
     text-shadow: 0px 2px 2px rgba(125, 125, 125, 10);
+    z-index: 2;
 }
 
 .RealMainHeader h3 {
@@ -207,30 +99,44 @@
     font-family: 'Roboto', sans-serif;
     font-size: 1rem;
     font-weight: 700;
-    top: 75vh;
+    top: 72vh;
     left: 50%;
     transform: translateX(-50%);
     white-space: nowrap;
     overflow: hidden;
     color: #7d7d7d;
+    z-index: 2;
 }
 
 .MainHeaderCountDown {
     position: absolute;
-    top: 78vh;
+    top: 74vh;
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
     height: 30vh;
+    z-index: 4;
+
 }
+
+.RealMainHeaderBg{
+    position: absolute;
+    width: 45%;
+    height: 40%;
+    top: 60%;
+    left: -10%;
+    border-radius: 0 200px 0 0;
+    background-color: #acbaac;
+    z-index: 1;
+}
+
 
 /* 상단 컨텐츠 영역에 대한 스타일 */
 .RealMainUpBody {
     position: relative;
     width: 100%;
     height: 100vh;
-    background-color: #3c564f;
-
+    background-color: #D6B4A2;
     /*overflow: hidden;*/
 }
 
@@ -238,10 +144,10 @@
     position: absolute;
     width: 80%;
     height: 80%;
-    top: 50%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #F2EFEB;
+    background-color: #ffffff;
     z-index: 3;
 }
 
@@ -249,7 +155,7 @@
 .TodayAuction {
     position: absolute;
     top: 25vh;
-    left: 64vw;
+    left: 67vw;
     scale: 0.95;
     z-index: 10;
 }
@@ -334,7 +240,7 @@
     font-size: 1.1rem;
     font-weight: 700;
     top: 57vh;
-    left: 72%;
+    left: 73%;
     transform: translateX(-50%);
     white-space: nowrap;
     overflow: hidden;
@@ -361,19 +267,57 @@
     position: relative;
     width: 100%;
     height: 100vh;
-    background-color: #b6916d;
+    background-color: #ffffff;
     overflow: hidden;
 }
 
-.RealMainDownBg {
+.RealMainDownBody h1{
     position: absolute;
-    width: 80vw;
-    height: 80vw;
-    top: 33%;
+    z-index: 4;
+    font-family: 'Song Myung', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    top: 5vh;
     left: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: 100%;
-    background-color: #F2EFEB;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    overflow: hidden;
+    text-shadow: 0px 2px 2px rgba(125, 125, 125, 10);
+}
+
+.RealMainDownBody h3{
+    position: absolute;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    top: 9vh;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    overflow: hidden;
+    color: #7d7d7d;
+}
+
+.RealMainDownBgUp {
+    position: absolute;
+    width: 100vw;
+    height: 100vw;
+    top: 20%;
+    left: 11%;
+    background-color: #9aaca1;
+    z-index: 0;
+    scale: 1;
+}
+
+.RealMainDownBgDown {
+    position: absolute;
+    width: 45vw;
+    height: 45vw;
+    top: 87vh;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50% 50% 0 0;
+    background-color: #dc9596;
     z-index: 1;
 }
 
@@ -382,18 +326,28 @@
     position: relative;
     width: 100%;
     height: 100vh;
-    background-color: #b69187;
+    background-color: #9787bb;
 }
 
 .RealMainFooterInfo {
     position: absolute;
-    width: 70%;
+    width: 75%;
     height: 3rem;
-    top: 65%;
+    top: 69vh;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 5;
     font-size: 5px;
+}
+
+.RealMainFooterLogo {
+    position: absolute;
+    bottom: 8vh;
+    left: 40%;
+    transform: translateX(-50%);
+    width: 285px;
+    height: 70px;
+    scale: 0.8;
 }
 
 .RealMainFooterMenu {
@@ -416,17 +370,11 @@
 .RealMainFooterBg {
     position: absolute;
     width: 80%;
-    height: 80%;
-    top: 50%;
+    height: 70%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #F2EFEB;
+    background-color: #ffffff;
     z-index: 2;
 }
 
-/* 휴대폰 가로 너비가 428px 이하일 때 스타일 변경 */
-@media screen and (max-width: 428px) {
-    .SignUpPage {
-        transform: scale(0.82); /* 스케일을 0.8로 설정하여 80%로 축소 */
-    }
-}

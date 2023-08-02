@@ -51,7 +51,7 @@ function UpdatePassPage(props) {
             </div>
 
             <form>
-                <div className="UpdatePassInput">
+                <div className="UpdatePassInputNew">
                     <input type="password" required placeholder='비밀번호를 입력하세요'
                            onChange={(e) => setRawPassWord(e.target.value)}
                     value={rawpassword}/>
@@ -62,7 +62,7 @@ function UpdatePassPage(props) {
                     <label>새로운 비밀번호 입력</label>
                 </div>
 
-                <div className="UpdatePassInput">
+                <div className="UpdatePassInputConfirm">
                     <input type="password" required placeholder='비밀번호를 재입력하세요'
                            onChange={(e) => setCheckPassWord(e.target.value)}
                            value = {checkpassword}/>

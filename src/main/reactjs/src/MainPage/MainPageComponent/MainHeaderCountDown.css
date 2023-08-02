@@ -4,12 +4,16 @@
     justify-content: center;
     flex-wrap: wrap;
     transform: scale(0.8);
-
+    /*background-color: #3d3d3d;*/
+    border-radius: 15px;
+    opacity: 0.9;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
 }
 
 /* 시 분 초 숫자*/
 .countdown-item {
-    color: #000000;
+    background-color: #4d4d4d;
+    color: #ffffff;
     font-size: 40px;
     display: flex;
     align-items: center;
@@ -17,18 +21,22 @@
     flex-direction: column;
     line-height: 30px;
     margin: 10px;
-    padding-top: 10px;
+    padding: 20px;
     position: relative;
     width: 100px;
-    height: 100px;
+    height: 95px;
+    border-radius: 15px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+
 }
 
 /* 시 분 초 글씨*/
 .countdown-item span {
-    color: #000000;
+    color: #ffffff;
     font-size: 12px;
     font-weight: 600;
     text-transform: uppercase;
+
 }
 
 .countdown-svg {
@@ -40,3 +48,4 @@
 .countdown-svg path {
     transition: d 0.5s linear;
 }
+

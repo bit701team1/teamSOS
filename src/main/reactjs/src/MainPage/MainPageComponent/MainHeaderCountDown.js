@@ -15,6 +15,11 @@ function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
 // 카운트다운 테두리 그리는 함수
 function describeArc(x, y, radius, startAngle, endAngle) {
 
+    // 시작 각도와 끝 각도가 같으면 끝 각도를 조금 증가시킵니다.
+    if (startAngle === endAngle) {
+        endAngle += 0.001;
+    }
+
     var start = polarToCartesian(x, y, radius, endAngle);
     var end = polarToCartesian(x, y, radius, startAngle);
 
@@ -36,32 +41,35 @@ function mapNumber(number, in_min, in_max, out_min, out_max) {
 // SVG 원을 렌더링하는 컴포넌트
 const SVGCircle = ({radius}) => (
     <svg className='countdown-svg'>
-        <path fill="none" stroke="#B24C4B" strokeWidth="4" d={describeArc(50, 50, 48, 0, radius)}/>
+        <path fill="none" stroke="none" strokeWidth="4" d={describeArc(50, 50, 48, 0, radius)}/>
     </svg>
 );
 
 // 카운트다운 컴포넌트
 class Countdown extends React.Component {
     state = {
-        hours: undefined,
-        minutes: undefined,
-        seconds: undefined
+        hours: 0,
+        minutes: 0,
+        seconds: 0
     }
 
     componentDidMount() {
         this.interval = setInterval(() => {
             const now = moment().tz('Asia/Seoul'); // 현재 시간을 KST로 설정
-            let then = moment().tz('Asia/Seoul').startOf('day').add(19, 'hours'); // 다음 날 저녁 7시를 KST로 계산
 
-            // 현재 시간이 이미 저녁 7시 이후라면 'then'을 다음 날로 설정
-            if (now > then) {
-                then = then.add(24, 'hours');
+            let then;
+            if (now.hour() < 19) {
+                // 현재 시간이 19시 이전이라면, 오늘 날짜의 19시를 기준점으로 설정
+                then = moment().tz('Asia/Seoul').hour(19).startOf('hour');
+            } else {
+                // 현재 시간이 19시 이후라면, 다음 날짜의 19시를 기준점으로 설정
+                then = moment().tz('Asia/Seoul').add(1, 'day').hour(19).startOf('hour');
             }
 
-            const countdown = moment(then - now);
-            const hours = countdown.format('HH');
-            const minutes = countdown.format('mm');
-            const seconds = countdown.format('ss');
+            const countdown = moment.duration(then.diff(now));
+            const hours = Math.floor(countdown.asHours());
+            const minutes = countdown.minutes();
+            const seconds = countdown.seconds();
 
             this.setState({hours, minutes, seconds});
         }, 1000);
@@ -79,34 +87,24 @@ class Countdown extends React.Component {
         const minutesRadius = mapNumber(minutes, 60, 0, 0, 360);
         const secondsRadius = mapNumber(seconds, 60, 0, 0, 360);
 
-        if (!seconds) {
-            return null;
-        }
-
         return (
             <div>
                 <div className='countdown-wrapper'>
-                    {hours && (
-                        <div className='countdown-item'>
-                            <SVGCircle radius={hoursRadius}/>
-                            {hours}
-                            <span>hours</span>
-                        </div>
-                    )}
-                    {minutes && (
-                        <div className='countdown-item'>
-                            <SVGCircle radius={minutesRadius}/>
-                            {minutes}
-                            <span>minutes</span>
-                        </div>
-                    )}
-                    {seconds && (
-                        <div className='countdown-item'>
-                            <SVGCircle radius={secondsRadius}/>
-                            {seconds}
-                            <span>seconds</span>
-                        </div>
-                    )}
+                    <div className='countdown-item'>
+                        <SVGCircle radius={hoursRadius}/>
+                        {hours}
+                        <span>hours</span>
+                    </div>
+                    <div className='countdown-item'>
+                        <SVGCircle radius={minutesRadius}/>
+                        {minutes}
+                        <span>minutes</span>
+                    </div>
+                    <div className='countdown-item'>
+                        <SVGCircle radius={secondsRadius}/>
+                        {seconds}
+                        <span>seconds</span>
+                    </div>
                 </div>
             </div>
         );

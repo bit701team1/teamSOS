@@ -89,8 +89,10 @@ function Enter(props) {
             <section className="OpeningSection">
                 {/* Intro 섹션 제목 */}
                 <h1 className="OpeningSectionTitle hidden">
-                    <span>당신이 원하는 모든 것<br/>
-                        All About Auction</span>
+                    <span>
+                        세상의 모든 것에<br/>
+                        가치를 부여하다
+                    </span>
                 </h1>
                 {/* Intro 섹션 배경 요소 */}
                 <div className="OpeningSectionBackground OpeningSectionBackground--left"></div>
@@ -103,11 +105,11 @@ function Enter(props) {
                     <img alt="MainLogo" src={EnterLogo}/>
 
                     <div className="EnterLoginButton pulse-button" onClick={handleLoginClick}>
-                        <span className="EnterLoginButtonText">로그인</span>
+                        <span className="EnterLoginButtonText">Login</span>
                     </div>
 
-                    <div className="EnterSignUpButton pulse-button" onClick={handleJoinClick}>
-                        <span className="EnterSignUpButtonText">회원가입</span>
+                    <div className="EnterSignUpButton" onClick={handleJoinClick}>
+                        <span className="EnterSignUpButtonText">SignUp</span>
                     </div>
 
                 </div>

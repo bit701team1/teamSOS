@@ -76,7 +76,7 @@ function VerificationPage(props) {
             </div>
 
             <form>
-                <div className="VerificationInput">
+                <div className="VerificationInputPhone">
                     <input type="text" required placeholder='휴대폰 번호를 입력하세요.'
                            value={hp} onChange={(e) => setHp( e.target.value
                         )
@@ -87,7 +87,7 @@ function VerificationPage(props) {
                     <label>휴대폰</label>
                 </div>
 
-                <div className="VerificationInput">
+                <div className="VerificationInputCode">
                     <input type="password" required placeholder='인증번호를 입력하세요.'
                            onChange={(e) => {
                                setInputAuthnum(e.target.value);

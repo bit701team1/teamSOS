@@ -4,16 +4,12 @@
 /* 전체 페이지 설정 */
 .FindPassPage{
     background-color: #2B2B2B;
-    width: 428px;
-    height: 926px;
+    width: 100vw;
+    height: 100vh;
     overflow: hidden;
     text-align: center;
-    color: #ffffff;
+    color: #000000;
     position: absolute;
-    top: calc(50% - 463px);
-    left: calc(50% - 214px);
-    transform-origin: center; /* 변환 기준점을 중앙으로 설정 */
-    transform: scale(1); /* 초기 스케일 값을 1로 설정 */
 }
 
 /* 뒤로가기 아이콘 설정 */
@@ -59,8 +55,9 @@
 /* 인증 버튼 설정*/
 .FindPassPhoneButton {
     position: absolute;
-    top: 244px;
-    left: 44px;
+    top: 30vh;
+    left:50%;
+    transform: translateX(-50%);
     width: 340px;
     height: 70px;
     border-radius: 15px;
@@ -92,8 +89,9 @@
 
 .FindPassEmailButton{
     position: absolute;
-    top: 364px;
-    left: 44px;
+    top: 45vh;
+    left:50%;
+    transform: translateX(-50%);
     width: 340px;
     height: 70px;
     border-radius: 15px;
@@ -125,29 +123,32 @@
 /* 네이버 로그인 버튼 위치 설정 */
 .FindNaver {
     position: absolute;
-    top: 512px;
-    left: 89.71px;
+    top: 60vh;
+    left:20%;
 }
 
 /* 구글 로그인 버튼 위치 설정 */
 .FindGoogle {
     position: absolute;
-    top: 512px;
-    left: 194.4px;
+    top: 60vh;
+    left:50%;
+    transform: translateX(-50%);
 }
 
 /* 카카오 로그인 버튼 위치 설정 */
 .FindKakao {
     position: absolute;
-    top: 512px;
-    left: 301px;
+    top: 60vh;
+    left:70%;
+
 }
 
 /* 페이지 푸터 위치 설정 */
 .FindPageFooter {
     position: absolute;
-    top: 830px;
-    left: 140px;
+    top: 80vh;
+    left: 50%;
+    transform: translateX(-50%);
     font-size: 15px;
     font-weight: 600;
 }
@@ -166,9 +167,9 @@
     color: #D6B4A2;
 }
 
-/* 휴대폰 가로 너비가 428px 이하일 때 스타일 변경 */
-@media screen and (max-width: 428px) {
-    .FindPassPage {
-        transform: scale(0.82); /* 스케일을 0.82로 설정하여 82%로 축소 */
-    }
-}
+/*!* 휴대폰 가로 너비가 428px 이하일 때 스타일 변경 *!*/
+/*@media screen and (max-width: 428px) {*/
+/*    .FindPassPage {*/
+/*        transform: scale(0.82); !* 스케일을 0.82로 설정하여 82%로 축소 *!*/
+/*    }*/
+/*}*/
