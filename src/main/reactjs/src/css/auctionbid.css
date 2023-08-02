@@ -35,7 +35,8 @@
 }
 .y_atbid-input {
   top: calc(50% - 15.5px);
-  width: 23.0rem;
+  width: 20rem;
+  left: calc(50% - 163px);
   height: 2.94rem;
   border-radius: 4px;
   border: 1px solid rgba(17, 17, 19, 0.2);
@@ -123,7 +124,7 @@
 .y_atbid-p2{
   font-size: 0.61rem;
   top: calc(50% + 33px);
-  left: calc(46%);
+  left: calc(35%);
   font-family: 'Roboto';
   color: #979797;
 }
