@@ -1,0 +1,317 @@
+/* 구글 폰트 로드 */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Song+Myung&display=swap');
+
+/* 페이지 전체 스타일 영역*/
+/*html,*/
+/*body {*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*    width: 100%;*/
+/*}*/
+
+.HomePage {
+    background-color: #ffffff;
+    color: #000000;
+    top: calc(50% - 463px);
+    left: calc(50% - 214px);
+    transform-origin: center;
+    transform: scale(1);
+    overflow-x: hidden;
+}
+
+/* 본문 영역에 대한 스타일 */
+.RealMainBodyPage {
+    width: 100%;
+    height: 100vh;
+    background: #121212;
+}
+
+.RealMainContent {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 헤더 영역에 대한 스타일 */
+.RealMainHeader {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-color: #F2EFEB;
+    /*background: linear-gradient(120deg, #ffffff,#ffffff,#ffffff);*/
+    /*background-size: 400% 400%;*/
+    /*animation: gradient 10s ease infinite;*/
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.RealMainHeaderLogo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 37vh;
+    height: 41vh;
+}
+
+.RealMainHeaderTitle {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 20vh;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 800;
+}
+
+.RealMainHeader h1 {
+    position: absolute;
+    z-index: 4;
+    font-family: 'Song Myung', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    top: 71vh;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    overflow: hidden;
+    text-shadow: 0px 2px 2px rgba(125, 125, 125, 10);
+}
+
+.RealMainHeader h3 {
+    position: absolute;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    top: 75vh;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    overflow: hidden;
+    color: #7d7d7d;
+}
+
+.MainHeaderCountDown {
+    position: absolute;
+    top: 78vh;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 30vh;
+}
+
+/* 상단 컨텐츠 영역에 대한 스타일 */
+.RealMainUpBody {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-color: #3c564f;
+
+    /*overflow: hidden;*/
+}
+
+.RealMainUpBodyBg {
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #F2EFEB;
+    z-index: 3;
+}
+
+
+.TodayAuction {
+    position: absolute;
+    top: 25vh;
+    left: 64vw;
+    scale: 0.95;
+    z-index: 10;
+}
+
+.PrevAuction {
+    position: absolute;
+    top: 65vh;
+    left: 27%;
+    scale: 0.5;
+    z-index: 10;
+}
+
+.NextAuction {
+    position: absolute;
+    top: 80vh;
+    left: 74%;
+    scale: 0.7;
+    z-index: 10;
+}
+
+.MainAuctionItem-Today h1 {
+    position: absolute;
+    z-index: 10;
+    font-family: 'Song Myung', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    top: 30vh;
+    left: 20%;
+    transform: translateX(-50%) rotate(-90deg);
+    white-space: nowrap;
+    overflow: hidden;
+    text-shadow: 0px 2px 2px rgba(125, 125, 125, 10);
+}
+
+.MainAuctionItem-Today h3 {
+    position: absolute;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    top: 30vh;
+    left: 26%;
+    transform: translateX(-50%) rotate(-90deg);
+    white-space: nowrap;
+    overflow: hidden;
+    color: #7d7d7d;
+    z-index: 10;
+}
+
+.MainAuctionItem-Prev h1 {
+    position: absolute;
+    z-index: 4;
+    font-family: 'Song Myung', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    top: 78vh;
+    left: 27%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    overflow: hidden;
+    text-shadow: 0px 2px 2px rgba(125, 125, 125, 10);
+}
+
+.MainAuctionItem-Prev h3 {
+    position: absolute;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    top: 81vh;
+    left: 19%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    overflow: hidden;
+    color: #7d7d7d;
+    z-index: 6;
+}
+
+
+.MainAuctionItem-Next h1 {
+    position: absolute;
+    z-index: 4;
+    font-family: 'Song Myung', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    top: 57vh;
+    left: 72%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    overflow: hidden;
+    text-shadow: 0px 2px 2px rgba(125, 125, 125, 10);
+}
+
+.MainAuctionItem-Next h3 {
+    position: absolute;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    top: 60vh;
+    left: 81%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    overflow: hidden;
+    color: #7d7d7d;
+    z-index: 6;
+}
+
+
+/* 하단 영역에 대한 스타일 */
+.RealMainDownBody {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-color: #b6916d;
+    overflow: hidden;
+}
+
+.RealMainDownBg {
+    position: absolute;
+    width: 80vw;
+    height: 80vw;
+    top: 33%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 100%;
+    background-color: #F2EFEB;
+    z-index: 1;
+}
+
+/* 푸터 영역에 대한 스타일 */
+.RealMainFooter {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-color: #b69187;
+}
+
+.RealMainFooterInfo {
+    position: absolute;
+    width: 70%;
+    height: 3rem;
+    top: 65%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    font-size: 5px;
+}
+
+.RealMainFooterMenu {
+    font-size: 12px;
+    margin-bottom: 15px;
+}
+
+.RealMainFooterMenu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.RealMainFooterMenu li {
+    margin-right: 10px;
+}
+
+.RealMainFooterBg {
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #F2EFEB;
+    z-index: 2;
+}
+
+/* 휴대폰 가로 너비가 428px 이하일 때 스타일 변경 */
+@media screen and (max-width: 428px) {
+    .SignUpPage {
+        transform: scale(0.82); /* 스케일을 0.8로 설정하여 80%로 축소 */
+    }
+}

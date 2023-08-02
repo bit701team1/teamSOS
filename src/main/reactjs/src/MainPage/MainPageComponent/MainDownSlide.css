@@ -1,0 +1,28 @@
+.MainDownSlideGroup {
+    position: absolute;
+    top: -3vh;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    margin: 0;
+    align-items: center;
+    justify-content: center;
+    /* 사용자 드래그 방지 */
+    user-select: none;
+    z-index: 900;
+}
+
+.MainDownSlideItem {
+    width: 15vw;
+    height: 40vh;
+    background-position: center;
+    background-size: 75vh;
+    margin: 1vw;
+    border-radius: 3vw;
+    display: inline-block;
+    cursor: pointer;
+}

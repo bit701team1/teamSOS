@@ -1,6 +1,7 @@
 import "./Login.css";
 import React, {useEffect, useState} from "react";
 import Axios from "axios";
+import {useNavigate} from "react-router-dom";
 // import BackIcon from "../ImageTest/back-arrow.svg";
 // import NaverIcon from "../ImageTest/naver-icon.svg";
 // import GoogleIcon from "../ImageTest/google-icon.svg";
@@ -22,14 +23,14 @@ const LoginPage = () => {
         password: ""
     })
 
+    const navi = useNavigate();
     //로그인
     const handleLoginClick = () => {
         //dto로 /user/login 으로 넘겨야함
         let url = "/api/user/login";
 
         Axios.post(url, data).then(res => {
-            alert("로그인 성공")
-
+            navi("/main");
         }).catch(error => {
             // 로그인 실패 처리
             alert("로그인 실패");
@@ -53,7 +54,7 @@ const LoginPage = () => {
 
         <div className="LoginPage">
             <div className="LoginPageHeader">
-                <a href='/enter'>
+                <a href='/'>
                     <img className="HeaderIcon" alt="뒤로가기 버튼" src={BackIcon}/>
                 </a>
                 <span className="HeaderTitle">로그인</span>

@@ -3,7 +3,10 @@ import '../css/userinfo.css';
 import { styled } from '@mui/system';
 import Switch from '@mui/material/Switch';
 import axios from 'axios';
+import {useNavigate} from "react-router-dom";
 function UserInfo(props) {
+
+    const navi = useNavigate();
   const StyledSwitch = styled(Switch)(({ theme }) => ({
     '& .MuiSwitch-switchBase.Mui-checked': {
       color: '#ffffff',
@@ -121,6 +124,10 @@ function UserInfo(props) {
     setShowPassword(prevShowPassword => !prevShowPassword);
   };
 
+    const handleBackClick = ()=>{
+        navi("/main");
+    }
+
 
   return (
     <div className="y_info-div">
@@ -186,7 +193,7 @@ function UserInfo(props) {
       <img
         className="y_back" style={{ cursor: 'pointer' }}
         alt=""
-        src={`${photo}y_back.svg`}
+        src={`${photo}y_back.svg`} onClick={handleBackClick}
       />
       <img
         className="y_center-icon"
