@@ -3,9 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import UserInfo from './userpage/UserInfo'
 
-
-
-import './css/ManagePageCSS/managePageMain.css';
+import './css/managepagecss/managepagemain.css';
 
 import errorimg from './image/ERR404.png';
 import Menu from "./user/Menu";

@@ -7,30 +7,29 @@
   .y_atlist-p1,
   .y_atlist-p2{
     position: absolute;
-    top: calc(50% - 369.5px);
     left: calc(50% - 170px);
   }
   .y_atlist-p1,
   .y_atlist-p2{
-    top: calc(50% - 355.5px);
+    top: 5vh;
     font-size: 1.5rem;
   }
   .y_atlist-p2{
-    top: calc(50% - 318.5px);
+    top: 9vh;
     font-size: 1rem;
     color: #636366;
   }
   .y_atlist-mainimg,
   .y_atlist-namediv{
     position: absolute;
-    top: calc(50% - 279.5px);
+    top: 15vh;
     left: calc(50% - 174px);
     border-radius: 12px;
     width: 21.75rem;
     height: 21.75rem;
   }
   .y_atlist-namediv{
-    top: calc(50% - 41.5px);
+    top: 43vh;
     left: calc(50% - 124px);
     border-radius: 16px;
     background-color: rgba(255, 255, 255, 0.7);
@@ -44,24 +43,24 @@
     font-weight: 500;
   }
   .y_atlist-p3 {
-    top: calc(50% - 26.5px);
+    top: 44.5vh;
     font-size: 1rem;
     font-weight: bold;
   }
   .y_atlist-p4 {
-    top: calc(50% - 0.5px);
+    top: 47vh;
     color: #393939;
   }
   .y_liveoff-icon{
     position: absolute;
-    top: calc(50% - 23px);
+    top: 44.8vh;
     left: calc(50% + 85.5px);
     width: 1.69rem;
     height: 1.9rem;
   }
   .y_liveon-icon{
     position: absolute;
-    top: calc(50% - 23px);
+    top: 44.8vh;
     left: calc(50% + 85.5px);
     width: 1.69rem;
     height: 1.9rem;
@@ -81,7 +80,7 @@
   }
   .y_atlist-p5 {
     position: absolute;
-    top: calc(50% + 151.5px);
+    top: 61vh;
     left: calc(50% - 170px);
     font-size: 1.25rem;
   }
@@ -90,7 +89,6 @@
   .y_atlist-imgbox,
   .y_auctionlist-div2{
     position: absolute;
-    top: calc(50% + 209.5px);
     left: calc(50% - 170px);
     border-radius: 10px 10px 0 0;
     width: 8.69rem;
@@ -104,23 +102,22 @@
   
   .y_atlist-imgbox,
 .y_auctionlist-div2{
-  top: calc(50% + 209.5px);
+  top: 66vh;
   border-radius: 10px 10px 0 0;
   width: 9.81rem;
   height: 6.81rem;
 }
 .y_auctionlist-div2{
-
   object-fit: contain; 
 }
   .y_atlist-text1,
   .y_atlist-text2,
   .y_auctionlist-div2{
-    left: calc(50% + 31px);
+    left: calc(50% + 15px);
   }
   .y_atlist-text1,
   .y_atlist-text2{
-    top: calc(50% + 318.5px);
+    top: 79vh;
     border-radius: 0 0 10px 10px;
     background-color: #fff;
     width: 9.81rem;
@@ -131,36 +128,36 @@
     left: calc(50% - 170px);
   }
   .y_atlist-text2{
-    left: calc(50% + 31px);
+    left: calc(50% + 15px);
   }
   .y_atlist-p6,
   .y_auctionlist-div3,
   .y_auctionlist-div4,
   .y_auctionlist-div5{
     position: absolute;
-    top: calc(50% + 326.5px);
+    top: 80vh;
     left: calc(50% - 163px);
   }
   .y_auctionlist-div3,
   .y_auctionlist-div4,
   .y_auctionlist-div5{
-    left: calc(50% + 38px);
+    left: calc(50% + 23px);
   }
   .y_auctionlist-div4,
   .y_auctionlist-div5 {
-    top: calc(50% + 355.5px);
+    top: 83vh;
     left: calc(50% - 163px);
     font-size: 0.56rem;
     color: #636366;
   }
   .y_auctionlist-div5{
-    left: calc(50% + 38px);
+    left: calc(50% + 23px);
   }
   .y_auctionlist-div{
     position: relative;
     background-color: rgba(236, 214, 165, 0.17);
     width: 100%;
-    height: 58.06rem;
+    height: 100vh;
     overflow: hidden;
     text-align: left;
     font-size: 0.75rem;
@@ -169,7 +166,7 @@
   }
   .y_atlist-heart{
     position: absolute;
-    top: calc(50% - 260.5px);
+    top: 20vh;
     left: calc(50% + 110px);
     width:2.5rem;
     height: 2.5rem;

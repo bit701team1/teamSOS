@@ -123,7 +123,7 @@ function AuctionLive2(props) {
       client.current.disconnect(); // 채팅이 두번 전송되는 것을 방지하기 위함
     };
   }, [roomId]);
-
+ 
   /* 소켓연결 */
   const connect = () => { //소켓 연결용 함수
     // let sock = new SockJS('http://localhost:9003/ws'); //endpoint 주소 소켓을 저기로 연결하겠다
@@ -293,6 +293,9 @@ function AuctionLive2(props) {
       return maskedPart;
     }
   }
+  const handleGoBack = () => {
+    navigate(-1); // -1을 전달하여 뒤로가기 기능을 수행합니다.
+  };
   return (
     <>
       <div className="y_auction-div">
@@ -303,6 +306,7 @@ function AuctionLive2(props) {
         <img
           className="y_back-icon"
           alt=""
+          onClick={handleGoBack}
           src={`${photo}y_back.svg`}
         />
         <div className="y_icon-div1" />

@@ -129,8 +129,8 @@ function AuctionLive_station(props) {
 
   /* 소켓연결 */
   const connect = () => { //소켓 연결용 함수
-    // let sock = new SockJS('http://localhost:9003/ws'); //endpoint 주소 소켓을 저기로 연결하겠다
-     let sock = new SockJS('http://175.45.193.12/ws'); //endpoint 주소 소켓을 저기로 연결하겠다
+    let sock = new SockJS('http://localhost:9003/ws'); //endpoint 주소 소켓을 저기로 연결하겠다
+    //  let sock = new SockJS('http://175.45.193.12/ws'); //endpoint 주소 소켓을 저기로 연결하겠다
     client.current = StompJS.Stomp.over(sock); //StompJS를 사용하여 소켓 연결을 관리하는 클라이언트 객체를 생성
     let ws = client.current;
     ws.connect({}, () => {
@@ -294,18 +294,20 @@ function AuctionLive_station(props) {
       return maskedPart;
     }
   }
+  const handleGoBack = () => {
+    navigate(-1); // -1을 전달하여 뒤로가기 기능을 수행합니다.
+  };
   return (
     <>
       <div className="y_auction-div">
-        <div className='y_auction-img'>
-          <LiveStream />
-        </div>
+      
         {admin &&
           <button className="y_liveend-btn" onClick={modalopen}>방송종료</button>
         }
         <img
           className="y_back-icon"
           alt=""
+          onClick={handleGoBack}
           src={`${photo}y_back.svg`}
         />
         <div className="y_icon-div1" />
@@ -315,6 +317,10 @@ function AuctionLive_station(props) {
           onClick={openFrame} />
         <img className="y_auctionbid" alt="" src={`${photo}y_coin.svg`} style={{ cursor: 'pointer' }}
           onClick={openFrame1} />
+          <div className='y_livestationall'>
+           <div className='y_auction-img'>
+          <LiveStream />
+        </div>
         <div className="y_chatscreen" ref={chatScreenRef}>
           {/* 메세지를 가져오는 부분 */}
           {msg.map((item) => {
@@ -366,6 +372,7 @@ function AuctionLive_station(props) {
               </div>
             );
           })}
+        </div>
         </div>
         <img className="y_auctionsend" alt="" src={`${photo}y_msgsend.svg`}
           style={{ cursor: 'pointer' }}
