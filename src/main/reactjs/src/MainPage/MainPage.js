@@ -20,7 +20,6 @@ function HomePage(props) {
     useEffect(() => {
         // 최초 로딩시 화면 최상단에서 시작
         window.scrollTo(0, 0);
-
     }, []);
 
 

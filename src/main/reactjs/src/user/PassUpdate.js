@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import './PassUpdate.css';
-import {useLocation} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import Axios from "axios";
 // import BackIcon from "../ImageTest/back-arrow.svg";
 // import Pass from "../ImageTest/password-icon.svg";
@@ -14,6 +14,7 @@ function UpdatePassPage(props) {
     const hp = location.state.hp;
     const [rawpassword,setRawPassWord] = useState("");
     const [checkpassword, setCheckPassWord] = useState("");
+    const navi = useNavigate();
 
     const handleUpdateClick = ()=>{
         // alert(hp);
@@ -25,6 +26,7 @@ function UpdatePassPage(props) {
             Axios.post("/api/user/passUpatebyHp", {hp:hp,rawpassword:rawpassword})
                 .then((response) => {
                     alert("성공적으로 변경되었습니다");
+                    navi("/login");
                 })
                 .catch((error) => {
                     console.error("오류 발생:", error);

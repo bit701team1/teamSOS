@@ -190,7 +190,9 @@ function ResultPage2(props) {
         }
         return false;
     };
-
+    const handleGoBack = () => {
+        navigate(-1); // -1을 전달하여 뒤로가기 기능을 수행합니다.
+      };
     return (
       <>
         <div className="y_resultpage-div">
@@ -199,7 +201,7 @@ function ResultPage2(props) {
           <img
             alt="" src={`${photo}y_back.svg`}
             className="y_result-back"
-            onClick={onIconArrowRightCircledClick}
+            onClick={handleGoBack}
           />
           <div className="y_result-dark" />
           <div className="y_result-div2" />

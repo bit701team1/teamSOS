@@ -49,9 +49,7 @@ function VerificationPage(props) {
                         hp: hp
                     }
                 }
-            )
-
-           //navi("/passupdate")
+            );
         } else {
             //alert("authnum : " + authnum + " inputauthnum : " + inputauthnum)
             alert("인증번호가 틀렸습니다");
