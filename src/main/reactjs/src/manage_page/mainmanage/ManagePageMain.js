@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import '../../css/ManagePageCSS/managePageMain.css';
+import '../../css/managepagecss/managepagemain.css';
 import {NavLink, Route, Routes, useNavigate} from "react-router-dom";
 import {BlockList, Monitor, UserList} from "../index";
 import Axios from "axios";

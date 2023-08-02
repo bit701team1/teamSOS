@@ -2,8 +2,8 @@ import React, {useCallback, useEffect, useState} from 'react';
 import Axios from "axios";
 import UserRowList from "./UserRowList";
 import {Link, NavLink, useNavigate, useParams} from "react-router-dom";
-import '../../css/ManagePageCSS/managePageMain.css';
-import '../../css/ManagePageCSS/userList.css';
+import '../../css/managepagecss/managepagemain.css';
+import '../../css/managepagecss/userlist.css';
 
 
 
