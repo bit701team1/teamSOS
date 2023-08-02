@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import anime from 'animejs';
+
 import {TweenMax, Expo} from 'gsap';
 import './MainPage.css';
 // import MainHeaderPeople from "./MainPageComponent/MainHeaderPeople";
@@ -37,60 +37,8 @@ function HomePage(props) {
     useEffect(() => {
         // 최초 로딩시 화면 최상단에서 시작
         window.scrollTo(0, 0);
-        console.log("todayImgSrc : " + todayImgSrc);
-        // 페이지 제목에 애니메이션 적용
-        var titleElement = document.querySelector(".title-animation");
-
-        // 각 글자를 '<span class='letter'>글자</span>' 형태로 변환
-        titleElement.innerHTML = titleElement.textContent.replace(
-            // 모든 문자와 숫자에 대한 정규 표현식
-            /([^\x00-\x80]|\w)/g,
-            // 변환할 형태
-            "<span class='letter'>$&</span>"
-        );
-
-        // anime.js의 timeline 함수를 사용하여 애니메이션 타임라인을 생성
-        // loop 옵션이 false설정, 애니메이션은 한 번만 실행시킨다.
-        anime
-            // 타임라인에 애니메이션 효과를 추가
-            .timeline({loop: false})
-            .add({
-                targets: ".title-animation .letter",
-                translateX: [140, 0],
-                translateZ: 0,
-                opacity: [0, 1],
-                easing: "easeOutExpo",
-                duration: 1400,
-
-                // 애니메이션 지연 시작 시간 설정 (각 글자마다 50 밀리초씩 증가)
-                delay: function (el, i) {
-                    return 500 + 50 * i;
-                },
-            })
-
-            // 타임라인에 두 번째 애니메이션 효과를 추가
-            .add({
-                targets: ".title-animation .letter", // 애니메이션 대상
-                translateX: [0, -140],
-                opacity: [1, 0],
-                easing: "easeInExpo",
-                duration: 1200,
-
-                // 애니메이션 지연 시작 시간 설정 (각 글자마다 50 밀리초씩 증가)
-                delay: function (el, i) {
-                    return 700 + 50 * i;
-                },
-            });
-
-        // 로딩 화면 애니메이션 설정
-        TweenMax.to(".loading-screen", 2.2, {
-            delay: 5,
-            top: "-100%",
-            ease: Expo.easeInOut,
-        });
     }, []);
 
-    let lastScrollPos = 0;
 
     //경매 상품에 대한 변수
     const todayTitle = "개발자 김성학의 오마카세";
@@ -104,28 +52,6 @@ function HomePage(props) {
 
     return (
         <div className="HomePage">
-            {/* 로딩 화면: 페이지가 로드되는 동안 사용자에게 보여지는 화면 */}
-            <div className="loading-screen">
-                <div className="marquee right fast">
-                    <p>Everything in the world is worth it!</p>
-                </div>
-                <div className="marquee left fast">
-                    <p>Inspire others with your stories!</p>
-                </div>
-                <div className="marquee right medium">
-                    <p>Talk to various people and win the auction!</p>
-                </div>
-                <div className="marquee left slow">
-                    <p>Auction is easy and fun, try it now!</p>
-                </div>
-                <div className="marquee right fast">
-                    <p>Right here we are waiting for you!</p>
-                </div>
-                <div className="RealMainIntro">
-                    <p className="title-animation">당신과 가장 가까운 경매 서비스</p>
-                </div>
-            </div>
-
             {/* 페이지 본문: 실제 웹사이트의 주요 콘텐츠가 위치하는 영역 */}
             <div className="RealMainBodyPage">
                 <div className="RealMainContent">

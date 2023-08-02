@@ -8,8 +8,6 @@ import UserInfo from './userpage/UserInfo'
 import './css/ManagePageCSS/managePageMain.css';
 
 import errorimg from './image/ERR404.png';
-import JoinForm from "./user/oldcomponent/JoinForm";
-import LoginForm from "./user/oldcomponent/LoginForm";
 import Menu from "./user/Menu";
 import {ManagePageMain, ProductList} from "./manage_page";
 import LiveStream from "./auctionpage/LiveStream";
@@ -38,23 +36,25 @@ function RouteMain(props) {
     return (
         <div>
             <Routes>
-                <Route path='/' element={<Menu/>}/>
-                <Route path='/enter' element={<Enter/>}/>
+                {/*<Route path='/' element={<Menu/>}/>*/}
+                <Route path='/' element={<Enter/>}/>
+                <Route path='/passfind' element={<PassFind/>}/>
+                <Route path='/login' element={<Login/>}/>
+                <Route path='/oauth' element={<RedirectURI/>}/>
+                <Route path='/join' element={<Join/>}/>
+                <Route path='/passauth' element={<PassAuth/>}/>
+                <Route path='/passupdate' element={<PassUpdate/>}/>
+                <Route path='/intro' element={<Intro/>}/>
 
-                <Route path='/testlogin' element={<LoginForm/>}/>
                 <Route path='/main/*' element={<MainPage/>}/>
 
 
                 <Route path='/userinfo' element={<UserInfo/>}/>
-
-                <Route path='/auctionlist' element={<AuctionList/>}/>
                 <Route path='/manage/*' element={<ManagePageMain/>}/>
                 <Route path='/productlist/*' element={<ProductList/>}/>
+                <Route path='/product/*' element={<RegisterProduct/>}/>
 
-
-
-                {/*<Route path='/oldjoin' element={<JoinForm/>}/>*/}
-                {/*<Route path='/login' element={<LoginForm/>}/>*/}
+                <Route path='/auctionlist' element={<AuctionList/>}/>
 
                 <Route path='/room/:roomId' element={<AuctionLive2/>}/>
                 <Route path='/result2' element={<ResultPage2/>}/>
@@ -62,17 +62,7 @@ function RouteMain(props) {
                     <Route path={'livestream'} element={<LiveStream/>}/>
                 </Route>
                 <Route path='/paymentresult' element={<PaymentResult/>}/>
-                <Route path='/product/*' element={<RegisterProduct/>}/>
-
-                <Route path='/passfind' element={<PassFind/>}/>
-                <Route path='/login' element={<Login/>}/>
                 <Route path='/ordercompletemobile' element={<OrderCompleteMobile />}/>
-                <Route path='/join' element={<Join/>}/>
-                <Route path='/passauth' element={<PassAuth/>}/>
-                <Route path='/passupdate' element={<PassUpdate/>}/>
-                <Route path='/intro' element={<Intro/>}/>
-
-                <Route path='/oauth' element={<RedirectURI/>}/>
 
 
                 <Route path='/*' element={
