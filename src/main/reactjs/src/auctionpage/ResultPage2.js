@@ -10,7 +10,7 @@ function ResultPage2(props) {
     useEffect(() => {
         const handlePopState = () => {
             // 홈으로 이동
-            navigate("/");
+            navigate("/main");
         };
 
         // 브라우저 뒤로가기 이벤트 리스너 등록
