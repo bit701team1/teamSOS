@@ -35,7 +35,9 @@ function UserInfo(props) {
 
   // 알람 스위치 
   const handleToggle = () => {
-    const updatedUserdata = { ...userdata, isalarm: !userdata.isalarm };
+
+    const updatedUserdata = {...userdata, isalarm: !userdata.isalarm };
+
 
     const url = '/room/alarm'; 
     axios.post(url, updatedUserdata)
