@@ -2,10 +2,10 @@
 
 .y_result-graph{
   position: absolute;
-  top: 5rem;
+  top: 3rem;
   left: calc(50% - 180px);
   width: 23.38rem;
-  height: 20.44rem;
+  height: 23rem;
   font-family: 'Roboto';
 }
 .y_resultmodal-div {
@@ -14,7 +14,7 @@
   border-radius: 50px 50px 0 0;
   background-color: #fff;
   width: 26.5rem;
-  height: 30.5rem;
+  height: 33rem;
   left: calc(50% - 211.5px);
   overflow: hidden;
   transform: translateY(100%);

@@ -4,7 +4,8 @@ import React, { PureComponent, useEffect, useState } from 'react';
 import {
   Bar, XAxis,
   LabelList,
-  ComposedChart
+  ComposedChart,
+  YAxis
 } from 'recharts';
 
 /*순위 출력*/
@@ -12,9 +13,9 @@ const ResultModal = ({ onClose, productName }) => {
   const [data, setData] = useState([]);
   const randomizeData = () => {
     setData([
-      { name: "최고가", price: Math.floor(Math.random() * 1000000) },
-      { name: "2순위", price: Math.floor(Math.random() * 1000000) },
-      { name: "최저가", price: Math.floor(Math.random() * 1000000) }
+      { name: "최고가", price: Math.floor(Math.random() * 100000) },
+      { name: "2순위", price: Math.floor(Math.random() * 100000) },
+      { name: "최저가", price: Math.floor(Math.random() * 100000) }
     ]);
   }
 
@@ -41,11 +42,12 @@ const ResultModal = ({ onClose, productName }) => {
   return (
     <div className="y_resultmodal-div">
       <div className="y_result-graph" >
-        <ComposedChart width={350} height={350} data={data} margin={{ left: 10 }}>
+        <ComposedChart width={350} height={450} data={data} margin={{ left: 10 }}>
           <XAxis dataKey="name" />
           <Bar dataKey="price" fill="#b24c4b" animationEasing="ease-in-out">
-            <LabelList dataKey="price" position="top" />
+            <LabelList dataKey="price" position="top" offset={10} />
           </Bar>
+          <YAxis domain={[0, 'dataMax + 2500']} hide={true}/>
           {/* <Line type="monotone" dataKey="price" stroke="#ff7300"/> */}
         </ComposedChart>
       </div>
