@@ -54,14 +54,16 @@
   width: 26.75rem;
   height: 32.06rem;
 }
-.y_result-p2,
-.y_result-p3 {
+.y_result-p2
+{
   position: absolute;
-  top: 83vh;
-  left: calc(50% - 175px);
+  top: 83.5vh;
+  left: calc(50% - 70px);
   font-size: 1.5rem;
 }
 .y_result-p3{
+  position: absolute;
+  left: calc(50% - 176px);
   top: 79vh;
   font-size: 0.81rem;
 }
@@ -155,7 +157,7 @@
   position: absolute;
 }
 .y_result-p15 {
-  top: 88vh;
+  top: 84.5vh;
   left: calc(50% - 175px);
   font-size: 0.81rem;
   color: rgba(99, 99, 102, 0.8);
@@ -179,11 +181,11 @@
   position: absolute;
 }
 .y_result-success {
-  top: 79vh;
-  left: calc(50% - 100px);
+  top: 90vh;
+  left: calc(50% - 115px);
   border-radius: 5px;
   background-color: #d6b4a2;
-  width: 18.19rem;
+  width: 14rem;
   border: none;
   color: #fff;
   height: 3.38rem;
