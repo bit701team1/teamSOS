@@ -54,6 +54,7 @@ public class MsgController {
                 // 특정 사용자를 강퇴하는 로직 추가
                 kickuser.setType("KICK");
                 kickuser.setUserName(msg.getUserName());
+                kickuser.setUser(msg.getUser());
                 kickuser.setRoomId(msg.getRoomId());
                 System.out.println("강퇴되었습니다.");
                 sendingOperations.convertAndSend("/sub/room/" + msg.getRoomId(), kickuser);
