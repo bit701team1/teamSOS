@@ -143,8 +143,8 @@ function AuctionLive_station(props) {
           const kickUser = JSON.parse(data.body).userName;
           // 현재 로그인한 사용자가 강퇴당하는 사용자와 같은지 확인
           if ("dusdus1001@gmail.com" === userName) {
-            navigate('/');
             alert('강퇴되었습니다');
+            navigate('/');
           }
         } else if (receivedMsg.type === 'LIVE_END') {
           openFrame2(); // 방송 종료 모달을 띄웁니다.
