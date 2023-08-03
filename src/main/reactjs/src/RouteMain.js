@@ -28,7 +28,6 @@ import MainPage from "./MainPage/MainPage";
 
 
 
-
 function RouteMain(props) {
 
     return (
@@ -52,7 +51,9 @@ function RouteMain(props) {
                 <Route path='/productlist/*' element={<ProductList/>}/>
                 <Route path='/product/*' element={<RegisterProduct/>}/>
 
+
                 <Route path='/auctionlist' element={<AuctionList/>}/>
+
 
                 <Route path='/room/:roomId' element={<AuctionLive2/>}/>
                 <Route path='/result2' element={<ResultPage2/>}/>

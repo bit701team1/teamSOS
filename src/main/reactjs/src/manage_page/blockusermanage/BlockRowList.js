@@ -18,7 +18,7 @@ function BlockRowList(props) {
 
     const limitMsg =(msg, maxLength)=>{
         if(msg.length > maxLength){
-            return msg.substring(0,maxLength-3)+"...";
+            return msg.substring(0,maxLength-6)+"...";
         }else {
             return msg;
         }

@@ -1,25 +1,15 @@
 /* 구글 폰트 로드 */
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&display=swap");
 
-.SignUpBackgroundColor{
-    background-color: #ffffff;
-    width: 100vw;
-    height: 100vh;
-}
-
 /* 전체 페이지 설정 */
 .SignUpPage{
     background-color: #ffffff;
-    width: 428px;
-    height: 926px;
+    width: 100vw;
+    height: 100vh;
     overflow: hidden;
     text-align: center;
     color: #000000;
     position: absolute;
-    top: calc(50% - 463px);
-    left: calc(50% - 214px);
-    transform-origin: center; /* 변환 기준점을 중앙으로 설정 */
-    transform: scale(1); /* 초기 스케일 값을 1로 설정 */
 }
 
 /* 뒤로가기 아이콘 설정 */
@@ -29,8 +19,9 @@
     height: 25px;
     flex-shrink: 0;
     stroke-width: 6px;
-    top: 87px;
-    left: 32px;
+    stroke: #ffffff;
+    top: 10vh;
+    left: 10%;
 }
 
 /* 페이지 제목 설정 */
@@ -42,19 +33,44 @@
     font-size: 25px;
     font-weight: 500;
     line-height: normal;
-    top: 85px;
-    left:180px;
+    top: 10vh;
+    left:50%;
+    transform: translateX(-50%);
 }
 
 /* 입력 필드 설정 */
-.SignUpPageInput {
-    position: relative;
-    top: 245px;
-    left: 44px;
-    margin-bottom: 30px;
+.SignUpPageInputName {
+    position: absolute;
+    top: 25vh;
+    left:50%;
+    transform: translateX(-50%);
 }
 
-.SignUpPageInput input {
+.SignUpPageInputEmail{
+    position: absolute;
+    top: 38vh;
+    left:50%;
+    transform: translateX(-50%);
+}
+
+.SignUpPageInputPassword{
+    position: absolute;
+    top: 51vh;
+    left:50%;
+    transform: translateX(-50%);
+}
+
+.SignUpPageInputPhone{
+    position: absolute;
+    top: 64vh;
+    left:50%;
+    transform: translateX(-50%);
+}
+
+.SignUpPageInputName input,
+.SignUpPageInputEmail input,
+.SignUpPageInputPassword input,
+.SignUpPageInputPhone input{
     font-size: 25px;
     padding: 10px 10px 10px 5px;
     border-radius: 15px;
@@ -69,13 +85,19 @@
 }
 
 /* 입력 필드 내의 플레이스홀더 설정 */
-.SignUpPageInput input::placeholder {
+.SignUpPageInputName input::placeholder,
+.SignUpPageInputEmail input::placeholder,
+.SignUpPageInputPassword input::placeholder,
+.SignUpPageInputPhone input::placeholder{
     text-align: center;
     font-size: 18px;
 }
 
 /* 라벨 설정 */
-.SignUpPageInput label {
+.SignUpPageInputName label,
+.SignUpPageInputEmail label,
+.SignUpPageInputPassword label,
+.SignUpPageInputPhone label{
     color:#999;
     font-size:10px;
     font-weight:normal;
@@ -88,7 +110,10 @@
 }
 
 /* 이미지 아이콘 설정 */
-.SignUpPageInput img{
+.SignUpPageInputName img,
+.SignUpPageInputEmail img,
+.SignUpPageInputPassword img,
+.SignUpPageInputPhone img{
     position: absolute;
     left: 16px;
     opacity: 1;
@@ -96,8 +121,14 @@
 }
 
 /* 입력 필드에 포커스가 있거나 유효한 입력이 있을 때 이미지 숨김 */
-.SignUpPageInput input:focus ~ img,
-.SignUpPageInput input:valid ~ img{
+.SignUpPageInputName input:focus ~ img,
+.SignUpPageInputName input:valid ~ img,
+.SignUpPageInputEmail input:focus ~ img,
+.SignUpPageInputEmail input:valid ~ img,
+.SignUpPageInputPassword input:focus ~ img,
+.SignUpPageInputPassword input:valid ~ img,
+.SignUpPageInputPhone input:focus ~ img,
+.SignUpPageInputPhone input:valid ~ img{
     opacity: 0;
 }
 
@@ -111,7 +142,10 @@
 }
 
 /* 입력 필드에 포커스가 있거나 유효한 입력이 있을 때 라벨의 위치 및 크기 변경 */
-.SignUpPageInput input:focus ~ label, input:valid ~ label {
+.SignUpPageInputName input:focus ~ label, input:valid ~ label,
+.SignUpPageInputEmail input:focus ~ label, input:valid ~ label,
+.SignUpPageInputPassword input:focus ~ label, input:valid ~ label,
+.SignUpPageInputPhone input:focus ~ label, input:valid ~ label{
     top:-30px;
     font-size:20px;
     color: #B24C4B;
@@ -180,8 +214,9 @@ input:focus ~ .SignUpHighlight {
 /* 링크 텍스트 설정 */
 .SignUpPageLink{
     position: absolute;
-    top: 630px;
-    left: 65px;
+    top: 75%;
+    left: 16vw;
+
     /*width: 340px;*/
     /*height: 70px;*/
     /*border-radius: 15px;*/
@@ -212,8 +247,9 @@ input:focus ~ .SignUpHighlight {
 /* 회원가입 버튼 설정 */
 .SignUpButton {
     position: absolute;
-    top: 730px;
-    left: 44px;
+    top: 85vh;
+    left:50%;
+    transform: translateX(-50%);
     width: 340px;
     height: 70px;
     border-radius: 15px;
@@ -236,8 +272,9 @@ input:focus ~ .SignUpHighlight {
 /* 페이지 하단 텍스트 설정 */
 .SingUpPageFooter{
     position: absolute;
-    top: 830px;
-    left: 129px;
+    top: 95vh;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .SingUpFooterText1 {
@@ -260,16 +297,15 @@ input:focus ~ .SignUpHighlight {
 .RedCrossIcon{
     position: absolute;
     width: 25px;
-    margin-bottom: 5px;
-    bottom: 55px;
-    left: 280px;
+    left: 70vw;
+    bottom: 8vh;
+
 }
 .GreenCheckIcon{
     position: absolute;
     width: 25px;
-    margin-bottom: 5px;
-    bottom: 55px;
-    left: 280px;
+    bottom: 8vh;
+    left: 70vw;
 }
 
 .SignUpAuthButton{
@@ -277,9 +313,9 @@ input:focus ~ .SignUpHighlight {
     margin-left: 30px;
 }
 
-/* 휴대폰 가로 너비가 428px 이하일 때 스타일 변경 */
-@media screen and (max-width: 428px) {
-    .SignUpPage {
-        transform: scale(0.82); /* 스케일을 0.82로 설정하여 82%로 축소 */
-    }
-}
+/*!* 휴대폰 가로 너비가 428px 이하일 때 스타일 변경 *!*/
+/*@media screen and (max-width: 428px) {*/
+/*    .SignUpPage {*/
+/*        transform: scale(0.82); !* 스케일을 0.82로 설정하여 82%로 축소 *!*/
+/*    }*/
+/*}*/

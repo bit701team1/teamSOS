@@ -62,7 +62,7 @@ const LoginPage = () => {
 
             <div className="LoginPageBody">
                 <form>
-                    <div className="LoginPageInput">
+                    <div className="LoginPageInputEmail">
                         <input type="text" required placeholder='이메일을 입력하세요'
                                value={data.email}
                                onChange={(e) => setData({
@@ -76,7 +76,7 @@ const LoginPage = () => {
                         <label>이메일</label>
                     </div>
 
-                    <div className="LoginPageInput">
+                    <div className="LoginPageInputPassword">
                         <input type="password" required placeholder='비밀번호를 입력하세요'
                                value={data.password}
                                onChange={(e) => setData({
@@ -109,9 +109,9 @@ const LoginPage = () => {
 
             <div className="LoginPageSocial">
                 <div className="LoginNaver" id='naverIdLogin'></div>
-                {/*<div className="LoginNaver">*/}
-                {/*    <img alt="네이버" src={NaverIcon}/>*/}
-                {/*</div>*/}
+                <div className="LoginNaver">
+                    <img alt="네이버" src={NaverIcon}/>
+                </div>
                 <div className="LoginGoogle">
                     <img alt="구글" src={GoogleIcon}/>
                 </div>

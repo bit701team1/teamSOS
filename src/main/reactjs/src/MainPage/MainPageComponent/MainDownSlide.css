@@ -1,6 +1,6 @@
 .MainDownSlideGroup {
     position: absolute;
-    top: -3vh;
+    top: -10vh;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
@@ -20,9 +20,18 @@
     width: 15vw;
     height: 40vh;
     background-position: center;
-    background-size: 75vh;
+    background-size: cover;
     margin: 1vw;
     border-radius: 3vw;
     display: inline-block;
     cursor: pointer;
+    /*filter: grayscale(100%);*/
+}
+.SelectedName{
+    font-family: "Song Myung";
+    font-size: 20px;
+    font-weight: 600;
+    font-style: italic; /* 이탤릭체로 설정 */
+    text-transform: uppercase; /* 모든 문자를 대문자로 변경 */
+
 }
