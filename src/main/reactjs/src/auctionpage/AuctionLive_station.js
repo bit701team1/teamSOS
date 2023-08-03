@@ -129,8 +129,8 @@ function AuctionLive_station(props) {
 
   /* 소켓연결 */
   const connect = () => { //소켓 연결용 함수
-    let sock = new SockJS('http://localhost:9003/ws'); //endpoint 주소 소켓을 저기로 연결하겠다
-    //  let sock = new SockJS('http://175.45.193.12/ws'); //endpoint 주소 소켓을 저기로 연결하겠다
+    // let sock = new SockJS('http://localhost:9003/ws'); //endpoint 주소 소켓을 저기로 연결하겠다
+     let sock = new SockJS('http://175.45.193.12/ws'); //endpoint 주소 소켓을 저기로 연결하겠다
     client.current = StompJS.Stomp.over(sock); //StompJS를 사용하여 소켓 연결을 관리하는 클라이언트 객체를 생성
     let ws = client.current;
     ws.connect({}, () => {
@@ -144,6 +144,7 @@ function AuctionLive_station(props) {
           // 현재 로그인한 사용자가 강퇴당하는 사용자와 같은지 확인
           if ("dusdus1001@gmail.com" === userName) {
             navigate('/');
+            alert('강퇴되었습니다');
           }
         } else if (receivedMsg.type === 'LIVE_END') {
           openFrame2(); // 방송 종료 모달을 띄웁니다.
