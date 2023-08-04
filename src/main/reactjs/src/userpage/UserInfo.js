@@ -35,7 +35,9 @@ function UserInfo(props) {
 
   // 알람 스위치 
   const handleToggle = () => {
-    const updatedUserdata = { email: userdata.email, isalarm: !userdata.isalarm };
+
+    const updatedUserdata = {...userdata, isalarm: !userdata.isalarm };
+
 
     const url = '/room/alarm'; 
     axios.post(url, updatedUserdata)
@@ -110,7 +112,7 @@ function UserInfo(props) {
     const url = '/room/pwdupdate';
     axios.post(url, updateData)
       .then(response => {
-        alert("비번수정완료");
+        alert("비밀번호가 변경되었습니다");
         console.log(updateData);
       })
       .catch(error => {
