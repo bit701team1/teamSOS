@@ -29,6 +29,8 @@ function SignUpPage(props) {
     const RedCrossIcon = process.env.REACT_APP_BUCKET + "/user/cross.png";
     const GreenCheckIcon = process.env.REACT_APP_BUCKET + "/user/check.png";
 
+    const navigate = useNavigate();
+
     const [data, setData] = useState({
         email: '',
         password: "",
@@ -68,7 +70,7 @@ function SignUpPage(props) {
                         alert("유효한 이메일 형식을 입력해주세요");
                     } else {
                         alert("성공적으로 가입되었습니다");
-                        navi("/login");
+                        navigate("/intro");
                     }
                 }).catch(error => {
                 // 회원가입 실패 처리

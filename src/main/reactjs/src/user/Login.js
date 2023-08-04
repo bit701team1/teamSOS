@@ -2,12 +2,6 @@ import "./Login.css";
 import React, {useEffect, useState} from "react";
 import Axios from "axios";
 import {useNavigate} from "react-router-dom";
-// import BackIcon from "../ImageTest/back-arrow.svg";
-// import NaverIcon from "../ImageTest/naver-icon.svg";
-// import GoogleIcon from "../ImageTest/google-icon.svg";
-// import KakaoIcon from "../ImageTest/kakao-icon.svg";
-// import Email from "../ImageTest/email-icon.svg";
-// import Pass from "../ImageTest/password-icon.svg";
 
 const LoginPage = () => {
 
