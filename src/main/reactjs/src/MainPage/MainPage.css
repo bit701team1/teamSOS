@@ -310,6 +310,12 @@
     scale: 1;
 }
 
+/* 화면 전체가 스크롤 되지 않게 해봄*/
+.MainFooterSlide{
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
 .RealMainDownBgDown {
     position: absolute;
     width: 45vw;

@@ -102,7 +102,10 @@ function HomePage(props) {
                         <div>
                             <img className="RealMainDownBgUp" alt='content-images' src={contentImgSrc}/>
                         </div>
-                        <MainFooterCard/>
+                        <div className="MainFooterSlide">
+                            <MainFooterCard/>
+                        </div>
+
                         <div className="RealMainDownBgDown"></div>
                     </div>
 
