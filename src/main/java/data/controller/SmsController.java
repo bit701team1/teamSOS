@@ -4,6 +4,7 @@ import data.dto.ProductDto;
 import data.dto.UserDto;
 import data.mapper.AuthMapper;
 import data.mapper.ProductMapper;
+import lombok.extern.slf4j.Slf4j;
 import net.nurigo.sdk.NurigoApp;
 import net.nurigo.sdk.message.exception.NurigoMessageNotReceivedException;
 import net.nurigo.sdk.message.model.Message;
@@ -15,6 +16,7 @@ import net.nurigo.sdk.message.response.MultipleDetailMessageSentResponse;
 import net.nurigo.sdk.message.response.SingleMessageSentResponse;
 
 import net.nurigo.sdk.message.service.DefaultMessageService;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/sms")
 @CrossOrigin(origins = "https://api.coolsms", methods = RequestMethod.POST)
@@ -50,8 +53,9 @@ public class SmsController {
    //단일 메세지 발송, 문자 인증 용도
     @PostMapping("/send-one")
     public String sendOne(@RequestBody UserDto dto) {
-        System.out.println("/send-one 진입");
-        System.out.println(dto.getHp());
+
+        log.info("/send-one 진입");
+        log.info(dto.getHp());
 
         String authnum = generateRandomNumber(6);
 
@@ -62,7 +66,6 @@ public class SmsController {
         message.setText("[AAA] 인증번호 ["+authnum+"]를 입력해주세요");
 
         SingleMessageSentResponse response = this.messageService.sendOne(new SingleMessageSendingRequest(message));
-        System.out.println(response);
 
         return authnum;
     }

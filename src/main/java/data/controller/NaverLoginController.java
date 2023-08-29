@@ -5,6 +5,8 @@ import data.dto.NaverLoginDto;
 import data.dto.UserDto;
 import data.mapper.UserMapper;
 
+import data.service.NaverLoginService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
@@ -25,6 +27,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
+@Slf4j
 @Controller
 @RequestMapping("/oauth")
 @CrossOrigin(origins = {"https://nid.naver.com", "http://localhost:3000"}, methods = RequestMethod.GET)
@@ -40,109 +43,20 @@ public class NaverLoginController {
     private String callback_url;
     private String state = "RANDOM_STATE";
 
-    @Autowired
-    UserController userController;
 
     @Autowired
-    UserMapper userMapper;
+    NaverLoginService naverLoginService;
 
+    //네이버 회원 정보 받아서 Join or SingIn으로 보냄
     @PostMapping("/naverlogin")
     public ResponseEntity<Integer> naverlogin(@RequestBody NaverLoginDto dto, HttpServletResponse response)  {
-        int result = -1;
-        System.out.println("NaverLogindto : " + dto);
-
-        UserDto userDto = new UserDto();
-        //로그인 및 가입을 위한 기본 정보 옮김
-        userDto.setEmail(dto.getEmail());
-        userDto.setUser_name(dto.getName());
-        userDto.setHp(dto.getMobile());
-        userDto.setResponse(response);
-        userDto.setNaver(true);
-        //이 부분 자체가 랜덤 변수가 요구됨
-        userDto.setPassword("네이버비밀번호");
-        
-
-        //가입이 필요하면 join, 아니면 signIn으로 진입시킴
-        if(userMapper.countEmail(dto.getEmail()) > 0){
-            System.out.println("naver direct 로그인");
-            userController.signIn(userDto,response);
-            System.out.println("Naver singIn 끝");
-            return ResponseEntity.ok(result);
-        }
-        userController.join(userDto);
-
-        return  ResponseEntity.ok(result);
+            return naverLoginService.naverlogin(dto,response);
     }
 
-
+    //Token값 반환
     @GetMapping("/callback")
     @ResponseBody
     public String callback(String accessToken) {
-        System.out.println("/callback 진입");
-        System.out.println(accessToken);
-        String token = accessToken; // 네이버 로그인 접근 토큰;
-        String header = "Bearer " + token; // Bearer 다음에 공백 추가
-
-        String apiURL = "https://openapi.naver.com/v1/nid/me";
-
-        Map<String, String> requestHeaders = new HashMap<>();
-        requestHeaders.put("Authorization", header);
-        String responseBody = get(apiURL, requestHeaders);
-        System.out.println(responseBody);
-        return responseBody;
-    }
-
-    private static String get(String apiUrl, Map<String, String> requestHeaders) {
-        HttpURLConnection con = connect(apiUrl);
-        try {
-            con.setRequestMethod("GET");
-            for (Map.Entry<String, String> header : requestHeaders.entrySet()) {
-                con.setRequestProperty(header.getKey(), header.getValue());
-            }
-
-            int responseCode = con.getResponseCode();
-            System.out.println("responseCode : " + responseCode);
-            System.out.println("HttpURLConnection.HTTP_OK : " + HttpURLConnection.HTTP_OK);
-            if (responseCode == HttpURLConnection.HTTP_OK) { // 정상 호출
-                System.out.println("responseCode 정상");
-                return readBody(con.getInputStream());
-            } else { // 에러 발생
-                System.out.println("responseCode 에러");
-                return readBody(con.getErrorStream());
-            }
-        } catch (IOException e) {
-            throw new RuntimeException("API 요청과 응답 실패", e);
-        } finally {
-            con.disconnect();
-        }
-    }
-
-    private static HttpURLConnection connect(String apiUrl) {
-        try {
-            URL url = new URL(apiUrl);
-            System.out.println("connect 정상");
-            return (HttpURLConnection) url.openConnection();
-        } catch (MalformedURLException e) {
-            throw new RuntimeException("API URL이 잘못되었습니다. : " + apiUrl, e);
-        } catch (IOException e) {
-            throw new RuntimeException("연결이 실패했습니다. : " + apiUrl, e);
-        }
-    }
-
-    private static String readBody(InputStream body) {
-        InputStreamReader streamReader = new InputStreamReader(body);
-
-        try (BufferedReader lineReader = new BufferedReader(streamReader)) {
-            StringBuilder responseBody = new StringBuilder();
-
-            String line;
-            while ((line = lineReader.readLine()) != null) {
-                responseBody.append(line);
-            }
-            System.out.println("readBody Test");
-            return responseBody.toString();
-        } catch (IOException e) {
-            throw new RuntimeException("API 응답을 읽는데 실패했습니다.", e);
-        }
+        return naverLoginService.callback(accessToken);
     }
 }

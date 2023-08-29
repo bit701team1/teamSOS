@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/lobby")
 public class LobbyController {
 
-    @Autowired
+
     RoomService roomService;
     @Autowired
     UserMapper userMapper;

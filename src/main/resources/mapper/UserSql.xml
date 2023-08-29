@@ -97,7 +97,7 @@
         UPDATE user set password = #{password} where email=#{email}
     </update>
 
-    <!--    신고 수 카운트 -->
+    <!-- 신고 수 카운트 -->
     <select id="getBlockEmailCount" resultType="int">
         select count(*) from report where email=#{email}
     </select>

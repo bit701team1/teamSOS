@@ -128,7 +128,7 @@ function SignUpPage(props) {
         <div className="SignUpBackgroundColor">
             <div className='SignUpPage'>
                 <div className="SignUpPageHeader">
-                    <a href='/enter'>
+                    <a href='/'>
                         <img className="SignUpIcon" alt="뒤로가기 버튼" src={BackIcon2}/>
                     </a>
                     <span className="SignUpTitle">회원가입</span>
